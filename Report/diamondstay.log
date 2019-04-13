@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2019.3.2)  13 APR 2019 16:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2019.3.2)  13 APR 2019 17:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1857,7 +1857,7 @@ mondstay.tocpdfTeX warning (ext4): destination with the same identifier (name{p
 age.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.46 ...h\IeC {\`a}}{42}{subsubsubsection.4.7.2.1}
+l.46 ...h\IeC {\`a}}{43}{subsubsubsection.4.7.2.1}
                                                    [1])
 \tf@toc=\write5
 \openout5 = `diamondstay.toc'.
@@ -1875,11 +1875,15 @@ File: t5cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `T5/cmtt/bx/n' in size <10> not available
 (Font)              Font shape `T5/cmtt/m/n' tried instead on input line 157.
  [2]
-(./diamondstay.lof)
+(./diamondstay.lof [3])
 \tf@lof=\write6
 \openout6 = `diamondstay.lof'.
 
- [3] (./parts/history.tex
+File: Image/hcmut.png Graphic file (type png)
+ <use Image/hcmut.png>
+Package pdftex.def Info: Image/hcmut.png used on input line 160.
+(pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
+ [4] (./parts/history.tex
 Underfull \hbox (badness 1466) in paragraph at lines 17--17
 []|\T5/cmr/m/n/10 Th¶m use-case di-a-gram cho 2
  []
@@ -1910,14 +1914,14 @@ Underfull \vbox (badness 10000) detected at line 30
 
 File: Image/hcmut.png Graphic file (type png)
 <use Image/hcmut.png>
-Package pdftex.def Info: Image/hcmut.png used on input line 33.
+Package pdftex.def Info: Image/hcmut.png used on input line 34.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [4])
+ [5])
 File: Image/hcmut.png Graphic file (type png)
  <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 165.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [5] (./parts/intro.tex)
+ [6] (./parts/intro.tex)
 (./parts/modules-overview.tex
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 3.
 
@@ -1931,7 +1935,7 @@ File: Image/hcmut.png Graphic file (type png)
 Package pdftex.def Info: Image/hcmut.png used on input line 12.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
 
-[6] <Image/ucFull.png, id=566, 810.02625pt x 733.74126pt>
+[7] <Image/ucFull.png, id=585, 810.02625pt x 733.74126pt>
 File: Image/ucFull.png Graphic file (type png)
 
 <use Image/ucFull.png>
@@ -1947,12 +1951,12 @@ File: Image/hcmut.png Graphic file (type png)
  <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 173.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [7 <./Image/ucFull.png>]
+ [8 <./Image/ucFull.png>]
 \openout2 = `parts/Tan/main.aux'.
 
  (./parts/Tan/main.tex
 (./parts/Tan/submodule-1.tex
-<Image/module1.png, id=575, 664.4825pt x 221.82875pt>
+<Image/module1.png, id=594, 664.4825pt x 221.82875pt>
 File: Image/module1.png Graphic file (type png)
  <use Image/module1.png>
 Package pdftex.def Info: Image/module1.png used on input line 12.
@@ -1962,7 +1966,7 @@ Package pdftex.def Info: Image/module1.png used on input line 12.
 Package hyperref Warning: bookmark level for unknown subsubsubsection defaults 
 to 0.
 
-<Image/duyetTinSequence.png, id=576, 573.14125pt x 594.22pt>
+<Image/duyetTinSequence.png, id=595, 573.14125pt x 594.22pt>
 File: Image/duyetTinSequence.png Graphic file (type png)
 
 <use Image/duyetTinSequence.png>
@@ -1985,20 +1989,20 @@ File: Image/hcmut.png Graphic file (type png)
 <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 69.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [8
+ [9
 
  <./Image/module1.png>]
 File: Image/hcmut.png Graphic file (type png)
  <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 69.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [9])
+ [10])
 File: Image/hcmut.png Graphic file (type png)
 
 <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 4.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [10]
+ [11]
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
 (hyperref)                than one, level fixed on input line 5.
@@ -2012,14 +2016,14 @@ File: Image/hcmut.png Graphic file (type png)
 <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 10.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [11 <./Image/duyetTinSequence.png>]
-<Image/module2aa.png, id=619, 457.71pt x 227.85126pt>
+ [12 <./Image/duyetTinSequence.png>]
+<Image/module2aa.png, id=639, 457.71pt x 227.85126pt>
 File: Image/module2aa.png Graphic file (type png)
 
 <use Image/module2aa.png>
 Package pdftex.def Info: Image/module2aa.png used on input line 26.
 (pdftex.def)             Requested size: 284.52756pt x 141.64528pt.
- <Image/module2b.png, id=620, 421.575pt x 228.855pt>
+ <Image/module2b.png, id=640, 421.575pt x 228.855pt>
 File: Image/module2b.png Graphic file (type png)
 
 <use Image/module2b.png>
@@ -2033,8 +2037,8 @@ File: Image/hcmut.png Graphic file (type png)
 <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 36.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [12 <./Image/module2aa.png>]
-<Image/createSystemPromoSequence.png, id=628, 462.72874pt x 336.25626pt>
+ [13 <./Image/module2aa.png>]
+<Image/createSystemPromoSequence.png, id=647, 462.72874pt x 336.25626pt>
 File: Image/createSystemPromoSequence.png Graphic file (type png)
 
 <use Image/createSystemPromoSequence.png>
@@ -2054,13 +2058,13 @@ File: Image/hcmut.png Graphic file (type png)
 <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 79.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [13 <./Image/module2b.png> <./Image/createSystemPromoSequence.png>]
+ [14 <./Image/module2b.png> <./Image/createSystemPromoSequence.png>]
 File: Image/hcmut.png Graphic file (type png)
  <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 81.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [14]
-<Image/createChuNhaPromo.png, id=654, 459.7175pt x 404.51125pt>
+ [15]
+<Image/createChuNhaPromo.png, id=673, 459.7175pt x 404.51125pt>
 File: Image/createChuNhaPromo.png Graphic file (type png)
 
 <use Image/createChuNhaPromo.png>
@@ -2079,19 +2083,19 @@ File: Image/hcmut.png Graphic file (type png)
 <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 133.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [15 <./Image/createChuNhaPromo.png>]
+ [16 <./Image/createChuNhaPromo.png>]
 File: Image/hcmut.png Graphic file (type png)
 
 <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 133.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [16]
+ [17]
 File: Image/hcmut.png Graphic file (type png)
  <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 135.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [17]
-<Image/deleteChuNhaPromo.png, id=688, 445.665pt x 398.48875pt>
+ [18]
+<Image/deleteChuNhaPromo.png, id=708, 445.665pt x 398.48875pt>
 File: Image/deleteChuNhaPromo.png Graphic file (type png)
 
 <use Image/deleteChuNhaPromo.png>
@@ -2110,8 +2114,8 @@ File: Image/hcmut.png Graphic file (type png)
 <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 189.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [18 <./Image/deleteChuNhaPromo.png>]
-<Image/deleteSystemPromo.png, id=697, 456.70625pt x 397.485pt>
+ [19 <./Image/deleteChuNhaPromo.png>]
+<Image/deleteSystemPromo.png, id=716, 456.70625pt x 397.485pt>
 File: Image/deleteSystemPromo.png Graphic file (type png)
 
 <use Image/deleteSystemPromo.png>
@@ -2121,7 +2125,7 @@ File: Image/hcmut.png Graphic file (type png)
  <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 197.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [19]
+ [20]
 Overfull \hbox (16.85388pt too wide) in alignment at lines 199--246
  [] [] 
  []
@@ -2134,13 +2138,13 @@ File: Image/hcmut.png Graphic file (type png)
 <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 246.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [20 <./Image/deleteSystemPromo.png>]))
+ [21 <./Image/deleteSystemPromo.png>]))
 File: Image/hcmut.png Graphic file (type png)
 
 <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 176.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [21]
+ [22]
 \openout2 = `parts/Tin/main.aux'.
 
  (./parts/Tin/main.tex
@@ -2148,7 +2152,7 @@ Package pdftex.def Info: Image/hcmut.png used on input line 176.
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
 (hyperref)                than one, level fixed on input line 1.
 
-<Image/tin-usecase.png, id=745, 467.7475pt x 458.71375pt>
+<Image/tin-usecase.png, id=765, 467.7475pt x 458.71375pt>
 File: Image/tin-usecase.png Graphic file (type png)
 
 <use Image/tin-usecase.png>
@@ -2159,7 +2163,7 @@ Package pdftex.def Info: Image/tin-usecase.png used on input line 4.
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
 (hyperref)                than one, level fixed on input line 1.
 
-<Image/tin-sequence-comment.png, id=746, 556.0775pt x 546.04pt>
+<Image/tin-sequence-comment.png, id=766, 556.0775pt x 546.04pt>
 File: Image/tin-sequence-comment.png Graphic file (type png)
 
 <use Image/tin-sequence-comment.png>
@@ -2182,7 +2186,7 @@ File: Image/hcmut.png Graphic file (type png)
 <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 39.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [22
+ [23
 
 
  <./Image/tin-usecase.png>]
@@ -2191,7 +2195,7 @@ File: Image/hcmut.png Graphic file (type png)
 Package pdftex.def Info: Image/hcmut.png used on input line 41.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
 
-[23] <Image/tin-sequence-rating.png, id=769, 523.9575pt x 514.92375pt>
+[24] <Image/tin-sequence-rating.png, id=789, 523.9575pt x 514.92375pt>
 File: Image/tin-sequence-rating.png Graphic file (type png)
 
 <use Image/tin-sequence-rating.png>
@@ -2214,13 +2218,13 @@ File: Image/hcmut.png Graphic file (type png)
 <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 74.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [24 <./Image/tin-sequence-comment.png>])
+ [25 <./Image/tin-sequence-comment.png>])
 (./parts/Tin/submodule-2.tex
 
 Package hyperref Warning: Difference (3) between bookmark levels is greater 
 (hyperref)                than one, level fixed on input line 1.
 
-<Image/tin-sequence-homstay-order.png, id=779, 556.0775pt x 524.96124pt>
+<Image/tin-sequence-homstay-order.png, id=798, 556.0775pt x 524.96124pt>
 File: Image/tin-sequence-homstay-order.png Graphic file (type png)
 
 <use Image/tin-sequence-homstay-order.png>
@@ -2244,23 +2248,23 @@ File: Image/hcmut.png Graphic file (type png)
 <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 45.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [25]))
+ [26]))
 File: Image/hcmut.png Graphic file (type png)
  <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 177.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [26]
+ [27]
 File: Image/hcmut.png Graphic file (type png)
  <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 177.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
 
-[27 <./Image/tin-sequence-rating.png>]
+[28 <./Image/tin-sequence-rating.png>]
 File: Image/hcmut.png Graphic file (type png)
  <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 177.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [28 <./Image/tin-sequence-homstay-order.png>]
+ [29 <./Image/tin-sequence-homstay-order.png>]
 \openout2 = `parts/bao/main.aux'.
 
  (./parts/bao/main.tex
@@ -2268,7 +2272,7 @@ Package pdftex.def Info: Image/hcmut.png used on input line 177.
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
 (hyperref)                than one, level fixed on input line 1.
 
-<parts/bao/images/Module3UseCase.png, id=816, 623.32875pt x 563.10374pt>
+<parts/bao/images/Module3UseCase.png, id=835, 623.32875pt x 563.10374pt>
 File: parts/bao/images/Module3UseCase.png Graphic file (type png)
 
 <use parts/bao/images/Module3UseCase.png>
@@ -2281,7 +2285,7 @@ Package hyperref Warning: Difference (2) between bookmark levels is greater
 (hyperref)                than one, level fixed on input line 1.
 
 
-<parts/bao/images/SequenceDiagram_NewPost.png, id=817, 476.78125pt x 390.45876p
+<parts/bao/images/SequenceDiagram_NewPost.png, id=836, 476.78125pt x 390.45876p
 t>
 File: parts/bao/images/SequenceDiagram_NewPost.png Graphic file (type png)
  <use parts/bao/images/SequenceDiagram_NewPost.png>
@@ -2305,11 +2309,11 @@ File: Image/hcmut.png Graphic file (type png)
 <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 42.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [29
+ [30
 
 
  <./parts/bao/images/Module3UseCase.png>]
-<parts/bao/images/SequenceDiagram_ListPost.png, id=825, 476.78125pt x 390.45876
+<parts/bao/images/SequenceDiagram_ListPost.png, id=845, 476.78125pt x 390.45876
 pt>
 File: parts/bao/images/SequenceDiagram_ListPost.png Graphic file (type png)
  <use parts/bao/images/SequenceDiagram_ListPost.png>
@@ -2333,13 +2337,13 @@ File: Image/hcmut.png Graphic file (type png)
 <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 79.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [30]
+ [31]
 
 Package hyperref Warning: Difference (3) between bookmark levels is greater 
 (hyperref)                than one, level fixed on input line 82.
 
 
-<parts/bao/images/SequenceDiagram_EditPost.png, id=842, 476.78125pt x 470.75874
+<parts/bao/images/SequenceDiagram_EditPost.png, id=861, 476.78125pt x 470.75874
 pt>
 File: parts/bao/images/SequenceDiagram_EditPost.png Graphic file (type png)
  <use parts/bao/images/SequenceDiagram_EditPost.png>
@@ -2363,8 +2367,8 @@ File: Image/hcmut.png Graphic file (type png)
 <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 118.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [31]
-<parts/bao/images/SequenceDiagram_HidePost.png, id=856, 476.78125pt x 470.75874
+ [32]
+<parts/bao/images/SequenceDiagram_HidePost.png, id=876, 476.78125pt x 470.75874
 pt>
 File: parts/bao/images/SequenceDiagram_HidePost.png Graphic file (type png)
  <use parts/bao/images/SequenceDiagram_HidePost.png>
@@ -2389,19 +2393,19 @@ File: Image/hcmut.png Graphic file (type png)
  <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 178.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [32]
+ [33]
 File: Image/hcmut.png Graphic file (type png)
  <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 178.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [33 <./parts/bao/images/SequenceDiagram_NewPost.png> <./parts/bao/images/Seque
+ [34 <./parts/bao/images/SequenceDiagram_NewPost.png> <./parts/bao/images/Seque
 nceDiagram_ListPost.png>]
 File: Image/hcmut.png Graphic file (type png)
 
 <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 178.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [34 <./parts/bao/images/SequenceDiagram_EditPost.png> <./parts/bao/images/Sequ
+ [35 <./parts/bao/images/SequenceDiagram_EditPost.png> <./parts/bao/images/Sequ
 enceDiagram_HidePost.png>]
 \openout2 = `parts/Khoa/main.aux'.
 
@@ -2414,21 +2418,21 @@ Package hyperref Warning: Difference (2) between bookmark levels is greater
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
 (hyperref)                than one, level fixed on input line 5.
 
-<parts/Khoa/khoa_ui/search.png, id=882, 1423.3175pt x 463.7325pt>
+<parts/Khoa/khoa_ui/search.png, id=901, 1423.3175pt x 463.7325pt>
 File: parts/Khoa/khoa_ui/search.png Graphic file (type png)
 
 <use parts/Khoa/khoa_ui/search.png>
 Package pdftex.def Info: parts/Khoa/khoa_ui/search.png used on input line 8.
 (pdftex.def)             Requested size: 284.50642pt x 113.81004pt.
 
-<parts/Khoa/khoa_ui/filter.png, id=883, 603.25375pt x 91.34125pt>
+<parts/Khoa/khoa_ui/filter.png, id=902, 603.25375pt x 91.34125pt>
 File: parts/Khoa/khoa_ui/filter.png Graphic file (type png)
 
 <use parts/Khoa/khoa_ui/filter.png>
 Package pdftex.def Info: parts/Khoa/khoa_ui/filter.png used on input line 9.
 (pdftex.def)             Requested size: 284.52342pt x 28.45207pt.
 
-<parts/Khoa/khoa_ui/khoa_search_and_filter.png, id=884, 1479.5275pt x 744.7825p
+<parts/Khoa/khoa_ui/khoa_search_and_filter.png, id=903, 1479.5275pt x 744.7825p
 t>
 File: parts/Khoa/khoa_ui/khoa_search_and_filter.png Graphic file (type png)
  <use parts/Khoa/khoa_ui/khoa_search_and_filter.png>
@@ -2453,7 +2457,7 @@ File: Image/hcmut.png Graphic file (type png)
 <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 50.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [35
+ [36
 
 
  <./parts/Khoa/khoa_ui/search.png> <./parts/Khoa/khoa_ui/filter.png> <./parts/K
@@ -2470,19 +2474,19 @@ File: Image/hcmut.png Graphic file (type png)
 <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 82.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [36]
+ [37]
 
 Package hyperref Warning: Difference (3) between bookmark levels is greater 
 (hyperref)                than one, level fixed on input line 86.
 
-<parts/Khoa/khoa_ui/book.png, id=909, 1206.5075pt x 182.6825pt>
+<parts/Khoa/khoa_ui/book.png, id=928, 1206.5075pt x 182.6825pt>
 File: parts/Khoa/khoa_ui/book.png Graphic file (type png)
 
 <use parts/Khoa/khoa_ui/book.png>
 Package pdftex.def Info: parts/Khoa/khoa_ui/book.png used on input line 89.
 (pdftex.def)             Requested size: 284.52344pt x 28.45207pt.
 
-<parts/Khoa/khoa_ui/khoa_order.png, id=910, 1479.5275pt x 744.7825pt>
+<parts/Khoa/khoa_ui/khoa_order.png, id=929, 1479.5275pt x 744.7825pt>
 File: parts/Khoa/khoa_ui/khoa_order.png Graphic file (type png)
 
 <use parts/Khoa/khoa_ui/khoa_order.png>
@@ -2493,7 +2497,7 @@ File: Image/hcmut.png Graphic file (type png)
  <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 99.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [37 <./parts/Khoa/khoa_ui/book.png> <./parts/Khoa/khoa_ui/khoa_order.png>]
+ [38 <./parts/Khoa/khoa_ui/book.png> <./parts/Khoa/khoa_ui/khoa_order.png>]
 Overfull \hbox (59.68222pt too wide) in alignment at lines 103--133
  [] [] 
  []
@@ -2506,12 +2510,12 @@ File: Image/hcmut.png Graphic file (type png)
 <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 133.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [38])
+ [39])
 File: Image/hcmut.png Graphic file (type png)
  <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 179.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [39]
+ [40]
 \openout2 = `parts/Cuong/main.aux'.
 
  (./parts/Cuong/main.tex
@@ -2520,7 +2524,7 @@ Package pdftex.def Info: Image/hcmut.png used on input line 179.
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
 (hyperref)                than one, level fixed on input line 1.
 
-<parts/Cuong/images/module5a.jpg, id=945, 442.65375pt x 233.87375pt>
+<parts/Cuong/images/module5a.jpg, id=964, 442.65375pt x 233.87375pt>
 File: parts/Cuong/images/module5a.jpg Graphic file (type jpg)
 
 <use parts/Cuong/images/module5a.jpg>
@@ -2544,7 +2548,7 @@ File: Image/hcmut.png Graphic file (type png)
 <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 35.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [40
+ [41
 
 
  <./parts/Cuong/images/module5a.jpg>]
@@ -2569,7 +2573,7 @@ File: Image/hcmut.png Graphic file (type png)
 <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 87.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [41]) (./parts/Cuong/module5b.tex
+ [42]) (./parts/Cuong/module5b.tex
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
 (hyperref)                than one, level fixed on input line 1.
@@ -2578,7 +2582,7 @@ Package hyperref Warning: Difference (2) between bookmark levels is greater
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
 (hyperref)                than one, level fixed on input line 2.
 
-<parts/Cuong/images/module5b.jpg, id=965, 578.16pt x 241.90375pt>
+<parts/Cuong/images/module5b.jpg, id=986, 578.16pt x 241.90375pt>
 File: parts/Cuong/images/module5b.jpg Graphic file (type jpg)
 
 <use parts/Cuong/images/module5b.jpg>
@@ -2598,7 +2602,7 @@ File: Image/hcmut.png Graphic file (type png)
 <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 51.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [42 <./parts/Cuong/images/module5b.jpg>]
+ [43 <./parts/Cuong/images/module5b.jpg>]
 Overfull \hbox (21.42746pt too wide) in alignment at lines 55--71
  [] [] 
  []
@@ -2616,7 +2620,7 @@ File: Image/hcmut.png Graphic file (type png)
 <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 91.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [43]
+ [44]
 Underfull \vbox (badness 10000) detected at line 91
  []
 
@@ -2642,7 +2646,7 @@ File: Image/hcmut.png Graphic file (type png)
 <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 142.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [44]) (./parts/Cuong/module5c.tex
+ [45]) (./parts/Cuong/module5c.tex
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
 (hyperref)                than one, level fixed on input line 1.
@@ -2651,7 +2655,7 @@ Package hyperref Warning: Difference (2) between bookmark levels is greater
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
 (hyperref)                than one, level fixed on input line 2.
 
-<parts/Cuong/images/module5c.jpg, id=1008, 571.13374pt x 206.7725pt>
+<parts/Cuong/images/module5c.jpg, id=1027, 571.13374pt x 206.7725pt>
 File: parts/Cuong/images/module5c.jpg Graphic file (type jpg)
 
 <use parts/Cuong/images/module5c.jpg>
@@ -2671,7 +2675,7 @@ File: Image/hcmut.png Graphic file (type png)
 <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 36.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [45 <./parts/Cuong/images/module5c.jpg>]
+ [46 <./parts/Cuong/images/module5c.jpg>]
 Overfull \hbox (21.42746pt too wide) in alignment at lines 39--56
  [] [] 
  []
@@ -2693,7 +2697,7 @@ File: Image/hcmut.png Graphic file (type png)
 <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 81.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [46]
+ [47]
 Overfull \hbox (21.42746pt too wide) in alignment at lines 85--107
  [] [] 
  []
@@ -2707,58 +2711,110 @@ File: Image/hcmut.png Graphic file (type png)
  <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 180.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [47] (./parts/non-functional.tex) (./parts/ui.tex
-(./parts/Tan/ui.tex <Image/uiDuyettin.png, id=1046, 639.38875pt x 584.1825pt>
-File: Image/uiDuyettin.png Graphic file (type png)
+ [48] (./parts/non-functional.tex) (./parts/ui.tex
+(./parts/Tan/ui.tex <Image/uiTan1.png, id=1066, 597.23125pt x 325.215pt>
+File: Image/uiTan1.png Graphic file (type png)
 
-<use Image/uiDuyettin.png>
-Package pdftex.def Info: Image/uiDuyettin.png used on input line 4.
-(pdftex.def)             Requested size: 284.52756pt x 259.96484pt.
+<use Image/uiTan1.png>
+Package pdftex.def Info: Image/uiTan1.png used on input line 4.
+(pdftex.def)             Requested size: 284.52756pt x 154.93526pt.
+ <Image/uiTan2.png, id=1067, 594.22pt x 320.19624pt>
+File: Image/uiTan2.png Graphic file (type png)
+
+<use Image/uiTan2.png>
+Package pdftex.def Info: Image/uiTan2.png used on input line 11.
+(pdftex.def)             Requested size: 284.52756pt x 153.326pt.
 File: Image/hcmut.png Graphic file (type png)
  <use Image/hcmut.png>
-Package pdftex.def Info: Image/hcmut.png used on input line 8.
+Package pdftex.def Info: Image/hcmut.png used on input line 15.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [48
+ [49
 
-]
-<Image/PromoManager.png, id=1053, 777.90625pt x 411.5375pt>
+ <./Image/uiTan1.png>]
+<Image/uiTan3.png, id=1075, 586.19pt x 315.1775pt>
+File: Image/uiTan3.png Graphic file (type png)
+ <use Image/uiTan3.png>
+Package pdftex.def Info: Image/uiTan3.png used on input line 18.
+(pdftex.def)             Requested size: 284.52756pt x 152.98112pt.
+
+<Image/uiTan4.png, id=1076, 585.18625pt x 316.18124pt>
+File: Image/uiTan4.png Graphic file (type png)
+ <use Image/uiTan4.png>
+Package pdftex.def Info: Image/uiTan4.png used on input line 25.
+(pdftex.def)             Requested size: 284.52756pt x 153.7385pt.
+
+<Image/uiTan5.png, id=1077, 590.205pt x 318.18875pt>
+File: Image/uiTan5.png Graphic file (type png)
+ <use Image/uiTan5.png>
+Package pdftex.def Info: Image/uiTan5.png used on input line 32.
+(pdftex.def)             Requested size: 284.52756pt x 153.39401pt.
+File: Image/hcmut.png Graphic file (type png)
+
+<use Image/hcmut.png>
+Package pdftex.def Info: Image/hcmut.png used on input line 36.
+(pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
+ [50 <./Image/uiTan2.png> <./Image/uiTan3.png> <./Image/uiTan4.png>] <Image/uiT
+an6.png, id=1086, 591.20876pt x 320.19624pt>
+File: Image/uiTan6.png Graphic file (type png)
+
+<use Image/uiTan6.png>
+Package pdftex.def Info: Image/uiTan6.png used on input line 39.
+(pdftex.def)             Requested size: 284.52756pt x 154.10284pt.
+ <Image/uiTan7.png, id=1087, 586.19pt x 319.1925pt>
+File: Image/uiTan7.png Graphic file (type png)
+
+<use Image/uiTan7.png>
+Package pdftex.def Info: Image/uiTan7.png used on input line 46.
+(pdftex.def)             Requested size: 284.52756pt x 154.92993pt.
+ <Image/uiTan8.png, id=1088, 496.85625pt x 227.85126pt>
+File: Image/uiTan8.png Graphic file (type png)
+
+<use Image/uiTan8.png>
+Package pdftex.def Info: Image/uiTan8.png used on input line 53.
+(pdftex.def)             Requested size: 284.52756pt x 130.4815pt.
+File: Image/hcmut.png Graphic file (type png)
+ <use Image/hcmut.png>
+Package pdftex.def Info: Image/hcmut.png used on input line 57.
+(pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
+ [51 <./Image/uiTan5.png> <./Image/uiTan6.png> <./Image/uiTan7.png>]
+<Image/PromoManager.png, id=1097, 777.90625pt x 411.5375pt>
 File: Image/PromoManager.png Graphic file (type png)
 
 <use Image/PromoManager.png>
-Package pdftex.def Info: Image/PromoManager.png used on input line 13.
+Package pdftex.def Info: Image/PromoManager.png used on input line 61.
 (pdftex.def)             Requested size: 284.52756pt x 150.52705pt.
 File: Image/hcmut.png Graphic file (type png)
  <use Image/hcmut.png>
-Package pdftex.def Info: Image/hcmut.png used on input line 18.
+Package pdftex.def Info: Image/hcmut.png used on input line 66.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [49 <./Image/uiDuyettin.png> <./Image/PromoManager.png>]
-<Image/addPromo.png, id=1062, 571.13374pt x 490.83376pt>
+ [52 <./Image/uiTan8.png> <./Image/PromoManager.png>]
+<Image/addPromo.png, id=1105, 571.13374pt x 490.83376pt>
 File: Image/addPromo.png Graphic file (type png)
 
 <use Image/addPromo.png>
-Package pdftex.def Info: Image/addPromo.png used on input line 22.
+Package pdftex.def Info: Image/addPromo.png used on input line 70.
 (pdftex.def)             Requested size: 284.52756pt x 244.52501pt.
 
-<Image/deletePromo.png, id=1063, 428.60126pt x 244.915pt>
+<Image/deletePromo.png, id=1106, 428.60126pt x 244.915pt>
 File: Image/deletePromo.png Graphic file (type png)
 
 <use Image/deletePromo.png>
-Package pdftex.def Info: Image/deletePromo.png used on input line 29.
+Package pdftex.def Info: Image/deletePromo.png used on input line 77.
 (pdftex.def)             Requested size: 227.62204pt x 130.06966pt.
 ) (./parts/Tin/ui.tex
 File: Image/hcmut.png Graphic file (type png)
  <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 1.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [50 <./Image/addPromo.png> <./Image/deletePromo.png>]
-<parts/Khoa/khoa_ui/1b.png, id=1071, 968.61874pt x 646.415pt>
+ [53 <./Image/addPromo.png> <./Image/deletePromo.png>]
+<parts/Khoa/khoa_ui/1b.png, id=1114, 968.61874pt x 646.415pt>
 File: parts/Khoa/khoa_ui/1b.png Graphic file (type png)
 
 <use parts/Khoa/khoa_ui/1b.png>
 Package pdftex.def Info: parts/Khoa/khoa_ui/1b.png used on input line 6.
 (pdftex.def)             Requested size: 284.52756pt x 189.88196pt.
 
-<Image/ui-ngoctin.png, id=1072, 727.71875pt x 484.81125pt>
+<Image/ui-ngoctin.png, id=1115, 727.71875pt x 484.81125pt>
 File: Image/ui-ngoctin.png Graphic file (type png)
 
 <use Image/ui-ngoctin.png>
@@ -2769,8 +2825,8 @@ File: Image/hcmut.png Graphic file (type png)
  <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 1.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [51 <./parts/Khoa/khoa_ui/1b.png> <./Image/ui-ngoctin.png>]
-<parts/Khoa/khoa_ui/1.png, id=1080, 964.60374pt x 644.4075pt>
+ [54 <./parts/Khoa/khoa_ui/1b.png> <./Image/ui-ngoctin.png>]
+<parts/Khoa/khoa_ui/1.png, id=1124, 964.60374pt x 644.4075pt>
 File: parts/Khoa/khoa_ui/1.png Graphic file (type png)
 
 <use parts/Khoa/khoa_ui/1.png>
@@ -2785,15 +2841,15 @@ File: Image/hcmut.png Graphic file (type png)
 <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 16.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [52 <./parts/Khoa/khoa_ui/1.png>]
-<parts/Khoa/khoa_ui/2.png, id=1087, 966.61125pt x 646.415pt>
+ [55 <./parts/Khoa/khoa_ui/1.png>]
+<parts/Khoa/khoa_ui/2.png, id=1131, 966.61125pt x 646.415pt>
 File: parts/Khoa/khoa_ui/2.png Graphic file (type png)
 
 <use parts/Khoa/khoa_ui/2.png>
 Package pdftex.def Info: parts/Khoa/khoa_ui/2.png used on input line 20.
 (pdftex.def)             Requested size: 312.9803pt x 209.30316pt.
 
-<parts/Khoa/khoa_ui/3.png, id=1088, 964.60374pt x 645.41125pt>
+<parts/Khoa/khoa_ui/3.png, id=1132, 964.60374pt x 645.41125pt>
 File: parts/Khoa/khoa_ui/3.png Graphic file (type png)
 
 <use parts/Khoa/khoa_ui/3.png>
@@ -2803,15 +2859,15 @@ File: Image/hcmut.png Graphic file (type png)
  <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 26.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [53 <./parts/Khoa/khoa_ui/2.png> <./parts/Khoa/khoa_ui/3.png>]
-<parts/Khoa/khoa_ui/4.png, id=1098, 965.6075pt x 641.39626pt>
+ [56 <./parts/Khoa/khoa_ui/2.png> <./parts/Khoa/khoa_ui/3.png>]
+<parts/Khoa/khoa_ui/4.png, id=1142, 965.6075pt x 641.39626pt>
 File: parts/Khoa/khoa_ui/4.png Graphic file (type png)
 
 <use parts/Khoa/khoa_ui/4.png>
 Package pdftex.def Info: parts/Khoa/khoa_ui/4.png used on input line 29.
 (pdftex.def)             Requested size: 312.9803pt x 207.89345pt.
 
-<parts/Khoa/khoa_ui/5.png, id=1099, 966.61125pt x 647.41875pt>
+<parts/Khoa/khoa_ui/5.png, id=1143, 966.61125pt x 647.41875pt>
 File: parts/Khoa/khoa_ui/5.png Graphic file (type png)
 
 <use parts/Khoa/khoa_ui/5.png>
@@ -2821,8 +2877,8 @@ File: Image/hcmut.png Graphic file (type png)
  <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 35.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [54 <./parts/Khoa/khoa_ui/4.png> <./parts/Khoa/khoa_ui/5.png>]
-<parts/Khoa/khoa_ui/6.png, id=1110, 965.6075pt x 643.40375pt>
+ [57 <./parts/Khoa/khoa_ui/4.png> <./parts/Khoa/khoa_ui/5.png>]
+<parts/Khoa/khoa_ui/6.png, id=1153, 965.6075pt x 643.40375pt>
 File: parts/Khoa/khoa_ui/6.png Graphic file (type png)
 
 <use parts/Khoa/khoa_ui/6.png>
@@ -2832,15 +2888,15 @@ File: Image/hcmut.png Graphic file (type png)
  <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 40.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [55 <./parts/Khoa/khoa_ui/6.png>]) (./parts/bao/ui.tex
-<parts/bao/images/createPost.png, id=1118, 714.41907pt x 520.19344pt>
+ [58 <./parts/Khoa/khoa_ui/6.png>]) (./parts/bao/ui.tex
+<parts/bao/images/createPost.png, id=1161, 714.41907pt x 520.19344pt>
 File: parts/bao/images/createPost.png Graphic file (type png)
 
 <use parts/bao/images/createPost.png>
 Package pdftex.def Info: parts/bao/images/createPost.png used on input line 5.
 (pdftex.def)             Requested size: 284.52756pt x 207.17674pt.
 
-<parts/bao/images/roomManager.png, id=1119, 718.18312pt x 523.20468pt>
+<parts/bao/images/roomManager.png, id=1162, 718.18312pt x 523.20468pt>
 File: parts/bao/images/roomManager.png Graphic file (type png)
 
 <use parts/bao/images/roomManager.png>
@@ -2851,8 +2907,8 @@ File: Image/hcmut.png Graphic file (type png)
  <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 17.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [56 <./parts/bao/images/createPost.png (PNG copy)> <./parts/bao/images/roomMan
-ager.png (PNG copy)>] <parts/bao/images/resendPost.png, id=1125, 716.6775pt x 5
+ [59 <./parts/bao/images/createPost.png (PNG copy)> <./parts/bao/images/roomMan
+ager.png (PNG copy)>] <parts/bao/images/resendPost.png, id=1168, 716.6775pt x 5
 23.20468pt>
 File: parts/bao/images/resendPost.png Graphic file (type png)
 
@@ -2861,14 +2917,14 @@ Package pdftex.def Info: parts/bao/images/resendPost.png used on input line 21.
 
 (pdftex.def)             Requested size: 284.52756pt x 207.72139pt.
 
-<parts/bao/images/hidePost.png, id=1126, 713.66624pt x 520.94624pt>
+<parts/bao/images/hidePost.png, id=1169, 713.66624pt x 520.94624pt>
 File: parts/bao/images/hidePost.png Graphic file (type png)
 
 <use parts/bao/images/hidePost.png>
 Package pdftex.def Info: parts/bao/images/hidePost.png used on input line 29.
 (pdftex.def)             Requested size: 284.52756pt x 207.6912pt.
 ) (./parts/Cuong/ui.tex
-<parts/Cuong/images/danh-sach-phong.png, id=1127, 511.15968pt x 277.78781pt>
+<parts/Cuong/images/danh-sach-phong.png, id=1170, 511.15968pt x 277.78781pt>
 File: parts/Cuong/images/danh-sach-phong.png Graphic file (type png)
 
 <use parts/Cuong/images/danh-sach-phong.png>
@@ -2879,8 +2935,8 @@ File: Image/hcmut.png Graphic file (type png)
  <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 8.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [57 <./parts/bao/images/resendPost.png (PNG copy)> <./parts/bao/images/hidePos
-t.png (PNG copy)>] <parts/Cuong/images/ds-tin-nhan.png, id=1133, 506.6428pt x 2
+ [60 <./parts/bao/images/resendPost.png (PNG copy)> <./parts/bao/images/hidePos
+t.png (PNG copy)>] <parts/Cuong/images/ds-tin-nhan.png, id=1177, 506.6428pt x 2
 74.77657pt>
 File: parts/Cuong/images/ds-tin-nhan.png Graphic file (type png)
 
@@ -2892,9 +2948,9 @@ File: Image/hcmut.png Graphic file (type png)
  <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 18.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [58 <./parts/Cuong/images/danh-sach-phong.png> <./parts/Cuong/images/ds-tin-nh
+ [61 <./parts/Cuong/images/danh-sach-phong.png> <./parts/Cuong/images/ds-tin-nh
 an.png>]
-<parts/Cuong/images/chi-tiet-tin-nhan.png, id=1141, 450.18187pt x 294.34969pt>
+<parts/Cuong/images/chi-tiet-tin-nhan.png, id=1186, 450.18187pt x 294.34969pt>
 File: parts/Cuong/images/chi-tiet-tin-nhan.png Graphic file (type png)
 
 <use parts/Cuong/images/chi-tiet-tin-nhan.png>
@@ -2902,7 +2958,7 @@ Package pdftex.def Info: parts/Cuong/images/chi-tiet-tin-nhan.png used on input
  line 22.
 (pdftex.def)             Requested size: 284.52756pt x 186.04312pt.
 
-<parts/Cuong/images/tra-loi-tin-nhan.png, id=1142, 414.79968pt x 323.70938pt>
+<parts/Cuong/images/tra-loi-tin-nhan.png, id=1187, 414.79968pt x 323.70938pt>
 File: parts/Cuong/images/tra-loi-tin-nhan.png Graphic file (type png)
 
 <use parts/Cuong/images/tra-loi-tin-nhan.png>
@@ -2916,7 +2972,7 @@ File: Image/hcmut.png Graphic file (type png)
 <use Image/hcmut.png>
 Package pdftex.def Info: Image/hcmut.png used on input line 188.
 (pdftex.def)             Requested size: 22.76204pt x 22.75928pt.
- [59 <./parts/Cuong/images/chi-tiet-tin-nhan.png> <./parts/Cuong/images/tra-loi
+ [62 <./parts/Cuong/images/chi-tiet-tin-nhan.png> <./parts/Cuong/images/tra-loi
 -tin-nhan.png>]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 188.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 188.
@@ -2929,10 +2985,10 @@ Package rerunfilecheck Info: File `diamondstay.out' has not changed.
 (rerunfilecheck)             Checksum: 9960DADBB42A3F5A0453A639D739BE0B;18525.
  ) 
 Here is how much of TeX's memory you used:
- 34447 strings out of 493029
- 630257 string characters out of 6136235
+ 34492 strings out of 493029
+ 631028 string characters out of 6136235
  689326 words of memory out of 5000000
- 36870 multiletter control sequences out of 15000+600000
+ 36898 multiletter control sequences out of 15000+600000
  21603 words of font info for 43 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  67i,24n,76p,10431b,749s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -2945,10 +3001,10 @@ r/share/texlive/texmf-dist/fonts/type1/vntex/vnr/vnti10.pfb></usr/share/texlive
 /texmf-dist/fonts/type1/vntex/vnr/vnti9.pfb></usr/share/texlive/texmf-dist/font
 s/type1/vntex/vnr/vntt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/vntex/v
 nr/vntt8.pfb>
-Output written on diamondstay.pdf (60 pages, 1790395 bytes).
+Output written on diamondstay.pdf (63 pages, 1933142 bytes).
 PDF statistics:
- 1273 PDF objects out of 1440 (max. 8388607)
- 1102 compressed objects within 12 object streams
- 409 named destinations out of 1000 (max. 500000)
- 928 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1318 PDF objects out of 1440 (max. 8388607)
+ 1130 compressed objects within 12 object streams
+ 419 named destinations out of 1000 (max. 500000)
+ 963 words of extra memory for PDF output out of 10000 (max. 10000000)
 
