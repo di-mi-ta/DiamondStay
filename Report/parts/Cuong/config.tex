@@ -1,0 +1,30 @@
+% \setlist[enumerate]{itemsep=0mm}
+% \setlist[itemize]{itemsep=0mm}
+% \let\olditem\item
+% \renewcommand{\item}{%
+% \olditem\vspace{4pt}}
+
+\newenvironment{usecase}
+{   
+    \begin{center}
+    \begin{longtable}{ | l |p{10cm}|}
+    \hline
+}
+{
+    \end{longtable}
+    \end{center}
+}
+
+\newcommand{\usecasename}[1]{\textbf{Tên usecase} & #1 \\ \hline}
+\newcommand{\actor}[1]{\textbf{Người tương tác} & #1 \\ \hline}
+\newcommand{\describe}[1]{\textbf{Mô tả} & #1 \\ \hline}
+\newcommand{\creators}[2]{\textbf{Người tạo:} \textit{#1} & \textbf{Cập nhật lần cuối bởi:} \textit{#2} \\ \hline}
+\newcommand{\datecreated}[2]{\textbf{Ngày tạo:} \textit{#1} & \textbf{Lần cuối cập nhật:} \textit{#2} \\ \hline}
+\newcommand{\precond}[1]{\textbf{Tiền điều kiện} &  #1 \\ \hline }
+\newcommand{\postcond}[1]{\textbf{Hậu điều kiện} &  #1 \\ \hline }
+\newcommand{\normalflow}{\textbf{Luồng cơ bản} & }
+\newcommand{\altflow}{\textbf{Luồng thay thế} & }
+\newcommand{\exception}{\textbf{Ngoại lệ} & }
+\newcommand{\noalternative}{\textbf{Luồng thay thế} & Không có \\ \hline}
+\newcommand{\noexception}{\textbf{Ngoại lệ} & Không có \\ \hline}
+\newcommand{\alt}[1]{\item \textit{#1.}}
