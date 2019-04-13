@@ -1,0 +1,85 @@
+\contentsline {section}{\numberline {1}L\IeC {\d i}ch s\IeC {\h \uhorn } s\IeC {\h \uhorn }a \IeC {\dj }\IeC {\h \ocircumflex }i}{4}{section.1}
+\contentsline {section}{\numberline {2}Gi\IeC {\'\ohorn }i thi\IeC {\d \ecircumflex }u}{6}{section.2}
+\contentsline {section}{\numberline {3}T\IeC {\h \ocircumflex }ng quan h\IeC {\d \ecircumflex } th\IeC {\'\ocircumflex }ng}{6}{section.3}
+\contentsline {section}{\numberline {4}M\IeC {\^o} t\IeC {\h a} chi ti\IeC {\'\ecircumflex }t}{8}{section.4}
+\contentsline {subsection}{\numberline {4.1}Module 1: Duy\IeC {\d \ecircumflex }t tin \IeC {\dj }\IeC {\u a}ng y\IeC {\^e}u c\IeC {\`\acircumflex }u th\IeC {\^e}m ch\IeC {\~\ocircumflex } \IeC {\h \ohorn } m\IeC {\'\ohorn }i t\IeC {\`\uhorn } ch\IeC {\h u} nh\IeC {\`a}}{8}{subsection.4.1}
+\contentsline {subsubsection}{\numberline {4.1.1}User Story}{8}{subsubsection.4.1.1}
+\contentsline {subsubsection}{\numberline {4.1.2}C\IeC {\'a}c usecase chi ti\IeC {\'\ecircumflex }t}{8}{subsubsection.4.1.2}
+\contentsline {subsubsubsection}{\numberline {4.1.2.a}Use Case 1: Duy\IeC {\d \ecircumflex }t tin.}{8}{subsubsubsection.4.1.2.1}
+\contentsline {subsection}{\numberline {4.2}Module 2: Qu\IeC {\h a}n l\IeC {\'\i } khuy\IeC {\'\ecircumflex }n m\IeC {\d a}i}{11}{subsection.4.2}
+\contentsline {subsubsection}{\numberline {4.2.1}User Story}{11}{subsubsection.4.2.1}
+\contentsline {subsubsection}{\numberline {4.2.2}C\IeC {\'a}c usecase chi ti\IeC {\'\ecircumflex }t}{12}{subsubsection.4.2.2}
+\contentsline {subsubsubsection}{\numberline {4.2.2.a}Usecase 2: Th\IeC {\^e}m khuy\IeC {\'\ecircumflex }n m\IeC {\d a}i c\IeC {\h u}a h\IeC {\d \ecircumflex } th\IeC {\'\ocircumflex }ng}{13}{subsubsubsection.4.2.2.1}
+\contentsline {subsubsubsection}{\numberline {4.2.2.b}Usecase 3: Th\IeC {\^e}m khuy\IeC {\'\ecircumflex }n m\IeC {\d a}i ri\IeC {\^e}ng (d\IeC {\`a}nh cho ch\IeC {\h u} nh\IeC {\`a})}{15}{subsubsubsection.4.2.2.2}
+\contentsline {subsubsubsection}{\numberline {4.2.2.c}Usecase 4: X\IeC {\'o}a khuy\IeC {\'\ecircumflex }n m\IeC {\d a}i (d\IeC {\`a}nh cho ch\IeC {\h u} nh\IeC {\`a})}{18}{subsubsubsection.4.2.2.3}
+\contentsline {subsubsubsection}{\numberline {4.2.2.d}Usecase 5: X\IeC {\'o}a khuy\IeC {\'\ecircumflex }n m\IeC {\d a}i h\IeC {\d \ecircumflex } th\IeC {\'\ocircumflex }ng (d\IeC {\`a}nh cho qu\IeC {\h a}n l\IeC {\'\i })}{20}{subsubsubsection.4.2.2.4}
+\contentsline {subsection}{\numberline {4.3}Module 3: B\IeC {\`\i }nh lu\IeC {\d \acircumflex }n v\IeC {\`a} rating cho nh\IeC {\`a}}{22}{subsection.4.3}
+\contentsline {subsubsection}{\numberline {4.3.1}B\IeC {\`\i }nh lu\IeC {\d \acircumflex }n v\IeC {\`a} rating cho nh\IeC {\`a}}{22}{subsubsection.4.3.1}
+\contentsline {subsubsubsection}{\numberline {4.3.1.a}User Story}{22}{subsubsubsection.4.3.1.1}
+\contentsline {subsubsubsection}{\numberline {4.3.1.b}M\IeC {\^o} t\IeC {\h a} c\IeC {\'a}c use case}{22}{subsubsubsection.4.3.1.2}
+\contentsline {subsubsection}{\numberline {4.3.2}Qu\IeC {\h a}n l\IeC {\'y} huy hi\IeC {\d \ecircumflex }u, x\IeC {\'\ecircumflex }p h\IeC {\d a}ng c\IeC {\'a}c homestay}{25}{subsubsection.4.3.2}
+\contentsline {subsubsubsection}{\numberline {4.3.2.a}User Story}{25}{subsubsubsection.4.3.2.1}
+\contentsline {subsubsubsection}{\numberline {4.3.2.b}M\IeC {\^o} t\IeC {\h a} c\IeC {\'a}c use case}{25}{subsubsubsection.4.3.2.2}
+\contentsline {subsection}{\numberline {4.4}Module 4: Y\IeC {\^e}u c\IeC {\`\acircumflex }u t\IeC {\d a}o tin m\IeC {\'\ohorn }i, qu\IeC {\h a}n l\IeC {\'y} c\IeC {\'a}c tin \IeC {\dj }\IeC {\~a} g\IeC {\h \uhorn }i}{29}{subsection.4.4}
+\contentsline {subsubsection}{\numberline {4.4.1}User story}{29}{subsubsection.4.4.1}
+\contentsline {subsubsection}{\numberline {4.4.2}M\IeC {\^o} t\IeC {\h a} c\IeC {\'a}c use case}{29}{subsubsection.4.4.2}
+\contentsline {subsubsubsection}{\numberline {4.4.2.a}Use Case 1: Th\IeC {\^e}m m\IeC {\'\ohorn }i}{29}{subsubsubsection.4.4.2.1}
+\contentsline {subsubsubsection}{\numberline {4.4.2.b}Use Case 2: Xem danh s\IeC {\'a}ch tin}{30}{subsubsubsection.4.4.2.2}
+\contentsline {subsubsection}{\numberline {4.4.3}Use Case 3: Ch\IeC {\h i}nh s\IeC {\h \uhorn }a tin \IeC {\dj }\IeC {\~a} \IeC {\dj }\IeC {\u a}ng}{31}{subsubsection.4.4.3}
+\contentsline {subsubsubsection}{\numberline {4.4.3.a}Use Case 4: \IeC {\h \ACIRCUMFLEX }n tin \IeC {\dj }\IeC {\~a} \IeC {\dj }\IeC {\u a}ng}{32}{subsubsubsection.4.4.3.1}
+\contentsline {subsection}{\numberline {4.5}Module 5: T\IeC {\`\i }m ki\IeC {\'\ecircumflex }m v\IeC {\`a} l\IeC {\d o}c k\IeC {\'\ecircumflex }t qu\IeC {\h a}; \IeC {\DJ }\IeC {\d \abreve }t ph\IeC {\`o}ng homestay}{35}{subsection.4.5}
+\contentsline {subsubsection}{\numberline {4.5.1} T\IeC {\`\i }m ki\IeC {\'\ecircumflex }m v\IeC {\`a} l\IeC {\d o}c homestay}{35}{subsubsection.4.5.1}
+\contentsline {subsubsubsection}{\numberline {4.5.1.a}User Story}{35}{subsubsubsection.4.5.1.1}
+\contentsline {subsubsubsection}{\numberline {4.5.1.b}M\IeC {\^o} t\IeC {\h a} c\IeC {\'a}c use case}{35}{subsubsubsection.4.5.1.2}
+\contentsline {subsubsection}{\numberline {4.5.2}\IeC {\DJ }\IeC {\d \abreve }t ph\IeC {\`o}ng homestay (bao g\IeC {\`\ocircumflex }m thanh to\IeC {\'a}n)}{37}{subsubsection.4.5.2}
+\contentsline {subsubsubsection}{\numberline {4.5.2.a}User story}{37}{subsubsubsection.4.5.2.1}
+\contentsline {subsubsubsection}{\numberline {4.5.2.b}M\IeC {\^o} t\IeC {\h a} c\IeC {\'a}c use case}{38}{subsubsubsection.4.5.2.2}
+\contentsline {subsection}{\numberline {4.6}Module 6: Theo d\IeC {\~o}i t\IeC {\`\i }nh tr\IeC {\d a}ng \IeC {\dj }\IeC {\d \abreve }t ph\IeC {\`o}ng cho ch\IeC {\h u} nh\IeC {\`a}}{40}{subsection.4.6}
+\contentsline {subsubsection}{\numberline {4.6.1}User stories}{40}{subsubsection.4.6.1}
+\contentsline {subsubsection}{\numberline {4.6.2}C\IeC {\'a}c use case chi ti\IeC {\'\ecircumflex }t}{40}{subsubsection.4.6.2}
+\contentsline {subsubsubsection}{\numberline {4.6.2.a}Usercase 1: Xem danh s\IeC {\'a}ch ph\IeC {\`o}ng}{40}{subsubsubsection.4.6.2.1}
+\contentsline {subsubsubsection}{\numberline {4.6.2.b}Usercase 2: L\IeC {\d o}c danh s\IeC {\'a}ch ph\IeC {\`o}ng}{41}{subsubsubsection.4.6.2.2}
+\contentsline {subsubsubsection}{\numberline {4.6.2.c}Usercase 3: S\IeC {\'\abreve }p x\IeC {\'\ecircumflex }p danh s\IeC {\'a}ch ph\IeC {\`o}ng}{41}{subsubsubsection.4.6.2.3}
+\contentsline {subsection}{\numberline {4.7}Module 7: C\IeC {\'a}c ch\IeC {\'\uhorn }c n\IeC {\u a}ng v\IeC {\`\ecircumflex } nh\IeC {\'\abreve }n tin cho kh\IeC {\'a}ch thu\IeC {\^e}}{42}{subsection.4.7}
+\contentsline {subsubsection}{\numberline {4.7.1}User stories}{42}{subsubsection.4.7.1}
+\contentsline {subsubsection}{\numberline {4.7.2}C\IeC {\'a}c use case chi ti\IeC {\'\ecircumflex }t}{42}{subsubsection.4.7.2}
+\contentsline {subsubsubsection}{\numberline {4.7.2.a}G\IeC {\h \uhorn }i tin nh\IeC {\'\abreve }n cho ch\IeC {\h u} nh\IeC {\`a}}{42}{subsubsubsection.4.7.2.1}
+\contentsline {subsubsubsection}{\numberline {4.7.2.b}Xem danh s\IeC {\'a}ch tin nh\IeC {\'\abreve }n}{43}{subsubsubsection.4.7.2.2}
+\contentsline {subsubsubsection}{\numberline {4.7.2.c}Xem chi ti\IeC {\'\ecircumflex }t tin nh\IeC {\'\abreve }n}{44}{subsubsubsection.4.7.2.3}
+\contentsline {subsubsubsection}{\numberline {4.7.2.d}Tr\IeC {\h a} l\IeC {\`\ohorn }i tin nh\IeC {\'\abreve }n}{44}{subsubsubsection.4.7.2.4}
+\contentsline {subsubsubsection}{\numberline {4.7.2.e}Xo\IeC {\'a} tin nh\IeC {\'\abreve }n}{44}{subsubsubsection.4.7.2.5}
+\contentsline {subsection}{\numberline {4.8}Module 8: C\IeC {\'a}c ch\IeC {\'\uhorn }c n\IeC {\u a}ng v\IeC {\`\ecircumflex } nh\IeC {\'\abreve }n tin cho ch\IeC {\h u} nh\IeC {\`a}}{45}{subsection.4.8}
+\contentsline {subsubsection}{\numberline {4.8.1}User stories}{45}{subsubsection.4.8.1}
+\contentsline {subsubsection}{\numberline {4.8.2}C\IeC {\'a}c use case chi ti\IeC {\'\ecircumflex }t}{45}{subsubsection.4.8.2}
+\contentsline {subsubsubsection}{\numberline {4.8.2.a}Xem danh s\IeC {\'a}ch tin nh\IeC {\'\abreve }n}{45}{subsubsubsection.4.8.2.1}
+\contentsline {subsubsubsection}{\numberline {4.8.2.b}Xem chi ti\IeC {\'\ecircumflex }t tin nh\IeC {\'\abreve }n}{46}{subsubsubsection.4.8.2.2}
+\contentsline {subsubsubsection}{\numberline {4.8.2.c}Tr\IeC {\h a} l\IeC {\`\ohorn }i tin nh\IeC {\'\abreve }n}{46}{subsubsubsection.4.8.2.3}
+\contentsline {subsubsubsection}{\numberline {4.8.2.d}Xo\IeC {\'a} tin nh\IeC {\'\abreve }n}{47}{subsubsubsection.4.8.2.4}
+\contentsline {section}{\numberline {5}\IeC {\DJ }\IeC {\d \abreve }c t\IeC {\h a} c\IeC {\'a}c y\IeC {\^e}u c\IeC {\`\acircumflex }u phi ch\IeC {\'\uhorn }c n\IeC {\u a}ng}{48}{section.5}
+\contentsline {subsection}{\numberline {5.1}Availability Requirements}{48}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Security Requirements}{48}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Usability Requirements}{48}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.4}Scalabitlity Requirements}{48}{subsection.5.4}
+\contentsline {subsection}{\numberline {5.5}Performance Requirements}{48}{subsection.5.5}
+\contentsline {section}{\numberline {6}Thi\IeC {\'\ecircumflex }t k\IeC {\'\ecircumflex } giao di\IeC {\d \ecircumflex }n ng\IeC {\uhorn }\IeC {\`\ohorn }i d\IeC {\`u}ng}{49}{section.6}
+\contentsline {subsection}{\numberline {6.1}Module 1: Duy\IeC {\d \ecircumflex }t tin}{49}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}Module 2: Qu\IeC {\h a}n l\IeC {\'\i } khuy\IeC {\'\ecircumflex }n m\IeC {\d a}i}{49}{subsection.6.2}
+\contentsline {subsubsection}{\numberline {6.2.1}Giao di\IeC {\d \ecircumflex }n qu\IeC {\h a}n l\IeC {\'\i } khuy\IeC {\'\ecircumflex }n m\IeC {\d a}i}{49}{subsubsection.6.2.1}
+\contentsline {subsubsection}{\numberline {6.2.2}Giao di\IeC {\d \ecircumflex }n th\IeC {\^e}m khuy\IeC {\'\ecircumflex }n m\IeC {\d a}i}{50}{subsubsection.6.2.2}
+\contentsline {subsubsection}{\numberline {6.2.3}Giao di\IeC {\d \ecircumflex }n x\IeC {\'o}a khuy\IeC {\'\ecircumflex }n m\IeC {\d a}i}{50}{subsubsection.6.2.3}
+\contentsline {subsection}{\numberline {6.3}Module 3: B\IeC {\`\i }nh lu\IeC {\d \acircumflex }n, rating v\IeC {\`a} x\IeC {\'\ecircumflex }p h\IeC {\d a}ng cho nh\IeC {\`a}}{51}{subsection.6.3}
+\contentsline {subsubsection}{\numberline {6.3.1}Giao di\IeC {\d \ecircumflex }n b\IeC {\`\i }nh lu\IeC {\d \acircumflex }n v\IeC {\`a} rating}{51}{subsubsection.6.3.1}
+\contentsline {subsubsection}{\numberline {6.3.2}Giao di\IeC {\d \ecircumflex }n x\IeC {\'\ecircumflex }p h\IeC {\d a}ng c\IeC {\h u}a nh\IeC {\`a}}{51}{subsubsection.6.3.2}
+\contentsline {subsection}{\numberline {6.4}Module 5: T\IeC {\`\i }m ki\IeC {\'\ecircumflex }m v\IeC {\`a} l\IeC {\d o}c homestay; D\IeC {\d \abreve }t ph\IeC {\`o}ng}{52}{subsection.6.4}
+\contentsline {subsubsection}{\numberline {6.4.1}T\IeC {\`I}m ki\IeC {\'\ecircumflex }m v\IeC {\`a} l\IeC {\d o}c k\IeC {\'\ecircumflex }t qu\IeC {\h a}}{52}{subsubsection.6.4.1}
+\contentsline {subsubsection}{\numberline {6.4.2}\IeC {\DJ }\IeC {\d \abreve }t ph\IeC {\`o}ng v\IeC {\`a} thanh to\IeC {\'a}n}{53}{subsubsection.6.4.2}
+\contentsline {subsection}{\numberline {6.5}Module 4: Y\IeC {\^e}u c\IeC {\`\acircumflex }u t\IeC {\d a}o tin m\IeC {\'\ohorn }i, qu\IeC {\h a}n l\IeC {\'y} c\IeC {\'a}c tin \IeC {\dj }\IeC {\~a} g\IeC {\h \uhorn }i}{56}{subsection.6.5}
+\contentsline {subsubsection}{\numberline {6.5.1}Th\IeC {\^e}m m\IeC {\'\ohorn }i}{56}{subsubsection.6.5.1}
+\contentsline {subsubsection}{\numberline {6.5.2}Xem danh s\IeC {\'a}ch tin}{56}{subsubsection.6.5.2}
+\contentsline {subsubsection}{\numberline {6.5.3}Ch\IeC {\h i}nh s\IeC {\h \uhorn }a tin \IeC {\dj }\IeC {\~a} \IeC {\dj }\IeC {\u a}ng}{57}{subsubsection.6.5.3}
+\contentsline {subsubsection}{\numberline {6.5.4}\IeC {\h \ACIRCUMFLEX }n tin \IeC {\dj }\IeC {\~a} \IeC {\dj }\IeC {\u a}ng}{57}{subsubsection.6.5.4}
+\contentsline {subsection}{\numberline {6.6}Module 6: Theo d\IeC {\~o}i t\IeC {\`\i }nh tr\IeC {\d a}ng \IeC {\dj }\IeC {\d \abreve }t ph\IeC {\`o}ng}{58}{subsection.6.6}
+\contentsline {subsection}{\numberline {6.7}Module 8: Tin nh\IeC {\'\abreve }n cho ch\IeC {\h u} nh\IeC {\`a}}{58}{subsection.6.7}
+\contentsline {subsubsection}{\numberline {6.7.1}Giao di\IeC {\d \ecircumflex }n xem danh s\IeC {\'a}ch tin nh\IeC {\'\abreve }n}{58}{subsubsection.6.7.1}
+\contentsline {subsubsection}{\numberline {6.7.2}Giao di\IeC {\d \ecircumflex }n xem chi ti\IeC {\'\ecircumflex }t tin nh\IeC {\'\abreve }n}{59}{subsubsection.6.7.2}
+\contentsline {subsubsection}{\numberline {6.7.3}Giao di\IeC {\d \ecircumflex }n tr\IeC {\h a} l\IeC {\`\ohorn }i tin nh\IeC {\'\abreve }n}{59}{subsubsection.6.7.3}
