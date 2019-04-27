@@ -25,6 +25,10 @@ const  ratingSchema = new Schema({
 });
 
 const HomePostSchema = new Schema({
+    owner: {
+        type: String,
+        required: true,
+    },
     rating: [ratingSchema],
     name: {
         type: String, 
@@ -58,10 +62,9 @@ const HomePostSchema = new Schema({
         default:'',      
     },
     state: {
-        type: Number,
-        min: 0,
-        max: 2,
-        require: true 
+        type: String,
+        default: 'waiting',
+        enum: ['success', 'rejected', 'waiting', 'requireEdit']
     },
     note:{
         type: String,
