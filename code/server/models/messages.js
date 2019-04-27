@@ -7,5 +7,5 @@ const MessageSchema = new Schema({
     timestamps : true
 });
 
-var MessageSchema = mongoose.model('MessageSchema', MessageSchema)
+var MessageSchema = mongoose.model('Messages', MessageSchema)
 module.exports = MessageSchema   

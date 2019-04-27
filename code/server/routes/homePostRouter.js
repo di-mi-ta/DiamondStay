@@ -82,7 +82,6 @@ homePostRouter.route('/:homePostId')
     .catch((err) => next(err)); 
 });
 
-
 homePostRouter.route('/:homePostId/rating/:ratingId')
 .get((req,res,next) => {
     HomePosts.findById(req.params.homePostId)

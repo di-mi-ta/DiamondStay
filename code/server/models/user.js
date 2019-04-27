@@ -9,7 +9,7 @@ var User = new Schema({
         type: String,
         default: ''
     },
-    lastname: {
+    lastName: {
         type: String, 
         default: ''
     },
@@ -23,10 +23,10 @@ var User = new Schema({
     },
     typeUser: {
         type: Number,
-        default: 0,
+        default: 0,   // 0: renter, 1: host, 2: admin 
     }
 });
 
 
 User.plugin(passportLocalMongoose);
-module.exports = mongoose.model('User',User);
+module.exports = mongoose.model('Users', User);
