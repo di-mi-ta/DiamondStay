@@ -18,23 +18,10 @@ const  ratingSchema = new Schema({
     },
     author: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'Users'
     }
 }, {
     timestamps: true
-});
-
-const priceSchema = new Schema({
-    numRoom: {
-        type: Number,
-        default: 0,
-        require: true
-    },
-    price: {
-        type: Currency,
-        default: 0,
-        require: true 
-    }
 });
 
 const HomePostSchema = new Schema({
@@ -56,13 +43,36 @@ const HomePostSchema = new Schema({
         type: String,
         default: ''
     },
-    price: [priceSchema],
+    price: {
+        type: Number,
+        min: 0,
+        default: 0,
+        required: true
+    },
     features: {
+        type: String,
+        default: ''
+    },
+    mainFeatures: {
         type: String,
         default:'',      
     },
+    state: {
+        type: Number,
+        min: 0,
+        max: 2,
+        require: true 
+    },
+    note:{
+        type: String,
+        default: ''
+    },
+    confirmedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Users'
+    }
 },{
     timestamps : true
 });
 
-module.exports = mongoose.model('HomePostSchema',HomePostSchema) 
+module.exports = mongoose.model('HomePosts',HomePostSchema) 

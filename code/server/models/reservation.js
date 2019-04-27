@@ -10,9 +10,18 @@ const reservationSchema = new Schema({
         type: Number,
         default: 0.0,
     },
+    numNights: {
+        type: Number,
+        min: 0,
+        default: 0,
+    },
+    appliedPromo: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Promotions'
+    },
     home: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'HomePost'
+        ref: 'HomePosts'
     },
     dateStart: {
         type: Date,
@@ -30,4 +39,4 @@ const reservationSchema = new Schema({
     timestamps : true
 });
 
-module.exports = mongoose.model('ReservationSchema',reservationSchema);
+module.exports = mongoose.model('Reservations',reservationSchema);

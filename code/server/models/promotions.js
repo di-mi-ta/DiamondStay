@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 const homeAppliedPromotion = new Schema({
     home: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'HomePost'
+        ref: 'HomePosts'
     }
 })
 
@@ -40,12 +40,17 @@ const promotionSchema = new Schema({
     },
     creator: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'Users'
+    },
+    type: {
+        type: Number, // 0: host promotion, 1: system promotion
+        min: 0,
+        max: 1,
+        default: 0,
     },
     homeposts: [homeAppliedPromotion]
 },{
     timestamps: true
 })
 
-const Promotions = mongoose.model('Promotions', promotionSchema);
-module.exports = Promotions;
+module.exports = mongoose.model('Promotions', promotionSchema);
