@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+var mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 require('mongoose-currency').loadType(mongoose)
@@ -43,10 +43,6 @@ const HomePostSchema = new Schema({
         type: String,
         required: true
     },
-    label: {
-        type: String,
-        default: ''
-    },
     price: {
         type: Number,
         min: 0,
@@ -73,6 +69,11 @@ const HomePostSchema = new Schema({
     confirmedBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Users'
+    },
+    maxPeoples: {
+        type: Number,
+        default: 1,
+        required: true 
     }
 },{
     timestamps : true

@@ -1,7 +1,8 @@
-import mongoose, { SchemaType, SchemaTypes } from 'mongoose'; 
+var mongoose = require('mongoose')
 const User = mongoose.model('Users');
+var authenticate = require('../authenticate');
 
-export const getListUser = (req, res, next) => {
+const getListUser = (req, res, next) => {
    User.find({})
    .then((users) => {
       res.statusCode = 200;
@@ -11,7 +12,7 @@ export const getListUser = (req, res, next) => {
    .catch((err) => next(err)); 
 };
 
-export const deleteAllUsers = (req, res, next) => {
+const deleteAllUsers = (req, res, next) => {
    User.remove({})
    .then((resp) => {
       res.statusCode = 200;
@@ -21,7 +22,7 @@ export const deleteAllUsers = (req, res, next) => {
    .catch((err) => next(err)); 
 };
 
-export const signUp = (req, res, next) => {
+const signUp = (req, res, next) => {
    User.register(new User({username: req.body.username}), 
      req.body.password, (err, user) => {
      if(err) {
@@ -57,14 +58,14 @@ export const signUp = (req, res, next) => {
    });
 };
 
-export const logIn = (req, res) => {
+const logIn = (req, res) => {
    var token = authenticate.getToken({_id: req.user._id});
    res.statusCode = 200;
    res.setHeader('Content-Type', 'application/json');
    res.json({success: true, token: token, status: 'You are successfully logged in!'});
 };
 
-export const logOut = (req,res,next) => {
+const logOut = (req,res,next) => {
    if (req.session){
      req.session.destroy();
      res.clearCookie('session-id');
@@ -75,5 +76,13 @@ export const logOut = (req,res,next) => {
      err.status = 403;
      next(err);
    }
+}
+
+module.exports = {
+  logOut,
+  logIn,
+  signUp,
+  deleteAllUsers,
+  getListUser
 }
 

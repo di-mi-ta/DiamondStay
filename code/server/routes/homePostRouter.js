@@ -8,15 +8,17 @@ const authenticate = require('../authenticate');
 
 homePostRouter.use(bodyParser.json());
 
-import {HomePostCtrl} from '../controllers'
+const Controllers  = require('../controllers');
+const HomePostCtrl = Controllers.HomePostCtrl;
 
 homePostRouter.route('/')
-.get(HomePostCtrl.getListHomePostsVerifyOK)
-.post(authenticate.verifyUser, authenticate.verifyAdmin, HomePostCtrl.createNewHomePost)
-.delete(authenticate.verifyUser, authenticate.verifyAdmin, HomePostCtrl.deleteAllHomePost);
+.get(HomePostCtrl.getListWaitingConfirmedHomePosts)
+.post(authenticate.verifyUser, HomePostCtrl.createNewHomePost)
+.delete(authenticate.verifyUser, HomePostCtrl.deleteAllHomePost);
 
 homePostRouter.route('/:homePostId')
-.get(HomePostCtrl.findHomePostById)
+.get(HomePostCtrl.findHomePostDetailedById)
+.post(authenticate.verifyUser, HomePostCtrl.postRating)
 .put(authenticate.verifyUser, authenticate.verifyAdmin, HomePostCtrl.updateHomePost)
 .delete(authenticate.verifyUser, authenticate.verifyAdmin, HomePostCtrl.deleteHomePost);
 

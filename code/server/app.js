@@ -5,12 +5,15 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const homePostRouter  = require('./routes/homePostRouter');
+const promoRouter = require('./routes/promoRouter'); 
+
 var passport = require('passport');
 var config = require('./config');
 
 var app = express();
 
-const mongoose = require('mongoose')
+var mongoose = require('mongoose')
 mongoose.Promise = require('bluebird');
 
 const url = config.mongoUrl;
@@ -20,8 +23,7 @@ connect.then((db) => {
   console.log('CONNECTING TO MONGO DATABASE SUCCESSFULLY !!!')
 },(err) => {console.log(err)});
 
-const homePostRouter  = require('./routes/homePostRouter');
-const promoRouter = require('./routes/promoRouter'); 
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

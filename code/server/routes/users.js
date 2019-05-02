@@ -4,9 +4,11 @@ var router = express.Router();
 var passport = require('passport');
 var authenticate = require('../authenticate');
 
-import {AuthCtrl} from '../controllers';
+const Controllers  = require('../controllers');
+const AuthCtrl = Controllers.AuthCtrl;
 
-router.use(bodyParser.json())
+
+router.use(bodyParser.json());
 
 router.get('/', authenticate.verifyUser, authenticate.verifyAdmin, AuthCtrl.getListUser);
 

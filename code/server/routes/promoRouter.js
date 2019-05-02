@@ -9,30 +9,17 @@ const mongoose = require('mongoose')
 const Promotions = require('../models/promotions')
 const authenticate = require('../authenticate');
 
+const Controllers  = require('../controllers');
+const PromoCtrl = Controllers.PromoCtrl;
+
 promoRouter.route('/')
-.get((req,res,next) => {
-    Promotions.find({})
-    .then((promotions) => {
-        res.statusCode = 200;
-        res.setHeader('Content-Type','application/json');
-        res.json(promotions) 
-    },(err) => next(err))
-    .catch((err) => next(err))
-})
-.post(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
-    Promotions.create(res.body)
-    .then((promotion) => {
-        console.log("Promotion is created", promotion);
-        res.statusCode = 200;
-        res.setHeader('Content-Type','application/json');
-        res.json(promotion) 
-    },(err) => next(err))
-    .catch((err) => next(err))
-})
+.get(PromoCtrl.getListPromotion)
+.post(authenticate.verifyUser, PromoCtrl.createNewHostPromotion)
 .put(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
     res.statusCode = 403;
     res.end('PUT operation not supported on /promotions');
 })
+
 .delete(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
     Promotions.remove({})
     .then((resp) => {

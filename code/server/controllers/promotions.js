@@ -1,25 +1,34 @@
-import mongoose, { SchemaType, SchemaTypes } from 'mongoose'; 
+var mongoose = require('mongoose')
+var Promotions = require('../models/promotions')
 
-const Users = mongoose.model('Users');
-const Promotions = mongoose.model('Promotions');
-const Messages = mongoose.model('Messages');
-const Reservations = mongoose.model('Reservations');
-const HomePosts = mongoose.model('HomePosts');
-
-export const createNewHostPromotion =  () => {
-    /* This function to add new host promotions */
-    // TODO 
+const createNewHostPromotion =  () => {
+    /* Description: Create new host promotion*/
+    // TO DO
+}
+const createNewSystemPromotion =  () => {
+    /* Description: Create new system promotion*/
+    // TO DO 
 }
 
-export const createNewSystemPromotion =  () => {
-    /* This function to add new system promotions */
-    // TODO 
+const updatePromotion =  () => {
+    /* Description: Update a promotion*/
+    // TO DO 
 }
 
-export const updatePromotion =  () => {
-    // TODO 
+const deletePromotion =  () => {
+    /* Description: Delete a promotion*/
+    // TO DO 
 }
 
-export const deletePromotion =  () => {
-    // TODO 
+const getListPromotion =  () => {
+    // TO DO 
+}
+
+// export all functions
+module.exports = {
+    createNewHostPromotion,
+    createNewSystemPromotion,
+    updatePromotion,
+    deletePromotion,
+    getListPromotion,
 }

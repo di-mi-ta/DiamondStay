@@ -1,9 +1,9 @@
-import mongoose, { SchemaType, SchemaTypes } from 'mongoose'; 
-
+var mongoose = require('mongoose')
 const Users = mongoose.model('Users');
-const HomePosts = mongoose.model('HomePosts'); 
+const HomePosts = require('../models/homeposts')
 
-export const getListWaitingConfirmedHomePosts = (req, res, next) => {
+const getListWaitingConfirmedHomePosts = (req, res, next) => {
+    /* Description: Get list homepost to verify [FOR ADMIN]*/
     HomePosts.find({state: 'waiting'})
     .populate('rating.author')
     .then((homeposts) => {
@@ -14,7 +14,8 @@ export const getListWaitingConfirmedHomePosts = (req, res, next) => {
     .catch((err) => next(err)); 
 }
 
-export const getListHomePostsVerifyOK = (req, res, next) => {
+const getListHomePostsVerifyOK = (req, res, next) => {
+    /* Description: Get list homeposts are comfirmed OK */
     HomePosts.find({state: 'success'})
     .populate('rating.author')
     .then((homeposts) => {
@@ -25,8 +26,9 @@ export const getListHomePostsVerifyOK = (req, res, next) => {
     .catch((err) => next(err)); 
 }
 
-export const getMyHomePosts = (req, res, next) => {
-    HomePosts.find({owner = req.body.username})
+const getMyHomePosts = (req, res, next) => {
+    /* Description: get list homepost of specify user*/
+    HomePosts.find({owner: req.body.username})
     .populate('rating.author')
     .then((homeposts) => {
         res.statusCode = 200;
@@ -36,7 +38,8 @@ export const getMyHomePosts = (req, res, next) => {
     .catch((err) => next(err)); 
 }
 
-export const deleteAllHomePost = (req, res, next) => {
+const deleteAllHomePost = (req, res, next) => {
+    /* Description: Delete all homeposts (hope never use :))) [FOR ADMIN]*/
     HomePosts.remove({})
     .then((resp) => {
         res.statusCode = 200;
@@ -46,7 +49,8 @@ export const deleteAllHomePost = (req, res, next) => {
     .catch((err) => next(err));
 }
 
-export const findHomePostById = (req,res,next) => {
+const findHomePostDetailedById = (req,res,next) => {
+    /* Description: Get detailed information of a homepost*/
     HomePosts.findById(res.params.homePostId)
     .populate('rating.author')
     .then((homepost) => {
@@ -57,23 +61,28 @@ export const findHomePostById = (req,res,next) => {
     .catch((err) => next(err))
 }
 
-export const confirmHomePost = (req, res, next) => {
+const confirmHomePost = (req, res, next) => {
+    /* Description: Confirm a homepost [FOR ADMIN]*/
     // TODO 
 }
 
-export const rejectHomePost = (req, res, next) => {
+const rejectHomePost = (req, res, next) => {
+    /* Description: Reject a homepost [FOR ADMIN]*/
     // TODO 
 }
 
-export const requireEditingHomePost = (req, res, next) => {
+const requireEditingHomePost = (req, res, next) => {
+    /* Description: Required user editting and resubmit a homepost [FOR ADMIN]*/
     // TODO 
 }
 
-export const hideHomePost = (req, res, next) => {
+const hideHomePost = (req, res, next) => {
+    /* Description: Hide a homepost */
     // TODO 
 }
 
-export const deleteHomePost = (req, res, next) => {
+const deleteHomePost = (req, res, next) => {
+    /* Description: Delete a homepost */
     HomePosts.findByIdAndRemove(res.params.homePostId)
     .then((resp) => {
         res.statusCode = 200;
@@ -83,7 +92,8 @@ export const deleteHomePost = (req, res, next) => {
     .catch((err) => next(err)); 
 }
 
-export const updateHomePost = (req, res, next) => {
+const updateHomePost = (req, res, next) => {
+    /* Description: Update a homepost */
     HomePosts.findByIdAndUpdate(req.params.homePostId, {
         $set: req.body
     }, { new: true })
@@ -95,35 +105,26 @@ export const updateHomePost = (req, res, next) => {
     .catch((err) => next(err));
 }
 
-export const createNewHomePost = (req, res, next) => {
-    // TODO 
+const createNewHomePost = (req, res, next) => {
+    /* Description: Create new homepost */
+    HomePosts.create(req.body)
+    .then((homepost) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(homepost);
+    }, (err) => next(err))
+    .catch((err) => next(err));
 }
 
-export const getListRatingOfHomePost = (req,res,next) => {
-    /* TO DO */
-    // HomePosts.findById(req.params.homePostId)
-    // .populate('rating.author')
-    // .then((homepost) => {
-    //     if (homepost != null && homepost.rating.id(req.params.ratingId) != null) {
-    //         res.statusCode = 200;
-    //         res.setHeader('Content-Type', 'application/json');
-    //         res.json(homepost.rating.id(req.params.ratingId));
-    //     }
-    //     else if (homepost == null) {
-    //         err = new Error('Homepost ' + req.params.homePostId + ' not found');
-    //         err.status = 404;
-    //         return next(err);
-    //     }
-    //     else {
-    //         err = new Error('Rating ' + req.params.ratingId + ' not found');
-    //         err.status = 404;
-    //         return next(err);            
-    //     }
-    // }, (err) => next(err))
-    // .catch((err) => next(err));
+const getLstRatingsOfHomePost = (req,res,next) => {
+    /* Description: Get list ratings of a homepost*/
+    // TO DO
+
+
 }
 
-export const deleteRating = (req, res, next) => {
+const deleteRating = (req, res, next) => {
+    /* Description: Delete one rating*/ 
     HomePosts.findById(req.params.homePostId)
     .then((homepost) => {
         if (homepost != null && homepost.rating.id(req.params.ratingId) != null) {
@@ -149,7 +150,8 @@ export const deleteRating = (req, res, next) => {
     .catch((err) => next(err));
 }
 
-export const editRating = (req, res, next) => {
+const editRating = (req, res, next) => {
+    /* Description: Editing rating*/
     HomePosts.findById(req.params.homePostId)
     .then((homepost) => {
         if (homepost != null && homepost.rating.id(req.params.ratingId) != null) {
@@ -175,4 +177,29 @@ export const editRating = (req, res, next) => {
         }
     }, (err) => next(err))
     .catch((err) => next(err));
+}
+
+const postRating = (req, res, next) => {
+    /* Description: Add new rating to a homepost*/
+    // TO DO
+
+}
+
+module.exports = {
+    getListWaitingConfirmedHomePosts,
+    getListHomePostsVerifyOK,
+    getMyHomePosts,
+    deleteAllHomePost,
+    editRating,
+    deleteRating,
+    createNewHomePost,
+    getLstRatingsOfHomePost,
+    updateHomePost,
+    deleteHomePost,
+    findHomePostDetailedById,
+    confirmHomePost,
+    rejectHomePost,
+    requireEditingHomePost,
+    hideHomePost,
+    postRating
 }

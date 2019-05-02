@@ -1,8 +1,8 @@
-import * as AuthCtrl from './auth'
-import * as PromoCtrl from './promotions' 
-import * as HomePostCtrl from './homeposts'
+var AuthCtrl = require('./auth')
+var PromoCtrl = require('./promotions')
+var HomePostCtrl = require('./homeposts')
 
-export {
+module.exports = {
     AuthCtrl,
     PromoCtrl,
     HomePostCtrl
