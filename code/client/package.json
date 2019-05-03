@@ -4,8 +4,17 @@
   "private": true,
   "dependencies": {
     "react": "^16.8.6",
+    "react-animation-components": "^3.0.0",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.0"
+    "react-redux": "^7.0.3",
+    "react-redux-form": "^1.16.13",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "3.0.0",
+    "react-transition-group": "^4.0.0",
+    "reactstrap": "^8.0.0",
+    "redux": "^4.0.1",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
