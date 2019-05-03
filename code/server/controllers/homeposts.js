@@ -182,7 +182,6 @@ const editRating = (req, res, next) => {
 const postRating = (req, res, next) => {
     /* Description: Add new rating to a homepost*/
     // TO DO
-
 }
 
 module.exports = {
