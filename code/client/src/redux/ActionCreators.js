@@ -1,11 +1,29 @@
 import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../shared/baseUrl';
 
+export const addPromo = (namePromo, value, dateStart, dateEnd, lstHome) => ({
+    type: ActionTypes.ADD_PROMO,
+    payload: {
+        namePromo: namePromo,
+        value: value,
+        dateStart: dateStart,
+        dateEnd: dateEnd 
+    }
+})
+
+export const deletePromo = (promoId) => ({
+    type: ActionTypes.DELETE_PROMO,
+    payload: {
+        promoId: promoId
+    }
+})
+
+
+/////////////////////////////////////////////////////////////////////////////////
 export const addRating = (rating) => ({
     type: ActionTypes.ADD_RATING,
     payload: rating
 });
-
 export const postRating = (homepostId, rating, comment) => (dispatch) => {
 
     const newRating = {
@@ -153,14 +171,14 @@ export const requestLogin = (creds) => {
         creds
     }
 }
-  
+
 export const receiveLogin = (response) => {
     return {
         type: ActionTypes.LOGIN_SUCCESS,
         token: response.token
     }
 }
-  
+
 export const loginError = (message) => {
     return {
         type: ActionTypes.LOGIN_FAILURE,
@@ -172,8 +190,8 @@ export const loginUser = (creds) => (dispatch) => {
     dispatch(requestLogin(creds))
     return fetch(baseUrl + 'users/login', {
         method: 'POST',
-        headers: { 
-            'Content-Type':'application/json' 
+        headers: {
+            'Content-Type':'application/json'
         },
         body: JSON.stringify(creds)
     })
@@ -194,7 +212,7 @@ export const loginUser = (creds) => (dispatch) => {
         if (response.success) {
             localStorage.setItem('token', response.token);
             localStorage.setItem('creds', JSON.stringify(creds));
-            // Dispatch 
+            // Dispatch
             dispatch(fetchFavorites());
             dispatch(receiveLogin(response));
         }
@@ -212,7 +230,7 @@ export const requestLogout = () => {
       type: ActionTypes.LOGOUT_REQUEST
     }
 }
-  
+
 export const receiveLogout = () => {
     return {
       type: ActionTypes.LOGOUT_SUCCESS

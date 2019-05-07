@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import Home from './HomeComponent';
-import HomePostDetailed from './HomepostDetailedComponent';
-import Favorites from './FavoriteComponent';
-import Header from './HeaderComponent';
-import Footer from './FooterComponent';
-import {Switch, Route, Redirect, withRouter} from 'react-router-dom';
+import {Switch, Route, Redirect, withRouter, Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {postRating, fetchHomeposts, fetchRatings, fetchPromos, loginUser, logoutUser, fetchFavorites, postFavorite, deleteFavorite} from '../redux/ActionCreators';
-import {TransitionGroup, CSSTransition} from 'react-transition-group';
+import {postRating, fetchHomeposts, fetchRatings, 
+        fetchPromos, loginUser, logoutUser, fetchFavorites, 
+        postFavorite, deleteFavorite, addPromo, deletePromo} from '../redux/ActionCreators';
+import AdminManager from '../components/AdminManagerComponent';
+import HostManager from '../components/HostManagerComponent';
+import { Layout } from 'antd';
+import Header from './HeaderComponent';
 
 const mapStateToProps = state => {
     return {
@@ -20,6 +21,10 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
+  addPromo: (namePromo, value, dateStart, dateEnd, lstHome) => dispatch(addPromo(namePromo, value, dateStart, dateEnd, lstHome)),
+  deletePromo: (promoId) => dispatch(deletePromo(promoId)),
+  
+  //////////////////////////////////////////////////////////////////////////////////////////////
   postRating: (homepostId, rating, comment) => dispatch(postRating(homepostId, rating, comment)),
   fetchHomeposts: () => {dispatch(fetchHomeposts())},
   fetchRatings: () => {dispatch(fetchRatings())},
@@ -53,36 +58,28 @@ class Main extends Component {
       );
     }
 
-    const PrivateRoute = ({ component: Component, ...rest }) => (
-      <Route {...rest} render={(props) => (
-        this.props.auth.isAuthenticated
-          ? <Component {...props} />
-          : <Redirect to={{
-              pathname: '/home',
-              state: { from: props.location }
-            }} />
-      )} />
-    );
-
     return (
       <div>
         <Header auth={this.props.auth} 
           loginUser={this.props.loginUser} 
           logoutUser={this.props.logoutUser} 
-          />   
-        <TransitionGroup>
-          <CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
-            <Switch>
-              <Route path="/home" component={HomePage} />
-              <PrivateRoute exact path="/favorites" component={() => <Favorites favorites={this.props.favorites} deleteFavorite={this.props.deleteFavorite}/>}/>
-              <Redirect to="/home" />
-            </Switch>
-          </CSSTransition>
-        </TransitionGroup>
-        <Footer />
+        />
+        <Switch>
+          <Route path="/host" 
+                render={() => <HostManager promotions={this.props.promotions}
+                                            homeposts={this.props.homeposts}
+                              />}/>
+          <Route path="/admin" 
+                render={() => <AdminManager promotions={this.props.promotions}
+                                            deletePromo={this.props.deletePromo}
+                                            homeposts={this.props.homeposts}
+                              />}/>
+          <Redirect to="/host" />
+        </Switch>
       </div>
     );
   }
 }
+
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

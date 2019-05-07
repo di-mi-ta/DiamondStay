@@ -23,7 +23,7 @@ homePostRouter.route('/:homePostId')
 .delete(authenticate.verifyUser, authenticate.verifyAdmin, HomePostCtrl.deleteHomePost);
 
 homePostRouter.route('/:homePostId/rating/:ratingId')
-.get(HomePostCtrl.getListRatingOfHomePost)
+.get(HomePostCtrl.getLstRatingsOfHomePost)
 .put(authenticate.verifyUser, HomePostCtrl.editRating)
 .delete(authenticate.verifyUser, HomePostCtrl.deleteRating);
 

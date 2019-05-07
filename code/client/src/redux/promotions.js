@@ -1,21 +1,47 @@
 import * as ActionTypes from './ActionTypes';
+import PROMOTIONS from '../shared/promotions';
 
-export const Promotions = (state = {
+export const Promotions = (state={
         isLoading: true,
         errMess: null,
-        promotions: []
+        promotions: PROMOTIONS
     }, action) => {
-    switch(action.type) {
-        case ActionTypes.ADD_PROMOS:
-            return {...state, isLoading: false, errMess: null, promotions: action.payload};
-
-        case ActionTypes.PROMOS_LOADING:
-            return {...state, isLoading: true, errMess: null, promotions: []};
-
-        case ActionTypes.PROMOS_FAILED:
-            return {...state, isLoading: false, errMess: action.payload, promotions: []};
-
+    switch(action.type){
+        case ActionTypes.ADD_PROMO:
+            let promos = state.promotions.push(action.payload);
+            return {...state, promotions: promos}
+        case ActionTypes.DELETE_PROMO:
+            // for test 
+            state.promotions.pop()
+            return {...state, promotions: state.promotions}
         default:
-            return state;
+            return state
     }
 }
+
+
+
+
+
+
+
+
+// export const Promotions = (state = {
+//         isLoading: true,
+//         errMess: null,
+//         promotions: []
+//     }, action) => {
+//     switch(action.type) {
+//         case ActionTypes.ADD_PROMOS:
+//             return {...state, isLoading: false, errMess: null, promotions: action.payload};
+
+//         case ActionTypes.PROMOS_LOADING:
+//             return {...state, isLoading: true, errMess: null, promotions: []};
+
+//         case ActionTypes.PROMOS_FAILED:
+//             return {...state, isLoading: false, errMess: action.payload, promotions: []};
+
+//         default:
+//             return state;
+//     }
+// }

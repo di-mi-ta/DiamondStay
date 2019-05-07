@@ -16,3 +16,12 @@ export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
 export const FAVORITES_LOADING = 'FAVORITES_LOADING';
 export const FAVORITES_FAILED = 'FAVORITES_FAILED';
 export const ADD_FAVORITES = 'ADD_FAVORITES';
+
+
+/////////////////////////////////////////////
+
+export const ADD_PROMO = 'ADD_PROMO';
+export const DELETE_PROMO = 'DELETE_PROMO';
+export const UPDATE_PROMO = 'UPDATE_PROMO';
+export const VERIFY_HOMEPOST = 'VERIFY_HOMEPOST'
+

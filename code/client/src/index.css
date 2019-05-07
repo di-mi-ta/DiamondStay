@@ -1,4 +1,7 @@
-body {
-  margin: 0;
-  padding: 0;
+
+.heading {
+  font-weight: 700;
+}
+.subheading {
+  font-weight: 300;
 }

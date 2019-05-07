@@ -1,7 +1,6 @@
 import React from 'react';
 import {Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle} from 'reactstrap';
 import {Loading} from './LoadingComponent';
-import {baseUrl} from '../shared/baseUrl';
 import {FadeTransform} from 'react-animation-components';
 
 function RenderCard({item, isLoading, errMess}) {
@@ -26,14 +25,14 @@ function RenderCard({item, isLoading, errMess}) {
         );
 }
 
-function Home(props) {
+function Home(props){
     return(
         <div className="container">
             <div className="row align-items-start">
                 <div className="col-12 col-md m-1">
                     <RenderCard item={props.homepost} 
                         isLoading={props.homepostsLoading}
-                        errMess={props.homepostsErrMess} />
+                        errMess={props.homepostsErrMess}/>
                 </div>
                 <div className="col-12 col-md m-1">
                     <RenderCard item={props.promotion} 
