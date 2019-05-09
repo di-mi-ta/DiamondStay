@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron,
-    Button, Modal, ModalHeader, ModalBody,
-    Form, FormGroup, Input, Label } from 'reactstrap';
-import { NavLink } from 'react-router-dom';
-
+import "../css/main_styles.css";
 class Header extends Component {
 
     constructor(props) {
@@ -43,80 +39,37 @@ class Header extends Component {
 
     render() {
         return(
-            <React.Fragment>
-                <Navbar dark expand="md">
-                    <div className="container">
-                        <NavbarToggler onClick={this.toggleNav} />
-                        <NavbarBrand className="mr-auto" href="/">
-                            <img src="assets/images/logo.png" height="30" width="41" />
-                        </NavbarBrand>
-                        <Collapse isOpen={this.state.isNavOpen} navbar>
-                            <Nav navbar>
-                                <NavItem>
-                                    <NavLink className="nav-link" to="/home">
-                                        <span className="fa fa-home fa-lg"></span> Home
-                                    </NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink className="nav-link" to="/favorites">
-                                        <span className="fa fa-heart fa-lg"></span> My Favorites
-                                    </NavLink>
-                                </NavItem>
-                            </Nav>
-                            <Nav className="ml-auto" navbar>
-                                <NavItem>
-                                    { !this.props.auth.isAuthenticated ?
-                                        <Button outline onClick={this.toggleModal}>
-                                            <span className="fa fa-sign-in fa-lg"></span> Login
-                                            {this.props.auth.isFetching ?
-                                                <span className="fa fa-spinner fa-pulse fa-fw"></span>
-                                                : null
-                                            }
-                                        </Button>
-                                        :
-                                        <div>
-                                        <div className="navbar-text mr-3">{this.props.auth.user.username}</div>
-                                        <Button outline onClick={this.handleLogout}>
-                                            <span className="fa fa-sign-out fa-lg"></span> Logout
-                                            {this.props.auth.isFetching ?
-                                                <span className="fa fa-spinner fa-pulse fa-fw"></span>
-                                                : null
-                                            }
-                                        </Button>
-                                        </div>
-                                    }
+            <header class="header">
+                <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                    {/*logo*/}
+                    <div><a href="#">
+                        <img src="images/diamondstay_icon.png" alt="DiamondStay icon" style={{width:"70px",height:"70px"}}/>
+                    </a></div>
 
-                                </NavItem>
-                            </Nav>
-                        </Collapse>
+                    {/*Menu, including horizontal menu and 2 buttons*/}
+                    <div class="ml-auto d-flex flex-row align-items-center justify-content-start">
+                        <nav class="main_nav">
+                            <ul class="d-flex flex-row align-items-start justify-content-start">
+                                <li class="active"><a href="index.html">Trang chủ</a></li>
+                                <li><a style={{color:"#FFFFFF"}}>Về chúng tôi</a></li>
+                                <li><a href="blog.html" style={{color:"#FFFFFF"}}>Blog</a></li>
+                                <li><a href="contact.html" style={{color:"#FFFFFF"}}>Liên hệ</a></li>
+                            </ul>
+                        </nav>
+                        <div class="book_button"><a href="booking.html">Đặt phòng Online</a></div>
+                        <div class="header_phone d-flex flex-row align-items-center justify-content-center">
+                            <img src="images/phone.png" alt=""/>
+                            <span>090-xxx-xxxx</span>
+                        </div>
+                        {/*User name*/}
+                        <div class="header_phone d-flex flex-row align-items-center justify-content-center">
+                            <img src="images/.png" alt=""/>
+                            <span>Chào, bạn gì đó</span>
+                        </div>
+                        <div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
                     </div>
-                </Navbar>
-                <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
-                    <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
-                    <ModalBody>
-                        <Form onSubmit={this.handleLogin}>
-                            <FormGroup>
-                                <Label htmlFor="username">Username</Label>
-                                <Input type="text" id="username" name="username"
-                                    innerRef={(input) => this.username = input} />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label htmlFor="password">Password</Label>
-                                <Input type="password" id="password" name="password"
-                                    innerRef={(input) => this.password = input}  />
-                            </FormGroup>
-                            <FormGroup check>
-                                <Label check>
-                                    <Input type="checkbox" name="remember"
-                                    innerRef={(input) => this.remember = input}  />
-                                    Remember me
-                                </Label>
-                            </FormGroup>
-                            <Button type="submit" value="submit" color="primary">Login</Button>
-                        </Form>
-                    </ModalBody>
-                </Modal>
-            </React.Fragment>
+                </div>
+            </header>
         );
     }
 }
