@@ -614,6 +614,13 @@ section
 	color: #ffffff;
 	line-height: 1.2;
 }
+.home_subtitle
+{
+	font-size: 55px;
+	font-weight: 400;
+	color: #ffffff;
+	line-height: 1.2;
+}
 .booking_form_container
 {
 	width: 100%;
@@ -625,6 +632,87 @@ section
 {
 	display: block;
 	width: 100%;
+}
+.search_input
+{
+	width: 200%;
+	height: 54px;
+	background: rgba(255,255,255,0.2);
+	border: solid 2px #ffffff;
+	padding-left: 27px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #ffffff;
+	outline: none;
+}
+.search_input_container
+{
+	width: 100%;
+}
+.search_input_container > div
+{
+	padding-right: 10px;
+}
+.search_input_container > div:first-child,
+.search_input_container > div:nth-child(2)
+{
+	width: 32.60869565217391%;
+}
+.search_input_container > div:nth-child(3),
+.search_input_container > div:nth-child(4)
+{
+	width: 17.39130434782609%;
+}
+.search_input_a
+{
+	
+}
+.search_input_b
+{
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button
+{ 
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+}
+.search_input::-webkit-input-placeholder
+{
+	font-size: 14px !important;
+	font-weight: 500 !important;
+	color: #FFFFFF !important;
+}
+.search_input:-moz-placeholder
+{
+	font-size: 14px !important;
+	font-weight: 500 !important;
+	color: #FFFFFF !important;
+}
+.search_input::-moz-placeholder
+{
+	font-size: 14px !important;
+	font-weight: 500 !important;
+	color: #FFFFFF !important;
+} 
+.search_input:-ms-input-placeholder
+{ 
+	font-size: 14px !important;
+	font-weight: 500 !important;
+	color: #FFFFFF !important;
+}
+.search_input::input-placeholder
+{
+	font-size: 14px !important;
+	font-weight: 500 !important;
+	color: #FFFFFF !important;
 }
 .booking_input
 {
@@ -787,7 +875,6 @@ input[type=number]::-webkit-outer-spin-button
 
 .gallery
 {
-	width: 100%;
 }
 .gallery_item
 {

@@ -259,7 +259,7 @@ class Preview extends Component{
 			</div>
 		</div>
     </div>
-    </div>
+    	</div>
     );
 }
 }

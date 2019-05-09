@@ -6,6 +6,7 @@ import { ConfigureStore } from './redux/configureStore';
 import Header from "./components/HeaderComponent";
 import Home from "./components/HomeComponent"; //Khoa
 import Main from "./components/MainComponent";
+import Footer from "./components/FooterComponent";
 import "./css/main_styles.css";
 
 const store = ConfigureStore();
@@ -20,6 +21,7 @@ class App extends Component {
               <Header/>
               <Home/>
               <Main/>
+              {/*<Footer/>*/}
             </div>
           </div>
         </BrowserRouter>
