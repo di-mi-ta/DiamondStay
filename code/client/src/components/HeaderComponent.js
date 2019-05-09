@@ -51,11 +51,9 @@ class Header extends Component {
                         <nav class="main_nav">
                             <ul class="d-flex flex-row align-items-start justify-content-start">
                                 <li class="active"><a href="index.html">Trang chủ</a></li>
-                                <li>
-                                    <a>Về chúng tôi</a>
-                                </li>
-                                <li><a href="blog.html" style={{color:"#555555"}}>Blog</a></li>
-                                <li><a href="contact.html" style={{color:"#555555"}}>Liên hệ</a></li>
+                                <li><a style={{color:"#FFFFFF"}}>Về chúng tôi</a></li>
+                                <li><a href="blog.html" style={{color:"#FFFFFF"}}>Blog</a></li>
+                                <li><a href="contact.html" style={{color:"#FFFFFF"}}>Liên hệ</a></li>
                             </ul>
                         </nav>
                         <div class="book_button"><a href="booking.html">Đặt phòng Online</a></div>

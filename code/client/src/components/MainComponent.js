@@ -67,6 +67,7 @@ class Main extends Component {
 
     return (
       <div class="main">
+        {/*OK. Need to add description*/}
         <div class="features">
           <div class="container">
             <div class="row">
@@ -107,28 +108,30 @@ class Main extends Component {
         </div>
         <div class="gallery">
           <div class="gallery_slider_container">
-            {/*Slide*/}
-            <div class="gallery_item">
-                <div class="background_image"><img src="../images/gallery_1.jpg"/></div>
+			      <div class="owl-carousel owl-theme gallery_slider">
+              {/*Slide*/}
+              <div class="gallery_item">
+                <div class="background_image" style={{backgroundImage: `url("images/gallery_1.jpg")`}}></div>
                 <a class="colorbox" href="images/gallery_1.jpg"></a>
-            </div>
-            {/*Slide*/}
-            <div class="gallery_item">
-                <div class="background_image"><img src="../images/gallery_2.jpg"/></div>
+              </div>
+              {/*Slide*/}
+              <div class="gallery_item">
+                <div class="background_image" style={{backgroundImage: `url("images/gallery_2.jpg")`}}></div>
                 <a class="colorbox" href="images/gallery_2.jpg"></a>
-            </div>
-            {/*Slide*/}
-            <div class="gallery_item">
-                <div class="background_image"><img src="../images/gallery_3.jpg"/></div>
+              </div>
+              {/*Slide*/}
+              <div class="gallery_item">
+                <div class="background_image" style={{backgroundImage: `url("images/gallery_3.jpg")`}}></div>
                 <a class="colorbox" href="images/gallery_3.jpg"></a>
-            </div>
-            {/*Slide*/}
-            <div class="gallery_item">
-                <div class="background_image"><img src="../images/gallery_4.jpg"/></div>
+              </div>
+              {/*Slide*/}
+              <div class="gallery_item">
+                <div class="background_image" style={{backgroundImage: `url("images/gallery_4.jpg")`}}></div>
                 <a class="colorbox" href="images/gallery_4.jpg"></a>
+              </div>
             </div>
           </div>
-        </div>
+         </div> 
         <div class="about">
           <div class="container">
             <div class="row">

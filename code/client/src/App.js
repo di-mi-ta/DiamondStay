@@ -21,7 +21,7 @@ class App extends Component {
               <Header/>
               <Home/>
               <Main/>
-              {/*<Footer/>*/}
+              <Footer/>
             </div>
           </div>
         </BrowserRouter>
