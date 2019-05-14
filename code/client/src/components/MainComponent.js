@@ -157,7 +157,7 @@ class Main extends Component {
           </div>
         </div>
         <div class="testimonials">
-          <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="images/testimonials.jpg" data-speed="0.8"></div>
+          <div class="parallax_background parallax-window" datdataa-parallax="scroll" data-image-src="images/testimonials.jpg" data-speed="0.8"></div>
           <div class="testimonials_overlay"></div>
           <div class="container">
             <div class="row">

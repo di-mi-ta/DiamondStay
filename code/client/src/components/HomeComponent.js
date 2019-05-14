@@ -17,9 +17,10 @@ class Home extends Component{
                                         <form action="#" class="booking_form">
                                             <div class="d-flex flex-xl-row flex-column align-items-start justify-content-start">
                                                 <div class="booking_input_container d-flex flex-lg-row flex-column align-items-start justify-content-start">
-                                                    <div><input type="text" class="datepicker booking_input booking_input_a booking_in" placeholder="Ngày Check in" required="required"/></div>
-                                                    <div><input type="text" class="datepicker booking_input booking_input_a booking_out" placeholder="Ngày Check out" required="required"/></div>
-                                                    <div><input type="text" class="search_input booking_input_b" placeholder="Tìm kiếm phòng trọ..." required="required"/></div>
+                                                    <div><input type="text" class="booking_input booking_input_b" placeholder="Tìm kiếm phòng trọ..." required="required"/></div>
+                                                    <div><input type="number" class="booking_input booking_input_b" placeholder="Người lớn" required="required"/></div>
+                                                    <div><input type="number" class="booking_input booking_input_b" placeholder="Trẻ em" required="required"/></div>
+                                                    <div><input type="number" class="booking_input booking_input_b" placeholder="Số phòng" required="required"/></div>
                                                 </div>
                                                 <div><button class="booking_button trans_200">Book Now</button></div>
                                             </div>
@@ -33,9 +34,8 @@ class Home extends Component{
                                 <form action="#" class="booking_form">
                                     <div class="d-flex flex-xl-row flex-column align-items-start justify-content-start">
                                         <div class="booking_input_container d-flex flex-lg-row flex-column align-items-start justify-content-start">
-                                            <div><input type="number" class="booking_input booking_input_b" placeholder="Người lớn" required="required"/></div>
-                                            <div><input type="number" class="booking_input booking_input_b" placeholder="Trẻ em" required="required"/></div>
-                                            <div><input type="number" class="booking_input booking_input_b" placeholder="Số phòng" required="required"/></div>
+                                            <div><input type="text" class="datepicker booking_input booking_input_a booking_in" placeholder="Ngày Check in" required="required"/></div>
+                                            <div><input type="text" class="datepicker booking_input booking_input_a booking_out" placeholder="Ngày Check out" required="required"/></div>
                                         </div>
                                     </div>
                                 </form>
