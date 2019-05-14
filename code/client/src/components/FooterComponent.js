@@ -1,46 +1,66 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import "../css/main_styles.css";
 
 function Footer(props) {
     return(
-        <div className="footer">
-            <div className="container">
-                <div className="row justify-content-center">             
-                    <div className="col-4 offset-1 col-sm-2">
-                        <h5>Links</h5>
-                        <ul className="list-unstyled">
-                            <li><Link to="/home">Home</Link></li>
-                            <li><Link to="/aboutus">About Us</Link></li>
-                        </ul>
-                    </div>
-                    <div className="col-7 col-sm-5">
-                        <h5>Our Address</h5>
-                        <address>
-                        268, Li Thuong Kiet Street, District 10,<br />
-                        Ho Chi Minh City<br />
-                        VIET NAM<br />
-                        <i className="fa fa-phone fa-lg"></i>: +84 39 251 6548 <br />
-                        <i className="fa fa-fax fa-lg"></i>: +852 8765 4321<br />
-                        <i className="fa fa-envelope fa-lg"></i>: <a href="mailto:beta.dimitaa7@gmail.com">
-                        beta.dimitaa7@gmail.com</a>
-                        </address>
-                    </div>
-                    <div className="col-12 col-sm-4 align-self-center">
-                        <div className="text-center">
-                            <a className="btn btn-social-icon btn-google" href="http://google.com/+"><i className="fa fa-google-plus"></i></a>
-                            <a className="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i className="fa fa-facebook"></i></a>
-                            <a className="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i className="fa fa-linkedin"></i></a>
-                            <a className="btn btn-social-icon" href="mailto:"><i className="fa fa-envelope-o"></i></a>
+        <footer class="footer">
+		    <div class="footer_content">
+			    <div class="container">
+				    <div class="row">
+					    <div class="col">
+						    <div class="footer_logo_container text-center">
+							    <div class="footer_logo">
+								    <a href="#"></a>
+								    <div>The River</div>
+								    <div>since 1945</div>
+							    </div>
+						    </div>
+					    </div>
+				    </div>
+                    <div class="row footer_row">
+                        <div class="col-lg-3">
+                            <div class="footer_title">Our Address</div>
+                            <div class="footer_list">
+                                <ul>
+                                    <li>Beach Str. 345</li>
+                                    <li>67559 Miami</li>
+                                    <li>USA</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="footer_title">Reservations</div>
+                            <div class="footer_list">
+                                <ul>
+                                    <li>Tel: 345 5667 889</li>
+                                    <li>Fax; 6783 4567 889</li>
+                                    <li>reservations@hotelriver.com</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="footer_title">Newsletter</div>
+                            <div class="newsletter_container">
+                                <form action="#" class="newsletter_form" id="newsletter_form">
+                                    <input type="email" class="newsletter_input" placeholder="Your email address" required="required"/>
+                                    <button class="newsletter_button">Subscribe</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="certificates d-flex flex-row align-items-start justify-content-lg-between justify-content-start flex-lg-nowrap flex-wrap">
+                                <div class="cert"><img src="images/cert_1.png" alt=""/></div>
+                                <div class="cert"><img src="images/cert_2.png" alt=""/></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="row justify-content-center">             
-                    <div className="col-auto">
-                        <p>© Copyright 2019 Diamond Stay</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+			    </div>
+		    </div>
+        </footer>
     );
 }
 
