@@ -8,11 +8,6 @@ const formItemLayout = {
   labelAlign: 'left',
   labelCol: { span: 3, offset: 2 },
   wrapperCol: { span: 10, offset: 2 },
-  style: {
-    // height: '10px',
-    marginBottom: '8px !important',
-    size: 'sm'
-  }
 }
 const tailFormItemLayout = {
   wrapperCol: {
@@ -67,17 +62,17 @@ export default class UserInfo extends React.Component {
 
   render() {
     return (
-      <Form  {...formItemLayout}>
-        <Item label='Tên'>
+      <Form>
+        <Item label='Tên' {...formItemLayout}>
           <Paragraph editable={{ onChange: (s) => this.changeInfo({ name: s }) }}>{this.state.user.name}</Paragraph>
         </Item>
-        <Item label='Email'>
+        <Item label='Email' {...formItemLayout}>
           <Paragraph editable={{ onChange: (s) => this.changeInfo({ email: s }) }}>{this.state.user.email}</Paragraph>
         </Item>
-        <Item label='Di động'>
+        <Item label='Di động' {...formItemLayout}>
           <Paragraph editable={{ onChange: (s) => this.changeInfo({ phone: s }) }}>{this.state.user.phone}</Paragraph>
         </Item>
-        <Item label='Ngày sinh'>
+        <Item label='Ngày sinh' {...formItemLayout}>
           <DatePicker
             format={dateFormat}
             // value={moment(this.state.user.birthday, dateFormat).isValid() ? moment(this.state.user.birthday, dateFormat) : null}
@@ -86,13 +81,13 @@ export default class UserInfo extends React.Component {
             showToday={true}
           />
         </Item>
-        <Item label='Địa chỉ'>
+        <Item label='Địa chỉ' {...formItemLayout}>
           <Paragraph editable={{ onChange: (s) => this.changeInfo({ address: s }) }}>{this.state.user.address}</Paragraph>
         </Item>
-        <Item label='CMND'>
+        <Item label='CMND' {...formItemLayout}>
           <Paragraph editable={{ onChange: (s) => this.changeInfo({ cmnd: s }) }}>{this.state.user.cmnd}</Paragraph>
         </Item>
-        <Item label='Hình đại diện'>
+        <Item label='Hình đại diện' {...formItemLayout}>
           <Upload>
 
           </Upload>

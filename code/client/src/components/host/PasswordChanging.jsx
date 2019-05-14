@@ -36,11 +36,11 @@ class PasswordChanging extends React.Component {
   // this should be a props
   onChangePassword = () => {
     console.table(this.state)
-    if (this.state.oldPass == '') {
+    if (this.state.oldPass === '') {
       console.log('Chưa nhập mật khẩu');
-    } else if (this.state.newPass == '') {
+    } else if (this.state.newPass === '') {
       console.log('Chưa nhập mật khẩu mới');
-    } else if (this.state.newPassConfirm == '') {
+    } else if (this.state.newPassConfirm === '') {
       console.log('Chưa nhập xác nhận MK')
     }
     else if (this.state.newPass !== this.state.newPassConfirm) {
