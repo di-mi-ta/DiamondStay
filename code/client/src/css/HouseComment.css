@@ -1,0 +1,65 @@
+.houseCommentList {
+    padding: 0px;
+}
+
+.houseCommentList > h2 {
+    /* font-size: 1.5rem; */
+    color: black;
+}
+
+/* comments */
+.commentItem {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px 0px;
+}
+
+.commentItem > .content {
+    width: 100%;
+}
+
+.commentItem > .commentTitle {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.commentItem .content p {
+    color: black;
+    padding: 15px;
+}
+
+.commentItem .content p.collapse {
+    display: block;
+    max-height: 50px;
+    overflow: hidden;
+}
+
+.commentItem > .commentTitle .user {
+    display: flex;
+    align-items: center;
+}
+
+.commentItem > .commentTitle .rating > i.fill {
+    text-shadow: 0 0 orange !important;
+}
+
+.commentTitle img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.commentTitle .userInfo {
+    margin-left: 15px;
+}
+
+.readMore {
+    display: inline-block;
+    margin-top: 10px;
+    color: #f65e39;
+}
+
+.readMore:hover {
+    color: black;
+}

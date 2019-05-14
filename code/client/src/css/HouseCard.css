@@ -1,0 +1,51 @@
+.houseCard {
+    padding: 0;
+    margin-top: 20px;
+}
+
+.houseCard .houseImage > img {
+    border-radius: 2%;
+}
+
+.houseCard > .houseInfo {
+    margin-bottom: 10px;
+}
+
+.houseCard > .houseInfo .houseType {
+    text-transform: uppercase;
+    color: #888;
+    margin-top: 10px;
+}
+
+.houseCard > .houseInfo > h4 {
+    margin-top: 5px;
+}
+
+.houseCard > .houseInfo > div {
+    margin: 0px;
+}
+
+.houseCard > .houseInfo > div > * {
+    line-height: 2.2em;
+    font-weight: 600;
+}
+
+.houseCard > .houseInfo > div > i {
+    color: #888;
+}
+
+.houseCard > .houseInfo > * > span {
+    margin-left: 10px;
+}
+
+.houseCard > .houseInfo > .star > * {
+    line-height: 2.2em;
+}
+
+.houseCard > .houseInfo > .star > i {
+    color: orange;
+}
+
+.houseCard > .houseInfo > .star > .rating {
+    color: orange;
+}
