@@ -1,30 +1,35 @@
 var mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const homeAppliedPromotion = new Schema({
-    home: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'HomePosts'
-    }
-})
-
 const promotionSchema = new Schema({
     name: {
         type: String,
         required: true,
-        unique: true
     },
     logoPath: {
         type: String,
-        required: true
+        default: ''
     },
     value: {
         type: Number,
-        default: 0.0
+        default: 0.0 // %, for example: 50%
     },
-    description: {
-        type: String, 
-        required: true,
+    maxValue: {
+        type: Number,
+        default: -1 
+    },
+    minValueBooking: {
+        type: Number,
+        default: -1 
+    },
+    maxNightsApplied: {
+        type: Number,
+        default: -1 
+    },
+    locationApplied: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Locations',
+        default: ''
     },
     code: {
         type: String,
@@ -42,15 +47,8 @@ const promotionSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Users'
     },
-    type: {
-        type: Number, // 0: host promotion, 1: system promotion
-        min: 0,
-        max: 1,
-        default: 0,
-    },
-    homeposts: [homeAppliedPromotion]
 },{
     timestamps: true
 })
 
-module.exports = mongoose.model('Promotions', promotionSchema);
+module.exports = mongoose.model('SystemPromos', promotionSchema);

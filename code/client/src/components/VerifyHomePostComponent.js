@@ -4,6 +4,8 @@ import { Steps, Icon, Button, Input,
         Modal, Table, Tag,
         message, Popover} from 'antd';
 
+import {Checkbox, Form } from 'semantic-ui-react'
+
 const Step = Steps.Step;
 const ButtonGroup = Button.Group;
 const TextArea = Input.TextArea;
@@ -46,17 +48,17 @@ const data = [{
     states: ['HỢP LỆ'],
 }, {
     key: 'field',
-    field: 'Vị trí',
+    field: 'Thông tin cơ bản',
     response: 'Không có',
     states: ['HỢP LỆ'],
 },{
     key: 'field',
-    field: 'Hình ảnh',
+    field: 'Giá',
     response: 'Không có',
     states: ['KHÔNG HỢP LỆ'],
 },{
     key: 'field',
-    field: 'Mô tả',
+    field: 'Phòng và giường',
     response: 'Không có',
     states: ['HỢP LỆ'],
 }, {
@@ -118,42 +120,94 @@ class VerifyHomepostComponent extends Component {
         if (this.state.currentStep === 0){
             return(
                 <div>
-                    {/* TO DO */}
+                    <h4><b>Mô tả</b></h4>
+                    <Form>
+                        <Form.Field>
+                        <label>Tiêu đề</label>
+                        <input value={'Tiêu đề'}/>
+                        </Form.Field>
+                        <Form.Field>
+                        <label>Mô tả</label>
+                        <input value={'Mô tả'}/>
+                        </Form.Field>
+                    </Form>
                 </div>
             )
         }
         else if (this.state.currentStep === 1){
             return(
                 <div>
-                    {/* TO DO */}
+                    <h4><b>Hình ảnh</b></h4>
                 </div>
             )
         }
         else if (this.state.currentStep === 2){
             return(
                 <div>
-                    
+                    <h4><b>Thông tin cơ bản</b></h4>
+                    <Form>
+                        <Form.Field>
+                        <label>Loại chỗ ở</label>
+                        <input value={'Loại chỗ ở'}/>
+                        </Form.Field>
+                        <Form.Field>
+                        <label>Loại phòng</label>
+                        <input value={'Loại phòng'}/>
+                        </Form.Field>
+                        <Form.Field>
+                        <label>Số khách tối đa</label>
+                        <input value={'Số khách tối đa'}/>
+                        </Form.Field>
+                        <Form.Field>
+                        <label>Diện tích chỗ ở</label>
+                        <input value={'Diện tích chỗ ở'}/>
+                        </Form.Field>
+                    </Form>
                 </div>
             )
         }
         else if (this.state.currentStep === 3){
             return(
                 <div>
-                    
+                    <h4><b>Giá</b></h4>
+                    <Form>
+                        <Form.Field>
+                        <label>Giá cơ bản</label>
+                        <input value={'Giá cơ bản'}/>
+                        </Form.Field>
+                        <Form.Field>
+                        <label>Giá cuối tuần</label>
+                        <input value={'Giá cuối tuần'}/>
+                        </Form.Field>
+                    </Form>
                 </div>
             )
         }
         else if (this.state.currentStep === 4){
             return(
                 <div>
-                    
+                   <h4><b>Phòng và giường</b></h4>
+                    <Form>
+                        <Form.Field>
+                        <label>Số phòng ngủ</label>
+                        <input value={'Số phòng ngủ'}/>
+                        </Form.Field>
+                        <Form.Field>
+                        <label>Số giường</label>
+                        <input value={'Số giường'}/>
+                        </Form.Field>
+                        <Form.Field>
+                        <label>Số  phòng tắm</label>
+                        <input value={'Số  phòng tắm'}/>
+                        </Form.Field>
+                    </Form>
                 </div>
             )
         }
         else if (this.state.currentStep === 5){
             return(
                 <div>
-                    <h2>Vị trí </h2> 
+                    <h4><b>Vị trí</b></h4>
                 </div>
             )
         }
@@ -198,30 +252,46 @@ class VerifyHomepostComponent extends Component {
         return(
             <div className='container'>
                 <h2><b>Duyệt tin</b></h2>
-                <Steps current={this.state.currentStep} style={{marginBottom: '20px'}}>
+                <Steps current={this.state.currentStep} style={{marginBottom: '10px'}}>
                     <Step title="Mô tả" />
                     <Step title="Hình ảnh" />
-                    <Step title="Đặc điểm" />
+                    <Step title="Thông tin cơ bản" />
                     <Step title="Giá"/>
-                    <Step title="Tiện ích" />
+                    <Step title="Phòng và giường"/>
                     <Step title="Vị trí" />
                 </Steps>
-                <Row style={{marginTop: '10px', background: '#FBF7F7', 
-                            paddingTop: '10px', paddingRight: '10px', height: '300px'}}>
-                    <Col span={12} style={{marginTop: '10px'}}>
-                        {this.renderContent()}
+                <Row style={{paddingRight: '10px'}}>
+                    <Col span={18} >
+                        <Card style={{marginTop: '20px', 
+                                    boxShadow: "1px 3px 1px #9E9E9E",
+                                    marginRight: '10px',
+                                    borderRadius: "10px",
+                                    minHeight: '300px'}}>
+                            {this.renderContent()}
+                        </Card>
                     </Col>
-                    <Col span={12} onBackClickstyle={{marginTop: '10px', alignItems: 'center'}}>
+                    <Col span={6} onBackClickstyle={{marginTop: '10px'}}>
                         <span>
-                            <TextArea placeholder="Cung cấp phản hồi cho người dùng (nếu cần)" 
-                                    autosize={{minRows: 2, maxRows: 30}} />
+                            <Card style={{marginTop: '20px', 
+                                        boxShadow: "1px 3px 1px #9E9E9E",
+                                        borderRadius: "10px",
+                                        height: '100%'}} >
+                                <h4><b>Phản hồi</b></h4>
+                                <TextArea placeholder="Cung cấp phản hồi cho người dùng (nếu cần)" 
+                                        rows={4}/>
+                            </Card>
+                            <Card style={{marginTop: '20px', textAlign:'center', 
+                                        boxShadow: "1px 3px 1px #9E9E9E",
+                                        borderRadius: "10px",
+                                        background: "#ffe4da"}} >
+                            <h4><b>Xác nhận</b></h4>
                             <RadioGroup onChange={this.onChangeRatio} 
                                         value={this.state.valueRatio} 
-                                        style={{marginTop: '20px'}}
                             >
                                 <Radio value={1} >Hợp lệ</Radio>
                                 <Radio value={0}>Không hợp lệ</Radio>
-                        </RadioGroup>
+                            </RadioGroup>
+                            </Card>
                         </span>
                     </Col>
                 </Row>
@@ -249,7 +319,7 @@ class VerifyHomepostComponent extends Component {
                     ]}
                     >
                     <Table columns={columns} dataSource={data}  
-                           pagination={{ pageSize: 5}}/>
+                           pagination={{ pageSize: 5}} bordered/>
                 </Modal>
             </div>
         )

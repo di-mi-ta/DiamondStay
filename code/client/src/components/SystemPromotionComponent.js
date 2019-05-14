@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
-import { Table, Divider, Button, Icon, 
+import {Table, Divider, Button, Icon, 
          Modal, Input, DatePicker,
          message, InputNumber, Select, Tag,
          Popconfirm, Form} from 'antd';
 
 const RangePicker = DatePicker.RangePicker;
 
-class PromotionCompoment extends Component {
+class SystemPromotionCompoment extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -28,7 +28,7 @@ class PromotionCompoment extends Component {
         this.handleNameChange = this.handleNameChange.bind(this);
     }
     componentWillMount(){
-        this.props.fetchHostPromos(this.props.auth.user.username)
+        //this.props.fetchHostPromos(this.props.auth.user.username)
     }
 
     handleDatePickerChange = value => {
@@ -291,4 +291,4 @@ class PromotionCompoment extends Component {
 
 }
 
-export default PromotionCompoment;
+export default SystemPromotionCompoment;

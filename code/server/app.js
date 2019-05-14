@@ -6,7 +6,8 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const homePostRouter  = require('./routes/homePostRouter');
-const promoRouter = require('./routes/promoRouter'); 
+const hostPromoRouter = require('./routes/hostPromoRouter');
+const systemPromoRouter = require('./routes/systemPromoRouter');
 
 var passport = require('passport');
 var config = require('./config');
@@ -22,8 +23,6 @@ const connect = mongoose.connect(url);
 connect.then((db) => {
   console.log('CONNECTING TO MONGO DATABASE SUCCESSFULLY !!!')
 },(err) => {console.log(err)});
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -41,7 +40,8 @@ app.use('/users', usersRouter);
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/homeposts',homePostRouter);
-app.use('/promotions', promoRouter)
+app.use('/host-promotions', hostPromoRouter);
+app.use('/system-promotions', systemPromoRouter)
 
 
 // catch 404 and forward to error handler

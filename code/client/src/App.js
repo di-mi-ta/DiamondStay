@@ -5,9 +5,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ConfigureStore } from './redux/configureStore';
 
-// import css 
-import 'antd/dist/antd.css';
-
 const store = ConfigureStore();
 
 /*  Main App */
@@ -16,7 +13,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <BrowserRouter>
-          <div>
+          <div className='body'>
             <Main/>
           </div>
         </BrowserRouter>

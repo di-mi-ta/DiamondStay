@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 
-import { Table, Divider, Button, Icon, 
-         Modal, Form, Input, Radio, DatePicker,
-         message} from 'antd'; 
+import { Table, Button, Icon,} from 'antd'; 
 
 import {Route, Link, Switch, Redirect} from 'react-router-dom';
 

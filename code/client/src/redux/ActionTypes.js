@@ -4,8 +4,8 @@ export const HOMEPOSTS_FAILED = 'HOMEPOSTS_FAILED';
 export const ADD_HOMEPOSTS = 'ADD_HOMEPOSTS';
 export const ADD_RATINGS = 'ADD_RATINGS';
 export const RATINGS_FAILED = 'RATINGS_FAILED';
-export const PROMOS_LOADING = 'PROMOS_LOADING';
-export const ADD_PROMOS = 'ADD_PROMOS';
+
+export const PROMOS_LOADING = 'HOST_PROMOS_LOADING';
 export const PROMOS_FAILED = 'PROMOS_FAILED';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -19,9 +19,10 @@ export const ADD_FAVORITES = 'ADD_FAVORITES';
 
 
 /////////////////////////////////////////////
-
-export const ADD_PROMO = 'ADD_PROMO';
-export const DELETE_PROMO = 'DELETE_PROMO';
-export const UPDATE_PROMO = 'UPDATE_PROMO';
-export const VERIFY_HOMEPOST = 'VERIFY_HOMEPOST'
+export const DELETE_HOST_PROMO = 'DELETE_PROMO';
+export const UPDATE_HOST_PROMO = 'UPDATE_HOST_PROMO';
+export const VERIFY_HOMEPOST = 'VERIFY_HOMEPOST';
+export const HOST_PROMOS_LOADING = 'HOST_PROMOS_LOADING';
+export const ADD_HOST_PROMOS = 'ADD_HOST_PROMOS';
+export const ADD_HOST_PROMO = 'ADD_HOST_PROMO';
 

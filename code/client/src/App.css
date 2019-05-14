@@ -1,4 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Anton');
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+ .body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #F1F1F1;
+}
 
 .row-header{
     margin:0px auto;
@@ -56,7 +61,3 @@ address{
     transition: all 300ms ease-out;
 }
 
-.body {
-    font-family: 'Anton', sans-serif;
-    background: blue
-}

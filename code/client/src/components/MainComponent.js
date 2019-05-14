@@ -3,8 +3,10 @@ import Home from './HomeComponent';
 import {Switch, Route, Redirect, withRouter, Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {postRating, fetchHomeposts, fetchRatings, 
-        fetchPromos, loginUser, logoutUser, fetchFavorites, 
-        postFavorite, deleteFavorite, addPromo, deletePromo} from '../redux/ActionCreators';
+        fetchHostPromos, loginUser, logoutUser, fetchFavorites, 
+        postFavorite, deleteFavorite, deletePromo,
+        fetchUpdateHostPromo, fetchDeleteHostPromo,
+        fetchCreateHostPromo} from '../redux/ActionCreators';
 import AdminManager from '../components/AdminManagerComponent';
 import HostManager from '../components/HostManagerComponent';
 import { Layout } from 'antd';
@@ -21,14 +23,14 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  addPromo: (namePromo, value, dateStart, dateEnd, lstHome) => dispatch(addPromo(namePromo, value, dateStart, dateEnd, lstHome)),
-  deletePromo: (promoId) => dispatch(deletePromo(promoId)),
-  
+  fetchUpdateHostPromo: (updatedPromo) => dispatch(fetchUpdateHostPromo(updatedPromo)),
+  fetchDeleteHostPromo: (promoId) => dispatch(fetchDeleteHostPromo(promoId)),
+  fetchCreateHostPromo: (promo) => dispatch(fetchCreateHostPromo(promo)),
   //////////////////////////////////////////////////////////////////////////////////////////////
   postRating: (homepostId, rating, comment) => dispatch(postRating(homepostId, rating, comment)),
   fetchHomeposts: () => {dispatch(fetchHomeposts())},
   fetchRatings: () => {dispatch(fetchRatings())},
-  fetchPromos: () => {dispatch(fetchPromos())},
+  fetchHostPromos: (username) => {dispatch(fetchHostPromos(username))},
   loginUser: (creds) => dispatch(loginUser(creds)),
   logoutUser: () => dispatch(logoutUser()),
   fetchFavorites: () => dispatch(fetchFavorites()),
@@ -41,40 +43,33 @@ class Main extends Component {
   componentDidMount() {
     this.props.fetchHomeposts();
     this.props.fetchRatings();
-    this.props.fetchPromos();
     this.props.fetchFavorites();
   }
 
   render() {
-    const HomePage = () => {
-      return(
-        <Home homepost={this.props.homeposts.homeposts.filter((homepost) => homepost.featured)[0]}
-          homepostsLoading={this.props.homeposts.isLoading}
-          homepostsErrMess={this.props.homeposts.errMess}
-          promotion={this.props.promotions.promotions.filter((promo) => promo.featured)[0]}
-          promosLoading={this.props.promotions.isLoading}
-          promosErrMess={this.props.promotions.errMess}
-        />
-      );
-    }
-
     return (
       <div>
         <Header auth={this.props.auth} 
-          loginUser={this.props.loginUser} 
-          logoutUser={this.props.logoutUser} 
+              loginUser={this.props.loginUser} 
+              logoutUser={this.props.logoutUser} 
         />
         <Switch>
           <Route path="/host" 
-                render={() => <HostManager promotions={this.props.promotions}
+                render={() => <HostManager  auth={this.props.auth} 
+                                            promotions={this.props.promotions}
                                             homeposts={this.props.homeposts}
+                                            fetchHostPromos={this.props.fetchHostPromos}
+                                            fetchUpdateHostPromo = {this.props.fetchUpdateHostPromo}
+                                            fetchDeleteHostPromo = {this.props.fetchDeleteHostPromo}
+                                            fetchCreateHostPromo = {this.props.fetchCreateHostPromo}
                               />}/>
           <Route path="/admin" 
-                render={() => <AdminManager promotions={this.props.promotions}
+                render={() => <AdminManager auth={this.props.auth} 
+                                            promotions={this.props.promotions}
                                             deletePromo={this.props.deletePromo}
                                             homeposts={this.props.homeposts}
                               />}/>
-          <Redirect to="/host" />
+          <Redirect to="/home" />
         </Switch>
       </div>
     );

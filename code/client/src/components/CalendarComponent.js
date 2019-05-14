@@ -27,7 +27,7 @@ class CalendarCom extends Component{
     render() {
         const { value, selectedValue } = this.state;
         return (
-            <div className='container'>
+            <div>
                 <Alert message={`Bạn đang chọn: ${selectedValue && selectedValue.format('DD-MM-YYYY')}`} />
                 <Calendar value={value} onSelect={this.onSelect} onPanelChange={this.onPanelChange} />
             </div>
