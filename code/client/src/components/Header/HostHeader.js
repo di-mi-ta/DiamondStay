@@ -60,31 +60,10 @@ class Header extends Component {
     render() {
         const menu = (
             <Menu onClick={this.handleMenuClick}>
-                <Menu.Item key="1">
-                    <span>
-                        <Link to='/host'> 
-                        <Icon type="book"/> Đặt chỗ của tôi
-                        </Link>
-                    </span>
-                </Menu.Item>
-                <Menu.Item key="2">
-                    <span>
-                        <Link to='/host'> 
-                        <Icon type="message" /> Tin nhắn
-                        </Link>
-                    </span>
-                </Menu.Item>
                 <Menu.Item key="3">
                     <span>
                         <Link to='/host'> 
                         <Icon type="setting" /> Cài đặt tài khoản
-                        </Link>
-                    </span>
-                </Menu.Item>
-                <Menu.Item key="4">
-                    <span>
-                        <Link to='/host'> 
-                        <Icon type="heart" /> Yêu thích
                         </Link>
                     </span>
                 </Menu.Item>
@@ -100,23 +79,19 @@ class Header extends Component {
             <React.Fragment>
                 <Navbar light expand="md" 
                         style= {{
-                            backgroundImage: "while",
+                            backgroundImage: "linear-gradient(to right, red , yellow)",
                             top: 0,
                             width: '100%',
                         }}>
                     <div className="container">
                     <NavbarToggler onClick={this.toggleNav} />
                     <NavbarBrand className="mr-auto" href="/" style={{color: 'while'}}>
-                            <img src="assets/images/icon.png" height="30" width="30"/>
-                            <b>Diamond Stay</b>
+                            <img src="http://www.iconeasy.com/icon/png/Business/Pretty%20Office%204/Home.png" 
+                            height="30" width="30"/>
+                            <b>{' Diamond Stay'}</b>
                     </NavbarBrand>
                     <Collapse isOpen={this.state.isNavOpen} navbar>
                         <Nav className="ml-auto" navbar>
-                            <NavItem>
-                                <Button type="link">
-                                        Trở thành chủ nhà
-                                </Button>
-                            </NavItem>
                             <NavItem>
                                 {!this.props.auth.isAuthenticated ?
                                     <div>

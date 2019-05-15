@@ -14,17 +14,13 @@ const promotionSchema = new Schema({
         type: Number,
         default: 0.0 // %, for example: 50%
     },
-    maxValue: {
-        type: Number,
-        default: -1 
-    },
     minValueBooking: {
         type: Number,
-        default: -1 
+        default: -1
     },
-    maxNightsApplied: {
+    maxNumBookingApplied: {
         type: Number,
-        default: -1 
+        default: -1
     },
     locationApplied: {
         type: mongoose.Schema.Types.ObjectId,
@@ -33,7 +29,8 @@ const promotionSchema = new Schema({
     },
     code: {
         type: String,
-        default: ''
+        default: '',
+        unique: true
     },
     dateStart: {
         type: Date,

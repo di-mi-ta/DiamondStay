@@ -6,46 +6,57 @@ import WaitingHomepostList from './WaitingHomepostComponent';
 import {Link, Switch, Route} from 'react-router-dom';
 import VerifyHomepostComponent from './VerifyHomePostComponent';
 import VerifiedHomepostList from './VerifiedPostListComponent';
+
+import Header from './Header/HostHeader';
 const SubMenu = Menu.SubMenu;
 
 class AdminManager extends Component{
   render() {
     return (
-      <div className='container'>
+      <div>
+        <Header 
+              auth={this.props.auth}
+              loginUser={this.props.loginUser} 
+              logoutUser={this.props.logoutUser} 
+        />
         <Menu
           defaultSelectedKeys={['1']}
           mode= "horizontal"
           theme= 'light'
-          style={{marginBottom: '30px',textAlign: 'center', background: "#d6ebff"}}
+          style={{
+            textAlign: 'center', 
+            background: "#d6ebff"
+          }}
         >
           <Menu.Item key="1" style={{Right: '20px'}}>
-            <span>
               <Link to='/admin/promotions' style={{color: 'black' }}> 
-                <b>Quản lí khuyến mãi</b> 
+                <span>
+                  <b>Quản lí khuyến mãi</b> 
+                </span>
               </Link>
-            </span>
           </Menu.Item>
           <Menu.Item key="2">
-            <span>
-              <Link to='/admin/calendars' style={{color: 'black' }}> 
-                <b> Lịch </b> 
-              </Link>
-            </span>
-          </Menu.Item>
-          <SubMenu key="sub1"  style={{color: 'black' }} title={<span><b>Quản lí tin đăng</b></span>}>
-            <Menu.Item key="3">
+            <Link to='/admin/calendars' style={{color: 'black' }}> 
               <span>
-                <Link to='/admin/waiting-posts' style={{color: 'black' }}> 
-                  <b>Tin chưa duyệt</b> 
-                </Link>
+                <b> Lịch </b> 
               </span>
+            </Link>
+          </Menu.Item>
+          <SubMenu key="sub1"  style={{color: 'black'}} 
+                              title={<span><b>Quản lí tin đăng</b></span>}>
+            <Menu.Item key="3">
+              <Link to='/admin/waiting-posts' style={{color: 'black' }}>
+                <span>
+                  <b>Tin chưa duyệt</b> 
+                </span>
+              </Link>
             </Menu.Item>
             <Menu.Item key="4">
-              <span>
-                <Link to='/admin/verified-posts' style={{color: 'black' }}> 
+              <Link to='/admin/verified-posts' style={{color: 'black' }}> 
+                <span>                
                   <b>Tin đã duyệt</b> 
-                </Link>
-              </span>
+                </span>
+              </Link>
             </Menu.Item>
           </SubMenu>
           <Menu.Item key="5" style={{color: 'black' }}>
@@ -56,7 +67,11 @@ class AdminManager extends Component{
           <Route path="/admin/promotions" 
                 render={() => <SystemPromotionComponent 
                                   promotions={this.props.promotions}
-                                  deletePromo={this.props.deletePromo}/>}/>
+                                  deletePromo={this.props.deletePromo}
+                                  fetchSystemPromos={this.props.fetchSystemPromos}
+                                  fetchUpdateSystemPromo = {this.props.fetchUpdateSystemPromo}
+                                  fetchDeleteSystemPromo = {this.props.fetchDeleteSystemPromo}
+                                  fetchCreateSystemPromo = {this.props.fetchCreateSystemPromo}/>}/>
           <Route path="/admin/calendars" render={() => <CalendarComponent/>}/>
           <Route path="/admin/waiting-posts" 
                 render={() => <WaitingHomepostList homeposts={this.props.homeposts}/>}/>

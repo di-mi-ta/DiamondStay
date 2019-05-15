@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { Steps, Icon, Button, Input, 
         Radio, Row, Col, Card,
         Modal, Table, Tag,
-        message, Popover} from 'antd';
+        message, Popover, Carousel} from 'antd';
 
-import {Checkbox, Form } from 'semantic-ui-react'
+import {Checkbox, Form} from 'semantic-ui-react'
+import '../css/verifyHome.css';
 
 const Step = Steps.Step;
 const ButtonGroup = Button.Group;
@@ -15,16 +16,20 @@ const RadioGroup = Radio.Group;
 const columns = [{
     title: 'Trường thông tin',
     dataIndex: 'field',
+    align: 'center',
     key: 'field',
+    render: (text) => <b>{text}</b>
 }, {
     title: 'Phản hồi',
     dataIndex: 'response',
     key: 'response',
+    align: 'center',
     render: (text) => (<Popover content={text}><p>{text}</p></Popover>)
 }, {
     title: 'Trạng thái',
     key: 'states',
     dataIndex: 'states',
+    align: 'center',
     render: states => (
       <span>
         {states.map(state => {
@@ -138,6 +143,20 @@ class VerifyHomepostComponent extends Component {
             return(
                 <div>
                     <h4><b>Hình ảnh</b></h4>
+                    <Carousel autoplay>
+                        <div>
+                        <h3>Image 1</h3>
+                        </div>
+                        <div>
+                        <h3>Image 2</h3>
+                        </div>
+                        <div>
+                        <h3>Image 3</h3>
+                        </div>
+                        <div>
+                        <h3>Image 4</h3>
+                        </div>
+                    </Carousel>
                 </div>
             )
         }
@@ -250,7 +269,8 @@ class VerifyHomepostComponent extends Component {
 
     render(){
         return(
-            <div className='container'>
+            <div style = {{paddingTop: 30, paddingLeft: 50, paddingRight: 50, 
+                            paddingBottom: 50, background: '#f1f1f1'}}>
                 <h2><b>Duyệt tin</b></h2>
                 <Steps current={this.state.currentStep} style={{marginBottom: '10px'}}>
                     <Step title="Mô tả" />
@@ -265,48 +285,52 @@ class VerifyHomepostComponent extends Component {
                         <Card style={{marginTop: '20px', 
                                     boxShadow: "1px 3px 1px #9E9E9E",
                                     marginRight: '10px',
-                                    borderRadius: "10px",
-                                    minHeight: '300px'}}>
+                                    height: '400px',
+                                    overflowY: 'scroll'}}>
                             {this.renderContent()}
                         </Card>
                     </Col>
                     <Col span={6} onBackClickstyle={{marginTop: '10px'}}>
                         <span>
                             <Card style={{marginTop: '20px', 
+                                        textAlign:'center',
                                         boxShadow: "1px 3px 1px #9E9E9E",
-                                        borderRadius: "10px",
-                                        height: '100%'}} >
+                                        height: '100%',
+                                        }} >
                                 <h4><b>Phản hồi</b></h4>
                                 <TextArea placeholder="Cung cấp phản hồi cho người dùng (nếu cần)" 
                                         rows={4}/>
                             </Card>
-                            <Card style={{marginTop: '20px', textAlign:'center', 
+                            <Card style={{marginTop: '20px', 
+                                        textAlign:'center', 
                                         boxShadow: "1px 3px 1px #9E9E9E",
-                                        borderRadius: "10px",
                                         background: "#ffe4da"}} >
                             <h4><b>Xác nhận</b></h4>
                             <RadioGroup onChange={this.onChangeRatio} 
                                         value={this.state.valueRatio} 
+                                        style = {{
+                                            alignItems: 'center'
+                                        }}
                             >
                                 <Radio value={1} >Hợp lệ</Radio>
                                 <Radio value={0}>Không hợp lệ</Radio>
                             </RadioGroup>
                             </Card>
+                            <div align='center'>
+                                <ButtonGroup style={{marginTop: '20px'}}>
+                                    <Button type="primary" onClick={this.onBackBtnClicked} 
+                                            disabled={!this.state.canBack}>
+                                        <Icon type="left" />Quay lại
+                                    </Button>
+                                    <Button type="primary" onClick={this.onNextBtnClicked} 
+                                            disabled={!this.state.canNext}>
+                                        Tiếp theo <Icon type="right" />
+                                    </Button>
+                                </ButtonGroup>
+                            </div>
                         </span>
                     </Col>
                 </Row>
-                <div align="center">
-                    <ButtonGroup style={{marginTop: '20px'}}>
-                        <Button type="primary" onClick={this.onBackBtnClicked} 
-                                disabled={!this.state.canBack}>
-                            <Icon type="left" />Quay lại
-                        </Button>
-                        <Button type="primary" onClick={this.onNextBtnClicked} 
-                                disabled={!this.state.canNext}>
-                            Tiếp theo <Icon type="right" />
-                        </Button>
-                    </ButtonGroup>
-                </div>
                 <Modal
                     visible={this.state.isOpenModal}
                     title={<b>Xác nhận</b>}
@@ -327,3 +351,4 @@ class VerifyHomepostComponent extends Component {
 }
 
 export default VerifyHomepostComponent;
+

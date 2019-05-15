@@ -5,6 +5,11 @@
     background-color: #F1F1F1;
 }
 
+.container {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 .row-header{
     margin:0px auto;
     padding:0px auto;

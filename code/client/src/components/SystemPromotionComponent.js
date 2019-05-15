@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 
 import {Table, Divider, Button, Icon, 
          Modal, Input, DatePicker,
-         message, InputNumber, Select, Tag,
-         Popconfirm, Form} from 'antd';
+         message, InputNumber, Tag,
+         Popconfirm, Form, Card} from 'antd';
 
 const RangePicker = DatePicker.RangePicker;
 
@@ -15,7 +15,6 @@ class SystemPromotionCompoment extends Component {
             isModalOpen: false,
             isModalEditOpen: false,
             currentPromo: '',
-            children: []
         };
         this.onAddPromoBtnClick = this.onAddPromoBtnClick.bind(this)
         this.handleCancel = this.handleCancel.bind(this);
@@ -24,11 +23,14 @@ class SystemPromotionCompoment extends Component {
         this.onEditBtnClick = this.onEditBtnClick.bind(this);   
         this.handleDatePickerChange = this.handleDatePickerChange.bind(this);
         this.handleValueChange = this.handleValueChange.bind(this);
-        this.handleHomepostChange = this.handleHomepostChange.bind(this);
         this.handleNameChange = this.handleNameChange.bind(this);
+        this.handleMinValueChange = this.handleMinValueChange.bind(this);
+        this.handleNumTimeChange = this.handleNumTimeChange.bind(this);
+        this.handleCodeChange = this.handleCodeChange.bind(this);
     }
+
     componentWillMount(){
-        //this.props.fetchHostPromos(this.props.auth.user.username)
+        this.props.fetchSystemPromos()
     }
 
     handleDatePickerChange = value => {
@@ -37,9 +39,21 @@ class SystemPromotionCompoment extends Component {
         })
     }
 
-    handleHomepostChange = value => {
+    handleMinValueChange = value => {
         this.setState({
-            currentPromo: {...this.state.currentPromo, homeposts: value}
+            currentPromo: {...this.state.currentPromo, minValueBooking: value}
+        })
+    }
+
+    handleNumTimeChange = value => {
+        this.setState({
+            currentPromo: {...this.state.currentPromo, maxNumBookingApplied: value}
+        })
+    }
+
+    handleCodeChange = e => {
+        this.setState({
+            currentPromo: {...this.state.currentPromo, code: e.target.value}
         })
     }
 
@@ -63,9 +77,9 @@ class SystemPromotionCompoment extends Component {
         align: 'center',
         render: text => text,
     },{
-        title: 'Mức khuyến mãi',
-        dataIndex: 'value',
-        key: 'value',
+        title: 'Code',
+        dataIndex: 'code',
+        key: 'code',
         align: 'center',
         render: text => text,
     },{
@@ -114,7 +128,7 @@ class SystemPromotionCompoment extends Component {
     }
 
     onConfirmDeleteClick = (promo) => {
-        this.props.fetchDeleteHostPromo(promo._id)
+        this.props.fetchDeleteSystemPromo(promo._id)
     }
       
     onAddPromoBtnClick(){
@@ -127,7 +141,7 @@ class SystemPromotionCompoment extends Component {
         this.setState({
           isModalEditOpen: false,
         });
-        this.props.fetchUpdateHostPromo(this.state.currentPromo);
+        this.props.fetchUpdateSystemPromo(this.state.currentPromo);
         if (true){
             message.success('Cập nhật thành công !!!');
         } else {
@@ -151,9 +165,11 @@ class SystemPromotionCompoment extends Component {
             dateEnd: this.state.currentPromo.dateEnd,
             value: this.state.currentPromo.value,
             creator: this.props.auth.user.username,
-            homeposts: []
+            minValueBooking: this.state.currentPromo.minValueBooking,
+            maxNumBookingApplied: this.state.currentPromo.maxNumBookingApplied,
+            code: this.state.currentPromo.code
         }
-        this.props.fetchCreateHostPromo(promo);
+        this.props.fetchCreateSystemPromo(promo);
         if (true){
             message.success('Bạn đã thêm một khuyến mại mới thành công!');
         } else {
@@ -175,20 +191,27 @@ class SystemPromotionCompoment extends Component {
         } 
 
         return(
-            <div className='container' padding-top='10px'>
-                <div style={{display:'inline'}}> 
-                <h2> <b> Quản lí khuyến mại </b></h2>
+            <div style={{paddingTop: 30, paddingLeft: 50, paddingRight: 50, 
+                        paddingBottom: 50, background: '#f1f1f1'}}>
+                <div style={{flex: 'row'}}> 
+                    <h2> <b> Quản lí khuyến mại </b></h2>
                     <Button type="primary" icon="plus" ghost
                         onClick = {this.onAddPromoBtnClick}
                     >
                     Thêm khuyến mại
                 </Button>
                 </div>
-                <Table columns={this.columns} 
-                    dataSource={this.props.promotions.promotions} 
-                    style={{marginTop: '20px', backgroundColor: 'while'}}
-                    bordered
-                />
+                <Card style={{ 
+                    boxShadow: "1px 3px 1px #9E9E9E",
+                    borderRadius: "10px",
+                    minHeight: '300px',
+                    marginTop: '30px'}}>
+                    <Table columns={this.columns} 
+                        dataSource={this.props.promotions.systemPromos} 
+                        style={{marginTop: '20px', backgroundColor: 'while'}}
+                        bordered
+                    />
+                </Card>
                 <Modal
                     title="Thêm khuyến mại"
                     visible={this.state.isModalOpen}
@@ -206,24 +229,30 @@ class SystemPromotionCompoment extends Component {
                             <Input onChange={this.handleNameChange}/>
                         </Form.Item>
                         <Form.Item
-                            label="Mức giảm giá"
+                            label="Code"
                             {...formItemLayout}
                         >
-                            <InputNumber min='0' max='100'  onChange={this.handleValueChange}/>
-                            {' %'}
+                            <Input onChange={this.handleCodeChange}/>
                         </Form.Item>
                         <Form.Item
-                            label="Chỗ ở áp dụng"
+                            label="Giá trị booking tối thiểu"
                             {...formItemLayout}
                         >
-                            <Select
-                                mode="multiple"
-                                style={{ width: '100%' }}
-                                onChange={this.handleChangeSelectHome}
-                                allowClear
-                            >
-                                {this.state.children}
-                            </Select>
+                            <InputNumber min='0' max='100'  onChange={this.handleMinValueChange}/>
+                            VND
+                        </Form.Item>
+                        <Form.Item
+                            label="Giá trị khuyến mãi"
+                            {...formItemLayout}
+                        >
+                            <InputNumber min='0' onChange={this.handleValueChange}/>
+                            VND 
+                        </Form.Item>
+                        <Form.Item
+                            label="Số lần sử dụng tối đa"
+                            {...formItemLayout}
+                        >
+                            <InputNumber min='0' onChange={this.handleNumTimeChange}/>
                         </Form.Item>
                         <Form.Item
                             label="Thời gian áp dụng"
@@ -243,47 +272,49 @@ class SystemPromotionCompoment extends Component {
                     okText='Cập nhật'
                     cancelText='Hủy bỏ'
                 > 
-                <Form layout='Horizontal' style={{ width: '100%'}}>
-                    <Form.Item
-                        label="Tên khuyến mãi"
-                        {...formItemLayout}
-                    >
-                        <Input value={this.state.currentPromo.name} 
-                        onChange={this.handleNameChange}/>
-                    </Form.Item>
-                    <Form.Item
-                        label="Mức giảm giá"
-                        {...formItemLayout}
-                    >
-                        <InputNumber min='0' max='100' 
-                                    name='value' 
-                                    value={this.state.currentPromo.value}
-                                    onChange={this.handleValueChange}/>
-                        {' %'}
-                    </Form.Item>
-                    <Form.Item
-                        label="Chỗ ở áp dụng"
-                        {...formItemLayout}
-                    >
-                        <Select
-                            mode="multiple"
-                            style={{ width: '100%' }}
-                            allowClear
-                            name="homeposts"
+                <Form layout='Horizontal' style={{ width: '100%'}} onSubmit={this.handleSubmit}>
+                        <Form.Item
+                            label="Tên khuyến mãi"
+                            {...formItemLayout}
                         >
-                            {this.state.currentPromo.homeposts}
-                        </Select>
-                    </Form.Item>
-                    <Form.Item
-                        label="Thời gian áp dụng"
-                        {...formItemLayout}
-                    >
-                        <RangePicker style={{ width: '100%' }}
-                                    name='dates' 
-                                    onChange={this.handleDatePickerChange}
-                                    format="DD-MM-YYYY"/>
-                    </Form.Item>
-                </Form>
+                            <Input onChange={this.handleNameChange} value={this.state.currentPromo.name}/>
+                        </Form.Item>
+                        <Form.Item
+                            label="Code"
+                            {...formItemLayout}
+                        >
+                            <Input onChange={this.handleCodeChange} value={this.state.currentPromo.code}/>
+                        </Form.Item>
+                        <Form.Item
+                            label="Giá trị booking tối thiểu"
+                            {...formItemLayout}
+                        >
+                            <InputNumber min='0' onChange={this.handleMinValueChange}
+                                        value={this.state.currentPromo.minBookingApplied}/>
+                            {' VND'}
+                        </Form.Item>
+                        <Form.Item
+                            label="Giá trị khuyến mãi"
+                            {...formItemLayout}
+                        >
+                            <InputNumber min='0' onChange={this.handleValueChange}
+                                                value={this.state.currentPromo.value}/>
+                            {' VND'} 
+                        </Form.Item>
+                        <Form.Item
+                            label="Số lần sử dụng tối đa"
+                            {...formItemLayout}
+                        >
+                            <InputNumber min='0' onChange={this.handleNumTimeChange}
+                                                value={this.state.currentPromo.maxNumBookingApplied}/>
+                        </Form.Item>
+                        <Form.Item
+                            label="Thời gian áp dụng"
+                            {...formItemLayout}
+                        >
+                            <RangePicker style={{ width: '100%' }} onChange={this.handleDatePickerChange}/>
+                        </Form.Item>
+                        </Form>
                 </Modal> 
             </div>
         )

@@ -1,42 +1,45 @@
 import React from 'react';
+import '../css/footer.css';
 import { Link } from 'react-router-dom';
+import { SocialIcon } from 'react-social-icons';
 
 function Footer(props) {
     return(
         <div className="footer">
-            <div className="container">
-                <div className="row justify-content-center">             
-                    <div className="col-4 offset-1 col-sm-2">
-                        <h5>Links</h5>
-                        <ul className="list-unstyled">
-                            <li><Link to="/home">Home</Link></li>
-                            <li><Link to="/aboutus">About Us</Link></li>
-                        </ul>
-                    </div>
-                    <div className="col-7 col-sm-5">
-                        <h5>Our Address</h5>
+            <div className="container footer-container">
+                <div className="row justify-content-center">
+                    <div className="col-md-3 col-xs-12 offset-1">
+                        <h2 className="mb-0">Diamond Stay</h2>
+                        <p>Hệ thống chia sẻ nhà</p>
+                    </div>           
+                    <div className="col-md-2 col-xs-12">
+                        <h5>Visit</h5>
                         <address>
-                        268, Li Thuong Kiet Street, District 10,<br />
-                        Ho Chi Minh City<br />
-                        VIET NAM<br />
-                        <i className="fa fa-phone fa-lg"></i>: +84 39 251 6548 <br />
-                        <i className="fa fa-fax fa-lg"></i>: +852 8765 4321<br />
-                        <i className="fa fa-envelope fa-lg"></i>: <a href="mailto:beta.dimitaa7@gmail.com">
-                        beta.dimitaa7@gmail.com</a>
+                            268 Ly Thuong Kiet St.<br />
+                            District 10, TP.HCM<br />
+                            Socialist Republic of Vietnam<br />
+                        </address>
+                        <br />
+                        <h5>Business</h5>
+                        <address>
+                            +84 39 251 6548<br />
+                            Diamond Stay<br />
                         </address>
                     </div>
-                    <div className="col-12 col-sm-4 align-self-center">
-                        <div className="text-center">
-                            <a className="btn btn-social-icon btn-google" href="http://google.com/+"><i className="fa fa-google-plus"></i></a>
-                            <a className="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i className="fa fa-facebook"></i></a>
-                            <a className="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i className="fa fa-linkedin"></i></a>
-                            <a className="btn btn-social-icon" href="mailto:"><i className="fa fa-envelope-o"></i></a>
+                    <div className="col-md-4 col-xs-12 align-self-center social-icons-container">
+                        <h5>Follow Us</h5>
+                        <div>
+                            <SocialIcon style={{height: 30, width: 30, margin: 4}} url="https://www.google.com" fgColor="#ffffff"/>
+                            <SocialIcon style={{height: 30, width: 30, margin: 4}} url="https://www.facebook.com/" fgColor="#ffffff"/>
+                            <SocialIcon style={{height: 30, width: 30, margin: 4}} url="https://www.twitter.com/" fgColor="#ffffff"/>
+                            <SocialIcon style={{height: 30, width: 30, margin: 4}} url="https://linkedin.com/" fgColor="#ffffff"/>
+                            <SocialIcon style={{height: 30, width: 30, margin: 4}} url="https://www.cse.hcmut.edu.vn" label="CSE" fgColor="#ffffff"/>
                         </div>
                     </div>
                 </div>
                 <div className="row justify-content-center">             
                     <div className="col-auto">
-                        <p>© Copyright 2019 Diamond Stay</p>
+                        <p className="mb-0">© Copyright @2019 Diamond Stay. All Rights Reserved.</p>
                     </div>
                 </div>
             </div>

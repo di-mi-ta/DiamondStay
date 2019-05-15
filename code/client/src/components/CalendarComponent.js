@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Calendar, Alert } from 'antd';
+import { Calendar, Alert, Card } from 'antd';
 import moment from 'moment';
 
 class CalendarCom extends Component{
@@ -27,9 +27,15 @@ class CalendarCom extends Component{
     render() {
         const { value, selectedValue } = this.state;
         return (
-            <div>
+            <div style = {{padding: 30, background: '#f1f1f1'}}>
+                <Card style={{ 
+                                boxShadow: "1px 3px 1px #9E9E9E",
+                                borderRadius: "10px",
+                                minHeight: '300px',
+                            }}>
                 <Alert message={`Bạn đang chọn: ${selectedValue && selectedValue.format('DD-MM-YYYY')}`} />
                 <Calendar value={value} onSelect={this.onSelect} onPanelChange={this.onPanelChange} />
+                </Card>
             </div>
         );
     }

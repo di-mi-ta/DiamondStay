@@ -1,13 +1,6 @@
 import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../shared/baseUrl';
 
-export const deletePromo = (promoId) => ({
-    type: ActionTypes.DELETE_HOST_PROMO,
-    payload: {
-        promoId: promoId
-    }
-})
-
 export const fetchHostPromos = (username) => (dispatch) => {
     dispatch(hostPromosLoading(true));
     return fetch(baseUrl + 'host-promotions?username=' + username)
@@ -30,13 +23,44 @@ export const fetchHostPromos = (username) => (dispatch) => {
         .catch(error => dispatch(promosFailed(error.message)));
 }
 
+export const fetchSystemPromos = () => (dispatch) => {
+    dispatch(systemPromosLoading(true));
+    return fetch(baseUrl + 'system-promotions')
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+        error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+        })
+        .then(response => response.json())
+        .then(promos => dispatch(addSystemPromos(promos)))
+        .catch(error => dispatch(promosFailed(error.message)));
+}
+
 export const addHostPromos = (promos) => ({
     type: ActionTypes.ADD_HOST_PROMOS,
     payload: promos
 });
 
+export const addSystemPromos = (promos) => ({
+    type: ActionTypes.ADD_SYSTEM_PROMOS,
+    payload: promos
+});
+
 export const hostPromosLoading = () => ({
     type: ActionTypes.HOST_PROMOS_LOADING
+});
+
+export const systemPromosLoading = () => ({
+    type: ActionTypes.SYSTEM_PROMOS_LOADING
 });
 
 export const promosFailed = (errmess) => ({
@@ -49,9 +73,24 @@ export const addHostPromo = (promo) => ({
     payload: promo
 });
 
+export const addSystemPromo = (promo) => ({
+    type: ActionTypes.ADD_SYSTEM_PROMO,
+    payload: promo
+});
+
+export const updateSystemPromo = (promo) => ({
+    type: ActionTypes.UPDATE_SYSTEM_PROMO,
+    payload: promo
+});
+
 export const updateHostPromo = (promo) => ({
     type: ActionTypes.UPDATE_HOST_PROMO,
     payload: promo
+});
+
+export const deleteSystemPromo = (promoId) => ({
+    type: ActionTypes.DELETE_SYSTEM_PROMO,
+    payload: promoId
 });
 
 export const deleteHostPromo = (promoId) => ({
@@ -85,6 +124,32 @@ export const fetchDeleteHostPromo = (promoId) => (dispatch) => {
         .catch(error => dispatch(favoritesFailed(error.message)));
 }
 
+export const fetchDeleteSystemPromo = (promoId) => (dispatch) => {
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+        fetch(baseUrl + 'system-promotions/' + promoId, {
+            method: "DELETE",
+            headers: {
+            'Authorization': bearer,
+            credentials: "same-origin"
+            },
+        })
+        .then(response => {
+            if (response.ok) {
+            return response;
+            } else {
+            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+            error.response = response;
+            throw error;
+            }
+        },
+        error => {
+                throw error;
+        })
+        .then(response => response.json())
+        .then((promo)=> dispatch(deleteSystemPromo(promo)))
+        .catch(error => dispatch(favoritesFailed(error.message)));
+}
+
 export const fetchUpdateHostPromo = (updatedPromo) => (dispatch) => {
     const bearer = 'Bearer ' + localStorage.getItem('token');
         fetch(baseUrl + 'host-promotions/' + updatedPromo._id, {
@@ -113,6 +178,34 @@ export const fetchUpdateHostPromo = (updatedPromo) => (dispatch) => {
         .catch(error => dispatch(favoritesFailed(error.message)));
 }
 
+export const fetchUpdateSystemPromo = (updatedPromo) => (dispatch) => {
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+        fetch(baseUrl + 'system-promotions/' + updatedPromo._id, {
+            method: "PUT",
+            body: JSON.stringify(updatedPromo),
+            headers: {
+            "Content-Type": "application/json",
+            'Authorization': bearer,
+            credentials: "same-origin"
+            },
+        })
+        .then(response => {
+            if (response.ok) {
+            return response;
+            } else {
+            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+            error.response = response;
+            throw error;
+            }
+        },
+        error => {
+                throw error;
+        })
+        .then(response => response.json())
+        .then((promo)=> dispatch(updateSystemPromo(promo)))
+        .catch(error => dispatch(favoritesFailed(error.message)));
+}
+
 export const fetchCreateHostPromo = (promo) => (dispatch) => {
     const bearer = 'Bearer ' + localStorage.getItem('token');
         fetch(baseUrl + 'host-promotions/', {
@@ -138,6 +231,34 @@ export const fetchCreateHostPromo = (promo) => (dispatch) => {
         })
         .then(response => response.json())
         .then((promo)=> dispatch(addHostPromo(promo)))
+        .catch(error => dispatch(favoritesFailed(error.message)));
+}
+
+export const fetchCreateSystemPromo = (promo) => (dispatch) => {
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+        fetch(baseUrl + 'system-promotions/', {
+            method: "POST",
+            body: JSON.stringify(promo),
+            headers: {
+            "Content-Type": "application/json",
+            'Authorization': bearer,
+            credentials: "same-origin"
+            },
+        })
+        .then(response => {
+            if (response.ok) {
+            return response;
+            } else {
+            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+            error.response = response;
+            throw error;
+            }
+        },
+        error => {
+                throw error;
+        })
+        .then(response => response.json())
+        .then((promo)=> dispatch(addSystemPromo(promo)))
         .catch(error => dispatch(favoritesFailed(error.message)));
 }
 

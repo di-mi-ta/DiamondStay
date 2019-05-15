@@ -1,41 +1,55 @@
 import React, { Component } from 'react';
 import {Link, Switch, Route} from 'react-router-dom';
 import {Menu} from 'antd';
-import PromotionComponent from './PromotionsComponent';
+import PromotionComponent from './HostPromotionsComponent';
 import CalendarComponent from './CalendarComponent';
 
-const SubMenu = Menu.SubMenu;
+import '../css/host/host-manager.css';
+import Header from './Header/HostHeader';
 
 class HostManager extends Component{
     render() {
         return (
-          <div className='container' style= {{backgroundColor: "#F1F1F1"}}>
+          <div>
+            <Header 
+              auth={this.props.auth}
+              loginUser={this.props.loginUser} 
+              logoutUser={this.props.logoutUser} 
+            />
             <Menu
               defaultSelectedKeys={['1']}
               mode= "horizontal"
               theme= 'light'
-              style={{marginBottom: '30px', textAlign: 'center', 
-                      background: "#d6ebff",
+              style={{ 
+                      textAlign: 'center', 
+                      background: "#d6ebff"
                     }}
             >
               <Menu.Item key="1" to='/'>
-                <span><Link style={{color: 'black' }}  to='/host/promotions'><b>Bảng thông tin</b> </Link></span>
+                <Link to='/host/promotions'>
+                  <span>
+                    <b>Bảng thông tin</b>
+                  </span>
+                </Link>
               </Menu.Item>
               <Menu.Item key="2">
-                <span><Link style={{color: 'black' }} to='/host/calendars'> <b> Lịch </b> </Link></span>
+                <Link to='/host/calendars'> 
+                  <span>  
+                    <b> Lịch </b> 
+                  </span>
+                </Link>
               </Menu.Item>
               <Menu.Item key="3">
-                <span><Link style={{color: 'black' }} to='/host'> <b> Chỗ ở của tôi </b> </Link></span>
+                <Link to='/host'>
+                  <span> <b> Chỗ ở của tôi </b> </span>
+                </Link>
               </Menu.Item>
-              <SubMenu key="sub1" style={{color: 'black' }} title={<span><b>Khuyến mãi</b></span>}>
-                <Menu.Item key="4">
-                  <span><Link to='/host' style={{color: 'black' }}> <b>Khuyến mãi của hệ thống</b> </Link></span>
-                </Menu.Item>
-                <Menu.Item key="5">
-                  <span><Link to='/host/host-promotions' style={{color: 'black' }}> <b>Khuyến mãi của tôi</b> </Link></span>
-                </Menu.Item>
-              </SubMenu>
-              <Menu.Item key="6" style={{color: 'black' }}>
+              <Menu.Item key="5">
+                <Link to='/host/host-promotions' > 
+                  <span><b>Khuyến mãi của tôi</b></span>
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="6" >
                 <span> <b>Tin nhắn</b> </span>
               </Menu.Item>
             </Menu>
@@ -56,3 +70,4 @@ class HostManager extends Component{
 }
 
 export default HostManager;
+

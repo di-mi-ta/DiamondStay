@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 
 import { Table, Divider, Button, Icon, 
-    Modal, Form, Input, DatePicker,
-    message, InputNumber, Select, Tag,
-    Popconfirm } from 'antd';
-
-import {Route, Link, Switch, Redirect} from 'react-router-dom';
+    Popconfirm, Card } from 'antd';
 
 const columns = [{
     title: 'Homestay',
@@ -48,9 +44,15 @@ class VerifiedHomepostList extends Component {
     render(){
         return(
             <div className='container'>
-                <Table columns={columns} 
-                    dataSource={this.props.homeposts.homeposts} 
-                />
+                <Card style={{marginTop: '20px', 
+                                    boxShadow: "1px 3px 1px #9E9E9E",
+                                    marginRight: '10px',
+                                    borderRadius: "10px",
+                                    minHeight: '300px'}}>
+                    <Table columns={columns} 
+                        dataSource={this.props.homeposts.homeposts} 
+                    />
+                </Card>
             </div>
         )
     }

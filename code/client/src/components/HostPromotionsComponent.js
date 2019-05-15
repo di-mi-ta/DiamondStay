@@ -3,9 +3,11 @@ import React, { Component } from 'react';
 import { Table, Divider, Button, Icon, 
          Modal, Input, DatePicker,
          message, InputNumber, Select, Tag,
-         Popconfirm, Form} from 'antd';
+         Popconfirm, Form, Card} from 'antd';
+import moment from 'moment';
 
 const RangePicker = DatePicker.RangePicker;
+
 
 class PromotionCompoment extends Component {
     constructor(props){
@@ -67,7 +69,7 @@ class PromotionCompoment extends Component {
         dataIndex: 'value',
         key: 'value',
         align: 'center',
-        render: text => text,
+        render: text => text + ' %',
     },{
         title: 'Tình trạng',
         key: 'states',
@@ -175,8 +177,8 @@ class PromotionCompoment extends Component {
         } 
 
         return(
-            <div className='container' padding-top='10px'>
-                <div style={{display:'inline'}}> 
+            <div style={{padding: 30, background: '#f1f1f1'}}>
+                <div style={{display:'row'}}> 
                 <h2> <b> Quản lí khuyến mại </b></h2>
                     <Button type="primary" icon="plus" ghost
                         onClick = {this.onAddPromoBtnClick}
@@ -184,11 +186,18 @@ class PromotionCompoment extends Component {
                     Thêm khuyến mại
                 </Button>
                 </div>
-                <Table columns={this.columns} 
-                    dataSource={this.props.promotions.promotions} 
-                    style={{marginTop: '20px', backgroundColor: 'while'}}
-                    bordered
-                />
+                <Card style={{ 
+                            boxShadow: "1px 3px 1px #9E9E9E",
+                            borderRadius: "10px",
+                            minHeight: '300px',
+                            marginTop: '30px'
+                            }}>
+                    <Table columns={this.columns} 
+                        dataSource={this.props.promotions.hostPromotions} 
+                        style={{marginTop: '20px', backgroundColor: 'while'}}
+                        bordered
+                    />
+                </Card>
                 <Modal
                     title="Thêm khuyến mại"
                     visible={this.state.isModalOpen}
@@ -270,6 +279,7 @@ class PromotionCompoment extends Component {
                             style={{ width: '100%' }}
                             allowClear
                             name="homeposts"
+                            placeholder='Nhấn vào để xem'
                         >
                             {this.state.currentPromo.homeposts}
                         </Select>
@@ -281,7 +291,10 @@ class PromotionCompoment extends Component {
                         <RangePicker style={{ width: '100%' }}
                                     name='dates' 
                                     onChange={this.handleDatePickerChange}
-                                    format="DD-MM-YYYY"/>
+                                    format="DD-MM-YYYY"
+                                    value={[moment(this.state.currentPromo.dateStart), 
+                                        moment(this.state.currentPromo.dateEnd)]}
+                        />
                     </Form.Item>
                 </Form>
                 </Modal> 
