@@ -18,16 +18,12 @@ class App extends Component {
       <Provider store={store}>
         <BrowserRouter>
           <div>
-            {/* Main page
             <div class="super_container">
               <Header/>
               <Home/>
               <Main/>
               <Footer/>
             </div>
-            */}
-            <Header/>
-            <Booking/>
           </div>
         </BrowserRouter>
       </Provider>

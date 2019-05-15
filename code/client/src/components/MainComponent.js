@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Home from './HomeComponent';
-import HomePostDetailed from './HomepostDetailedComponent';
 import Favorites from './FavoriteComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
