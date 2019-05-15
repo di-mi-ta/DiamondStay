@@ -9,6 +9,12 @@ import {connect} from 'react-redux';
 import {postRating, fetchHomeposts, fetchRatings, fetchPromos, loginUser, logoutUser, fetchFavorites, postFavorite, deleteFavorite} from '../redux/ActionCreators';
 import {TransitionGroup, CSSTransition} from 'react-transition-group';
 import "../css/main_styles.css";
+import "../css/about.css";
+import "../css/about_responsive.css";
+import "../css/blog.css";
+import "../css/blog_responsive.css";
+import "../css/elements.css";
+import "../css/elements_responsive.css";
 
 const mapStateToProps = state => {
   return {
@@ -207,7 +213,7 @@ class Main extends Component {
           <div class="container">
             <div class="row">
               <div class="col">
-                <div class="booking_title text-center"><h2>Book a room</h2></div>
+                <div class="booking_title text-center"><h2>Book a place</h2></div>
                 <div class="booking_text text-center">
                     <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum lacus suscipit sit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum lacus suscipit sit.</p>
                 </div>
@@ -220,7 +226,7 @@ class Main extends Component {
                             <div class="background_image"><img src="../images/booking_1.jpg"/></div>
                             <div class="booking_overlay trans_200"></div>
                             <div class="booking_price">$120/Night</div>
-                            <div class="booking_link"><a href="booking.html">Family Room</a></div>
+                            <div class="booking_link"><a href="booking.html">Sissy Homestay</a></div>
                         </div>
 
                         {/*Slide*/}
@@ -228,7 +234,7 @@ class Main extends Component {
                             <div class="background_image"><img src="../images/booking_2.jpg"/></div>
                             <div class="booking_overlay trans_200"></div>
                             <div class="booking_price">$120/Night</div>
-                            <div class="booking_link"><a href="booking.html">Deluxe Room</a></div>
+                            <div class="booking_link"><a href="booking.html">Hello Packager</a></div>
                         </div>
 
                         {/*Slide*/}
@@ -236,7 +242,7 @@ class Main extends Component {
                             <div class="background_image"><img src="../images/booking_3.jpg"/></div>
                             <div class="booking_overlay trans_200"></div>
                             <div class="booking_price">$120/Night</div>
-                            <div class="booking_link"><a href="booking.html">Single Room</a></div>
+                            <div class="booking_link"><a href="booking.html">La Lung Homestay</a></div>
                         </div>
                     </div>
                 </div>

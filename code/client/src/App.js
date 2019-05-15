@@ -7,6 +7,7 @@ import Header from "./components/HeaderComponent";
 import Home from "./components/HomeComponent"; //Khoa
 import Main from "./components/MainComponent";
 import Footer from "./components/FooterComponent";
+import Booking from "./components/BookingComponent";
 import "./css/main_styles.css";
 
 const store = ConfigureStore();
@@ -17,12 +18,16 @@ class App extends Component {
       <Provider store={store}>
         <BrowserRouter>
           <div>
+            {/* Main page
             <div class="super_container">
               <Header/>
               <Home/>
               <Main/>
               <Footer/>
             </div>
+            */}
+            <Header/>
+            <Booking/>
           </div>
         </BrowserRouter>
       </Provider>

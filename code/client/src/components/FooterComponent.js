@@ -12,26 +12,26 @@ function Footer(props) {
 						    <div class="footer_logo_container text-center">
 							    <div class="footer_logo">
 								    <a href="#"></a>
-								    <div>The River</div>
-								    <div>since 1945</div>
+								    <div>DStay</div>
+								    <div>since 2019</div>
 							    </div>
 						    </div>
 					    </div>
 				    </div>
                     <div class="row footer_row">
                         <div class="col-lg-3">
-                            <div class="footer_title">Our Address</div>
+                            <div class="footer_title">Địa chỉ của chúng tôi</div>
                             <div class="footer_list">
                                 <ul>
-                                    <li>Beach Str. 345</li>
-                                    <li>67559 Miami</li>
-                                    <li>USA</li>
+                                    <li>999 đường Khởi Nghiệp</li>
+                                    <li>Phường Rose, Quận Vũ.</li>
+                                    <li>Việt Nam</li>
                                 </ul>
                             </div>
                         </div>
 
                         <div class="col-lg-3">
-                            <div class="footer_title">Reservations</div>
+                            <div class="footer_title">Tiếp tâns</div>
                             <div class="footer_list">
                                 <ul>
                                     <li>Tel: 345 5667 889</li>
@@ -45,7 +45,7 @@ function Footer(props) {
                             <div class="footer_title">Newsletter</div>
                             <div class="newsletter_container">
                                 <form action="#" class="newsletter_form" id="newsletter_form">
-                                    <input type="email" class="newsletter_input" placeholder="Your email address" required="required"/>
+                                    <input type="email" class="newsletter_input" placeholder="Địa chỉ email" required="required"/>
                                     <button class="newsletter_button">Subscribe</button>
                                 </form>
                             </div>
