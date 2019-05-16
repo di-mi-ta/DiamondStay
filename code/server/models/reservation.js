@@ -15,9 +15,13 @@ const reservationSchema = new Schema({
         min: 0,
         default: 0,
     },
-    appliedPromo: {
+    appliedHostPromo: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Promotions'
+    },
+    appliedSystemPromo: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'SystemPromos'
     },
     home: {
         type: mongoose.Schema.Types.ObjectId,
@@ -31,10 +35,6 @@ const reservationSchema = new Schema({
         type: Date,
         default: ''
     },
-    dateCreate: {
-        type: Date,
-        default: ''
-    }
 },{
     timestamps : true
 });

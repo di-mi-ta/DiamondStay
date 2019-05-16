@@ -2,14 +2,13 @@ const express = require('express')
 const bodyParser = require('body-parser');
 
 const homePostRouter= express.Router();
-
-const HomePosts = require('../models/homeposts');
 const authenticate = require('../authenticate');
 
 homePostRouter.use(bodyParser.json());
 
 const Controllers  = require('../controllers');
 const HomePostCtrl = Controllers.HomePostCtrl;
+const PromoCtrl = Controllers.PromoCtrl;
 
 homePostRouter.route('/')
 .get(HomePostCtrl.getListWaitingConfirmedHomePosts)
@@ -21,6 +20,10 @@ homePostRouter.route('/:homePostId')
 .post(authenticate.verifyUser, HomePostCtrl.postRating)
 .put(authenticate.verifyUser, authenticate.verifyAdmin, HomePostCtrl.updateHomePost)
 .delete(authenticate.verifyUser, authenticate.verifyAdmin, HomePostCtrl.deleteHomePost);
+
+//for promotions
+// homePostRouter.route('/:homePostId/promotions')
+// .get(PromoCtrl.getActivePromoForHomepost)
 
 homePostRouter.route('/:homePostId/rating/:ratingId')
 .get(HomePostCtrl.getLstRatingsOfHomePost)

@@ -1,3 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Merriweather');
+
+.body {
+    font-family: 'Merriweather', serif;
+    background-color: #F1F1F1;
+}
+
+.container {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 .row-header{
     margin:0px auto;
     padding:0px auto;
@@ -53,3 +65,4 @@ address{
     transform: translateX(100%);
     transition: all 300ms ease-out;
 }
+
