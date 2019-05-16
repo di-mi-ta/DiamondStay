@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
 import {Switch, Route, Redirect, withRouter, Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {postRating, fetchHomeposts, fetchRatings, 
@@ -9,6 +10,11 @@ import {postRating, fetchHomeposts, fetchRatings,
         fetchUpdateSystemPromo, fetchSystemPromos} from '../redux/ActionCreators';
 import AdminManager from '../components/AdminManagerComponent';
 import HostManager from '../components/HostManagerComponent';
+=======
+import Home from './HomeComponent';
+import HomePostDetailed from './HomepostDetailedComponent';
+import Favorites from './FavoriteComponent';
+>>>>>>> parent of ead37b5... Add UI for result
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 
