@@ -1,34 +1,154 @@
 var mongoose = require('mongoose')
-var Promotions = require('../models/promotions')
+var HostPromotions = require('../models/hostPromotions')
+var SystemPromotions = require('../models/systemPromotions')
 
-const createNewHostPromotion =  () => {
+const createHostPromotion = (req, res, next) => {
     /* Description: Create new host promotion*/
-    // TO DO
+    HostPromotions.create(req.body)
+    .then((promotion) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(promotion);
+    }, (err) => next(err))
+    .catch((err)=> next(err));
 }
-const createNewSystemPromotion =  () => {
+
+const createSystemPromotion = (req, res, next) => {
     /* Description: Create new system promotion*/
-    // TO DO 
+    SystemPromotions.create(req.body)
+    .then((promotion) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(promotion);
+    }, (err) => next(err))
+    .catch((err)=> next(err));
 }
 
-const updatePromotion =  () => {
-    /* Description: Update a promotion*/
-    // TO DO 
+const updateHostPromotion = (req, res, next) => {
+    HostPromotions.findByIdAndUpdate(req.params.promoId, {
+        $set: req.body
+    }, { new: true })
+    .then((promotion) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(promotion);
+    }, (err) => next(err))
+    .catch((err) => next(err));
 }
 
-const deletePromotion =  () => {
-    /* Description: Delete a promotion*/
-    // TO DO 
+const updateSystemPromotion = (req, res, next) => {
+    SystemPromotions.findByIdAndUpdate(req.params.promoId, {
+        $set: req.body
+    }, { new: true })
+    .then((promotion) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(promotion);
+    }, (err) => next(err))
+    .catch((err) => next(err));
 }
 
-const getListPromotion =  () => {
-    // TO DO 
+const deleteHostPromotion = (req, res, next) => {
+    /* Description: Delete a host promotion*/
+    HostPromotions.findByIdAndRemove(req.params.promoId)
+    .then((resp) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(resp);
+    }, (err) => next(err))
+    .catch((err) => next(err));
+}
+
+const deleteSystemPromotion = (req, res, next) => {
+    SystemPromotions.findByIdAndRemove(req.params.promoId)
+    .then((resp) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(resp);
+    }, (err) => next(err))
+    .catch((err) => next(err));
+}
+
+const getHostPromoById = (req,res,next) => {
+    HostPromotions.findById(req.params.promoId)
+    .then((promotion) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type','application/json')
+        res.json(promotion)
+    }, (err) => next(err))
+    .catch((err) => next(err))
+}
+
+const getSystemPromoById = (req,res,next) => {
+    SystemPromotions.findById(req.params.promoId)
+    .then((promotion) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type','application/json')
+        res.json(promotion)
+    }, (err) => next(err))
+    .catch((err) => next(err))
+}
+
+const getHostPromoOfUser = (req, res, next) => {
+    HostPromotions.find({creator: req.query.username})
+    .then((promotions) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type','application/json')
+        res.json(promotions)
+    }, (err)=>next(err))
+    .catch((err) => next(err))
+}
+
+const getActivePromoForHomepost = (req, res, next) => {
+    // Promotions.find({ dateStart : {$gt: new Date(),
+    //                   dateEnd: {$lt: new Date()}}})
+    // .populate(homeposts)
+    // .then((lstPromos) => {
+    //     let promos = lstPromos.filter((promo) => {
+    //         const check = promo.homeposts.filter((homepost) => homepost.owner === req.params.homePostId)
+    //         check > 0
+    //     })
+    //     res.statusCode = 200;
+    //     res.setHeader('Content-Type','application/json');
+    //     res.json(promos)
+    // }, (err) => next(err))
+    // .catch((err) => next(err));
+}
+
+const getFullListPromo = (req, res, next) => {
+    SystemPromotions.find({})
+    .then((promos) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type','application/json');
+        res.json(promos)
+    },
+    (err)=> next(err))
+    .catch((err) => next(err));
+}
+
+const getActiveSystemPromo = (req, res, next) => {
+    SystemPromotions.find({ dateStart : {$gt: new Date(),
+                            dateEnd: {$lt: new Date()}}})
+    .then((promos) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type','application/json');
+        res.json(promos)
+    },
+    (err)=> next(err))
+    .catch((err) => next(err));
 }
 
 // export all functions
 module.exports = {
-    createNewHostPromotion,
-    createNewSystemPromotion,
-    updatePromotion,
-    deletePromotion,
-    getListPromotion,
+    createHostPromotion,
+    createSystemPromotion,
+    updateSystemPromotion,
+    deleteSystemPromotion,
+    updateHostPromotion,
+    deleteHostPromotion,
+    getHostPromoById,
+    getHostPromoOfUser,
+    getFullListPromo,
+    getActiveSystemPromo,
+    getSystemPromoById
 }

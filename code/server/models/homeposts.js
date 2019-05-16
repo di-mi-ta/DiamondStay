@@ -3,14 +3,14 @@ const Schema = mongoose.Schema
 
 require('mongoose-currency').loadType(mongoose)
 
-const Currency = mongoose.Types.Currency
+const locationSchema = 'Locations';
 
 const  ratingSchema = new Schema({
     rate: {
         type: Number,
         min: 1,
         max: 5,
-        required: true 
+        required: true
     },
     comment: {
         type: String,
@@ -24,59 +24,107 @@ const  ratingSchema = new Schema({
     timestamps: true
 });
 
+
+
 const HomePostSchema = new Schema({
     owner: {
         type: String,
         required: true,
     },
-    rating: [ratingSchema],
-    name: {
-        type: String, 
-        required: true,
-        unique: true
-    },
-    description: {
-        type: String,
-        required: true
-    },
-    image: {
-        type: String,
-        required: true
-    },
-    price: {
+
+    // Prices
+    weekdayPrice: {
         type: Number,
         min: 0,
         default: 0,
         required: true
     },
-    features: {
-        type: String,
-        default: ''
+    weekendPrice: {
+        type: Number,
+        min: 0,
+        default: 0,
+        required: true
     },
-    mainFeatures: {
-        type: String,
-        default:'',      
+    minimumNights: {
+        type: Number,
+        default: 1
     },
-    state: {
+
+    // Descriptions
+    name: {
         type: String,
-        default: 'waiting',
-        enum: ['success', 'rejected', 'waiting', 'requireEdit']
+        required: true,
     },
-    note:{
+    description: {
         type: String,
-        default: ''
+        required: true
     },
-    confirmedBy: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Users'
+    image: [{
+        type: String,
+        required: true
+    }],
+
+    // Basic informations
+    typeHome: {
+        type: String,
+        require: true,
+        emum: ['Chung cư', 'Biệt thự', 'Căn hộ Studio', 'Nhà riêng', 'Khác']
+    },
+    typeRoom: {
+        type: String,
+        require: true,
+        enum: ['Phòng riêng', 'Nguyên căn']
+    },
+    acreage: {
+        type: Number,
+        require: true,
+        default: 0
     },
     maxPeoples: {
         type: Number,
         default: 1,
-        required: true 
-    }
+        required: true
+    },
+
+    // Phong va giuong
+    numBed: {
+        type: Number,
+        require: true,
+        default: 0
+    },
+    numBedroom: {
+        type: Number,
+        require: true,
+        default: 0
+    },
+    numBathroom: {
+        type: Number,
+        require: true,
+        default: 0
+    },
+
+    // location
+    location: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: locationSchema,
+    },
+
+    // verify information
+    state: {
+        type: String,
+        default: 'waiting',
+        enum: ['success', 'rejected', 'waiting', 'requireEdit', 'hiden']
+    },
+
+    confirmedBy: {
+        type: String,
+        default: ''
+    },
+
+    // Comments and ratings
+    rating: [ratingSchema],
 },{
     timestamps : true
 });
 
-module.exports = mongoose.model('HomePosts',HomePostSchema) 
+module.exports = mongoose.model('HomePosts',HomePostSchema)

@@ -1,14 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'font-awesome/css/font-awesome.min.css';
+import 'bootstrap-social/bootstrap-social.css';
+import './index.css';
+import 'antd/dist/antd.css';
 import App from './App';
-import ResultPage from "./ResultPage";
 import registerServiceWorker from './registerServiceWorker';
-import HostPage from './components/host/Page'
-import "antd/dist/antd.css";
 
-var Test = HostPage;
-
-ReactDOM.render(<ResultPage />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
