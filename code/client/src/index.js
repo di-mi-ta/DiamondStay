@@ -8,9 +8,5 @@ import 'antd/dist/antd.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-<<<<<<< HEAD
 ReactDOM.render(<App />, document.getElementById('root'));
-=======
-ReactDOM.render(<Test />, document.getElementById('root'));
->>>>>>> parent of ead37b5... Add UI for result
 registerServiceWorker();
