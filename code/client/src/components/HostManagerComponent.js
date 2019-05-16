@@ -3,9 +3,12 @@ import {Link, Switch, Route} from 'react-router-dom';
 import {Menu} from 'antd';
 import PromotionComponent from './HostPromotionsComponent';
 import CalendarComponent from './CalendarComponent';
+import HomepostManager from './HomepostManager';
+import Reservation from './ReservationComponent'
+import Header from './Header/HostHeader';
+
 
 import '../css/host/host-manager.css';
-import Header from './Header/HostHeader';
 
 class HostManager extends Component{
     render() {
@@ -16,6 +19,8 @@ class HostManager extends Component{
               loginUser={this.props.loginUser} 
               logoutUser={this.props.logoutUser} 
             />
+            {this.props.auth.isAuthenticated ? 
+              <div>
             <Menu
               defaultSelectedKeys={['1']}
               mode= "horizontal"
@@ -40,7 +45,14 @@ class HostManager extends Component{
                 </Link>
               </Menu.Item>
               <Menu.Item key="3">
-                <Link to='/host'>
+                <Link to='/host/reservations'> 
+                  <span>  
+                    <b> Đặt phòng </b> 
+                  </span>
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="4">
+                <Link to='/host/my-homes'>
                   <span> <b> Chỗ ở của tôi </b> </span>
                 </Link>
               </Menu.Item>
@@ -63,7 +75,20 @@ class HostManager extends Component{
                                                       fetchCreateHostPromo= {this.props.fetchCreateHostPromo}
                                   />}/>
               <Route path="/host/calendars" render={() => <CalendarComponent/>}/>
+              <Route path="/host/my-homes" 
+                     render={() => <HomepostManager 
+                                    auth={this.props.auth}
+                                    
+                                    />}/>
+              <Route path="/host/reservations" 
+                     render={() => <Reservation
+                                    auth={this.props.auth}
+                                    
+                                    />}/>
             </Switch>
+            </div>
+            : <div/> 
+          }
           </div>
         );
     }

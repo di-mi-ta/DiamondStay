@@ -10,7 +10,7 @@ const  ratingSchema = new Schema({
         type: Number,
         min: 1,
         max: 5,
-        required: true 
+        required: true
     },
     comment: {
         type: String,
@@ -31,7 +31,7 @@ const HomePostSchema = new Schema({
         type: String,
         required: true,
     },
-    
+
     // Prices
     weekdayPrice: {
         type: Number,
@@ -47,12 +47,12 @@ const HomePostSchema = new Schema({
     },
     minimumNights: {
         type: Number,
-        default: 1  
+        default: 1
     },
 
-    // Descriptions 
+    // Descriptions
     name: {
-        type: String, 
+        type: String,
         required: true,
     },
     description: {
@@ -64,9 +64,9 @@ const HomePostSchema = new Schema({
         required: true
     }],
 
-    // Basic informations 
+    // Basic informations
     typeHome: {
-        type: String, 
+        type: String,
         require: true,
         emum: ['Chung cư', 'Biệt thự', 'Căn hộ Studio', 'Nhà riêng', 'Khác']
     },
@@ -83,10 +83,10 @@ const HomePostSchema = new Schema({
     maxPeoples: {
         type: Number,
         default: 1,
-        required: true 
+        required: true
     },
 
-    // Phong va giuong 
+    // Phong va giuong
     numBed: {
         type: Number,
         require: true,
@@ -103,13 +103,13 @@ const HomePostSchema = new Schema({
         default: 0
     },
 
-    // location 
+    // location
     location: {
         type: mongoose.Schema.Types.ObjectId,
         ref: locationSchema,
     },
 
-    // verify information 
+    // verify information
     state: {
         type: String,
         default: 'waiting',
@@ -119,12 +119,12 @@ const HomePostSchema = new Schema({
     confirmedBy: {
         type: String,
         default: ''
-    }, 
-    
-    // Comments and ratings 
+    },
+
+    // Comments and ratings
     rating: [ratingSchema],
 },{
     timestamps : true
 });
 
-module.exports = mongoose.model('HomePosts',HomePostSchema) 
+module.exports = mongoose.model('HomePosts',HomePostSchema)

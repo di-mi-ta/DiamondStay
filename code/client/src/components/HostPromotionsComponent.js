@@ -177,7 +177,7 @@ class PromotionCompoment extends Component {
         } 
 
         return(
-            <div style={{padding: 30, background: '#f1f1f1'}}>
+            <div style={{padding: 50, background: '#f1f1f1'}}>
                 <div style={{display:'row'}}> 
                 <h2> <b> Quản lí khuyến mại </b></h2>
                     <Button type="primary" icon="plus" ghost

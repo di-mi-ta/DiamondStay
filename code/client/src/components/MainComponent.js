@@ -73,6 +73,8 @@ class Main extends Component {
           <Route path="/admin" 
                 render={() => <AdminManager auth={this.props.auth} 
                                             promotions={this.props.promotions}
+                                            loginUser={this.props.loginUser} 
+                                            logoutUser={this.props.logoutUser} 
                                             deletePromo={this.props.deletePromo}
                                             homeposts={this.props.homeposts}
                                             fetchSystemPromos={this.props.fetchSystemPromos}
@@ -80,6 +82,19 @@ class Main extends Component {
                                             fetchDeleteSystemPromo = {this.props.fetchDeleteSystemPromo}
                                             fetchCreateSystemPromo = {this.props.fetchCreateSystemPromo}
                               />}/>
+          <Route path="/home" 
+                render={() => <div>
+                                  <Header auth={this.props.auth} 
+                                            promotions={this.props.promotions}
+                                            loginUser={this.props.loginUser} 
+                                            logoutUser={this.props.logoutUser} 
+                                            fetchHostPromos={this.props.fetchHostPromos}
+                                            fetchUpdateHostPromo = {this.props.fetchUpdateHostPromo}
+                                            fetchDeleteHostPromo = {this.props.fetchDeleteHostPromo}
+                                            fetchCreateHostPromo = {this.props.fetchCreateHostPromo}
+                                  />
+                              </div>
+                        }/>
           <Redirect to="/home" />
         </Switch>
         <Footer/>

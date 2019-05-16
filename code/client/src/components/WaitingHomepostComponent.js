@@ -44,7 +44,7 @@ class WaitingHomepostList extends Component {
 
     render(){
         return(
-            <div style = {{padding: 30, background: '#f1f1f1'}}>
+            <div style = {{padding: 50, background: '#f1f1f1'}}>
                 <Card style={{ 
                             boxShadow: "1px 3px 1px #9E9E9E",
                             borderRadius: "10px",

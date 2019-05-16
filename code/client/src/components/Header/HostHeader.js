@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem,
     Modal, ModalHeader, ModalBody,
     Form, FormGroup, Input, Label } from 'reactstrap';
-import { Divider, Button, Dropdown, Icon, Menu} from 'antd';
-import {Link} from 'react-router-dom';
+import {Button, Dropdown, Icon, Menu} from 'antd';
+import {Link, Redirect} from 'react-router-dom';
 
 
 class Header extends Component {
@@ -55,6 +55,7 @@ class Header extends Component {
 
     handleLogout() {
         this.props.logoutUser();
+        return <Redirect to='/home'/>
     }
 
     render() {
@@ -139,7 +140,7 @@ class Header extends Component {
                                     Nhớ mật khẩu
                                 </Label>
                             </FormGroup>
-                            <Button onClick={this.handleLogin} color="primary">Đăng nhập</Button>
+                            <Button onClick={this.handleLogin} type="primary">Đăng nhập</Button>
                         </Form>
                     </ModalBody>
                 </Modal>

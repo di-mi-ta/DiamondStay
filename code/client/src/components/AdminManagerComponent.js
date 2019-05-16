@@ -19,6 +19,8 @@ class AdminManager extends Component{
               loginUser={this.props.loginUser} 
               logoutUser={this.props.logoutUser} 
         />
+        {this.props.auth.isAuthenticated ? 
+        <div>
         <Menu
           defaultSelectedKeys={['1']}
           mode= "horizontal"
@@ -80,6 +82,9 @@ class AdminManager extends Component{
                                   deletePromo={this.props.deletePromo}/>}/>
           <Route path='/admin/:homepostId' component={VerifyHomepostComponent} />
         </Switch>
+        </div>
+        : <div/> 
+      }
       </div>
     );
   }

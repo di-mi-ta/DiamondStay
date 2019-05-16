@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem,
     Modal, ModalHeader, ModalBody,
     Form, FormGroup, Input, Label } from 'reactstrap';
-import { Divider, Button, Dropdown, Icon, Menu} from 'antd';
+import {Button, Dropdown, Icon, Menu} from 'antd';
 import {Link} from 'react-router-dom';
 
 
@@ -107,15 +107,17 @@ class Header extends Component {
                     <div className="container">
                     <NavbarToggler onClick={this.toggleNav} />
                     <NavbarBrand className="mr-auto" href="/" style={{color: 'while'}}>
-                            <img src="assets/images/icon.png" height="30" width="30"/>
+                            <img src="http://www.iconeasy.com/icon/png/Business/Pretty%20Office%204/Home.png" height="30" width="30"/>
                             <b>Diamond Stay</b>
                     </NavbarBrand>
                     <Collapse isOpen={this.state.isNavOpen} navbar>
                         <Nav className="ml-auto" navbar>
                             <NavItem>
-                                <Button type="link">
-                                        Trở thành chủ nhà
-                                </Button>
+                                <Link to='/host'>
+                                    <Button type="link">
+                                            Trở thành chủ nhà
+                                    </Button>
+                                </Link>
                             </NavItem>
                             <NavItem>
                                 {!this.props.auth.isAuthenticated ?
@@ -164,7 +166,7 @@ class Header extends Component {
                                     Nhớ mật khẩu
                                 </Label>
                             </FormGroup>
-                            <Button onClick={this.handleLogin} color="primary">Đăng nhập</Button>
+                            <Button onClick={this.handleLogin} type="primary">Đăng nhập</Button>
                         </Form>
                     </ModalBody>
                 </Modal>

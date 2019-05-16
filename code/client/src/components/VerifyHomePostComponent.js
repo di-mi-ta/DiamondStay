@@ -4,7 +4,7 @@ import { Steps, Icon, Button, Input,
         Modal, Table, Tag,
         message, Popover, Carousel} from 'antd';
 
-import {Checkbox, Form} from 'semantic-ui-react'
+import {Form} from 'semantic-ui-react'
 import '../css/verifyHome.css';
 
 const Step = Steps.Step;
@@ -12,66 +12,6 @@ const ButtonGroup = Button.Group;
 const TextArea = Input.TextArea;
 const RadioGroup = Radio.Group;
 
-
-const columns = [{
-    title: 'Trường thông tin',
-    dataIndex: 'field',
-    align: 'center',
-    key: 'field',
-    render: (text) => <b>{text}</b>
-}, {
-    title: 'Phản hồi',
-    dataIndex: 'response',
-    key: 'response',
-    align: 'center',
-    render: (text) => (<Popover content={text}><p>{text}</p></Popover>)
-}, {
-    title: 'Trạng thái',
-    key: 'states',
-    dataIndex: 'states',
-    align: 'center',
-    render: states => (
-      <span>
-        {states.map(state => {
-          let color = state.length > 5 ? 'geekblue' : 'green';
-          if (state === 'HỢP LỆ') {
-            color = 'green';
-          }
-          else{
-            color = 'volcano';
-          }
-          return <Tag color={color} key={state}>{state.toUpperCase()}</Tag>;
-        })}
-      </span>
-    ),
-}];
-  
-const data = [{
-    key: 'field',
-    field: 'Mô tả',
-    response: 'Không có',
-    states: ['HỢP LỆ'],
-}, {
-    key: 'field',
-    field: 'Thông tin cơ bản',
-    response: 'Không có',
-    states: ['HỢP LỆ'],
-},{
-    key: 'field',
-    field: 'Giá',
-    response: 'Không có',
-    states: ['KHÔNG HỢP LỆ'],
-},{
-    key: 'field',
-    field: 'Phòng và giường',
-    response: 'Không có',
-    states: ['HỢP LỆ'],
-}, {
-    key: 'field',
-    field: 'Vị trí',
-    response: 'Không có',
-    states: ['HỢP LỆ'],
-}];
 
 
 class VerifyHomepostComponent extends Component {
@@ -82,8 +22,31 @@ class VerifyHomepostComponent extends Component {
             canBack: false,
             canNext: true,
             fieldVerify: 'Mô tả',
-            valueRatio: -1,
             isOpenModal: false,
+            verifiedResult: {
+                description: 'CHƯA XÁC NHẬN',
+                image: 'CHƯA XÁC NHẬN',
+                location: 'CHƯA XÁC NHẬN',
+                basicInfo: 'CHƯA XÁC NHẬN',
+                roomBedInfo: 'CHƯA XÁC NHẬN',
+                price: 'CHƯA XÁC NHẬN',
+            },
+            valueRatio: {
+                description: -1,
+                image: -1,
+                location: -1,
+                basicInfo: -1,
+                roomBedInfo: -1,
+                price: -1,
+            },
+            noteResult: {
+                description: '',
+                image: '',
+                location: '',
+                basicInfo: '',
+                roomBedInfo: '',
+                price: '',
+            }
         }
         this.renderContent = this.renderContent.bind(this);
         this.onNextBtnClicked = this.onNextBtnClicked.bind(this);
@@ -92,12 +55,76 @@ class VerifyHomepostComponent extends Component {
         this.onCancelClick = this.onCancelClick.bind(this);
         this.onConfirmedClick = this.onConfirmedClick.bind(this);
         this.onRejectedClick = this.onRejectedClick.bind(this);
+        this.onNoteChange = this.onNoteChange.bind(this);
+    }
+
+
+    onNoteChange = e => {
+        if (this.state.currentStep === 0){
+            this.setState({
+                noteResult: {...this.state.noteResult, description: e.target.value}
+            })
+        } else if (this.state.currentStep === 1){
+            this.setState({
+                noteResult: {...this.state.noteResult, image: e.target.value}
+            })
+        } else if (this.state.currentStep === 2){
+            this.setState({
+                noteResult: {...this.state.noteResult, basicInfo: e.target.value}
+            })
+        } else if (this.state.currentStep === 3){
+            this.setState({
+                noteResult: {...this.state.noteResult, price: e.target.value}
+            })
+        } else if (this.state.currentStep === 4){
+            this.setState({
+                noteResult: {...this.state.noteResult, roomBedInfo: e.target.value}
+            })
+        } else if (this.state.currentStep === 5){
+            this.setState({
+                noteResult: {...this.state.noteResult, location: e.target.value}
+            })
+        } 
     }
 
     onChangeRatio(e){
-        this.setState({
-            valueRatio: e.target.value
-        })
+        let res = 'CHƯA XÁC NHẬN'
+        if (e.target.value === 1){
+            res = 'HỢP LỆ'
+        } else if (e.target.value === 0){
+            res = 'KHÔNG HỢP LỆ'
+        }
+        if (this.state.currentStep === 0){
+            this.setState({
+                verifiedResult: {...this.state.verifiedResult, description: res},
+                valueRatio: {...this.state.valueRatio, description: e.target.value},
+            })
+        } else if (this.state.currentStep === 1){
+            this.setState({
+                verifiedResult: {...this.state.verifiedResult, image: res},
+                valueRatio: {...this.state.valueRatio, image: e.target.value}
+            })
+        } else if (this.state.currentStep === 2){
+            this.setState({
+                verifiedResult: {...this.state.verifiedResult, basicInfo: res},
+                valueRatio: {...this.state.valueRatio, basicInfo: e.target.value}
+            })
+        } else if (this.state.currentStep === 3){
+            this.setState({
+                verifiedResult: {...this.state.verifiedResult, price: res},
+                valueRatio: {...this.state.valueRatio, price: e.target.value}
+            })
+        } else if (this.state.currentStep === 4){
+            this.setState({
+                verifiedResult: {...this.state.verifiedResult, roomBedInfo: res},
+                valueRatio: {...this.state.valueRatio, roomBedInfo: e.target.value}
+            })
+        } else if (this.state.currentStep === 5){
+            this.setState({
+                verifiedResult: {...this.state.verifiedResult, location: res},
+                valueRatio: {...this.state.valueRatio, location: e.target.value}
+            })
+        } 
     }
 
     onCancelClick(){
@@ -143,7 +170,7 @@ class VerifyHomepostComponent extends Component {
             return(
                 <div>
                     <h4><b>Hình ảnh</b></h4>
-                    <Carousel autoplay>
+                    <Carousel autoplay >
                         <div>
                         <h3>Image 1</h3>
                         </div>
@@ -243,7 +270,6 @@ class VerifyHomepostComponent extends Component {
                 canNext: true,
                 canBack: true,
                 currentStep: this.state.currentStep + 1,
-                valueRatio: -1
              })
         }
     }
@@ -254,7 +280,6 @@ class VerifyHomepostComponent extends Component {
                currentStep: this.state.currentStep - 1,
                canBack: false,
                canNext: true,
-               valueRatio: -1
             })
         } 
         else{
@@ -262,12 +287,85 @@ class VerifyHomepostComponent extends Component {
                currentStep: this.state.currentStep - 1,
                canBack: true,
                canNext: true, 
-               valueRatio: -1
             })
         }
     }
 
     render(){
+        const columns = [{
+            title: 'Trường thông tin',
+            dataIndex: 'field',
+            align: 'center',
+            key: 'field',
+            render: (text) => <b>{text}</b>
+        }, {
+            title: 'Phản hồi',
+            dataIndex: 'response',
+            key: 'response',
+            align: 'center',
+            render: (text) => (<Popover content={text}
+                ><p>
+                    {
+                        text.length > 10 ? 
+                        text.substr(0,9) + '...':
+                        text
+                    }
+                </p>
+            </Popover>)
+        }, {
+            title: 'Trạng thái',
+            key: 'states',
+            dataIndex: 'states',
+            align: 'center',
+            render: states => (
+              <span>
+                {states.map(state => {
+                  let color = '';
+                  if (state === "HỢP LỆ") {
+                    color = 'green';
+                  } if (state === "CHƯA XÁC NHẬN") {
+                    color = 'geekblue';
+                  }
+                  else if (state === "KHÔNG HỢP LỆ"){
+                    color = 'volcano';
+                  }
+                  return <Tag color={color} key={state}>{state.toUpperCase()}</Tag>;
+                })}
+              </span>
+            ),
+        }];
+
+        const data = [{
+            key: 'field',
+            field: 'Mô tả',
+            response: this.state.noteResult.description === '' ? 'Không có' : this.state.noteResult.description,
+            states: [this.state.verifiedResult.description],
+        },{
+            key: 'field',
+            field: 'Hình ảnh',
+            response: this.state.noteResult.image === '' ? 'Không có' : this.state.noteResult.image,
+            states: [this.state.verifiedResult.image],
+        },{
+            key: 'field',
+            field: 'Thông tin cơ bản',
+            response: this.state.noteResult.basicInfo === '' ? 'Không có' : this.state.noteResult.basicInfo,
+            states: [this.state.verifiedResult.basicInfo],
+        },{
+            key: 'field',
+            field: 'Giá',
+            response: this.state.noteResult.price === '' ? 'Không có' : this.state.noteResult.price,
+            states: [this.state.verifiedResult.price],
+        },{
+            key: 'field',
+            field: 'Phòng và giường',
+            response: this.state.noteResult.roomBedInfo === '' ? 'Không có' : this.state.noteResult.roomBedInfo,
+            states: [this.state.verifiedResult.roomBedInfo],
+        }, {
+            key: 'field',
+            field: 'Vị trí',
+            response: this.state.noteResult.location === '' ? 'Không có' : this.state.noteResult.location,
+            states: [this.state.verifiedResult.location],
+        }];
         return(
             <div style = {{paddingTop: 30, paddingLeft: 50, paddingRight: 50, 
                             paddingBottom: 50, background: '#f1f1f1'}}>
@@ -299,7 +397,23 @@ class VerifyHomepostComponent extends Component {
                                         }} >
                                 <h4><b>Phản hồi</b></h4>
                                 <TextArea placeholder="Cung cấp phản hồi cho người dùng (nếu cần)" 
-                                        rows={4}/>
+                                        rows={4}
+                                        onChange = {this.onNoteChange}
+                                        value={
+                                            this.state.currentStep === 0 ? 
+                                            this.state.noteResult.description :
+                                            this.state.currentStep === 1 ?
+                                            this.state.noteResult.image :
+                                            this.state.currentStep === 2 ?
+                                            this.state.noteResult.basicInfo :
+                                            this.state.currentStep === 3 ?
+                                            this.state.noteResult.price :
+                                            this.state.currentStep === 4 ?
+                                            this.state.noteResult.roomBedInfo :
+                                            this.state.currentStep === 5 ?
+                                            this.state.noteResult.location :
+                                            ''
+                                        }/>
                             </Card>
                             <Card style={{marginTop: '20px', 
                                         textAlign:'center', 
@@ -307,12 +421,28 @@ class VerifyHomepostComponent extends Component {
                                         background: "#ffe4da"}} >
                             <h4><b>Xác nhận</b></h4>
                             <RadioGroup onChange={this.onChangeRatio} 
-                                        value={this.state.valueRatio} 
                                         style = {{
                                             alignItems: 'center'
                                         }}
+                                        value={
+                                            this.state.currentStep === 0 ? 
+                                            this.state.valueRatio.description :
+                                            this.state.currentStep === 1 ?
+                                            this.state.valueRatio.image :
+                                            this.state.currentStep === 2 ?
+                                            this.state.valueRatio.basicInfo :
+                                            this.state.currentStep === 3 ?
+                                            this.state.valueRatio.price :
+                                            this.state.currentStep === 4 ?
+                                            this.state.valueRatio.roomBedInfo :
+                                            this.state.currentStep === 5 ?
+                                            this.state.valueRatio.location :
+                                            ''
+                                        }     
                             >
-                                <Radio value={1} >Hợp lệ</Radio>
+                                <Radio value={1}>
+                                    Hợp lệ
+                                </Radio>
                                 <Radio value={0}>Không hợp lệ</Radio>
                             </RadioGroup>
                             </Card>
@@ -337,8 +467,9 @@ class VerifyHomepostComponent extends Component {
                     onCancel={this.onCancelClick}
                     width='60%'
                     footer={[
-                        <Button onClick={this.onConfirmedClick}> Chấp nhận tin </Button>,
-                        <Button onClick={this.onRejectedClick}> Từ chối tin </Button>,
+                        <Button onClick={this.onConfirmedClick}
+                                type='primary' ghost> Chấp nhận tin </Button>,
+                        <Button type="danger" ghost onClick={this.onRejectedClick}> Từ chối tin </Button>,
                         <Button onClick={this.onCancelClick}> Hủy bỏ </Button>,
                     ]}
                     >
@@ -351,4 +482,3 @@ class VerifyHomepostComponent extends Component {
 }
 
 export default VerifyHomepostComponent;
-

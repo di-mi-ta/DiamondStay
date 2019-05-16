@@ -43,12 +43,11 @@ class VerifiedHomepostList extends Component {
 
     render(){
         return(
-            <div className='container'>
-                <Card style={{marginTop: '20px', 
-                                    boxShadow: "1px 3px 1px #9E9E9E",
-                                    marginRight: '10px',
-                                    borderRadius: "10px",
-                                    minHeight: '300px'}}>
+            <div style = {{padding: 50, background: '#f1f1f1'}}>
+                <Card style={{ 
+                                boxShadow: "1px 3px 1px #9E9E9E",
+                                borderRadius: "10px",
+                                minHeight: '300px'}}>
                     <Table columns={columns} 
                         dataSource={this.props.homeposts.homeposts} 
                     />

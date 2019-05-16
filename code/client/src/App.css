@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('https://fonts.googleapis.com/css?family=Merriweather');
 
- .body {
-    font-family: 'Montserrat', sans-serif;
+.body {
+    font-family: 'Merriweather', serif;
     background-color: #F1F1F1;
 }
 
