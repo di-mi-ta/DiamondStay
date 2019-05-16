@@ -15,7 +15,6 @@ class ResultPage extends Component{
                             <Header/>
                             <Home/>
                             <Result/>
-                            <Footer/>
                         </div>
                     </div>
                 </BrowserRouter>

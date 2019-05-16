@@ -10,5 +10,5 @@ import "antd/dist/antd.css";
 
 var Test = HostPage;
 
-ReactDOM.render(<ResultPage />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
