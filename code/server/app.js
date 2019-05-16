@@ -5,7 +5,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-const homePostRouter  = require('./routes/homePostRouter');
+const homepostRouter  = require('./routes/homepostRouter');
 const hostPromoRouter = require('./routes/hostPromoRouter');
 const systemPromoRouter = require('./routes/systemPromoRouter');
 
@@ -39,7 +39,7 @@ app.use('/users', usersRouter);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/homeposts',homePostRouter);
+app.use('/homeposts',homepostRouter);
 app.use('/host-promotions', hostPromoRouter);
 app.use('/system-promotions', systemPromoRouter)
 

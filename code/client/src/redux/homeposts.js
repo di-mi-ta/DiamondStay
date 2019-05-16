@@ -7,11 +7,11 @@ export const Homeposts = (state = {
         homeposts: HOMEPOST,
     }, action) => {
     switch(action.type) {
-        case ActionTypes.ADD_HOMEPOSTS:
+        case ActionTypes.ADD_HOMEPOST:
             state.homeposts.push(action.payload)
             return {...state, homeposts: state.homeposts}
         
-        case ActionTypes.ADD_HOMEPOST:
+        case ActionTypes.ADD_HOMEPOSTS:
             return {...state, isLoading: false, errMess: null, homeposts: action.payload};
 
         case ActionTypes.HOMEPOSTS_LOADING:

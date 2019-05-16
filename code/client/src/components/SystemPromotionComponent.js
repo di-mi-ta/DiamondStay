@@ -238,15 +238,17 @@ class SystemPromotionCompoment extends Component {
                             label="Giá trị booking tối thiểu"
                             {...formItemLayout}
                         >
-                            <InputNumber min='0' max='100'  onChange={this.handleMinValueChange}/>
-                            VND
+                            <InputNumber min='0' max='100'  onChange={this.handleMinValueChange}
+                                style={{width: '90%'}}/>
+                            {' VND'}
                         </Form.Item>
                         <Form.Item
                             label="Giá trị khuyến mãi"
                             {...formItemLayout}
                         >
-                            <InputNumber min='0' onChange={this.handleValueChange}/>
-                            VND 
+                            <InputNumber min='0' onChange={this.handleValueChange}
+                                        style={{width: '90%'}}/>
+                            {' VND'}
                         </Form.Item>
                         <Form.Item
                             label="Số lần sử dụng tối đa"
@@ -258,7 +260,10 @@ class SystemPromotionCompoment extends Component {
                             label="Thời gian áp dụng"
                             {...formItemLayout}
                         >
-                            <RangePicker style={{ width: '100%' }} onChange={this.handleDatePickerChange}/>
+                            <RangePicker style={{ width: '100%' }} 
+                                        onChange={this.handleDatePickerChange}
+                                        format="DD-MM-YYYY"            
+                            />
                         </Form.Item>
                         </Form>
                 </Modal>
@@ -290,7 +295,9 @@ class SystemPromotionCompoment extends Component {
                             {...formItemLayout}
                         >
                             <InputNumber min='0' onChange={this.handleMinValueChange}
-                                        value={this.state.currentPromo.minBookingApplied}/>
+                                        value={this.state.currentPromo.minBookingApplied}
+                                        style={{width: '90%'}}
+                            />
                             {' VND'}
                         </Form.Item>
                         <Form.Item
@@ -298,8 +305,10 @@ class SystemPromotionCompoment extends Component {
                             {...formItemLayout}
                         >
                             <InputNumber min='0' onChange={this.handleValueChange}
-                                                value={this.state.currentPromo.value}/>
-                            {' VND'} 
+                                                value={this.state.currentPromo.value}
+                                                style={{width: '90%'}}
+                            />
+                            {' VND'}
                         </Form.Item>
                         <Form.Item
                             label="Số lần sử dụng tối đa"
@@ -312,7 +321,10 @@ class SystemPromotionCompoment extends Component {
                             label="Thời gian áp dụng"
                             {...formItemLayout}
                         >
-                            <RangePicker style={{ width: '100%' }} onChange={this.handleDatePickerChange}/>
+                            <RangePicker style={{ width: '100%' }} 
+                                    onChange={this.handleDatePickerChange}
+                                    format="DD-MM-YYYY"        
+                            />
                         </Form.Item>
                         </Form>
                 </Modal> 

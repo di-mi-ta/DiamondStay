@@ -12,8 +12,6 @@ const ButtonGroup = Button.Group;
 const TextArea = Input.TextArea;
 const RadioGroup = Radio.Group;
 
-
-
 class VerifyHomepostComponent extends Component {
     constructor(props){
         super(props);
@@ -137,6 +135,8 @@ class VerifyHomepostComponent extends Component {
         this.setState({
             isOpenModal: false
         })
+        let homepost = {}
+        this.props.fetchUpdateHomepost(homepost)
         message.success('Tin đăng đã được duyệt thành công');
     }
 
@@ -144,6 +144,8 @@ class VerifyHomepostComponent extends Component {
         this.setState({
             isOpenModal: false
         })
+        let homepost = {}
+        this.props.fetchUpdateHomepost(homepost)
         message.success('Tin đăng đã được duyệt thành công');
     }
 

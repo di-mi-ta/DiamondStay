@@ -50,7 +50,10 @@ class WaitingHomepostList extends Component {
                             borderRadius: "10px",
                             minHeight: '300px'}}>
                 <Table columns={columns} 
-                    dataSource={this.props.homeposts.homeposts} 
+                        dataSource={
+                            this.props.homeposts.homeposts.filter(
+                                homepost => homepost.state === 'waiting'
+                        )}  
                 />
                 </Card>
             </div>

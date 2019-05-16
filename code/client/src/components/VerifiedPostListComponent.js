@@ -14,7 +14,13 @@ const columns = [{
     dataIndex: 'timeUpdate',
     key: 'timeUpdate',
     align: 'center',
-    render: text => <a href="javascript:;">{text}</a>,
+    render: text => <p> {text} </p>,
+},{
+    title: 'Trạng thái',
+    dataIndex: 'state',
+    key: 'state',
+    align: 'center',
+    render: text => <p> {text} </p>,
 },{
     key: 'action',
     align: 'center',
@@ -30,6 +36,11 @@ const columns = [{
         <Divider type="vertical" />
         <Button ghost onClick={this.onEditBtnClick}> 
             <Icon type="edit" style={{ color: '#FF8C00' }} 
+                theme="filled"/> 
+        </Button>
+        <Divider type="vertical" />
+        <Button ghost onClick={this.onHideBtnClick}> 
+            <Icon type="eye-invisible" style={{ color: '#A453A9' }} 
                 theme="filled"/> 
         </Button>
       </span>
@@ -49,7 +60,10 @@ class VerifiedHomepostList extends Component {
                                 borderRadius: "10px",
                                 minHeight: '300px'}}>
                     <Table columns={columns} 
-                        dataSource={this.props.homeposts.homeposts} 
+                        dataSource={
+                            this.props.homeposts.homeposts.filter(
+                                homepost => homepost.state !== 'waiting'
+                            )} 
                     />
                 </Card>
             </div>

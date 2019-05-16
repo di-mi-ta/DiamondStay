@@ -80,7 +80,10 @@ class AdminManager extends Component{
           <Route path="/admin/verified-posts" render={() => <VerifiedHomepostList 
                                   homeposts={this.props.homeposts}
                                   deletePromo={this.props.deletePromo}/>}/>
-          <Route path='/admin/:homepostId' component={VerifyHomepostComponent} />
+          <Route path='/admin/:homepostId' 
+                            render={() => <VerifyHomepostComponent 
+                                homeposts={this.props.homeposts}
+                                fetchUpdateHomepost = {this.props.fetchUpdateHomepost}/>} />
         </Switch>
         </div>
         : <div/> 
