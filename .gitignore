@@ -7,3 +7,4 @@ code/client/yarn-error.log
 code/server/yarn-error.log
 code/server/package-lock.json
 code/client/package-lock.json
+.vscode
