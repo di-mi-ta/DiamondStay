@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import Header from "./components/HeaderComponent";
 import Home from "./components/HomeComponent"; //Khoa
 import Result from "./components/ResultComponent";
+import Footer from "./components/FooterComponent";
 import "./css/main_styles.css";
 class ResultPage extends Component{
     render(){
