@@ -1,6 +1,7 @@
 var mongoose = require('mongoose')
 const User = mongoose.model('Users');
 var authenticate = require('../authenticate');
+var passport = require('passport');
 
 const getListUser = (req, res, next) => {
    User.find({})
@@ -9,7 +10,7 @@ const getListUser = (req, res, next) => {
       res.setHeader('Content-Type','application/json');
       res.json(users);
    })
-   .catch((err) => next(err)); 
+   .catch((err) => next(err));
 };
 
 const deleteAllUsers = (req, res, next) => {
@@ -19,11 +20,11 @@ const deleteAllUsers = (req, res, next) => {
       res.setHeader('Content-Type','application/json');
       res.json(resp);
    })
-   .catch((err) => next(err)); 
+   .catch((err) => next(err));
 };
 
 const signUp = (req, res, next) => {
-   User.register(new User({username: req.body.username}), 
+   User.register(new User({username: req.body.username}),
      req.body.password, (err, user) => {
      if(err) {
        res.statusCode = 500;
@@ -35,7 +36,7 @@ const signUp = (req, res, next) => {
          user.firstName = req.body.firstName;
        if (req.body.lastName)
          user.lastName = req.body.lastName;
-       if (req.body.email) 
+       if (req.body.email)
          user.email = req.body.email;
        if (req.body.phone)
          user.phone = req.body.phone;
@@ -58,11 +59,28 @@ const signUp = (req, res, next) => {
    });
 };
 
-const logIn = (req, res) => {
-   var token = authenticate.getToken({_id: req.user._id});
-   res.statusCode = 200;
-   res.setHeader('Content-Type', 'application/json');
-   res.json({success: true, token: token, status: 'You are successfully logged in!'});
+const logIn = (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+    if (err)
+      return next(err);
+    if (!user) {
+      res.statusCode = 401;
+      res.setHeader('Content-Type', 'application/json');
+      res.json({success: false, status: 'Login Unsuccessful!', err: info});
+    }
+    req.logIn(user, (err) => {
+      if (err) {
+        res.statusCode = 401;
+        res.setHeader('Content-Type', 'application/json');
+        res.json({success: false, status: 'Login Unsuccessful!', err: 'Could not log in user!'});
+      }
+
+      var token = authenticate.getToken({_id: req.user._id});
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      res.json({success: true, status: 'Login Successful!', token: token});
+    });
+  }) (req, res, next);
 };
 
 const logOut = (req,res,next) => {
@@ -85,4 +103,3 @@ module.exports = {
   deleteAllUsers,
   getListUser
 }
-

@@ -24,7 +24,8 @@ const MessageSchema = new Schema({
     },
     title: {
         type: mongoose.Schema.Types.String,
-        default: '[No Title]'
+        default: '[No Title]',
+        type: mongoose.Schema.Types.ObjectId,
     },
     content: {
         type: mongoose.Schema.Types.String,

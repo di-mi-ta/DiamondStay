@@ -1,3 +1,10 @@
 code/mongo
 code/server/node_modules
 code/client/node_modules
+code/client/yarn.lock
+code/server/yarn.lock
+code/client/yarn-error.log
+code/server/yarn-error.log
+code/server/package-lock.json
+code/client/package-lock.json
+.vscode

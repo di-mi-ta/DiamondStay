@@ -1,3 +1,8 @@
+/* Reset some value */
+img {
+    max-width: 100%;
+}
+
 /* host information */
 .houseSideBar > .hostInfo > h3 {
     color: black;
