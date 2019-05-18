@@ -17,12 +17,7 @@ class App extends Component {
       <Provider store={store}>
         <BrowserRouter>
           <div>
-            <div class="super_container">
-              <Header/>
-              <Home/>
-              <Main/>
-              <Footer/>
-            </div>
+            <Main/>
           </div>
         </BrowserRouter>
       </Provider>
