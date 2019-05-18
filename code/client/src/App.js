@@ -7,8 +7,9 @@ import { ConfigureStore } from './redux/configureStore';
 import Header from "./components/HeaderComponent";
 import Home from "./components/HomeComponent";
 import Footer from "./components/FooterComponent";
-// import "./css/main_styles.css";
 import House from "./components/House";
+import MainHeader from './components/MainHeader';
+import MainPage from './components/MainPage';
 
 const store = ConfigureStore();
 
@@ -26,12 +27,16 @@ class App extends Component {
               <Footer/>
             </div>
           </div> */}
-          <div>
-            <House/>
-          </div>
+          
           {/* <div>
             <Main/>
           </div> */}
+          <div>
+            <MainHeader/>
+            <MainPage/>
+            <House/>
+            <Footer/>
+          </div>
         </BrowserRouter>
       </Provider>
     );

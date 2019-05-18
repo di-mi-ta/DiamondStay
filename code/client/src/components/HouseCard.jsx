@@ -5,17 +5,18 @@ class HouseCard extends React.Component {
   constructor(props) {
     super(props);
     this.data = props.houseData;
+    this.ref = React.createRef();
   }
 
   render() {
     return (
-      <div className="houseCard container-fluid">
+      <div className="houseCard container-fluid" ref={this.ref}>
         <div className="houseImage">
           <img src={this.data.image}></img>
         </div>
         <div className="houseInfo">
           {this.data.type? <h5 className="houseType">{this.data.type}</h5>: null}
-          <h4>{this.data.houseName}</h4>
+          <h4 className="houseName">{this.data.houseName}</h4>
           <div className="location">
             <i className="fa fa-map-marker" aria-hidden="true"></i>
             <span>{this.data.location}</span>
@@ -39,7 +40,12 @@ class HouseCard extends React.Component {
   }
 
   componentDidMount() {
-    
+    let root = this.ref.current;
+    root.querySelector('.houseInfo > h4').style.fontSize = `${root.offsetWidth/15}px !important`;
+    window.addEventListener('resize', function(event) {
+      console.log("fontsize: " + root.querySelector('.houseInfo > h4').style.fontSize);
+      root.querySelector('.houseInfo > h4').style.fontSize = `${root.offsetWidth/15}px !important`;
+    });
   }
 }
 

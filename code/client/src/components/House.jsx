@@ -3,7 +3,6 @@ import "../css/House.css"
 import HouseCarousel from './HouseCarousel';
 import HouseSideBar from './HouseSideBar';
 import HouseComment from './HouseComment';
-import Convenience from './Convenience';
 
 class House extends Component {
     constructor() {

@@ -4,13 +4,6 @@
 }
 
 /* information */
-.housePage > .house-information .title h1 {
-    color: #222;
-    font-size: 1.8rem;
-    margin-top: 20px;
-    font-weight: 500;
-}
-
 .housePage > .house-information .title > span {
     display: inline-block;
     padding: 2px 10px;
@@ -40,8 +33,16 @@
 
 .housePage > .house-information .title > .booking {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     padding: 15px;
+}
+
+.housePage > .house-information .title > .booking > h1 {
+    color: #222;
+    font-size: 1.8rem;
+    margin-top: 20px;
+    font-weight: 500;
 }
 
 .housePage > .house-information .title > .booking .book-house {
@@ -49,6 +50,8 @@
     text-transform: capitalize;
     color: white;
     margin: 5px 0px;
+    max-height: 50px;
+    max-width: 90px;
 }
 
 /* location info */

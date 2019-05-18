@@ -1,0 +1,37 @@
+/* glide */
+.glide {
+    position: relative;
+}
+
+.glide > .glide__track > ul > li {
+    /* box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    height: 100%; */
+}
+
+.glide > .glide__arrows {
+    position: absolute;
+    top: 50%;
+    left: -52px;
+    right: -52px;
+}
+
+.glide > .glide__arrows > button {
+    background: #fff;
+    border-radius: 50%;
+    border: 1px solid #e6e6e6;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    padding: 10px;
+    height: 50px;
+    width: 50px;
+}
+
+@media only screen and (max-width: 700px) {
+    .glide > .glide__arrows > button {
+        display: none;
+    }
+}
+
+.glide > .glide__arrows > button > i {
+    color: #333;
+    font-size: 1rem;
+}

@@ -63,10 +63,10 @@ class HouseComment extends React.Component {
 
   render() {
     let commentList = this.state.comments.map(comment => {
-        const starRating = [0, 1, 2, 3, 4].map(val => 
+        const starRating = [0, 1, 2, 3, 4].map((val, idx) => 
             val < comment.numStar?
-            <i className="fa fa-star fill" aria-hidden="true"></i>:
-            <i className="fa fa-star" aria-hidden="true"></i>
+            <i className="fa fa-star fill" aria-hidden="true" key={idx}></i>:
+            <i className="fa fa-star" aria-hidden="true" key={idx}></i>
         );
         return (
             <div className="commentItem" key={comment.id}>
