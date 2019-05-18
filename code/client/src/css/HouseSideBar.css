@@ -1,0 +1,24 @@
+/* Reset some value */
+img {
+    max-width: 100%;
+}
+
+/* host information */
+.houseSideBar > .hostInfo > h3 {
+    color: black;
+    margin: 20px 0;
+}
+
+.houseSideBar > .hostInfo .hostAvatar {
+    text-align: center;
+}
+
+.houseSideBar > .hostInfo .hostAvatar img {
+    border-radius: 50%;
+    margin: auto;
+}
+
+/* promotion */
+.houseSideBar > .housePromotion {
+    margin-top: 30px;
+}
