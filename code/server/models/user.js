@@ -23,6 +23,11 @@ var User = new Schema({
     typeUser: {
         type: Number,
         default: 0,   // 0: renter, 1: host, 2: admin 
+    },
+    diamondCoin: {
+        type: Number,
+        min: 0,
+        default: 0
     }
 });
 

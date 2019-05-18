@@ -1,6 +1,6 @@
 var mongoose = require('mongoose')
 const Users = mongoose.model('Users');
-const HomePosts = require('../models/homeposts')
+const HomePosts = require('../models/homeposts');
 
 const getListWaitingConfirmedHomePosts = (req, res, next) => {
     /* Description: Get list homepost to verify [FOR ADMIN]*/
@@ -59,26 +59,6 @@ const findHomePostDetailedById = (req,res,next) => {
         res.json(homepost)
     }, (err) => next(err))
     .catch((err) => next(err))
-}
-
-const confirmHomePost = (req, res, next) => {
-    /* Description: Confirm a homepost [FOR ADMIN]*/
-    // TODO 
-}
-
-const rejectHomePost = (req, res, next) => {
-    /* Description: Reject a homepost [FOR ADMIN]*/
-    // TODO 
-}
-
-const requireEditingHomePost = (req, res, next) => {
-    /* Description: Required user editting and resubmit a homepost [FOR ADMIN]*/
-    // TODO 
-}
-
-const hideHomePost = (req, res, next) => {
-    /* Description: Hide a homepost */
-    // TODO 
 }
 
 const deleteHomePost = (req, res, next) => {

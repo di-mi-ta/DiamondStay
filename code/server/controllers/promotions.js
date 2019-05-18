@@ -1,4 +1,3 @@
-var mongoose = require('mongoose')
 var HostPromotions = require('../models/hostPromotions')
 var SystemPromotions = require('../models/systemPromotions')
 

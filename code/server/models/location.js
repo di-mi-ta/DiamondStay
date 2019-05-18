@@ -13,14 +13,6 @@ const locationSchema = new Schema({
     district: {
         type: String,
         required: true 
-    },
-    street: {
-        type: String,
-        default: ''
-    },
-    homeNumber: {
-        type: Number,
-        default: true
     }
 });
 export default mongoose.model('Locations', locationSchema);

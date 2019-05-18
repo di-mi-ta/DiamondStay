@@ -123,6 +123,39 @@ const HomePostSchema = new Schema({
 
     // Comments and ratings
     rating: [ratingSchema],
+
+    // Dieu khoan va chinh sach huy
+    policyCancel: {
+        type: String,
+        default: 'Flexible'
+    },
+    receiveRoomAfter: {
+        type: String,
+        default: '02:00 pm'
+    },
+    returnRoomBefore: {
+        type: String,
+        default: '12:00 pm'
+    },
+
+    // Cach thuc dat phong 
+    bookingMethod: {
+        type: String,
+        default: 'Yêu cầu đặt phòng',
+        enum: ['Yêu cầu đặt phòng', 'Đặt phòng nhanh']
+    },
+
+    //Quy tac cho o 
+    rule: {
+        type: String,
+        default: ''
+    },
+
+    // Huong dan su dung 
+    guide: {
+        type: String,
+        default: ''
+    }   
 },{
     timestamps : true
 });

@@ -85,7 +85,7 @@ const logIn = (req, res, next) => {
       res.json({success: true,
                 status: 'Login Successful!',
                 token: token,
-                typeUser: req.user.typeUser
+                user: req.user
       });
     });
   }) (req, res, next);
@@ -104,10 +104,23 @@ const logOut = (req,res,next) => {
    }
 }
 
+const updateUser = (req, res, next) => {
+  User.findByIdAndUpdate(req.params.userId, {
+      $set: req.body
+  }, { new: true })
+  .then((user) => {
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      res.json({success: 'true'});
+  }, (err) => next(err))
+  .catch((err) => next(err));
+}
+
 module.exports = {
   logOut,
   logIn,
   signUp,
   deleteAllUsers,
-  getListUser
+  getListUser,
+  updateUser
 }

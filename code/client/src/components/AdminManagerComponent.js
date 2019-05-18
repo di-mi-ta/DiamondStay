@@ -6,6 +6,7 @@ import WaitingHomepostList from './WaitingHomepostComponent';
 import {Link, Switch, Route} from 'react-router-dom';
 import VerifyHomepostComponent from './VerifyHomePostComponent';
 import VerifiedHomepostList from './VerifiedPostListComponent';
+import AddCoin from './Payment/AddCoin'
 
 import Header from './Header/HostHeader';
 const SubMenu = Menu.SubMenu;
@@ -64,6 +65,11 @@ class AdminManager extends Component{
           <Menu.Item key="5" style={{color: 'black' }}>
             <span> <b>Tin nhắn</b> </span>
           </Menu.Item>
+          <Menu.Item key="6" style={{color: 'black' }}>
+            <Link to='/admin/payment' style={{color: 'black' }}> 
+              <span> <b>Nạp tiền</b> </span>
+            </Link>
+          </Menu.Item>
         </Menu>
         <Switch>
           <Route path="/admin/promotions" 
@@ -80,10 +86,13 @@ class AdminManager extends Component{
           <Route path="/admin/verified-posts" render={() => <VerifiedHomepostList 
                                   homeposts={this.props.homeposts}
                                   deletePromo={this.props.deletePromo}/>}/>
+          <Route path='/admin/payment' 
+                            render={() => <AddCoin />} />
           <Route path='/admin/:homepostId' 
                             render={() => <VerifyHomepostComponent 
                                 homeposts={this.props.homeposts}
                                 fetchUpdateHomepost = {this.props.fetchUpdateHomepost}/>} />
+        
         </Switch>
         </div>
         : <div/> 
