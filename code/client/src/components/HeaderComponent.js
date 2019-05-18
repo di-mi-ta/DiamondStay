@@ -97,80 +97,37 @@ class Header extends Component {
         );
 
         return(
-            <React.Fragment>
-                <Navbar light expand="md" 
-                        style= {{
-                            backgroundImage: "while",
-                            top: 0,
-                            width: '100%',
-                        }}>
-                    <div className="container">
-                    <NavbarToggler onClick={this.toggleNav} />
-                    <NavbarBrand className="mr-auto" href="/" style={{color: 'while'}}>
-                            <img src="http://www.iconeasy.com/icon/png/Business/Pretty%20Office%204/Home.png" height="30" width="30"/>
-                            <b>Diamond Stay</b>
-                    </NavbarBrand>
-                    <Collapse isOpen={this.state.isNavOpen} navbar>
-                        <Nav className="ml-auto" navbar>
-                            <NavItem>
-                                <Link to='/host'>
-                                    <Button type="link">
-                                            Trở thành chủ nhà
-                                    </Button>
-                                </Link>
-                            </NavItem>
-                            <NavItem>
-                                {!this.props.auth.isAuthenticated ?
-                                    <div>
-                                        <Button onClick={this.toggleSigninModal} type="link" 
-                                        >
-                                            Đăng kí 
-                                        </Button> 
-                                        <Button onClick={this.toggleLoginModal} type="link" 
-                                        >
-                                            Đăng nhập 
-                                        </Button>  
-                                    </div>      
-                                    :
-                                    <div>
-                                        <Dropdown overlay={menu}>
-                                            <Button style={{background: '#f7ede1', width: '100px', borderRadius: "20px"}}>
-                                                {this.props.auth.user.username} <Icon type="down" />
-                                            </Button>
-                                        </Dropdown>
-                                    </div>
-                                }
-                            </NavItem> 
-                        </Nav>
-                    </Collapse>
+            <header class="header">
+                <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                    {/*logo*/}
+                    <div><a href="#">
+                        <img src="images/diamondstay_icon.png" alt="DiamondStay icon" style={{width:"70px",height:"70px"}}/>
+                    </a></div>
+
+                    {/*Menu, including horizontal menu and 2 buttons*/}
+                    <div class="ml-auto d-flex flex-row align-items-center justify-content-start">
+                        <nav class="main_nav">
+                            <ul class="d-flex flex-row align-items-start justify-content-start">
+                                <li class="active"><a href="index.html">Trang chủ</a></li>
+                                <li><a style={{color:"#FFFFFF"}}>Về chúng tôi</a></li>
+                                <li><a href="blog.html" style={{color:"#FFFFFF"}}>Blog</a></li>
+                                <li><a href="contact.html" style={{color:"#FFFFFF"}}>Liên hệ</a></li>
+                            </ul>
+                        </nav>
+                        <div class="book_button"><a href="booking.html">Đặt phòng Online</a></div>
+                        <div class="header_phone d-flex flex-row align-items-center justify-content-center">
+                            <img src="images/phone.png" alt=""/>
+                            <span>090-xxx-xxxx</span>
+                        </div>
+                        {/*User name*/}
+                        <div class="header_phone d-flex flex-row align-items-center justify-content-center">
+                            <img src="images/.png" alt=""/>
+                            <span>Chào, bạn gì đó</span>
+                        </div>
+                        <div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
                     </div>
-                </Navbar>
-                <Modal isOpen={this.state.isLoginModalOpen} toggle={this.toggleLoginModal}>
-                    <ModalHeader toggle={this.toggleLoginModal}>Đăng nhập</ModalHeader>
-                    <ModalBody>
-                        <Form>
-                            <FormGroup>
-                                <Label htmlFor="username">Tên đăng nhập</Label>
-                                <Input type="text" id="username" name="username"
-                                    innerRef={(input) => this.username = input} />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label htmlFor="password">Mật khẩu</Label>
-                                <Input type="password" id="password" name="password"
-                                    innerRef={(input) => this.password = input}  />
-                            </FormGroup>
-                            <FormGroup check>
-                                <Label check>
-                                    <Input type="checkbox" name="remember"
-                                    innerRef={(input) => this.remember = input}  />
-                                    Nhớ mật khẩu
-                                </Label>
-                            </FormGroup>
-                            <Button onClick={this.handleLogin} type="primary">Đăng nhập</Button>
-                        </Form>
-                    </ModalBody>
-                </Modal>
-            </React.Fragment>
+                </div>
+            </header>
         );
     }
 }

@@ -11,6 +11,14 @@ import AdminManager from '../components/AdminManagerComponent';
 import HostManager from '../components/HostManagerComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
+import Home from "./HomeComponent";
+import "../css/main_styles.css";
+import "../css/about.css";
+import "../css/about_responsive.css";
+import "../css/blog.css";
+import "../css/blog_responsive.css";
+import "../css/elements.css";
+import "../css/elements_responsive.css";
 
 const mapStateToProps = state => {
     return {
@@ -60,6 +68,7 @@ class Main extends Component {
               logoutUser={this.props.logoutUser} 
         /> */}
         <Switch>
+
           <Route path="/host" 
                 render={() => <HostManager  auth={this.props.auth} 
                                             promotions={this.props.promotions}
@@ -93,11 +102,12 @@ class Main extends Component {
                                             fetchDeleteHostPromo = {this.props.fetchDeleteHostPromo}
                                             fetchCreateHostPromo = {this.props.fetchCreateHostPromo}
                                   />
+                                  <Home/>
                               </div>
                         }/>
-          <Redirect to="/home" />
+
         </Switch>
-        <Footer/>
+        {/* <Footer/> */}
       </div>
     );
   }
