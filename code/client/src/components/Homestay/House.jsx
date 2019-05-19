@@ -5,14 +5,19 @@ import HouseSideBar from './HouseSideBar';
 import HouseComment from './HouseComment';
 
 class House extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
           id: "4313421",
           verify: false,
           location: "Sóc Sơn, Hà Nội, Vietnam",
           rating: 5,
-          numRating: 6
+          numRating: 6,
+          //home info 
+          name: 'Babylon House - Bungalow Bằng Lăng Trắng ',
+          minimumNights: 1,
+          weekdayPrice: 10,
+          weekendPrice: 100,
         }
     }
 
@@ -24,7 +29,7 @@ class House extends Component {
               <div className="row">
                 <div className="title col-12">
                   <div className="booking">
-                    <h1>Babylon House - Bungalow Bằng Lăng Trắng </h1>
+                    <h1>{this.state.name}</h1>
                     <button type="button" className="btn book-house">Đặt ngay</button>
                   </div>
                   <span className="label-house-id">Mã chỗ ở: {this.state.id}</span>
@@ -48,16 +53,16 @@ class House extends Component {
                     <p>Giá có thể tăng vào cuối tuần hoặc ngày lễ</p>
                     <div className="listPrice">
                       <div>
-                        <span>Thứ 2 - Thứ 5</span>
-                        <span><b>$86.73</b></span>
+                        <span>Thứ 2 - Thứ 6</span>
+                        <span><b>{this.state.weekdayPrice}</b></span>
                       </div>
                       <div>
-                        <span>Thứ 6 - Chủ nhật</span>
-                        <span><b>$96.73</b></span>
+                        <span>Thứ 7 - Chủ nhật</span>
+                        <span><b>{this.state.weekendPrice}</b></span>
                       </div>
                       <div>
-                        <span>Phí khách tăng thêm</span>
-                        <span><b>$26.73 (sau 1 khách)</b></span>
+                        <span>Số đêm tối thiểu</span>
+                        <span><b>{this.state.minimumNights}</b></span>
                       </div>
                       <div>
                         <span>Phí khách tăng thêm</span>
@@ -108,7 +113,7 @@ class House extends Component {
     }
 
     componentDidMount() {
-        // fetch information about house
+       // fetch data from server 
     }
 }
 

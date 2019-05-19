@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Menu, Row, Col, Divider } from 'antd';
+import {Menu} from 'antd';
 import SystemPromotionComponent from './SystemPromotionComponent';
 import CalendarComponent from '../Common/CalendarComponent';
 import WaitingHomepostList from '../Common/WaitingHomepostComponent';

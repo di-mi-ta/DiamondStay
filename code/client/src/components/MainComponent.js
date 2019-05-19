@@ -9,6 +9,7 @@ import {postRating, fetchHomeposts, fetchRatings,
         fetchUpdateSystemPromo, fetchSystemPromos} from '../redux/ActionCreators';
 import AdminManager from '../components/AdminManager/AdminManagerComponent';
 import HostManager from '../components/HostManager/HostManagerComponent';
+import House from './Homestay/House';
 import Home from "./HomeComponent";
 import "../css/main_styles.css";
 import "../css/about.css";
@@ -86,6 +87,9 @@ class Main extends Component {
                               />}/>
           <Route path="/home" 
                 render={() => <Home/>}
+          />
+          <Route path="/room/:homepostId" 
+                render={() => <House/>}
           />
           <Redirect to='/home'/>
         </Switch>

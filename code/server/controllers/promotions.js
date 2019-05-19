@@ -99,22 +99,6 @@ const getHostPromoOfUser = (req, res, next) => {
     .catch((err) => next(err))
 }
 
-const getActivePromoForHomepost = (req, res, next) => {
-    // Promotions.find({ dateStart : {$gt: new Date(),
-    //                   dateEnd: {$lt: new Date()}}})
-    // .populate(homeposts)
-    // .then((lstPromos) => {
-    //     let promos = lstPromos.filter((promo) => {
-    //         const check = promo.homeposts.filter((homepost) => homepost.owner === req.params.homePostId)
-    //         check > 0
-    //     })
-    //     res.statusCode = 200;
-    //     res.setHeader('Content-Type','application/json');
-    //     res.json(promos)
-    // }, (err) => next(err))
-    // .catch((err) => next(err));
-}
-
 const getFullListPromo = (req, res, next) => {
     SystemPromotions.find({})
     .then((promos) => {

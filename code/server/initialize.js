@@ -6,7 +6,6 @@ const passport = require('passport');
 const mongoConfig = require('./config/mongoConfig');
 
 const initialize = (app) => {
-    // mongoose.Promise = require('bluebird'); // TODO: what is this
     mongoose.connect(mongoConfig.uri, { useNewUrlParser: true });
     mongoose.connection
         .once('open', () => console.log('Connected to mongo database'))
