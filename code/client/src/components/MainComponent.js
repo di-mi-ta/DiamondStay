@@ -7,10 +7,8 @@ import {postRating, fetchHomeposts, fetchRatings,
         fetchUpdateHostPromo, fetchDeleteHostPromo,
         fetchCreateHostPromo, fetchCreateSystemPromo, fetchDeleteSystemPromo,
         fetchUpdateSystemPromo, fetchSystemPromos} from '../redux/ActionCreators';
-import AdminManager from '../components/Admin/AdminManagerComponent';
+import AdminManager from '../components/AdminManager/AdminManagerComponent';
 import HostManager from '../components/HostManager/HostManagerComponent';
-import Header from './HeaderComponent';
-import Footer from './FooterComponent';
 import Home from "./HomeComponent";
 import "../css/main_styles.css";
 import "../css/about.css";
@@ -63,12 +61,7 @@ class Main extends Component {
   render() {
     return (
       <div>
-        {/* <Header auth={this.props.auth} 
-              loginUser={this.props.loginUser} 
-              logoutUser={this.props.logoutUser} 
-        /> */}
         <Switch>
-
           <Route path="/host" 
                 render={() => <HostManager  auth={this.props.auth} 
                                             promotions={this.props.promotions}
@@ -92,11 +85,9 @@ class Main extends Component {
                                             fetchCreateSystemPromo = {this.props.fetchCreateSystemPromo}
                               />}/>
           <Route path="/home" 
-                render={() => <div>
-                                  <Home/>
-                              </div>
-                        }/>
-
+                render={() => <Home/>}
+          />
+          <Redirect to='/home'/>
         </Switch>
       </div>
     );

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Link, Switch, Route} from 'react-router-dom';
 import {Menu} from 'antd';
 import PromotionComponent from './HostPromotionsComponent';
-import CalendarComponent from '../common/CalendarComponent';
+import CalendarComponent from '../Common/CalendarComponent';
 import HomepostManager from './HomepostManager';
 import Reservation from '../Booking/ReservationComponent'
 import Header from '../Header/HostHeader';

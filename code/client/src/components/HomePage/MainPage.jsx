@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../css/MainPage.css';
 import ImageCard from './ImageCard';
-import HouseCard from '../DetailedHomepost/HouseCard';
+import HouseCard from '../Homestay/HouseCard';
 import GlideSlide from './GlideSlide';
 import SearchBox from './SearchBox';
 
@@ -134,26 +134,26 @@ class MainPage extends React.Component {
         
         <div className="title">
           <h2>Chỗ ở tốt nhất</h2>
-          <p>Thêm trải nghiệm, thêm nhiều niềm vui tại những chỗ ở được yêu thích nhất tại DiamonStay</p>
+          <p>Thêm trải nghiệm, thêm nhiều niềm vui tại những chỗ ở được yêu thích nhất tại Diamond Stay</p>
         </div>
-        <GlideSlide ref={this.placeRef} data={{
-          hasControl: true,
-          itemList: this.bestPlaces.map(place => 
-            <HouseCard houseData={place}/>
-          ),
-          options: {
-            type: 'slider',
-            startAt: 0,
-            perView: 4,
-            gap: 20,
-            bound: true,
-            autoplay: false
-          }
-        }} />
-
+        <GlideSlide ref={this.placeRef} 
+                    data={{ hasControl: true,
+                            itemList: this.bestPlaces.map(place => 
+                            <HouseCard houseData={place}/>
+                    ),
+                            options: {
+                              type: 'slider',
+                              startAt: 0,
+                              perView: 4,
+                              gap: 20,
+                              bound: true,
+                              autoplay: false
+                            }
+                          }} 
+        />
         <div className="title">
           <h2>Ưu đãi hiện hành</h2>
-          <p>Cập nhật ưu đãi từ DiamondStay để trải nghiệm chỗ ở xa hoa với giá tốt nhất</p>
+          <p>Cập nhật ưu đãi từ Diamond Stay để trải nghiệm chỗ ở xa hoa với giá tốt nhất</p>
         </div>
         <GlideSlide ref={this.policyRef} className="currentPolicy" data={{
           hasControl: true,

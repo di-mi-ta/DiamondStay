@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import House from "./DetailedHomepost/House";
 import MainHeader from './HomePage/MainHeader';
 import MainPage from './HomePage/MainPage';
 
