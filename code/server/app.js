@@ -5,12 +5,13 @@ const hostPromoRouter = require('./routes/hostPromoRouter');
 const systemPromoRouter = require('./routes/systemPromoRouter');
 
 const app = express();
+require('./initialize')(app);
 
 app.use('/users', usersRouter);
 app.use('/homeposts', homePostRouter);
 app.use('/host-promotions', hostPromoRouter);
 app.use('/system-promotions', systemPromoRouter)
-
+app.use('/messages', require('./routes/messages'));
 
 // Path unmatched any of the routes -> reject
 app.use(function (req, res, next) {
