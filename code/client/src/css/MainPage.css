@@ -1,0 +1,30 @@
+.mainPage {
+    margin: 50px 0;
+    padding: 0 50px;
+}
+
+@media only screen and (max-width: 600px) {
+    .mainPage {
+        padding: 0 20px;
+    }
+}
+
+.mainPage > .title {
+    margin-top: 3rem;
+}
+
+.mainPage > .title > p {
+    font-family: 'Open Sans', sans-serif;
+    color: #222;
+    margin-bottom: 0;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.mainPage > .title > h2 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 1.8rem;
+    color: #111;
+    margin-bottom: 1rem;
+}

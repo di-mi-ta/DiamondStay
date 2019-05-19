@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import {Link, Switch, Route} from 'react-router-dom';
 import {Menu} from 'antd';
 import PromotionComponent from './HostPromotionsComponent';
-import CalendarComponent from './CalendarComponent';
+import CalendarComponent from '../Common/CalendarComponent';
 import HomepostManager from './HomepostManager';
-import Reservation from './ReservationComponent'
-import Header from './Header/HostHeader';
+import Reservation from '../Booking/ReservationComponent'
+import Header from '../Header/HostHeader';
 
 
-import '../css/host/host-manager.css';
+import '../../css/host/host-manager.css';
 
 class HostManager extends Component{
     render() {

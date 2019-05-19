@@ -14,7 +14,7 @@ function Footer(props) {
 						    <div class="footer_logo_container text-center">
 							    <div class="footer_logo">
 								    <a href="#"></a>
-								    <div>DStay</div>
+								    <div>Diamond Stay</div>
 								    <div>since 2019</div>
 							    </div>
 						    </div>
