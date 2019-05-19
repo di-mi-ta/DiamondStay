@@ -7,8 +7,8 @@ import {postRating, fetchHomeposts, fetchRatings,
         fetchUpdateHostPromo, fetchDeleteHostPromo,
         fetchCreateHostPromo, fetchCreateSystemPromo, fetchDeleteSystemPromo,
         fetchUpdateSystemPromo, fetchSystemPromos} from '../redux/ActionCreators';
-import AdminManager from '../components/AdminManagerComponent';
-import HostManager from '../components/HostManagerComponent';
+import AdminManager from '../components/Admin/AdminManagerComponent';
+import HostManager from '../components/HostManager/HostManagerComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import Home from "./HomeComponent";

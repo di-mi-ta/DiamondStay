@@ -7,7 +7,7 @@ import { ConfigureStore } from './redux/configureStore';
 import Header from "./components/HeaderComponent";
 import Home from "./components/HomeComponent";
 import Footer from "./components/FooterComponent";
-import House from "./components/House";
+import House from "./components/DetailedHomepost/House";
 import MainHeader from './components/MainHeader';
 import MainPage from './components/MainPage';
 

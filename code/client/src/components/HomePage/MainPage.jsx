@@ -1,7 +1,7 @@
 import React from 'react';
 import '../css/MainPage.css';
 import ImageCard from './ImageCard';
-import HouseCard from './HouseCard';
+import HouseCard from '../DetailedHomepost/HouseCard';
 import GlideSlide from './GlideSlide';
 import SearchBox from './SearchBox';
 
