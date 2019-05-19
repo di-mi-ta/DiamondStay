@@ -1,0 +1,91 @@
+.mainHeader {
+    padding: 15px;
+    border-bottom: 1px solid #f2f2f2;
+    background-color: white !important;
+}
+
+
+/* Brand Logo */
+.mainHeader > .navbar-brand {
+    padding: 0;
+    margin-left: 10px;
+}
+
+.mainHeader > .navbar-brand > img {
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.mainHeader > .navbar-brand > span {
+    margin-left: 15px;
+    font-weight: 600;
+    font-size: 1.6rem;
+    font-family: 'Open Sans', sans-serif;
+    text-transform: uppercase;
+}
+
+/* nav items */
+.mainHeader > .collapse > ul > li.nav-item {
+    padding: 10px 13px;
+}
+
+.mainHeader > .collapse > ul > li.nav-item > a {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #222;
+    letter-spacing: .2px;
+    padding: 0;
+}
+
+.mainHeader > .collapse > ul > li.nav-item > a:hover {
+    color: #f65e39;
+}
+
+/* drop down item */
+.mainHeader > .collapse > ul > li.nav-item.dropdown {
+    background: #f6f6f6;
+    border-radius: 2rem;
+}
+
+.mainHeader > .collapse > ul > li.nav-item.dropdown > a {
+    display: flex;
+    align-items: center;
+}
+
+.mainHeader > .collapse > ul > li.nav-item.dropdown img {
+    display: inline-block;
+    margin-right: 5px;
+    vertical-align: text-bottom;
+}
+
+.mainHeader > .collapse > ul > li.nav-item.dropdown > .dropdown-menu {
+    right: 0;
+    left: unset;
+}
+
+.mainHeader > .collapse > ul > li.nav-item.dropdown > .dropdown-menu.show {
+    display: flex;
+    flex-wrap: wrap;
+    width: 250px;
+    padding: 0px;
+}
+
+.mainHeader > .collapse > ul > li.nav-item.dropdown > .dropdown-menu > div {
+    width: 50%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.mainHeader > .collapse > ul > li.nav-item.dropdown > .dropdown-menu > div > img {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.mainHeader > .collapse > ul > li.nav-item.dropdown > .dropdown-menu > div > b {
+    margin: auto;
+}

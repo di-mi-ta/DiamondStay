@@ -1,39 +1,34 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
-const userSchema = 'Users';
+const types = mongoose.Schema.Types;
 
 const MessageSchema = new Schema({
     sender: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: types.ObjectId,
         ref: userSchema,
-        required: true
-    },
-    senderType: {
-        enum: ['ADMIN', 'GUEST', 'PAID_CUSTOMER'],
         required: true
     },
     receiver: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: userSchema,
+        type: types.ObjectId,
+        ref: 'User',
         required: true
     },
     time: {
-        type: mongoose.Schema.Types.Date,
-        required: true
+        type: types.Date,
+        default: Date.now
     },
     title: {
-        type: mongoose.Schema.Types.String,
-        default: '[No Title]',
-        type: mongoose.Schema.Types.ObjectId,
+        type: types.String,
+        default: '',
+        type: types.ObjectId,
     },
     content: {
-        type: mongoose.Schema.Types.String,
-        default: ''
+        type: types.String,
+        required: true
     }
-},{
-    timestamps : true
 });
+
+
 
 const Message = mongoose.model('Message', MessageSchema);
 module.exports = Message;

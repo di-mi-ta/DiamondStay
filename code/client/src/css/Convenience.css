@@ -1,0 +1,25 @@
+.convenience > .section {
+    margin: 20px 0px;
+}
+
+.convenience > .section > .list {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px 0;
+}
+
+.convenience > .section > .list > .item {
+    min-width: 60px;
+    flex-basis: 30%;
+}
+
+.convenience > .section > .list > .item > img {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+}
+
+.convenience > .section > .list > .item > span {
+    margin-left: 5px;
+    display: inline-block;
+}

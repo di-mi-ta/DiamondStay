@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import {Menu, Row, Col, Divider } from 'antd';
 import SystemPromotionComponent from './SystemPromotionComponent';
-import CalendarComponent from './CalendarComponent';
-import WaitingHomepostList from './WaitingHomepostComponent';
+import CalendarComponent from '../Common/CalendarComponent';
+import WaitingHomepostList from '../Common/WaitingHomepostComponent';
 import {Link, Switch, Route} from 'react-router-dom';
 import VerifyHomepostComponent from './VerifyHomePostComponent';
-import VerifiedHomepostList from './VerifiedPostListComponent';
+import VerifiedHomepostList from '../Common/VerifiedPostListComponent';
 
-import Header from './Header/HostHeader';
+import Header from '../Header/HostHeader';
 const SubMenu = Menu.SubMenu;
 
 class AdminManager extends Component{

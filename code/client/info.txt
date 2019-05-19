@@ -1,0 +1,3 @@
+vtcincognito3		ttcnpm2@
+group:group12345
+mongodb+srv://group:group12345@diamondstaycluster-qk0vb.gcp.mongodb.net/test?retryWrites=true

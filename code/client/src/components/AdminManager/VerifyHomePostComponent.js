@@ -5,7 +5,7 @@ import { Steps, Icon, Button, Input,
         message, Popover, Carousel} from 'antd';
 
 import {Form} from 'semantic-ui-react'
-import '../css/verifyHome.css';
+import '../../css/verifyHome.css';
 
 const Step = Steps.Step;
 const ButtonGroup = Button.Group;
