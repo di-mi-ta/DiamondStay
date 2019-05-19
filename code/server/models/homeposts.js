@@ -51,7 +51,12 @@ const HomePostSchema = new Schema({
         type: Number,
         default: 1
     },
-
+    currencyUnit: {
+        type: String,
+        default: 'VND',
+        emum: ['VND', 'USD']
+    },
+    
     // Mô tả chung
     name: {
         type: String,

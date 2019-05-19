@@ -12,7 +12,7 @@ const promotionSchema = new Schema({
     },
     value: {
         type: Number,
-        default: 0.0 // %, for example: 50%
+        default: 0,
     },
     minValueBooking: {
         type: Number,
