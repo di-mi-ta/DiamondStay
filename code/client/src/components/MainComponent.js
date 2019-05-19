@@ -93,21 +93,11 @@ class Main extends Component {
                               />}/>
           <Route path="/home" 
                 render={() => <div>
-                                  <Header auth={this.props.auth} 
-                                            promotions={this.props.promotions}
-                                            loginUser={this.props.loginUser} 
-                                            logoutUser={this.props.logoutUser} 
-                                            fetchHostPromos={this.props.fetchHostPromos}
-                                            fetchUpdateHostPromo = {this.props.fetchUpdateHostPromo}
-                                            fetchDeleteHostPromo = {this.props.fetchDeleteHostPromo}
-                                            fetchCreateHostPromo = {this.props.fetchCreateHostPromo}
-                                  />
                                   <Home/>
                               </div>
                         }/>
 
         </Switch>
-        {/* <Footer/> */}
       </div>
     );
   }

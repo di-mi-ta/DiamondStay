@@ -1,11 +1,10 @@
 import React from 'react';
-import '../css/MainHeader.css';
+import '../../css/MainHeader.css';
 
 class MainHeader extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
-
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light mainHeader">

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/HouseCarousel.css';
+import '../../css/HouseCarousel.css';
 
 class HouseCarousel extends React.Component {
   constructor() {

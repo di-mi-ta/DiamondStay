@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import "../css/House.css"
+import "../../css/House.css"
 import HouseCarousel from './HouseCarousel';
 import HouseSideBar from './HouseSideBar';
 import HouseComment from './HouseComment';

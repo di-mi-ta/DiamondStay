@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/HouseSideBar.css';
+import '../../css/HouseSideBar.css';
 import HouseCard from './HouseCard';
 
 class HouseSideBar extends React.Component {

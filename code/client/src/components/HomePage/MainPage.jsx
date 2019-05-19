@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/MainPage.css';
+import '../../css/MainPage.css';
 import ImageCard from './ImageCard';
 import HouseCard from '../DetailedHomepost/HouseCard';
 import GlideSlide from './GlideSlide';
