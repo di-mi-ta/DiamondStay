@@ -103,6 +103,7 @@ class Main extends Component {
                                             fetchCreateHostPromo = {this.props.fetchCreateHostPromo}
                                   />
                                   <Home/>
+                                  <Footer/>
                               </div>
                         }/>
 
