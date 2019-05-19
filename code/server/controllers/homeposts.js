@@ -1,34 +1,8 @@
 const HomePosts = require('../models/homeposts')
 
 /* FOR HOMEPOST */
-
-const getListWaitingConfirmedHomePosts = (req, res, next) => {
-    /* Description: Get list homepost to verify [FOR ADMIN]*/
-    HomePosts.find({state: 'waiting'})
-    .populate('rating.author')
-    .then((homeposts) => {
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json')
-        res.json(homeposts)
-    },(err) => next(err)) 
-    .catch((err) => next(err)); 
-}
-
-const getListHomePostsVerifyOK = (req, res, next) => {
-    /* Description: Get list homeposts are comfirmed OK */
-    HomePosts.find({state: 'success'})
-    .populate('rating.author')
-    .then((homeposts) => {
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json')
-        res.json(homeposts)
-    },(err) => next(err)) 
-    .catch((err) => next(err)); 
-}
-
-const getMyHomePosts = (req, res, next) => {
-    /* Description: get list homepost of specify user*/
-    HomePosts.find({owner: req.body.username})
+const getHomeposts = (req, res, next) => {
+    HomePosts.find(req.query)
     .populate('rating.author')
     .then((homeposts) => {
         res.statusCode = 200;
@@ -163,9 +137,7 @@ const deleteRating = (req, res, next) => {
 
 // export all 
 module.exports = {
-    getListWaitingConfirmedHomePosts,
-    getListHomePostsVerifyOK,
-    getMyHomePosts,
+    getHomeposts,
     deleteAllHomePost,
     editRating,
     deleteRating,

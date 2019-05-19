@@ -20,7 +20,7 @@ const locationSchema = new Schema({
     },
     homeNumber: {
         type: Number,
-        default: true
+        default: ''
     }
 });
-export default mongoose.model('Locations', locationSchema);
+module.exports = mongoose.model('Locations', locationSchema);

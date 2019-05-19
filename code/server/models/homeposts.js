@@ -5,7 +5,7 @@ require('mongoose-currency').loadType(mongoose)
 
 const locationSchema = 'Locations';
 
-// Rating schema 
+// Rating schema
 const  ratingSchema = new Schema({
     rate: {
         type: Number,
@@ -28,7 +28,7 @@ const  ratingSchema = new Schema({
 
 const HomePostSchema = new Schema({
 
-    // Chủ nhà 
+    // Chủ nhà
     owner: {
         type: String,
         required: true,
@@ -56,7 +56,7 @@ const HomePostSchema = new Schema({
         default: 'VND',
         emum: ['VND', 'USD']
     },
-    
+
     // Mô tả chung
     name: {
         type: String,
@@ -114,6 +114,7 @@ const HomePostSchema = new Schema({
     location: {
         type: mongoose.Schema.Types.ObjectId,
         ref: locationSchema,
+        required: true
     },
 
     // Thông tin về duyệt tin [Dành cho admin]
@@ -128,10 +129,14 @@ const HomePostSchema = new Schema({
         default: ''
     },
 
+    note: {
+        type: String,
+        default: ''
+    },
     // Bình luận và đánh giá
     rating: [ratingSchema],
 
-    // Tiện nghi 
+    // Tiện nghi
     forFamily: [{
         type: String,
         enum: ['Phù hợp với trẻ nhỏ', 'Đệm bổ sung', 'Không hút thuốc']
@@ -141,7 +146,7 @@ const HomePostSchema = new Schema({
         type: String,
         enum: ['Bếp điện', 'Lò vi sóng', 'Tủ lạnh', 'Bếp ga']
     }],
-    
+
     funnyActs: [{
         type: String,
         enum: ['Cho thú cưng', 'BBQ', 'Cảnh quan đẹp', 'Hướng biển', 'Gần sân golf', 'Câu cá', 'Bể bơi']
@@ -154,12 +159,12 @@ const HomePostSchema = new Schema({
 
     convenience: [{
         type: String,
-        enum: ['Wifi', 'Tivi', 'Điều hòa', 'Máy giặt', 'Dầu gội, dầu xã', 'Giấy vệ sinh', 
-               'Giấy ăn', 'Nước khoáng', 'Khăn tắm', 'Kem đánh răng', 'Xà phòng tắm', 
+        enum: ['Wifi', 'Tivi', 'Điều hòa', 'Máy giặt', 'Dầu gội, dầu xã', 'Giấy vệ sinh',
+               'Giấy ăn', 'Nước khoáng', 'Khăn tắm', 'Kem đánh răng', 'Xà phòng tắm',
                'Thang máy','Máy sấy']
     }],
 
-    HighlightFacs: [{
+    highlightFacs: [{
         type: String,
         enum: ['Máy chiếu phim', 'Ghế massage', 'Smart tivi', 'Tủ đựng rượu']
     }]

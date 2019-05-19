@@ -22,11 +22,6 @@ const promotionSchema = new Schema({
         type: Number,
         default: -1
     },
-    locationApplied: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Locations',
-        default: ''
-    },
     code: {
         type: String,
         default: '',
@@ -41,8 +36,8 @@ const promotionSchema = new Schema({
         default: ''
     },
     creator: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Users'
+        type: String,
+        required: true,
     },
 },{
     timestamps: true

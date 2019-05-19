@@ -55,6 +55,10 @@ class VerifiedHomepostList extends Component {
             </div>
         )
     }
+
+    componentDidMount(){
+        this.props.fetchHomeposts('?state=Success');
+    }
 }
   
 export default VerifiedHomepostList;

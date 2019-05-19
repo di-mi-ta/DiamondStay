@@ -7,6 +7,9 @@ const systemPromoRouter = require('./routes/systemPromo');
 const app = express();
 require('./initialize')(app);
 
+// for test
+// const test = require('./make-test/create-homepost')
+
 app.use('/users', usersRouter);
 app.use('/homeposts', homepostRouter);
 app.use('/host-promotions', hostPromoRouter);

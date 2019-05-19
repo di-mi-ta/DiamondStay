@@ -5,8 +5,9 @@ import {postRating, fetchHomeposts, fetchRatings,
         fetchHostPromos, loginUser, logoutUser, fetchFavorites, 
         postFavorite, deleteFavorite, deletePromo,
         fetchUpdateHostPromo, fetchDeleteHostPromo,
-        fetchCreateHostPromo, fetchCreateSystemPromo, fetchDeleteSystemPromo,
-        fetchUpdateSystemPromo, fetchSystemPromos} from '../redux/ActionCreators';
+        fetchCreateHostPromo, fetchCreateSystemPromo, 
+        fetchDeleteSystemPromo, fetchUpdateSystemPromo, 
+        fetchSystemPromos, fetchUpdateHomepost, fetchCreateHomepost} from '../redux/ActionCreators';
 import AdminManager from '../components/AdminManager/AdminManagerComponent';
 import HostManager from '../components/HostManager/HostManagerComponent';
 import House from './Homestay/House';
@@ -38,10 +39,12 @@ const mapDispatchToProps = (dispatch) => ({
   fetchCreateSystemPromo: (promo) => dispatch(fetchCreateSystemPromo(promo)),
   fetchHostPromos: (username) => {dispatch(fetchHostPromos(username))},
   fetchSystemPromos: () => {dispatch(fetchSystemPromos())},
-  
+  fetchHomeposts: (query='') => {dispatch(fetchHomeposts(query))},
+  fetchUpdateHomepost: (homepost) => {dispatch(fetchUpdateHomepost(homepost))},
+  fetchCreateHomepost: (homepost) => {dispatch(fetchCreateHomepost(homepost))},
   //////////////////////////////////////////////////////////////////////////////////////////////
   postRating: (homepostId, rating, comment) => dispatch(postRating(homepostId, rating, comment)),
-  fetchHomeposts: () => {dispatch(fetchHomeposts())},
+  
   fetchRatings: () => {dispatch(fetchRatings())},
   
   loginUser: (creds) => dispatch(loginUser(creds)),
@@ -52,13 +55,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 class Main extends Component {
-
-  componentDidMount() {
-    this.props.fetchHomeposts();
-    this.props.fetchRatings();
-    this.props.fetchFavorites();
-  }
-
   render() {
     return (
       <div>
@@ -68,6 +64,7 @@ class Main extends Component {
                                             promotions={this.props.promotions}
                                             loginUser={this.props.loginUser} 
                                             logoutUser={this.props.logoutUser} 
+                                            fetchHomeposts={this.props.fetchHomeposts}
                                             fetchHostPromos={this.props.fetchHostPromos}
                                             fetchUpdateHostPromo = {this.props.fetchUpdateHostPromo}
                                             fetchDeleteHostPromo = {this.props.fetchDeleteHostPromo}
@@ -80,6 +77,9 @@ class Main extends Component {
                                             logoutUser={this.props.logoutUser} 
                                             deletePromo={this.props.deletePromo}
                                             homeposts={this.props.homeposts}
+                                            fetchHomeposts={this.props.fetchHomeposts}
+                                            fetchCreateHomepost={this.props.fetchCreateHomepost}
+                                            fetchUpdateHomepost={this.props.fetchUpdateHomepost}
                                             fetchSystemPromos={this.props.fetchSystemPromos}
                                             fetchUpdateSystemPromo = {this.props.fetchUpdateSystemPromo}
                                             fetchDeleteSystemPromo = {this.props.fetchDeleteSystemPromo}

@@ -1,6 +1,5 @@
-var mongoose = require('mongoose')
-var HostPromotions = require('../models/hostPromotions')
-var SystemPromotions = require('../models/systemPromotions')
+const HostPromotions = require('../models/hostPromos')
+const SystemPromotions = require('../models/systemPromos')
 
 const createHostPromotion = (req, res, next) => {
     /* Description: Create new host promotion*/

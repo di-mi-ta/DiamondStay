@@ -19,8 +19,8 @@ const columns = [{
     render: text => <p>{text}</p>,
 },{
     title: 'Ngày tạo',
-    dataIndex: 'timeUpdate',
-    key: 'timeUpdate',
+    dataIndex: 'createdAt',
+    key: 'createdAt',
     align: 'center',
     render: text => <p>{text}</p>,
 },{ 
@@ -28,7 +28,12 @@ const columns = [{
     key: 'action',
     align: 'center',
     render: (homepost) => (
-        <Link to={`/admin/${homepost._id}`} style={{color: 'white' }}>
+        <Link to={{pathname: `/admin/${homepost._id}`,
+                    state: {
+                        homepost: homepost,
+                    } 
+                }}
+              style={{color: 'white' }}>
             <Button style={{color: 'green'}}>
                 <Icon type="security-scan" /> 
                 Duyệt 
@@ -38,10 +43,6 @@ const columns = [{
 }]
 
 class WaitingHomepostList extends Component {
-    constructor(props){
-        super(props);
-    }
-
     render(){
         return(
             <div style = {{padding: 50, background: '#f1f1f1'}}>
@@ -55,6 +56,9 @@ class WaitingHomepostList extends Component {
                 </Card>
             </div>
         )
+    }
+    componentDidMount(){
+        this.props.fetchHomeposts('?state=Waiting');
     }
 }
   

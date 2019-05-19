@@ -30,7 +30,7 @@ class SystemPromotionCompoment extends Component {
     }
 
     componentWillMount(){
-        this.props.fetchSystemPromos()
+        this.props.fetchSystemPromos();
     }
 
     handleDatePickerChange = value => {

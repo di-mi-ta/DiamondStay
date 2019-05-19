@@ -5,5 +5,5 @@ var HomePostCtrl = require('./homeposts')
 module.exports = {
     AuthCtrl,
     PromoCtrl,
-    HomePostCtrl
+    HomePostCtrl,
 }

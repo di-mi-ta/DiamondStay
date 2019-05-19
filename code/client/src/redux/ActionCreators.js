@@ -398,9 +398,8 @@ export const fetchUpdateHomepost = (homepost) => (dispatch) => {
         .catch(error => dispatch(homepostsFailed(error.message)));
 }
 
-export const fetchHomeposts = () => (dispatch) => {
-    dispatch(homepostsLoading(true));
-    return fetch(baseUrl + 'homeposts')
+export const fetchHomeposts = (query='') => (dispatch) => {
+    return fetch(baseUrl + 'homeposts' + query)
         .then(response => {
             if (response.ok) {
                 return response;
@@ -447,7 +446,6 @@ export const fetchCreateHomepost = (homepost) => (dispatch) => {
         .then((promo)=> dispatch(addHomepost(homepost)))
         .catch(error => dispatch(homepostsFailed(error.message)));
 }
-
 
 // for ratings
 export const addRating = (rating) => ({
