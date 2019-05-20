@@ -13,6 +13,7 @@ import HostManager from '../components/HostManager/HostManagerComponent';
 import House from './Homestay/House';
 import Home from "./HomeComponent";
 import Footer from "./FooterComponent";
+import UpdatedHomepostManager from './HostManager/HomepostUpdate/UpdatedManager';
 
 const mapStateToProps = state => {
     return {
@@ -53,6 +54,14 @@ class Main extends Component {
     return (
       <div>
         <Switch>
+          <Route path="/home" 
+                render={() => <Home 
+                                auth={this.props.auth} 
+                                loginUser={this.props.loginUser} 
+                                logoutUser={this.props.logoutUser}
+                              />
+                      }
+          />
           <Route path="/host" 
                 render={() => <HostManager 
                                     auth={this.props.auth} 
@@ -83,11 +92,19 @@ class Main extends Component {
                                             fetchDeleteSystemPromo = {this.props.fetchDeleteSystemPromo}
                                             fetchCreateSystemPromo = {this.props.fetchCreateSystemPromo}
                               />}/>
-          <Route path="/home" 
-                render={() => <Home/>}
-          />
           <Route path="/room/:homepostId" 
                 render={() => <House/>}
+          />
+          <Route path="/properties" 
+                render={() => <UpdatedHomepostManager
+                                  auth={this.props.auth} 
+                                  loginUser={this.props.loginUser} 
+                                  logoutUser={this.props.logoutUser}
+                                  homeposts={this.props.homeposts}      
+                                  fetchHomeposts = {this.props.fetchHomeposts}
+                                  fetchCreateHomepost = {fetchCreateHomepost}
+                                  fetchUpdateHomepost = {fetchUpdateHomepost}
+                              />}
           />
           <Redirect to='/home'/>
         </Switch>

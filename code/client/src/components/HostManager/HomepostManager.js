@@ -49,7 +49,7 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
                   rules: [{ required: true, message: 'Vui lòng chọn loại phòng !!!' }],
                 })(
                     <Select>
-                        <Option value="nguyenca">Nguyên căn</Option>
+                        <Option value="nguyencan">Nguyên căn</Option>
                         <Option value="phongrieng">Phòng riêng</Option>
                     </Select>
                 )}
