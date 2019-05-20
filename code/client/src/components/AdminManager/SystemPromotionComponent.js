@@ -5,6 +5,8 @@ import {Table, Divider, Button, Icon,
          message, InputNumber, Tag,
          Popconfirm, Form, Card} from 'antd';
 
+import moment from 'moment';
+
 const RangePicker = DatePicker.RangePicker;
 
 class SystemPromotionCompoment extends Component {
@@ -258,7 +260,8 @@ class SystemPromotionCompoment extends Component {
                             label="Thời gian áp dụng"
                             {...formItemLayout}
                         >
-                            <RangePicker style={{ width: '100%' }} onChange={this.handleDatePickerChange}/>
+                            <RangePicker style={{ width: '100%' }} 
+                                        onChange={this.handleDatePickerChange}/>
                         </Form.Item>
                         </Form>
                 </Modal>
@@ -290,7 +293,7 @@ class SystemPromotionCompoment extends Component {
                             {...formItemLayout}
                         >
                             <InputNumber min='0' onChange={this.handleMinValueChange}
-                                        value={this.state.currentPromo.minBookingApplied}/>
+                                        value={this.state.currentPromo.minValueBooking}/>
                             {' VND'}
                         </Form.Item>
                         <Form.Item
@@ -312,7 +315,12 @@ class SystemPromotionCompoment extends Component {
                             label="Thời gian áp dụng"
                             {...formItemLayout}
                         >
-                            <RangePicker style={{ width: '100%' }} onChange={this.handleDatePickerChange}/>
+                            <RangePicker style={{ width: '100%' }} 
+                                        onChange={this.handleDatePickerChange}
+                                        format="DD-MM-YYYY"
+                                        value={[moment(this.state.currentPromo.dateStart), 
+                                        moment(this.state.currentPromo.dateEnd)]}
+                            />
                         </Form.Item>
                         </Form>
                 </Modal> 

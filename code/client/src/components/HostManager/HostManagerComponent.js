@@ -67,18 +67,23 @@ class HostManager extends Component{
             </Menu>
             <Switch>
               <Route path="/host/host-promotions" 
-                    render={() => <PromotionComponent auth={this.props.auth} 
-                                                      promotions={this.props.promotions}
-                                                      fetchHostPromos={this.props.fetchHostPromos}
-                                                      fetchUpdateHostPromo = {this.props.fetchUpdateHostPromo}
-                                                      fetchDeleteHostPromo= {this.props.fetchDeleteHostPromo}
-                                                      fetchCreateHostPromo= {this.props.fetchCreateHostPromo}
+                    render={() => <PromotionComponent 
+                                        auth={this.props.auth} 
+                                        promotions={this.props.promotions}
+                                        homeposts={this.props.homeposts}
+                                        fetchHostPromos={this.props.fetchHostPromos}
+                                        fetchHomeposts = {this.props.fetchHomeposts}
+                                        fetchUpdateHostPromo = {this.props.fetchUpdateHostPromo}
+                                        fetchDeleteHostPromo= {this.props.fetchDeleteHostPromo}
+                                        fetchCreateHostPromo= {this.props.fetchCreateHostPromo}
                                   />}/>
               <Route path="/host/calendars" render={() => <CalendarComponent/>}/>
               <Route path="/host/my-homes" 
                      render={() => <HomepostManager 
                                     auth={this.props.auth}
-                                    
+                                    homeposts={this.props.homeposts}
+                                    fetchHomeposts = {this.props.fetchHomeposts}
+                                    fetchCreateHomepost = {this.props.fetchCreateHomepost}         
                                     />}/>
               <Route path="/host/reservations" 
                      render={() => <Reservation
@@ -95,4 +100,3 @@ class HostManager extends Component{
 }
 
 export default HostManager;
-

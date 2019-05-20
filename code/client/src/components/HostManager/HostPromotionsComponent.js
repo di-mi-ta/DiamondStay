@@ -7,7 +7,7 @@ import { Table, Divider, Button, Icon,
 import moment from 'moment';
 
 const RangePicker = DatePicker.RangePicker;
-
+const Option = Select.Option;
 
 class PromotionCompoment extends Component {
     constructor(props){
@@ -17,7 +17,7 @@ class PromotionCompoment extends Component {
             isModalOpen: false,
             isModalEditOpen: false,
             currentPromo: '',
-            children: []
+            lstHomeposts: []
         };
         this.onAddPromoBtnClick = this.onAddPromoBtnClick.bind(this)
         this.handleCancel = this.handleCancel.bind(this);
@@ -29,8 +29,10 @@ class PromotionCompoment extends Component {
         this.handleHomepostChange = this.handleHomepostChange.bind(this);
         this.handleNameChange = this.handleNameChange.bind(this);
     }
-    componentWillMount(){
-        this.props.fetchHostPromos(this.props.auth.user.username)
+
+    componentDidMount(){
+        this.props.fetchHostPromos(this.props.auth.user.username);
+        this.props.fetchHomeposts();
     }
 
     handleDatePickerChange = value => {
@@ -56,7 +58,6 @@ class PromotionCompoment extends Component {
             currentPromo: {...this.state.currentPromo, name: e.target.value}
         })
     }
-
 
     columns = [{
         title: 'Tên khuyến mãi',
@@ -120,7 +121,11 @@ class PromotionCompoment extends Component {
     }
       
     onAddPromoBtnClick(){
+        let lstHomeposts = this.props.homeposts.homeposts.filter(homepost => 
+            homepost.owner === this.props.auth.user.username)
+        let lst = lstHomeposts.map(x=>(<Option key={x._id}>{x.name}</Option>));
         this.setState({
+            lstHomeposts: lst,
             isModalOpen: true,
         });
     }
@@ -166,6 +171,7 @@ class PromotionCompoment extends Component {
     handleCancel = (e) => {
         this.setState({
             isModalOpen: false,
+            lstHomeposts: [], 
         });
     }
 
@@ -217,8 +223,12 @@ class PromotionCompoment extends Component {
                         <Form.Item
                             label="Mức giảm giá"
                             {...formItemLayout}
+                            
                         >
-                            <InputNumber min='0' max='100'  onChange={this.handleValueChange}/>
+                            <InputNumber min='0' max='100'  
+                                        onChange={this.handleValueChange}
+                                        style={{ width: '90%' }}
+                            />
                             {' %'}
                         </Form.Item>
                         <Form.Item
@@ -227,18 +237,22 @@ class PromotionCompoment extends Component {
                         >
                             <Select
                                 mode="multiple"
+                                placeholder="Chọn nhà bạn muốn áp dụng khuyến mãi"
                                 style={{ width: '100%' }}
-                                onChange={this.handleChangeSelectHome}
+                                onChange={this.handleHomepostChange}
                                 allowClear
                             >
-                                {this.state.children}
+                                {this.state.lstHomeposts}
                             </Select>
                         </Form.Item>
                         <Form.Item
                             label="Thời gian áp dụng"
                             {...formItemLayout}
                         >
-                            <RangePicker style={{ width: '100%' }} onChange={this.handleDatePickerChange}/>
+                            <RangePicker style={{ width: '100%' }} 
+                                        onChange={this.handleDatePickerChange}
+                                        format="DD-MM-YYYY"
+                                        separator='đến'/>
                         </Form.Item>
                         </Form>
                 </Modal>
@@ -281,7 +295,7 @@ class PromotionCompoment extends Component {
                             name="homeposts"
                             placeholder='Nhấn vào để xem'
                         >
-                            {this.state.currentPromo.homeposts}
+                            {this.state.lstHomeposts}
                         </Select>
                     </Form.Item>
                     <Form.Item
@@ -292,6 +306,7 @@ class PromotionCompoment extends Component {
                                     name='dates' 
                                     onChange={this.handleDatePickerChange}
                                     format="DD-MM-YYYY"
+                                    separator='đến'
                                     value={[moment(this.state.currentPromo.dateStart), 
                                         moment(this.state.currentPromo.dateEnd)]}
                         />

@@ -12,13 +12,7 @@ import AdminManager from '../components/AdminManager/AdminManagerComponent';
 import HostManager from '../components/HostManager/HostManagerComponent';
 import House from './Homestay/House';
 import Home from "./HomeComponent";
-import "../css/main_styles.css";
-import "../css/about.css";
-import "../css/about_responsive.css";
-import "../css/blog.css";
-import "../css/blog_responsive.css";
-import "../css/elements.css";
-import "../css/elements_responsive.css";
+import Footer from "./FooterComponent";
 
 const mapStateToProps = state => {
     return {
@@ -60,15 +54,19 @@ class Main extends Component {
       <div>
         <Switch>
           <Route path="/host" 
-                render={() => <HostManager  auth={this.props.auth} 
-                                            promotions={this.props.promotions}
-                                            loginUser={this.props.loginUser} 
-                                            logoutUser={this.props.logoutUser} 
-                                            fetchHomeposts={this.props.fetchHomeposts}
-                                            fetchHostPromos={this.props.fetchHostPromos}
-                                            fetchUpdateHostPromo = {this.props.fetchUpdateHostPromo}
-                                            fetchDeleteHostPromo = {this.props.fetchDeleteHostPromo}
-                                            fetchCreateHostPromo = {this.props.fetchCreateHostPromo}
+                render={() => <HostManager 
+                                    auth={this.props.auth} 
+                                    loginUser={this.props.loginUser} 
+                                    logoutUser={this.props.logoutUser}
+                                    promotions={this.props.promotions}
+                                    homeposts={this.props.homeposts}
+                                    fetchHostPromos={this.props.fetchHostPromos}
+                                    fetchUpdateHostPromo = {this.props.fetchUpdateHostPromo}
+                                    fetchDeleteHostPromo = {this.props.fetchDeleteHostPromo}
+                                    fetchCreateHostPromo = {this.props.fetchCreateHostPromo}
+                                    fetchHomeposts = {this.props.fetchHomeposts}
+                                    fetchCreateHomepost = {fetchCreateHomepost}
+                                    fetchUpdateHomepost = {fetchUpdateHomepost}
                               />}/>
           <Route path="/admin" 
                 render={() => <AdminManager auth={this.props.auth} 
@@ -93,6 +91,8 @@ class Main extends Component {
           />
           <Redirect to='/home'/>
         </Switch>
+
+        <Footer/>
       </div>
     );
   }
