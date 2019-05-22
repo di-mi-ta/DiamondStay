@@ -85,7 +85,6 @@ class Main extends Component {
                                             fetchCreateSystemPromo = {this.props.fetchCreateSystemPromo}
                               />}/>
           <Route path="/home" 
-<<<<<<< HEAD
                 render={() => <div>
                                   <Header auth={this.props.auth} 
                                             promotions={this.props.promotions}
@@ -101,11 +100,6 @@ class Main extends Component {
                               </div>
                         }/>
 
-=======
-                render={() => <Home/>}
-          />
-          <Redirect to='/home'/>
->>>>>>> e8930caf2f3a462acd13746957b9c1ce50819288
         </Switch>
       </div>
     );
