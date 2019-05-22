@@ -1,34 +1,8 @@
-var mongoose = require('mongoose')
-const Users = mongoose.model('Users');
 const HomePosts = require('../models/homeposts')
 
-const getListWaitingConfirmedHomePosts = (req, res, next) => {
-    /* Description: Get list homepost to verify [FOR ADMIN]*/
-    HomePosts.find({state: 'waiting'})
-    .populate('rating.author')
-    .then((homeposts) => {
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json')
-        res.json(homeposts)
-    },(err) => next(err)) 
-    .catch((err) => next(err)); 
-}
-
-const getListHomePostsVerifyOK = (req, res, next) => {
-    /* Description: Get list homeposts are comfirmed OK */
-    HomePosts.find({state: 'success'})
-    .populate('rating.author')
-    .then((homeposts) => {
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json')
-        res.json(homeposts)
-    },(err) => next(err)) 
-    .catch((err) => next(err)); 
-}
-
-const getMyHomePosts = (req, res, next) => {
-    /* Description: get list homepost of specify user*/
-    HomePosts.find({owner: req.body.username})
+/* FOR HOMEPOST */
+const getHomeposts = (req, res, next) => {
+    HomePosts.find(req.query)
     .populate('rating.author')
     .then((homeposts) => {
         res.statusCode = 200;
@@ -59,26 +33,6 @@ const findHomePostDetailedById = (req,res,next) => {
         res.json(homepost)
     }, (err) => next(err))
     .catch((err) => next(err))
-}
-
-const confirmHomePost = (req, res, next) => {
-    /* Description: Confirm a homepost [FOR ADMIN]*/
-    // TODO 
-}
-
-const rejectHomePost = (req, res, next) => {
-    /* Description: Reject a homepost [FOR ADMIN]*/
-    // TODO 
-}
-
-const requireEditingHomePost = (req, res, next) => {
-    /* Description: Required user editting and resubmit a homepost [FOR ADMIN]*/
-    // TODO 
-}
-
-const hideHomePost = (req, res, next) => {
-    /* Description: Hide a homepost */
-    // TODO 
 }
 
 const deleteHomePost = (req, res, next) => {
@@ -116,38 +70,13 @@ const createNewHomePost = (req, res, next) => {
     .catch((err) => next(err));
 }
 
-const getLstRatingsOfHomePost = (req,res,next) => {
-    /* Description: Get list ratings of a homepost*/
+
+/* FOR RATING AND COMMENTS */
+
+const postRating = (req, res, next) => {
+    /* Description: Add new rating to a homepost*/
     // TO DO
 
-
-}
-
-const deleteRating = (req, res, next) => {
-    /* Description: Delete one rating*/ 
-    HomePosts.findById(req.params.homePostId)
-    .then((homepost) => {
-        if (homepost != null && homepost.rating.id(req.params.ratingId) != null) {
-            homepost.rating.id(req.params.ratingId).remove();
-            homepost.save()
-            .then((homepost) => {
-                res.statusCode = 200;
-                res.setHeader('Content-Type', 'application/json');
-                res.json(homepost);                
-            }, (err) => next(err));
-        }
-        else if (homepost == null) {
-            err = new Error('homepost ' + req.params.homePostId + ' not found');
-            err.status = 404;
-            return next(err);
-        }
-        else {
-            err = new Error('Rating ' + req.params.ratingId + ' not found');
-            err.status = 404;
-            return next(err);            
-        }
-    }, (err) => next(err))
-    .catch((err) => next(err));
 }
 
 const editRating = (req, res, next) => {
@@ -179,27 +108,42 @@ const editRating = (req, res, next) => {
     .catch((err) => next(err));
 }
 
-const postRating = (req, res, next) => {
-    /* Description: Add new rating to a homepost*/
-    // TO DO
-
+const deleteRating = (req, res, next) => {
+    /* Description: Delete one rating*/ 
+    HomePosts.findById(req.params.homePostId)
+    .then((homepost) => {
+        if (homepost != null && homepost.rating.id(req.params.ratingId) != null) {
+            homepost.rating.id(req.params.ratingId).remove();
+            homepost.save()
+            .then((homepost) => {
+                res.statusCode = 200;
+                res.setHeader('Content-Type', 'application/json');
+                res.json(homepost);                
+            }, (err) => next(err));
+        }
+        else if (homepost == null) {
+            err = new Error('homepost ' + req.params.homePostId + ' not found');
+            err.status = 404;
+            return next(err);
+        }
+        else {
+            err = new Error('Rating ' + req.params.ratingId + ' not found');
+            err.status = 404;
+            return next(err);            
+        }
+    }, (err) => next(err))
+    .catch((err) => next(err));
 }
 
+// export all 
 module.exports = {
-    getListWaitingConfirmedHomePosts,
-    getListHomePostsVerifyOK,
-    getMyHomePosts,
+    getHomeposts,
     deleteAllHomePost,
     editRating,
     deleteRating,
     createNewHomePost,
-    getLstRatingsOfHomePost,
     updateHomePost,
     deleteHomePost,
     findHomePostDetailedById,
-    confirmHomePost,
-    rejectHomePost,
-    requireEditingHomePost,
-    hideHomePost,
     postRating
 }

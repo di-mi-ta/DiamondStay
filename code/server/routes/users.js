@@ -1,5 +1,6 @@
 var express = require('express');
-var bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+
 var router = express.Router();
 var authenticate = require('../authenticate');
 const cors = require('./cors');
@@ -12,31 +13,32 @@ router.use(bodyParser.json());
 
 router.options('*', cors.corsWithOptions,(req, res) => {res.sendStatus(200);})
 
-router.get('/', authenticate.verifyUser, authenticate.verifyAdmin, AuthCtrl.getListUser);
+router
+  .get('/', authenticate.verifyUser, authenticate.verifyAdmin, AuthCtrl.getListUser)
+  .delete('/', authenticate.verifyUser, AuthCtrl.deleteAllUsers)
+  .post('/signup', AuthCtrl.signUp);
 
-router.delete('/', authenticate.verifyUser, AuthCtrl.deleteAllUsers);
+router
+  .post('/login', cors.corsWithOptions, AuthCtrl.logIn);
 
-router.post('/signup', AuthCtrl.signUp);
+router
+  .get('/checkJWTtoken', cors.corsWithOptions, (req, res) => {
+    passport.authenticate('jwt', {session: false}, (err, user, info) => {
+      if (err)
+        return next(err);
 
-router.post('/login', cors.corsWithOptions, AuthCtrl.logIn);
+      if (!user) {
+        res.statusCode = 401;
+        res.setHeader('Content-Type', 'application/json');
+        return res.json({status: 'JWT invalid!', success: false, err: info});
+      }
+      else {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        return res.json({status: 'JWT valid!', success: true, user: user});
 
-router.get('/checkJWTtoken', cors.corsWithOptions, (req, res) => {
-  passport.authenticate('jwt', {session: false}, (err, user, info) => {
-    if (err)
-      return next(err);
-
-    if (!user) {
-      res.statusCode = 401;
-      res.setHeader('Content-Type', 'application/json');
-      return res.json({status: 'JWT invalid!', success: false, err: info});
-    }
-    else {
-      res.statusCode = 200;
-      res.setHeader('Content-Type', 'application/json');
-      return res.json({status: 'JWT valid!', success: true, user: user});
-
-    }
-  }) (req, res);
+      }
+    }) (req, res);
 });
 
 

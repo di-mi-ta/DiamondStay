@@ -1,8 +1,16 @@
 // TODO 
-const express = require('express');
-const auth = require('../authenticate');
-const controller = require('../controllers/message')
-
+const
+    express = require('express'),
+    auth = require('../authenticate'),
+    controller = require('../controllers/messages');
+    
 const router = express.Router();
-router.route('/api/messages/').
-    get(auth.verifyUser)
+
+router.use(auth.verifyUser);
+
+router
+    .route('/')
+    .get(controller.getUserInboxMessages)
+    .post(controller.addMessage)
+    .delete(controller.deleteMessage)
+module.exports = router;

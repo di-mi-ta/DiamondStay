@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Menu, Row, Col, Divider } from 'antd';
+import {Menu} from 'antd';
 import SystemPromotionComponent from './SystemPromotionComponent';
 import CalendarComponent from '../Common/CalendarComponent';
 import WaitingHomepostList from '../Common/WaitingHomepostComponent';
@@ -68,19 +68,33 @@ class AdminManager extends Component{
         <Switch>
           <Route path="/admin/promotions" 
                 render={() => <SystemPromotionComponent 
+                                  auth={this.props.auth}
                                   promotions={this.props.promotions}
                                   deletePromo={this.props.deletePromo}
                                   fetchSystemPromos={this.props.fetchSystemPromos}
                                   fetchUpdateSystemPromo = {this.props.fetchUpdateSystemPromo}
                                   fetchDeleteSystemPromo = {this.props.fetchDeleteSystemPromo}
                                   fetchCreateSystemPromo = {this.props.fetchCreateSystemPromo}/>}/>
-          <Route path="/admin/calendars" render={() => <CalendarComponent/>}/>
+          <Route path="/admin/calendars" 
+                render={() => <CalendarComponent/>}/>
           <Route path="/admin/waiting-posts" 
-                render={() => <WaitingHomepostList homeposts={this.props.homeposts}/>}/>
-          <Route path="/admin/verified-posts" render={() => <VerifiedHomepostList 
+                render={() => <WaitingHomepostList 
+                                  auth={this.props.auth}
                                   homeposts={this.props.homeposts}
-                                  deletePromo={this.props.deletePromo}/>}/>
-          <Route path='/admin/:homepostId' component={VerifyHomepostComponent} />
+                                  fetchHomeposts={this.props.fetchHomeposts}
+                                  fetchUpdateHomepost={this.props.fetchUpdateHomepost}
+                        />}/>
+          <Route path="/admin/verified-posts" 
+                 render={() => <VerifiedHomepostList 
+                                  homeposts={this.props.homeposts}
+                                  fetchHomeposts={this.props.fetchHomeposts}/>}/>
+          <Route path='/admin/:homepostId' 
+                 render={({location})=> <VerifyHomepostComponent 
+                                  auth={this.props.auth}
+                                  fetchUpdateHomepost={this.props.fetchUpdateHomepost}
+                                  location={location}
+                              />} 
+          />
         </Switch>
         </div>
         : <div/> 

@@ -4,6 +4,7 @@ import ImageCard from './ImageCard';
 import HouseCard from '../Homestay/HouseCard';
 import GlideSlide from './GlideSlide';
 import SearchBox from './SearchBox';
+import {Link, Route, Switch} from 'react-router-dom';
 
 class MainPage extends React.Component {
   constructor(props) {
@@ -139,7 +140,9 @@ class MainPage extends React.Component {
         <GlideSlide ref={this.placeRef} 
                     data={{ hasControl: true,
                             itemList: this.bestPlaces.map(place => 
-                            <HouseCard houseData={place}/>
+                            <Link to={`/room/${place.id}`}>
+                              <HouseCard houseData={place}/>
+                            </Link>
                     ),
                             options: {
                               type: 'slider',

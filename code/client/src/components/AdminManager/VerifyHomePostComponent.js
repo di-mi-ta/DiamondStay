@@ -12,13 +12,12 @@ const ButtonGroup = Button.Group;
 const TextArea = Input.TextArea;
 const RadioGroup = Radio.Group;
 
-
-
 class VerifyHomepostComponent extends Component {
     constructor(props){
         super(props);
         this.state = {
             currentStep: 0,
+            homepost: this.props.location.state.homepost,
             canBack: false,
             canNext: true,
             fieldVerify: 'Mô tả',
@@ -57,7 +56,6 @@ class VerifyHomepostComponent extends Component {
         this.onRejectedClick = this.onRejectedClick.bind(this);
         this.onNoteChange = this.onNoteChange.bind(this);
     }
-
 
     onNoteChange = e => {
         if (this.state.currentStep === 0){
@@ -137,6 +135,15 @@ class VerifyHomepostComponent extends Component {
         this.setState({
             isOpenModal: false
         })
+        const updatedHome = {
+            ...this.state.homepost,
+            confirmedBy: this.props.auth.user.username,
+            state: 'Success',
+            note: JSON.stringify(this.state.noteResult)
+        }
+
+        //fetch 
+        this.props.fetchUpdateHomepost(updatedHome);
         message.success('Tin đăng đã được duyệt thành công');
     }
 
@@ -144,6 +151,15 @@ class VerifyHomepostComponent extends Component {
         this.setState({
             isOpenModal: false
         })
+        const updatedHome = {
+            ...this.state.homepost,
+            confirmedBy: this.props.auth.user.username,
+            state: 'Rejected',
+            note: JSON.stringify(this.state.noteResult)
+        }
+        
+        //fetch 
+        this.props.fetchUpdateHomepost(updatedHome);
         message.success('Tin đăng đã được duyệt thành công');
     }
 
@@ -156,11 +172,11 @@ class VerifyHomepostComponent extends Component {
                     <Form>
                         <Form.Field>
                         <label>Tiêu đề</label>
-                        <input value={'Tiêu đề'}/>
+                        <input value={this.state.homepost.name}/>
                         </Form.Field>
                         <Form.Field>
                         <label>Mô tả</label>
-                        <input value={'Mô tả'}/>
+                        <input value={this.state.homepost.description}/>
                         </Form.Field>
                     </Form>
                 </div>
@@ -194,19 +210,19 @@ class VerifyHomepostComponent extends Component {
                     <Form>
                         <Form.Field>
                         <label>Loại chỗ ở</label>
-                        <input value={'Loại chỗ ở'}/>
+                        <input value={this.state.homepost.typeHome}/>
                         </Form.Field>
                         <Form.Field>
                         <label>Loại phòng</label>
-                        <input value={'Loại phòng'}/>
+                        <input value={this.state.homepost.typeRoom}/>
                         </Form.Field>
                         <Form.Field>
                         <label>Số khách tối đa</label>
-                        <input value={'Số khách tối đa'}/>
+                        <input value={this.state.homepost.maxPeoples}/>
                         </Form.Field>
                         <Form.Field>
                         <label>Diện tích chỗ ở</label>
-                        <input value={'Diện tích chỗ ở'}/>
+                        <input value={this.state.homepost.acreage}/>
                         </Form.Field>
                     </Form>
                 </div>
@@ -219,11 +235,15 @@ class VerifyHomepostComponent extends Component {
                     <Form>
                         <Form.Field>
                         <label>Giá cơ bản</label>
-                        <input value={'Giá cơ bản'}/>
+                        <input value={this.state.homepost.weekdayPrice}/>
                         </Form.Field>
                         <Form.Field>
                         <label>Giá cuối tuần</label>
-                        <input value={'Giá cuối tuần'}/>
+                        <input value={this.state.homepost.weekendPrice}/>
+                        </Form.Field>
+                        <Form.Field>
+                        <label>Số đêm tối thiểu</label>
+                        <input value={this.state.homepost.minimumNights}/>
                         </Form.Field>
                     </Form>
                 </div>
@@ -236,15 +256,15 @@ class VerifyHomepostComponent extends Component {
                     <Form>
                         <Form.Field>
                         <label>Số phòng ngủ</label>
-                        <input value={'Số phòng ngủ'}/>
+                        <input value={this.state.homepost.numBed}/>
                         </Form.Field>
                         <Form.Field>
                         <label>Số giường</label>
-                        <input value={'Số giường'}/>
+                        <input value={this.state.homepost.numBedroom}/>
                         </Form.Field>
                         <Form.Field>
                         <label>Số  phòng tắm</label>
-                        <input value={'Số  phòng tắm'}/>
+                        <input value={this.state.homepost.numBathroom}/>
                         </Form.Field>
                     </Form>
                 </div>

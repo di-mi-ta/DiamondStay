@@ -4,18 +4,14 @@ import HOMEPOST from '../shared/homeposts';
 export const Homeposts = (state = {
         isLoading: true,
         errMess: null,
-        homeposts: HOMEPOST,
+        homeposts: [],
     }, action) => {
     switch(action.type) {
         case ActionTypes.ADD_HOMEPOSTS:
-            state.homeposts.push(action.payload)
-            return {...state, homeposts: state.homeposts}
+            return {...state, homeposts: action.payload}
         
         case ActionTypes.ADD_HOMEPOST:
             return {...state, isLoading: false, errMess: null, homeposts: action.payload};
-
-        case ActionTypes.HOMEPOSTS_LOADING:
-            return {...state, isLoading: true, errMess: null, homeposts: []};
 
         case ActionTypes.HOMEPOSTS_FAILED:
             return {...state, isLoading: false, errMess: action.payload, homeposts: []};

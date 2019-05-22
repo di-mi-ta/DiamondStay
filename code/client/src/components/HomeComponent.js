@@ -6,7 +6,10 @@ class Home extends Component{
     render(){
         return(
           <div>
-            <MainHeader/>
+            <MainHeader auth={this.props.auth} 
+                        loginUser={this.props.loginUser} 
+                        logoutUser={this.props.logoutUser}
+            />
             <MainPage/>
           </div> 
         );

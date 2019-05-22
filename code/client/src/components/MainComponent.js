@@ -5,18 +5,15 @@ import {postRating, fetchHomeposts, fetchRatings,
         fetchHostPromos, loginUser, logoutUser, fetchFavorites, 
         postFavorite, deleteFavorite, deletePromo,
         fetchUpdateHostPromo, fetchDeleteHostPromo,
-        fetchCreateHostPromo, fetchCreateSystemPromo, fetchDeleteSystemPromo,
-        fetchUpdateSystemPromo, fetchSystemPromos} from '../redux/ActionCreators';
+        fetchCreateHostPromo, fetchCreateSystemPromo, 
+        fetchDeleteSystemPromo, fetchUpdateSystemPromo, 
+        fetchSystemPromos, fetchUpdateHomepost, fetchCreateHomepost} from '../redux/ActionCreators';
 import AdminManager from '../components/AdminManager/AdminManagerComponent';
 import HostManager from '../components/HostManager/HostManagerComponent';
+import House from './Homestay/House';
 import Home from "./HomeComponent";
-import "../css/main_styles.css";
-import "../css/about.css";
-import "../css/about_responsive.css";
-import "../css/blog.css";
-import "../css/blog_responsive.css";
-import "../css/elements.css";
-import "../css/elements_responsive.css";
+import Footer from "./FooterComponent";
+import UpdatedHomepostManager from './HostManager/HomepostUpdate/UpdatedManager';
 
 const mapStateToProps = state => {
     return {
@@ -37,10 +34,12 @@ const mapDispatchToProps = (dispatch) => ({
   fetchCreateSystemPromo: (promo) => dispatch(fetchCreateSystemPromo(promo)),
   fetchHostPromos: (username) => {dispatch(fetchHostPromos(username))},
   fetchSystemPromos: () => {dispatch(fetchSystemPromos())},
-  
+  fetchHomeposts: (query='') => {dispatch(fetchHomeposts(query))},
+  fetchUpdateHomepost: (homepost) => {dispatch(fetchUpdateHomepost(homepost))},
+  fetchCreateHomepost: (homepost) => {dispatch(fetchCreateHomepost(homepost))},
   //////////////////////////////////////////////////////////////////////////////////////////////
   postRating: (homepostId, rating, comment) => dispatch(postRating(homepostId, rating, comment)),
-  fetchHomeposts: () => {dispatch(fetchHomeposts())},
+  
   fetchRatings: () => {dispatch(fetchRatings())},
   
   loginUser: (creds) => dispatch(loginUser(creds)),
@@ -51,26 +50,32 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 class Main extends Component {
-
-  componentDidMount() {
-    this.props.fetchHomeposts();
-    this.props.fetchRatings();
-    this.props.fetchFavorites();
-  }
-
   render() {
     return (
       <div>
         <Switch>
+          <Route path="/home" 
+                render={() => <Home 
+                                auth={this.props.auth} 
+                                loginUser={this.props.loginUser} 
+                                logoutUser={this.props.logoutUser}
+                              />
+                      }
+          />
           <Route path="/host" 
-                render={() => <HostManager  auth={this.props.auth} 
-                                            promotions={this.props.promotions}
-                                            loginUser={this.props.loginUser} 
-                                            logoutUser={this.props.logoutUser} 
-                                            fetchHostPromos={this.props.fetchHostPromos}
-                                            fetchUpdateHostPromo = {this.props.fetchUpdateHostPromo}
-                                            fetchDeleteHostPromo = {this.props.fetchDeleteHostPromo}
-                                            fetchCreateHostPromo = {this.props.fetchCreateHostPromo}
+                render={() => <HostManager 
+                                    auth={this.props.auth} 
+                                    loginUser={this.props.loginUser} 
+                                    logoutUser={this.props.logoutUser}
+                                    promotions={this.props.promotions}
+                                    homeposts={this.props.homeposts}
+                                    fetchHostPromos={this.props.fetchHostPromos}
+                                    fetchUpdateHostPromo = {this.props.fetchUpdateHostPromo}
+                                    fetchDeleteHostPromo = {this.props.fetchDeleteHostPromo}
+                                    fetchCreateHostPromo = {this.props.fetchCreateHostPromo}
+                                    fetchHomeposts = {this.props.fetchHomeposts}
+                                    fetchCreateHomepost = {fetchCreateHomepost}
+                                    fetchUpdateHomepost = {fetchUpdateHomepost}
                               />}/>
           <Route path="/admin" 
                 render={() => <AdminManager auth={this.props.auth} 
@@ -79,28 +84,32 @@ class Main extends Component {
                                             logoutUser={this.props.logoutUser} 
                                             deletePromo={this.props.deletePromo}
                                             homeposts={this.props.homeposts}
+                                            fetchHomeposts={this.props.fetchHomeposts}
+                                            fetchCreateHomepost={this.props.fetchCreateHomepost}
+                                            fetchUpdateHomepost={this.props.fetchUpdateHomepost}
                                             fetchSystemPromos={this.props.fetchSystemPromos}
                                             fetchUpdateSystemPromo = {this.props.fetchUpdateSystemPromo}
                                             fetchDeleteSystemPromo = {this.props.fetchDeleteSystemPromo}
                                             fetchCreateSystemPromo = {this.props.fetchCreateSystemPromo}
                               />}/>
-          <Route path="/home" 
-                render={() => <div>
-                                  <Header auth={this.props.auth} 
-                                            promotions={this.props.promotions}
-                                            loginUser={this.props.loginUser} 
-                                            logoutUser={this.props.logoutUser} 
-                                            fetchHostPromos={this.props.fetchHostPromos}
-                                            fetchUpdateHostPromo = {this.props.fetchUpdateHostPromo}
-                                            fetchDeleteHostPromo = {this.props.fetchDeleteHostPromo}
-                                            fetchCreateHostPromo = {this.props.fetchCreateHostPromo}
-                                  />
-                                  <Home/>
-                                  <Footer/>
-                              </div>
-                        }/>
-
+          <Route path="/room/:homepostId" 
+                render={() => <House/>}
+          />
+          <Route path="/properties" 
+                render={() => <UpdatedHomepostManager
+                                  auth={this.props.auth} 
+                                  loginUser={this.props.loginUser} 
+                                  logoutUser={this.props.logoutUser}
+                                  homeposts={this.props.homeposts}      
+                                  fetchHomeposts = {this.props.fetchHomeposts}
+                                  fetchCreateHomepost = {fetchCreateHomepost}
+                                  fetchUpdateHomepost = {fetchUpdateHomepost}
+                              />}
+          />
+          <Redirect to='/home'/>
         </Switch>
+
+        <Footer/>
       </div>
     );
   }

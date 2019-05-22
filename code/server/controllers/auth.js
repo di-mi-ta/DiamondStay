@@ -6,9 +6,7 @@ var passport = require('passport');
 const getListUser = (req, res, next) => {
    User.find({})
    .then((users) => {
-      res.statusCode = 200;
-      res.setHeader('Content-Type','application/json');
-      res.json(users);
+      res.status(200).json(users);
    })
    .catch((err) => next(err));
 };
@@ -16,9 +14,7 @@ const getListUser = (req, res, next) => {
 const deleteAllUsers = (req, res, next) => {
    User.remove({})
    .then((resp) => {
-      res.statusCode = 200;
-      res.setHeader('Content-Type','application/json');
-      res.json(resp);
+      res.status(200).json(resp);
    })
    .catch((err) => next(err));
 };
@@ -27,10 +23,8 @@ const signUp = (req, res, next) => {
    User.register(new User({username: req.body.username}),
      req.body.password, (err, user) => {
      if(err) {
-       res.statusCode = 500;
-       res.setHeader('Content-Type', 'application/json');
-       res.json({err: err});
-     }
+      res.status(500).json({ err });
+    }
      else {
        if (req.body.firstName)
          user.firstName = req.body.firstName;
@@ -44,15 +38,11 @@ const signUp = (req, res, next) => {
          user.typeUser = req.body.typeUser;
        user.save((err, user) => {
          if (err) {
-           res.statusCode = 500;
-           res.setHeader('Content-Type', 'application/json');
-           res.json({err: err});
+           res.status(500).json({ err });
            return ;
          }
          passport.authenticate('local')(req, res, () => {
-           res.statusCode = 200;
-           res.setHeader('Content-Type', 'application/json');
-           res.json({success: true, status: 'Registration Successful!'});
+           res.status(200).json({success: true, status: 'Registration Successful!'});
          });
        });
      }
@@ -64,21 +54,19 @@ const logIn = (req, res, next) => {
     if (err)
       return next(err);
     if (!user) {
-      res.statusCode = 401;
-      res.setHeader('Content-Type', 'application/json');
-      res.json({success: false, status: 'Login Unsuccessful!', err: info});
+      return res.status(401).json({success: false, status: 'Login Unsuccessful!', err: info});
     }
     req.logIn(user, (err) => {
       if (err) {
-        res.statusCode = 401;
-        res.setHeader('Content-Type', 'application/json');
-        res.json({success: false, status: 'Login Unsuccessful!', err: 'Could not log in user!'});
+        return res.status(401).json({success: false, status: 'Login Unsuccessful!', err: 'Could not log in user!'});
       }
 
       var token = authenticate.getToken({_id: req.user._id});
-      res.statusCode = 200;
-      res.setHeader('Content-Type', 'application/json');
-      res.json({success: true, status: 'Login Successful!', token: token});
+      return res.status(200).json({
+        success: true,
+        status: 'Login Successful!',
+        token: token
+      });
     });
   }) (req, res, next);
 };

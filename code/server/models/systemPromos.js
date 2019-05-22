@@ -12,7 +12,7 @@ const promotionSchema = new Schema({
     },
     value: {
         type: Number,
-        default: 0.0 // %, for example: 50%
+        default: 0,
     },
     minValueBooking: {
         type: Number,
@@ -21,11 +21,6 @@ const promotionSchema = new Schema({
     maxNumBookingApplied: {
         type: Number,
         default: -1
-    },
-    locationApplied: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Locations',
-        default: ''
     },
     code: {
         type: String,
@@ -41,8 +36,8 @@ const promotionSchema = new Schema({
         default: ''
     },
     creator: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Users'
+        type: String,
+        required: true,
     },
 },{
     timestamps: true

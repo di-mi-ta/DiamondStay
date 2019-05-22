@@ -1,6 +1,5 @@
-var mongoose = require('mongoose')
-var HostPromotions = require('../models/hostPromotions')
-var SystemPromotions = require('../models/systemPromotions')
+const HostPromotions = require('../models/hostPromos')
+const SystemPromotions = require('../models/systemPromos')
 
 const createHostPromotion = (req, res, next) => {
     /* Description: Create new host promotion*/
@@ -97,22 +96,6 @@ const getHostPromoOfUser = (req, res, next) => {
         res.json(promotions)
     }, (err)=>next(err))
     .catch((err) => next(err))
-}
-
-const getActivePromoForHomepost = (req, res, next) => {
-    // Promotions.find({ dateStart : {$gt: new Date(),
-    //                   dateEnd: {$lt: new Date()}}})
-    // .populate(homeposts)
-    // .then((lstPromos) => {
-    //     let promos = lstPromos.filter((promo) => {
-    //         const check = promo.homeposts.filter((homepost) => homepost.owner === req.params.homePostId)
-    //         check > 0
-    //     })
-    //     res.statusCode = 200;
-    //     res.setHeader('Content-Type','application/json');
-    //     res.json(promos)
-    // }, (err) => next(err))
-    // .catch((err) => next(err));
 }
 
 const getFullListPromo = (req, res, next) => {
