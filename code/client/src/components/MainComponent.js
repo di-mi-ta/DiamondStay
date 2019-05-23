@@ -20,12 +20,13 @@ const mapStateToProps = state => {
       homeposts: state.homeposts,
       ratings: state.ratings,
       promotions: state.promotions,
-      favorites: state.favorites,
       auth: state.auth
     }
 }
 
 const mapDispatchToProps = (dispatch) => ({
+  loginUser: (creds) => dispatch(loginUser(creds)),
+  logoutUser: () => dispatch(logoutUser()),
   fetchUpdateHostPromo: (updatedPromo) => dispatch(fetchUpdateHostPromo(updatedPromo)),
   fetchDeleteHostPromo: (promoId) => dispatch(fetchDeleteHostPromo(promoId)),
   fetchCreateHostPromo: (promo) => dispatch(fetchCreateHostPromo(promo)),
@@ -37,19 +38,16 @@ const mapDispatchToProps = (dispatch) => ({
   fetchHomeposts: (query='') => {dispatch(fetchHomeposts(query))},
   fetchUpdateHomepost: (homepost) => {dispatch(fetchUpdateHomepost(homepost))},
   fetchCreateHomepost: (homepost) => {dispatch(fetchCreateHomepost(homepost))},
-  //////////////////////////////////////////////////////////////////////////////////////////////
+
   postRating: (homepostId, rating, comment) => dispatch(postRating(homepostId, rating, comment)),
-  
   fetchRatings: () => {dispatch(fetchRatings())},
-  
-  loginUser: (creds) => dispatch(loginUser(creds)),
-  logoutUser: () => dispatch(logoutUser()),
-  fetchFavorites: () => dispatch(fetchFavorites()),
-  postFavorite: (homepostId) => dispatch(postFavorite(homepostId)),
-  deleteFavorite: (homepostId) => dispatch(deleteFavorite(homepostId))
 });
 
 class Main extends Component {
+  componentDidMount(){
+    this.props.fetchHomeposts();
+    this.props.fetchSystemPromos();
+  }
   render() {
     return (
       <div>
@@ -59,6 +57,10 @@ class Main extends Component {
                                 auth={this.props.auth} 
                                 loginUser={this.props.loginUser} 
                                 logoutUser={this.props.logoutUser}
+                                promotions={this.props.promotions}
+                                homeposts={this.props.homeposts}
+                                fetchSystemPromos={this.props.fetchSystemPromos}
+                                fetchHomeposts = {this.props.fetchHomeposts}
                               />
                       }
           />
