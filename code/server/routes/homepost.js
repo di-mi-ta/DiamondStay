@@ -2,7 +2,6 @@ const express = require('express')
 const bodyParser = require('body-parser');
 
 const homePostRouter= express.Router();
-const authenticate = require('../authenticate');
 const cors = require('./cors');
 
 homePostRouter.use(bodyParser.json());

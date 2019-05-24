@@ -9,6 +9,7 @@ import {Link, Route, Switch} from 'react-router-dom';
 class MainPage extends React.Component {
   constructor(props) {
     super(props);
+    this.bestPlaces = this.props.homeposts.homeposts;
     this.spaceList = [
       {
         id: "1",
@@ -31,68 +32,7 @@ class MainPage extends React.Component {
         description: 'Studio'
       }
     ];
-    this.bestPlaces = [
-      {
-        id: "1",
-        houseName: "Em ơi nhà chúng mình Homestay",
-        location: "Đà Lạt, Lâm Đồng",
-        price: "1,500,000đ/đêm",
-        type: "Nhà riêng",
-        image: "https://cdn.luxstay.com/rooms/14926/medium/1538099026_20180921_064858.jpg",
-        rating: 0,
-        numRating: 0
-      },
-      {
-        id: "2",
-        houseName: "Phòng đơn hướng vườn Hồng trứng - Vườn đom đóm",
-        location: "Đà Lạt, Lâm Đồng",
-        price: "370,000đ/đêm",
-        type: "Nhà riêng",
-        image: "https://cdn.luxstay.com/rooms/18902/medium/room_18902_8_1552234066.jpg",
-        rating: 5,
-        numRating: 5
-      },
-      {
-        id: "3",
-        houseName: "THE HOBBIT BUNGALOW - STANDARD",
-        location: "Đà Lạt, Lâm Đồng",
-        price: "450,000đ/đêm",
-        type: "Khác",
-        image: "https://cdn.luxstay.com/rooms/20059/medium/room_20059_5_1548478695.jpg",
-        rating: 0,
-        numRating: 0
-      },
-      {
-        id: "4",
-        houseName: "THE HOBBIT BUNGALOW - DELUXE",
-        location: "Đà Lạt, Lâm Đồng",
-        price: "600,000đ/đêm",
-        type: "Khác",
-        image: "https://cdn.luxstay.com/rooms/20130/medium/room_20130_10_1551931848.jpg",
-        rating: 5,
-        numRating: 1
-      },
-      {
-        id: "5",
-        houseName: "Lux Homestay phòng 3",
-        location: "Đà Lạt, Lâm Đồng",
-        price: "420,000đ/đêm",
-        type: "Căn hộ dịch vụ",
-        image: "https://cdn.luxstay.com/rooms/20192/medium/room_20192_6_1548854358.jpg",
-        rating: 5,
-        numRating: 1
-      },
-      {
-        id: "6",
-        houseName: "Ba An Apartment Đà Lạt",
-        location: "Đà Lạt, Lâm Đồng",
-        price: "1,900,000đ/đêm",
-        type: "Căn hộ",
-        image: "https://cdn.luxstay.com/rooms/13640/medium/room_13640_122_1551771179.jpg",
-        rating: 0,
-        numRating: 0
-      }
-    ]
+
     this.currentPolicies = [
       {
         id: "1",
@@ -117,6 +57,11 @@ class MainPage extends React.Component {
     this.updatePolicyGlideSize = this.updatePolicyGlideSize.bind(this);
   }
 
+  componentDidMount(){
+    this.props.fetchHomeposts();
+    this.props.fetchSystemPromos();
+  }
+
   render() {
     return (
       <div className="mainPage container-fluid">
@@ -136,6 +81,8 @@ class MainPage extends React.Component {
         <div className="title">
           <h2>Chỗ ở tốt nhất</h2>
           <p>Thêm trải nghiệm, thêm nhiều niềm vui tại những chỗ ở được yêu thích nhất tại Diamond Stay</p>
+          {/*for test list homepost*/}
+          <b>{JSON.stringify(this.props.homeposts.homeposts)}</b>
         </div>
         <GlideSlide ref={this.placeRef} 
                     data={{ hasControl: true,
