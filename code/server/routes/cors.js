@@ -14,5 +14,13 @@ var corsOptionsDelegate = (req, callback) => {
     callback(null, corsOptions);
 };
 
+const corsAllowAll = cors({
+    allowedHeaders: ['Content-Type', 'Authorization'], // Authorization for JWT token
+    origin: '*', // allow all origin
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // allow need smethods
+    preflightContinue: false,   // don't delegate OPTIONS request to my routers
+});
+
 exports.cors = cors();
 exports.corsWithOptions = cors(corsOptionsDelegate);
+exports.allowAll = corsAllowAll;

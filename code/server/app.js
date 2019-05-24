@@ -17,7 +17,7 @@ app.use(express.static('public'))
 app.use('/users', usersRouter);
 app.use('/homeposts', homepostRouter);
 app.use('/host-promotions', hostPromoRouter);
-app.use('/system-promotions', systemPromoRouter)
+app.use('/system-promotions', systemPromoRouter);
 app.use('/messages', messageRouter);
 app.use('/upload', uploadFileRouter);
 app.use('./comments', commentRouter);

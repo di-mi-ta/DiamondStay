@@ -4,27 +4,7 @@ import MessageDetail from './MessageDetail';
 import MessageReply from './MessageReply';
 
 import { Empty, message as antdMessage } from 'antd';
-
-let messages = [
-  {
-    senderId: '5555555',
-    sender: 'Văn Tiến Cường',
-    time: '20-11-2018',
-    title: 'Hỏi về chỗ giữ xe',
-    content: 'Đây là nội dung tin nhắn. Đây là nội dung tin nhắn. Đây là nội dung tin nhắn. Đây là nội dung tin nhắn. Đây là nội dung tin nhắn. Đây là nội dung tin nhắn. Đây là nội dung tin nhắn. Đây là nội dung tin nhắn. Đây là nội dung tin nhắn. Đây là nội dung tin nhắn. Đây là nội dung tin nhắn. Đây là nội dung tin nhắn. Đây là nội dung tin nhắn. Đây là nội dung tin nhắn. Đây là nội dung tin nhắn.',
-    type: 'Khách vãng lai',
-    seen: true
-  },
-  {
-    senderId: '999999999',
-    sender: 'Ghost',
-    time: '20-11-2019',
-    title: 'Re: Chào hỏi',
-    content: 'Đây là nội dung tin nhắn',
-    type: 'Khách thuê',
-    seen: false
-  },
-];
+import * as helper from './helper';
 
 const MESSAGE_LIST = 1;
 const MESSAGE_DETAIL = 2;
@@ -32,20 +12,19 @@ const MESSAGE_REPLY = 3;
 
 class MessageComponent extends React.Component {
   state = {
-    messages: messages,             // messages receive from above
+    messages: [],             // messages receive from above
     openingComponent: MESSAGE_LIST, // the component rendered by this class
     openingMessage: null,           // the message user working with
   };
 
   componentDidMount() {
-    let messages = [...this.state.messages];
-    messages.sort((a, b) => {
-      if (a.seen !== b.seen)
-        return b.seen - a.seen; // unseen messages has higher score
-      // return moment(a.time, 'DD-MM-YYYY').
-      return 0;
-    });
-    this.setState({ messages });
+    helper.fetchMessages()
+      .then(messages => {
+        this.setState({ messages });
+      })
+      .catch(err => {
+        antdMessage.error('Xảy ra lỗi, không thế  tải tin nhắn');
+      });
   }
 
   onOpenMessageList = () => {
@@ -56,14 +35,35 @@ class MessageComponent extends React.Component {
   };
 
   onOpenMessageDetail = (message) => {
-    // update seen status
-    // to network request
+    // already seen, don't do network request
+    if (message.seen === true) {
+      return this.setState({
+        openingComponent: MESSAGE_DETAIL,
+        openingMessage: message,
+      });
+    }
 
-    let messages
+    // message not seen yet -> do network request
+    const openingId = message._id;
+    helper.seenMessage(openingId).then(() => {
 
-    this.setState({
-      openingComponent: MESSAGE_DETAIL,
-      openingMessage: message,
+      // successful, change value locally, no need to fetch messages again
+      const messages = this.state.messages.map(m => {
+        if (m._id === openingId)
+          return { ...m, seen: true };
+        else return m;
+      });
+      this.setState({
+        messages: messages,
+        openingComponent: MESSAGE_DETAIL,
+        openingMessage: message,
+      });
+    }).catch(err => {
+      antdMessage.error('Lỗi khi seen message'); // PRODUCTION
+      this.setState({
+        openingComponent: MESSAGE_DETAIL,
+        openingMessage: message,
+      });
     });
   };
 
@@ -75,22 +75,33 @@ class MessageComponent extends React.Component {
   }
 
   onDeleteCurrentMessage = () => {
-    // TODO move to redux
-    // post request
-    antdMessage.success('Đã xoá tin nhắn');
-    const toDeleteId = this.state.openingMessage.senderId;
-    const newMessages = this.state.messages.filter(m => m.senderId !== toDeleteId);
-    this.setState({
-      messages: newMessages,
-      openingComponent: MESSAGE_LIST,
-      openingMessage: null
-    });
+    const deleteId = this.state.openingMessage._id;
+    helper.deleteMessage(deleteId)
+      .then(() => {
+        antdMessage.success('Đã xoá tin nhắn');
+        const newMessages = this.state.messages.filter(m => m._id !== deleteId);
+        this.setState({
+          messages: newMessages,
+          openingComponent: MESSAGE_LIST,
+          openingMessage: null
+        });
+      }).catch(err => {
+        antdMessage.warn('Có lỗi xảy ra, xoá không thành công!');
+        this.setState({
+          openingComponent: MESSAGE_LIST,
+          openingMessage: null
+        });
+      });
+    
   };
 
   onSendReplyMessage = (replyMessage) => {
-    // do st with network
-
-    antdMessage.success('Tin nhắn đã được gửi');
+    console.log(replyMessage);
+    helper.sendReplyMessage(replyMessage).then(() => {
+      antdMessage.success('Tin nhắn đã được gửi');
+    }).catch(err => {
+      antdMessage.error('Có lỗi xảy ra. Tin nhắn chưa được gửi.');
+    });
     this.setState({
       openingComponent: MESSAGE_LIST,
       openingMessage: null,

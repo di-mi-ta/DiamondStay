@@ -14,15 +14,18 @@ const formItemLayout = {
 
 
 const getDefaultTitle = (oldTitle) => 'Re: ' + oldTitle.replace(/(Re: )+/, '');
+function getDefaultConent(oldContent) {
+  return '\n\n\n\n\n  ------------------------------------\n' + oldContent;
+}
 
 export default class MessageReply extends React.Component {
   state = {
     title: getDefaultTitle(this.props.message.title),
-    content: this.props.message.content,
+    content: getDefaultConent(this.props.message.content),
   };
 
   onConfirmReturn = () => {
-    messageInfo.info('Đã huỷ thư đang soạn');
+    // messageInfo.info('Đã huỷ thư đang soạn');
     this.props.onReturn();
   };
 
@@ -34,10 +37,9 @@ export default class MessageReply extends React.Component {
 
   makeReplyMessage = () => {
     return {
-      senderId: '122121212121',
-      sender: 'this.props.hostName',
-      receiverId: this.props.message.senderId,
-      title: this.state.title
+      receiverId: this.props.message.sender._id,
+      title: this.state.title,
+      content: this.state.content
     };
   };
 
@@ -46,7 +48,7 @@ export default class MessageReply extends React.Component {
       <div>
         <Form {...formItemLayout}>
           <Item label='Người nhận'>
-            <Paragraph>{this.props.message.sender}</Paragraph>
+            <Paragraph>{this.props.message.sender.fullname}</Paragraph>
           </Item>
           <Item label='Chủ đề'>
             <Input name='title' value={this.state.title} onChange={this.onTextChange} />
@@ -62,7 +64,8 @@ export default class MessageReply extends React.Component {
           <Item wrapperCol={{ offset: 14 }}>
             <Button type='primary' onClick={() => this.props.onSendReplyMessage(this.makeReplyMessage())}>Gửi</Button>
             <Popconfirm
-              okText='Huỷ thư đang soạn?'
+              title='Huỷ thư đang soạn?'
+              okText='Huỷ thư'
               cancelText='Tiếp tục soạn thư'
               onConfirm={() => this.onConfirmReturn()}
             >
