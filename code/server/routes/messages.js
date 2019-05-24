@@ -7,12 +7,16 @@ const
     
 const router = express.Router();
 
-router.use(corsAllowAll)
-router.use(auth.verifyUser);
+router
+    .use(corsAllowAll)
+    .use(auth.verifyUser);
 
 router
     .route('/')
     .get(controller.getUserInboxMessages)
     .post(controller.addMessage)
-    .delete(controller.deleteMessage)
+    .put(controller.seenMessage)
+    
+router.delete('/:messageId', controller.deleteMessage);
+
 module.exports = router;

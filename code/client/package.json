@@ -22,7 +22,7 @@
     "react-redux": "5.0.7",
     "react-redux-form": "1.16.8",
     "react-router-dom": "4.2.2",
-    "react-scripts": "1.1.4",
+    "react-scripts": "^3.0.1",
     "react-social-icons": "^4.1.0",
     "react-transition-group": "2.3.0",
     "reactstrap": "5.0.0",
@@ -39,5 +39,17 @@
   },
   "devDependencies": {
     "babel-plugin-import": "^1.11.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

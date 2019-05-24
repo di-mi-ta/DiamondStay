@@ -4,7 +4,7 @@ import { Table, Tag } from 'antd';
 const columns = [
   {
     title: 'Người gửi',
-    dataIndex: 'sender',
+    dataIndex: 'sender.fullname',
   }, {
     title: 'Thời gian',
     dataIndex: 'time',
@@ -18,7 +18,7 @@ const columns = [
     title: 'Trạng thái',
     dataIndex: 'seen',
     render: (seen) => {
-      if (seen)
+      if (seen === true)
         return <Tag color='green'>Đã xem</Tag>
       else
         return <Tag color='blue'>Mới</Tag>

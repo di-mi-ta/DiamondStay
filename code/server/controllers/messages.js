@@ -19,7 +19,7 @@ function getUserInboxMessages(req, res, next) {
 }
 
 function deleteMessage(req, res, next) {
-    Message.findByIdAndDelete(req.body.messageId).exec((err, message) => {
+    Message.findByIdAndDelete(req.params.messageId).exec((err, message) => {
         if (err)
             return res.status(500).json({ err: 'Internal server error' });
         if (message === null)
@@ -31,7 +31,6 @@ function deleteMessage(req, res, next) {
 function addMessage(req, res, next) {
     if (req.user._id.toString() === req.body.receiverId)
         return res.json({ err: 'Sender and receiver cannot be the same' });
-
     const newMessage = {
         sender: req.user._id,
         receiver: req.body.receiverId,
@@ -45,7 +44,7 @@ function addMessage(req, res, next) {
             return res.status(500).json({ err: 'Internal server error' });
 
         // Receiver not exists
-        if (user === null)
+        if (!user)
             return res.json({ err: 'Receiver not found' });
 
         Message.create(newMessage, (err, message) => {
@@ -58,8 +57,19 @@ function addMessage(req, res, next) {
     });
 }
 
+function seenMessage(req, res, next) {
+    Message.findByIdAndUpdate(req.body.messageId, { seen: true }).exec((err, message) => {
+        if (err)
+            return res.status(500).json({ err: 'Internal server error' });
+        // if (message === null)
+        //     return res.json({ err: 'Message not found' })
+        res.status(200).json({});
+    });
+}
+
 module.exports = {
     getUserInboxMessages,
     addMessage,
     deleteMessage,
+    seenMessage,
 }
