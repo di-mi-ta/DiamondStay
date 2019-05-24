@@ -15,7 +15,7 @@ class SearchBox extends React.Component {
       dateLeave: undefined,
       numGuests: 1,
       numChildren: 0,
-      priceValue: 10,
+      priceValue: 1,
       homeStayOpen: false,
       homeStayValue: "Chọn loại HomeStay",
       kitchenChecked: false,
@@ -57,14 +57,14 @@ class SearchBox extends React.Component {
   }
 
   handleNumChidlrenChanged(value){
-    if(value.target.value <= 5)
+    if(value.target.value <= 5 && value.target.value >= 0)
       this.setState({
         numChildren: value.target.value
       });
   }
 
   handleNumGuestsChanged(value){
-    if(value.target.value <= 10)
+    if(value.target.value <= 10 && value.target.value >= 0)
       this.setState({
         numGuests: value.target.value
       });

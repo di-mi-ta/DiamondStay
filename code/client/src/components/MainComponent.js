@@ -13,6 +13,7 @@ import HostManager from '../components/HostManager/HostManagerComponent';
 import House from './Homestay/House';
 import Home from "./HomeComponent";
 import Footer from "./FooterComponent";
+import Booking from "./BookingComponent";
 import UpdatedHomepostManager from './HostManager/HomepostUpdate/UpdatedManager';
 
 const mapStateToProps = state => {
@@ -106,6 +107,17 @@ class Main extends Component {
                                   fetchHomeposts = {this.props.fetchHomeposts}
                                   fetchCreateHomepost = {fetchCreateHomepost}
                                   fetchUpdateHomepost = {fetchUpdateHomepost}
+                              />}
+          />
+          <Route path="/booking"
+                  render={() => <Booking
+                                  gauth={this.props.auth} 
+                                  loginUser={this.props.loginUser} 
+                                  logoutUser={this.props.logoutUser}
+                                  promotions={this.props.promotions}
+                                  homeposts={this.props.homeposts}
+                                  fetchSystemPromos={this.props.fetchSystemPromos}
+                                  fetchHomeposts = {this.props.fetchHomeposts}
                               />}
           />
           <Redirect to='/home'/>
