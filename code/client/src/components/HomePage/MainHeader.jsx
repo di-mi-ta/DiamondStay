@@ -39,10 +39,9 @@ class MainHeader extends React.Component {
       });
   }
 
-  handleLogin(event) {
+  handleLogin = () => {
       this.toggleLoginModal();
       this.props.loginUser({username: this.username.value, password: this.password.value});
-      event.preventDefault();
   }
 
   handleLogout() {
@@ -99,22 +98,15 @@ class MainHeader extends React.Component {
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <img src="https://www.luxstay.com/icons/vi.svg" width="24" height="24"/>
-                  <span>VND</span>
+                  <span>{this.props.auth.user.username}</span>
                 </a>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <div className="dropdown-item">
-                    <img src="https://www.luxstay.com/icons/vi.svg" width="24" height="24"/>
-                    <span>Tiếng việt</span>
-                  </div>
-                  <div className="dropdown-item">
-                    <b>VND</b>
-                  </div>
-                  <div className="dropdown-item">
-                    <img src="https://www.luxstay.com/icons/en.svg" width="24" height="24"/>
-                    <span>English</span>
-                  </div>
-                  <div className="dropdown-item">
-                    <b>USD</b>
+                      <a className="nav-link">
+                      <Button onClick={this.handleLogout} type="link">
+                        Đăng xuất
+                      </Button>
+                      </a>
                   </div>
                 </div>
               </li>
@@ -173,7 +165,7 @@ class MainHeader extends React.Component {
   }
 
   componentDidMount() {
-    
+    //fetch 
   }
 }
 

@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
+import axios, { post } from 'axios';
+import url from '../../shared/baseUrl'
 
 import {Table, Divider, Button, Icon, 
          Modal, Input, DatePicker,
          message, InputNumber, Tag,
-         Popconfirm, Form, Card} from 'antd';
+         Popconfirm, Form, Card, Upload} from 'antd';
 
 import moment from 'moment';
 
@@ -17,6 +19,7 @@ class SystemPromotionCompoment extends Component {
             isModalOpen: false,
             isModalEditOpen: false,
             currentPromo: '',
+            logo: null,
         };
         this.onAddPromoBtnClick = this.onAddPromoBtnClick.bind(this)
         this.handleCancel = this.handleCancel.bind(this);
@@ -29,12 +32,17 @@ class SystemPromotionCompoment extends Component {
         this.handleMinValueChange = this.handleMinValueChange.bind(this);
         this.handleNumTimeChange = this.handleNumTimeChange.bind(this);
         this.handleCodeChange = this.handleCodeChange.bind(this);
+        this.onLogoChange = this.onLogoChange.bind(this);
     }
 
     componentWillMount(){
         this.props.fetchSystemPromos();
     }
 
+    onLogoChange = e => {
+        this.setState({logo: e.target.files[0]})
+    }
+ 
     handleDatePickerChange = value => {
         this.setState({
             currentPromo: {...this.state.currentPromo, dateStart: value[0], dateEnd: value[1]}
@@ -161,22 +169,36 @@ class SystemPromotionCompoment extends Component {
         this.setState({
           isModalOpen: false,
         });
-        const promo = {
-            name: this.state.currentPromo.name,
-            dateStart: this.state.currentPromo.dateStart,
-            dateEnd: this.state.currentPromo.dateEnd,
-            value: this.state.currentPromo.value,
-            creator: this.props.auth.user.username,
-            minValueBooking: this.state.currentPromo.minValueBooking,
-            maxNumBookingApplied: this.state.currentPromo.maxNumBookingApplied,
-            code: this.state.currentPromo.code
+        const url = 'http://localhost:4444/upload';
+        const formData = new FormData();
+        formData.append('image', this.state.logo)
+        const config = {
+            headers: {
+                'Content-type': 'multipart/form-data',
+                credentials: "same-origin"
+            }
         }
-        this.props.fetchCreateSystemPromo(promo);
-        if (true){
-            message.success('Bạn đã thêm một khuyến mại mới thành công!');
-        } else {
-            message.error('Thêm khuyến mại thất bại!');
-        }
+        post(url, formData, config)
+        .then((image) => {
+            alert(JSON.stringify(image))
+            const promo = {
+                name: this.state.currentPromo.name,
+                logo: image.filename,
+                dateStart: this.state.currentPromo.dateStart,
+                dateEnd: this.state.currentPromo.dateEnd,
+                value: this.state.currentPromo.value,
+                creator: this.props.auth.user.username,
+                minValueBooking: this.state.currentPromo.minValueBooking,
+                maxNumBookingApplied: this.state.currentPromo.maxNumBookingApplied,
+                code: this.state.currentPromo.code
+            }
+            this.props.fetchCreateSystemPromo(promo);
+            if (true){
+                message.success('Bạn đã thêm một khuyến mại mới thành công!');
+            } else {
+                message.error('Thêm khuyến mại thất bại!');
+            }
+        })
       }
     
     handleCancel = (e) => {
@@ -203,6 +225,7 @@ class SystemPromotionCompoment extends Component {
                     Thêm khuyến mại
                 </Button>
                 </div>
+
                 <Card style={{ 
                     boxShadow: "1px 3px 1px #9E9E9E",
                     borderRadius: "10px",
@@ -229,6 +252,12 @@ class SystemPromotionCompoment extends Component {
                             {...formItemLayout}
                         >
                             <Input onChange={this.handleNameChange}/>
+                        </Form.Item>
+                        <Form.Item
+                            label="Logo"
+                            {...formItemLayout}
+                        >
+                            <input type="file" onChange={this.onLogoChange} />
                         </Form.Item>
                         <Form.Item
                             label="Code"

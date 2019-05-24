@@ -1,22 +1,37 @@
 import React, {Component} from 'react';
 import { Upload, Icon, Modal, Button } from 'antd';
+import axios, {post} from 'axios';
+
+const uploadFile = (file) => {
+  const url = 'http://localhost:4444/upload';
+  const formData = new FormData();
+  fetch(file)
+  .then(res => res.blob())
+  .then(blob => {
+    formData.append('image', blob, file.name)
+    const config = {
+        headers: {
+            'Content-type': 'multipart/form-data',
+            credentials: "same-origin"
+        }
+    }
+    post(url, formData, config)
+  })
+}
 
 class Images extends Component {
-
     constructor(props){
         super(props);
         this.state = {
             previewVisible: false,
             previewImage: '',
-            fileList: [
-                {
-                    uid: '-1',
-                    name: 'xxx.png',
-                    status: 'done',
-                    url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-                },
-            ],
+            fileList: [],
         }
+        this.onUpdateBtnClick = this.onUpdateBtnClick.bind(this);
+    }
+
+    onUpdateBtnClick = () => {
+      this.state.fileList.forEach(uploadFile)
     }
   
     handleCancel = () => {
@@ -35,7 +50,7 @@ class Images extends Component {
     }
   
     render() {
-      const { previewVisible, previewImage, fileList } = this.state;
+      const {previewVisible, previewImage, fileList} = this.state;
       const uploadButton = (
         <div>
           <Icon type="plus" />
@@ -49,7 +64,8 @@ class Images extends Component {
                     paddingTop: 20,
                     background: '#f1f1f1'}}> 
             <div style={{paddingBottom: 20}}>
-            <Button> 
+            <h3><b>Tải lên ít nhất 5 ảnh mô tả homestay của bạn</b></h3>
+            <Button onClick={this.onUpdateBtnClick}> 
                 Cập nhật 
             </Button>
             </div>

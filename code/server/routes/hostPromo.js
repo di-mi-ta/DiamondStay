@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 
 const promoRouter = express.Router();
 promoRouter.use(bodyParser.json());
-const authenticate = require('../authenticate');
 const cors = require('./cors');
 
 const Controllers  = require('../controllers');

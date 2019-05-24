@@ -6,11 +6,20 @@ class Home extends Component{
     render(){
         return(
           <div>
-            <MainHeader auth={this.props.auth} 
-                        loginUser={this.props.loginUser} 
-                        logoutUser={this.props.logoutUser}
+            <MainHeader 
+                auth={this.props.auth} 
+                loginUser={this.props.loginUser} 
+                logoutUser={this.props.logoutUser}
+                promotions={this.props.promotions}
+                homeposts={this.props.homeposts}
+                fetchSystemPromos={this.props.fetchSystemPromos}
+                fetchHomeposts = {this.props.fetchHomeposts}
             />
-            <MainPage/>
+            <MainPage
+                promotions={this.props.promotions}
+                homeposts={this.props.homeposts}
+                fetchSystemPromos={this.props.fetchSystemPromos}
+                fetchHomeposts = {this.props.fetchHomeposts}/>
           </div> 
         );
     }
