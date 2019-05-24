@@ -2,10 +2,12 @@
 const
     express = require('express'),
     auth = require('../authenticate'),
+    corsAllowAll = require('./cors').allowAll,
     controller = require('../controllers/messages');
     
 const router = express.Router();
 
+router.use(corsAllowAll)
 router.use(auth.verifyUser);
 
 router
