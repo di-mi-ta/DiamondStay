@@ -5,27 +5,6 @@ require('mongoose-currency').loadType(mongoose)
 
 const locationSchema = 'Locations';
 
-// Rating schema
-const  ratingSchema = new Schema({
-    rate: {
-        type: Number,
-        min: 1,
-        max: 5,
-        required: true
-    },
-    comment: {
-        type: String,
-        required: true
-    },
-    author: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Users'
-    }
-}, {
-    timestamps: true
-});
-
-
 const HomePostSchema = new Schema({
 
     // Chủ nhà
@@ -133,8 +112,12 @@ const HomePostSchema = new Schema({
         type: String,
         default: ''
     },
+
     // Bình luận và đánh giá
-    rating: [ratingSchema],
+    rating: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Comments'
+    }],
 
     // Tiện nghi
     forFamily: [{
