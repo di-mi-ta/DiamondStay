@@ -9,6 +9,7 @@ import Header from '../Header/HostHeader';
 
 
 import '../../css/host/host-manager.css';
+import MessageComponent from '../Host/MessageComponent';
 
 class HostManager extends Component{
     render() {
@@ -62,7 +63,9 @@ class HostManager extends Component{
                 </Link>
               </Menu.Item>
               <Menu.Item key="6" >
-                <span> <b>Tin nhắn</b> </span>
+                <Link to='/host/messages'>
+                  <span> <b>Tin nhắn</b> </span>
+                </Link>
               </Menu.Item>
             </Menu>
             <Switch>
@@ -92,8 +95,11 @@ class HostManager extends Component{
               <Route path="/host/reservations" 
                      render={() => <Reservation
                                     auth={this.props.auth}
-                                    
                                     />}/>
+              <Route
+                path="/host/messages"
+                component={MessageComponent}
+              />
             </Switch>
             </div>
             : <div/> 
