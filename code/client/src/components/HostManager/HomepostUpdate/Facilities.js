@@ -1,18 +1,23 @@
 import React, {Component} from 'react';
-import {Button, Modal, Input, Form, Menu, Select, InputNumber} from 'antd';
+import {Button, Radio, Input, Form} from 'antd';
+const RadioGroup = Radio.Group;
 
-const DescForm = Form.create({ name: 'desc' })(
+const FacilityForm = Form.create({ name: 'desc' })(
     class extends React.Component {
       render() {
         const { form } = this.props;
         const { getFieldDecorator } = form;
         return (
             <Form  layout="vertical">
-              <Form.Item label="Tiêu đề">
-                {getFieldDecorator('name', {
-                  rules: [{ required: true, message: 'Vui lòng nhập tên chỗ ở !!!' }],
+              <Form.Item label="Dành cho gia đình">
+                {getFieldDecorator('forFamily', {
+                  rules: [{ required: false}],
                 })(
-                  <Input />
+                  <RadioGroup name="radiogroup" defaultValue={1}>
+                  <Radio value={0}>Phù hợp với trẻ nhỏ</Radio>
+                  <Radio value={1}>Đệm bổ sung</Radio>
+                  <Radio value={2}>Không hút thuốc</Radio>
+                </RadioGroup>
                 )}
               </Form.Item>
               <Form.Item label="Mô tả">
@@ -52,7 +57,7 @@ class Facilities extends Component {
   render(){
       return(
           <div className="container">
-              <DescForm
+              <FacilityForm
                   wrappedComponentRef={this.saveFormRef}
                   onCancel={this.handleCancel}
                   onCreate={this.handleCreate}
