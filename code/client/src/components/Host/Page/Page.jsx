@@ -2,6 +2,7 @@ import React from 'react';
 import PageContent from '../Content';
 import { Layout, Col } from 'antd';
 import Header from '../Header';
+import 'antd/dist/antd.css';
 import './Page.css';
 const { Content, Footer } = Layout;
 

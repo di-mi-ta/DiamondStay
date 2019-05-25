@@ -6,8 +6,24 @@ class BookingForm extends React.Component{
     constructor(props){
         super(props);
         this.state = { //information of booking lies here
-            dateCome: undefined, //set them from main page
-            dateLeave: undefined,
+            //homestay
+            homestayName: undefined,
+            homestayType: undefined,
+            homestayPrice: undefined,
+            homestayAddress: undefined,
+            homestayPhoneNumber: undefined,
+            homestayEmail: undefined,
+            homestayCheckIn: undefined,
+            homestayCheckOut: undefined,
+            //user
+            userName: undefined,
+            userAccount: undefined,
+            userPhoneNumber: undefined,
+            userAddress: undefined,
+            userEmail: undefined,
+            //acount
+            accName: undefined,
+            accNumber: undefined
         }
         this.ref = React.createRef();
         this.handleDateComeChange = this.handleDateComeChange.bind(this);
