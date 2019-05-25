@@ -1,28 +1,26 @@
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var User = require('./models/user'); 
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
+const jwt = require('jsonwebtoken'); 
 
-var JwtStrategy = require('passport-jwt').Strategy;
-var ExtractJwt = require('passport-jwt').ExtractJwt;
-var jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
-
-var config = require('./config.js');
+const User = require('./models/user'); 
+const config = require('./config/jwtConfig');
 
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 exports.getToken = function(user) {
-    return jwt.sign(user, config.secretKey,
-        {expiresIn: 3600});
+    return jwt.sign(user, config.secretKey, { expiresIn: '30 days' });
 };
 
-var opts = {};
-opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = config.secretKey;
+var opts = {
+    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+    secretOrKey: config.secretKey,
+};
 
 exports.jwtPassport = passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
-        // console.log("JWT payload: ", jwt_payload);
         User.findOne({_id: jwt_payload._id}, (err, user) => {
             if (err) {
                 return done(err, false);

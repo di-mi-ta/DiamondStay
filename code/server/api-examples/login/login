@@ -1,0 +1,21 @@
+POST /users/login
+{
+  "username": "cuong",
+  "password": "pass123"
+}
+
+
+# Response
+{
+    "success": true,
+    "status": "Login Successful!",
+    "token": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Y2UxMWFmZjUyNzdmNjc4ZThkYThhNzIiLCJpYXQiOjE1NTg3Nzg1NDksImV4cCI6MTU2MTM3MDU0OX0.irYQeax_tfzqRMvg0c5yXOZZqiRN4rBkLuC_oUGh2v8",
+    "userInfo": {
+        "firstName": "Cuong",
+        "lastName": "Van",
+        "email": "cuongvtien@gmail.com",
+        "phone": "01231212212",
+        "typeUser": 0,
+        "coin": 0
+    }
+}
