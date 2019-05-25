@@ -1,6 +1,7 @@
 import React from 'react';
 import '../../css/SearchBox.css';
 import DatePicker from 'react-datepicker';
+import {Button} from 'reactstrap';
 
 class BookingForm extends React.Component{
     constructor(props){
@@ -28,8 +29,46 @@ class BookingForm extends React.Component{
         this.ref = React.createRef();
         this.handleDateComeChange = this.handleDateComeChange.bind(this);
         this.handleDateLeaveChange = this.handleDateLeaveChange.bind(this);
+        this.changeName = this.handleUserNameChange.bind(this);
+        this.changePhoneNumber = this.handlePhoneNumberChange.bind(this);
+        this.changeAddress = this.handleAddressChange.bind(this);
+        this.changeAccName = this.handleAccNameChange.bind(this);
+        this.changeAccNumber = this.handleAccNumberChange.bind(this);
         //functions lies here
     }
+
+    handleAccNumberChange(value){
+        this.setState({
+            accNumber: value.target.value
+        });
+    }
+
+    handleAccNameChange(value){
+        this.setState({
+            accName: value.target.value
+        });
+    }
+
+    handleAddressChange(value){
+        this.setState({
+            userAddress:value.target.value 
+        });
+    }
+
+
+    handlePhoneNumberChange(value){
+        this.setState({
+            userPhoneNumber:value.target.value
+        });
+    }
+
+    handleUserNameChange(value){
+        this.setState({
+            userName: value.target.value
+        });
+    }
+
+
 
     handleDateComeChange(date) {
         this.setState({
@@ -39,7 +78,7 @@ class BookingForm extends React.Component{
     
     handleDateLeaveChange(date) {
         this.setState({
-        dateLeave: date
+            dateLeave: date
         });
     }
 
@@ -56,60 +95,67 @@ class BookingForm extends React.Component{
                         <div className="homestay-info">
                             Thông tin homestay
                             <div className="inputField">Tên homestay</div>
-                            <div className="inputContent">a</div>
+                            <div className="inputContent">{this.state.homestayName}</div>
                             <div className="inputField">Loại homestay</div>
-                            <div className="inputContent">w</div>
+                            <div className="inputContent">{this.state.homestayType}</div>
                             <div className="inputField">Giá/đêm</div>
-                            <div className="inputContent">w</div>
-                            <div className="inputField">Địa chỉ: </div>
-                            <div className="inputContent">w</div>
-                            <div className="inputField">Số điện thoại liên hệ: </div>
-                            <div className="inputContent">w</div>
+                            <div className="inputContent">{this.state.homestayPrice}$/đêm</div>
+                            <div className="inputField">Địa chỉ</div>
+                            <div className="inputContent">{this.state.homestayAddress}</div>
+                            <div className="inputField">Số điện thoại liên hệ</div>
+                            <div className="inputContent">{this.state.homestayPhoneNumber}</div>
                             <div className="inputField">Email liên hệ:</div>
-                            <div className="inputContent">w</div>
+                            <div className="inputContent">{this.state.homestayEmail}</div>
                         </div>
                         <br/>
                         <div className="user-info">
                             Thông tin người dùng
                             <div className="inputField">Tên của bạn</div>
                             <div className="inputContent">
-                                <input type="text"/>
+                                <input type="text" value={this.state.userName} onChange={this.changeName}/>
                             </div>
                             <div className="inputField">Tên tài khoản</div>
-                            <div className="inputContent">
-                                <input type="text"/>
-                            </div>
+                            <div className="inputContent">{this.state.userAccount}</div>
                             <div className="inputField">Số diện thoại</div>
                             <div className="inputContent">
-                                <input type="text"/>
+                                <input type="text" value={this.state.userPhoneNumber} onChange={this.changePhoneNumber}/>
                             </div>
                             <div className="inputField">Địa chỉ</div>
                             <div className="inputContent">
-                                <input type="text"/>
+                                <input type="text" value={this.state.userAddress} onChange={this.changeAddress}/>
                             </div>
                             <div className="inputField">Email</div>
-                            <div className="inputContent">
-                                <input type="text"/>
-                            </div>
+                            <div className="inputContent">{this.state.userEmail}</div>
                         </div>
                     </div>
                     <div classsName="second-col-info inputBox">
                         <div className="date-picker">
-                            There lie Date picker.
+                        <div className="inputField">Ngày đi</div>
+                            <DatePicker
+                                selected={this.state.dateCome}
+                                onChange={this.handleDateComeChange}
+                            />
+                            <div className="inputField">Ngày về</div>
+                            <DatePicker
+                                selected={this.state.dateLeave}
+                                onChange={this.handleDateLeaveChange}
+                            />
                         </div>
                         <div className="banking-info">
                             <div className="inputField">Tên tài khoản ngân hàng</div>
                             <div className="inputContent">
-                                <input type="text"/>
+                                <input type="text" value={this.state.accName} onChange={this.changeAccName}/>
                             </div>
                             <div className="inputField">Số tài khoản ngân hàng</div>
                             <div className="inputContent">
-                                <input type="text"/>
+                                <input type="text" value={this.state.accNumber} onChange={this.changeAccNumber}/>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="hello">Book</div>
+                <div className="button-and-conditions">
+                    <Button color="primary">Đặt phòng</Button>
+                </div>
             </div>
         )
     }

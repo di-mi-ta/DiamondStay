@@ -6,7 +6,6 @@ class Booking extends React.Component{
     render(){
         return (
             <div>
-                {/*
                 <MainHeader 
                     auth={this.props.auth} 
                     loginUser={this.props.loginUser} 
@@ -15,7 +14,7 @@ class Booking extends React.Component{
                     homeposts={this.props.homeposts}
                     fetchSystemPromos={this.props.fetchSystemPromos}
                     fetchHomeposts = {this.props.fetchHomeposts}
-                />*/}
+                />
                 <BookingForm/>
             </div>
         )
