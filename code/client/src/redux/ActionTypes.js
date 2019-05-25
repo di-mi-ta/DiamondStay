@@ -28,12 +28,8 @@ export const HOMEPOSTS_LOADING = 'HOMEPOSTS_LOADING';
 export const ADD_HOMEPOSTS = 'ADD_HOMEPOSTS';
 export const ADD_HOMEPOST = 'ADD_HOMEPOST';
 export const UPDATE_HOMEPOST = 'UPDATE_HOMEPOST';
-<<<<<<< HEAD
 export const HOMEPOSTS_FAILED = 'HOMEPOSTS_FAILED';
 export const UPDATE_CURRENT_HOMEPOST = 'UPDATE_CURRENT_HOMEPOST';
-=======
-export const HOMEPOSTS_FAILED = 'HOMEPOSTS_FAILED'
->>>>>>> tan-branch
 
 // for ratings 
 export const ADD_RATING = 'ADD_RATING';

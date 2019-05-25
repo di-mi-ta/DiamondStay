@@ -6,18 +6,12 @@
     "@glidejs/glide": "^3.3.0",
     "@material-ui/core": "^3.9.3",
     "antd": "^3.17.0",
-<<<<<<< HEAD
     "axios": "^0.18.0",
-=======
->>>>>>> tan-branch
     "bootstrap": "4.0.0",
     "bootstrap-social": "5.1.1",
     "cross-fetch": "2.1.0",
     "font-awesome": "^4.7.0",
-<<<<<<< HEAD
     "jquery": "^3.4.1",
-=======
->>>>>>> tan-branch
     "moment": "^2.24.0",
     "prop-types": "15.6.0",
     "react": "^16.3.2",

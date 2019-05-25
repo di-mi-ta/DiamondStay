@@ -36,7 +36,6 @@ class Header extends Component {
     }
 
     toggleLoginModal() {
-<<<<<<< HEAD
         this.setState({
             isLoginModalOpen: !this.state.isLoginModalOpen
         });
@@ -44,15 +43,6 @@ class Header extends Component {
 
     toggleSigninModal(){
         this.setState({
-=======
-        this.setState({
-            isLoginModalOpen: !this.state.isLoginModalOpen
-        });
-    }
-
-    toggleSigninModal(){
-        this.setState({
->>>>>>> tan-branch
             isSigninModalOpen: !this.state.isSigninModalOpen
         });
     }
@@ -107,7 +97,6 @@ class Header extends Component {
         );
 
         return(
-<<<<<<< HEAD
             <header class="header">
                 <div class="header_content d-flex flex-row align-items-center justify-content-start">
                     {/*logo*/}
@@ -139,82 +128,6 @@ class Header extends Component {
                     </div>
                 </div>
             </header>
-=======
-            <React.Fragment>
-                <Navbar light expand="md" 
-                        style= {{
-                            backgroundImage: "while",
-                            top: 0,
-                            width: '100%',
-                        }}>
-                    <div className="container">
-                    <NavbarToggler onClick={this.toggleNav} />
-                    <NavbarBrand className="mr-auto" href="/" style={{color: 'while'}}>
-                            <img src="http://www.iconeasy.com/icon/png/Business/Pretty%20Office%204/Home.png" height="30" width="30"/>
-                            <b>Diamond Stay</b>
-                    </NavbarBrand>
-                    <Collapse isOpen={this.state.isNavOpen} navbar>
-                        <Nav className="ml-auto" navbar>
-                            <NavItem>
-                                <Link to='/host'>
-                                    <Button type="link">
-                                            Trở thành chủ nhà
-                                    </Button>
-                                </Link>
-                            </NavItem>
-                            <NavItem>
-                                {!this.props.auth.isAuthenticated ?
-                                    <div>
-                                        <Button onClick={this.toggleSigninModal} type="link" 
-                                        >
-                                            Đăng kí 
-                                        </Button> 
-                                        <Button onClick={this.toggleLoginModal} type="link" 
-                                        >
-                                            Đăng nhập 
-                                        </Button>  
-                                    </div>      
-                                    :
-                                    <div>
-                                        <Dropdown overlay={menu}>
-                                            <Button style={{background: '#f7ede1', width: '100px', borderRadius: "20px"}}>
-                                                {this.props.auth.user.username} <Icon type="down" />
-                                            </Button>
-                                        </Dropdown>
-                                    </div>
-                                }
-                            </NavItem> 
-                        </Nav>
-                    </Collapse>
-                    </div>
-                </Navbar>
-                <Modal isOpen={this.state.isLoginModalOpen} toggle={this.toggleLoginModal}>
-                    <ModalHeader toggle={this.toggleLoginModal}>Đăng nhập</ModalHeader>
-                    <ModalBody>
-                        <Form>
-                            <FormGroup>
-                                <Label htmlFor="username">Tên đăng nhập</Label>
-                                <Input type="text" id="username" name="username"
-                                    innerRef={(input) => this.username = input} />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label htmlFor="password">Mật khẩu</Label>
-                                <Input type="password" id="password" name="password"
-                                    innerRef={(input) => this.password = input}  />
-                            </FormGroup>
-                            <FormGroup check>
-                                <Label check>
-                                    <Input type="checkbox" name="remember"
-                                    innerRef={(input) => this.remember = input}  />
-                                    Nhớ mật khẩu
-                                </Label>
-                            </FormGroup>
-                            <Button onClick={this.handleLogin} type="primary">Đăng nhập</Button>
-                        </Form>
-                    </ModalBody>
-                </Modal>
-            </React.Fragment>
->>>>>>> tan-branch
         );
     }
 }

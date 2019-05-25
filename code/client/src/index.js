@@ -6,12 +6,7 @@ import 'jquery/dist/jquery';
 import 'bootstrap/dist/js/bootstrap.bundle';
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap-social/bootstrap-social.css';
-<<<<<<< HEAD
 import './index.css';   // this is global css file, do not remove
-=======
-import './index.css';
-import 'antd/dist/antd.css';
->>>>>>> tan-branch
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 

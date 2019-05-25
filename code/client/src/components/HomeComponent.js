@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-<<<<<<< HEAD
 import MainHeader from './HomePage/MainHeader';
 import MainPage from './HomePage/MainPage';
 
@@ -22,15 +21,6 @@ class Home extends Component{
                 fetchSystemPromos={this.props.fetchSystemPromos}
                 fetchHomeposts = {this.props.fetchHomeposts}/>
           </div> 
-=======
-
-class Home extends Component {
-    render(){
-        return(
-            <div className="container">
-                <p>Home</p>
-            </div>
->>>>>>> tan-branch
         );
     }
 }
