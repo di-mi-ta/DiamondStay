@@ -91,10 +91,23 @@ const logOut = (req,res,next) => {
    }
 }
 
+const updateUser = (req, res, next) => {
+  User.findByIdAndUpdate(req.params.userId, {
+      $set: req.body
+  }, { new: true })
+  .then((user) => {
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      res.json({success: 'true'});
+  }, (err) => next(err))
+  .catch((err) => next(err));
+}
+
 module.exports = {
   logOut,
   logIn,
   signUp,
   deleteAllUsers,
-  getListUser
+  getListUser,
+  updateUser
 }

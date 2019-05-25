@@ -158,6 +158,7 @@ export const addHostPromo = (promo) => ({
 export const addSystemPromo = (promo) => ({
     type: ActionTypes.ADD_SYSTEM_PROMO,
     payload: promo
+<<<<<<< HEAD
 });
 
 export const updateSystemPromo = (promo) => ({
@@ -165,16 +166,34 @@ export const updateSystemPromo = (promo) => ({
     payload: promo
 });
 
+=======
+});
+
+export const updateSystemPromo = (promo) => ({
+    type: ActionTypes.UPDATE_SYSTEM_PROMO,
+    payload: promo
+});
+
+>>>>>>> tan-branch
 export const updateHostPromo = (promo) => ({
     type: ActionTypes.UPDATE_HOST_PROMO,
     payload: promo
 });
+<<<<<<< HEAD
 
 export const deleteSystemPromo = (promoId) => ({
     type: ActionTypes.DELETE_SYSTEM_PROMO,
     payload: promoId
 });
 
+=======
+
+export const deleteSystemPromo = (promoId) => ({
+    type: ActionTypes.DELETE_SYSTEM_PROMO,
+    payload: promoId
+});
+
+>>>>>>> tan-branch
 export const deleteHostPromo = (promoId) => ({
     type: ActionTypes.DELETE_HOST_PROMO,
     payload: promoId
@@ -199,6 +218,7 @@ export const fetchDeleteHostPromo = (promoId) => (dispatch) => {
             }
         },
         error => {
+<<<<<<< HEAD
                 throw error;
         })
         .then(response => response.json())
@@ -239,6 +259,20 @@ export const fetchUpdateHostPromo = (updatedPromo) => (dispatch) => {
             body: JSON.stringify(updatedPromo),
             headers: {
             "Content-Type": "application/json",
+=======
+                throw error;
+        })
+        .then(response => response.json())
+        .then((promo)=> dispatch(deleteHostPromo(promo)))
+        .catch(error => dispatch(promosFailed(error.message)));
+}
+
+export const fetchDeleteSystemPromo = (promoId) => (dispatch) => {
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+        fetch(baseUrl + 'system-promotions/' + promoId, {
+            method: "DELETE",
+            headers: {
+>>>>>>> tan-branch
             'Authorization': bearer,
             credentials: "same-origin"
             },
@@ -254,6 +288,37 @@ export const fetchUpdateHostPromo = (updatedPromo) => (dispatch) => {
         },
         error => {
                 throw error;
+<<<<<<< HEAD
+=======
+        })
+        .then(response => response.json())
+        .then((promo)=> dispatch(deleteSystemPromo(promo)))
+        .catch(error => dispatch(promosFailed(error.message)));
+}
+
+export const fetchUpdateHostPromo = (updatedPromo) => (dispatch) => {
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+        fetch(baseUrl + 'host-promotions/' + updatedPromo._id, {
+            method: "PUT",
+            body: JSON.stringify(updatedPromo),
+            headers: {
+            "Content-Type": "application/json",
+            'Authorization': bearer,
+            credentials: "same-origin"
+            },
+        })
+        .then(response => {
+            if (response.ok) {
+            return response;
+            } else {
+            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+            error.response = response;
+            throw error;
+            }
+        },
+        error => {
+                throw error;
+>>>>>>> tan-branch
         })
         .then(response => response.json())
         .then((promo)=> dispatch(updateHostPromo(promo)))
@@ -346,11 +411,14 @@ export const fetchCreateSystemPromo = (promo) => (dispatch) => {
 
 
 // for homepost 
+<<<<<<< HEAD
 export const updateCurrentHomepost = (homepost) => ({
     type: ActionTypes.UPDATE_CURRENT_HOMEPOST,
     payload: homepost
 })
 
+=======
+>>>>>>> tan-branch
 export const addHomeposts = (homeposts) => ({
     type: ActionTypes.ADD_HOMEPOSTS,
     payload: homeposts
@@ -403,8 +471,14 @@ export const fetchUpdateHomepost = (homepost) => (dispatch) => {
         .catch(error => dispatch(homepostsFailed(error.message)));
 }
 
+<<<<<<< HEAD
 export const fetchHomeposts = (query='') => (dispatch) => {
     return fetch(baseUrl + 'homeposts' + query)
+=======
+export const fetchHomeposts = () => (dispatch) => {
+    dispatch(homepostsLoading(true));
+    return fetch(baseUrl + 'homeposts')
+>>>>>>> tan-branch
         .then(response => {
             if (response.ok) {
                 return response;
@@ -452,6 +526,10 @@ export const fetchCreateHomepost = (homepost) => (dispatch) => {
         .catch(error => dispatch(homepostsFailed(error.message)));
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> tan-branch
 // for ratings
 export const addRating = (rating) => ({
     type: ActionTypes.ADD_RATING,

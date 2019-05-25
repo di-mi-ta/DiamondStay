@@ -86,7 +86,11 @@ class Header extends Component {
                         }}>
                     <div className="container">
                     <NavbarToggler onClick={this.toggleNav} />
+<<<<<<< HEAD
                     <NavbarBrand className="mr-auto" href="/host" style={{color: 'while'}}>
+=======
+                    <NavbarBrand className="mr-auto" href="/" style={{color: 'while'}}>
+>>>>>>> tan-branch
                             <img src="http://www.iconeasy.com/icon/png/Business/Pretty%20Office%204/Home.png" 
                             height="30" width="30"/>
                             <b>{' Diamond Stay'}</b>
