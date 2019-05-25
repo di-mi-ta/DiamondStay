@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const passport = require('passport');
 
 const mongoConfig = require('./config/mongoConfig');
+const corsAllowAll = require('./routes/cors').allowAll;
 
 const initialize = (app) => {
     mongoose.connect(mongoConfig.uri, { useNewUrlParser: true });
@@ -18,6 +19,7 @@ const initialize = (app) => {
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
     app.use(passport.initialize());
+    app.use('*', corsAllowAll);
 };
 
 module.exports = initialize;

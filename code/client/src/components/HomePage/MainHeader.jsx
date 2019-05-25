@@ -5,6 +5,7 @@ import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem,
   Form, FormGroup, Input, Label } from 'reactstrap';
 import {Button, Dropdown, Icon, Menu} from 'antd';
 import {Link, Redirect} from 'react-router-dom';
+import UserRegistration from './UserRegistration';
 
 class MainHeader extends React.Component {
   constructor(props) {
@@ -12,11 +13,11 @@ class MainHeader extends React.Component {
     this.state = {
       isNavOpen: false,
       isLoginModalOpen: false,
-      isSigninModalOpen: false
+      isRegisterModalOpen: false,
     };
     this.toggleNav = this.toggleNav.bind(this);
     this.toggleLoginModal = this.toggleLoginModal.bind(this);
-    this.toggleSigninModal = this.toggleSigninModal.bind(this);
+    this.toggleRegisterModal = this.toggleRegisterModal.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
   }
@@ -33,9 +34,9 @@ class MainHeader extends React.Component {
       });
   }
 
-  toggleSigninModal(){
+  toggleRegisterModal(){
       this.setState({
-          isSigninModalOpen: !this.state.isSigninModalOpen
+          isRegisterModalOpen: !this.state.isRegisterModalOpen
       });
   }
 
@@ -47,7 +48,7 @@ class MainHeader extends React.Component {
   handleLogout() {
       this.props.logoutUser();
       return <Redirect to='/home'/>
-  } 
+  }
 
   render() {
     return (
@@ -79,7 +80,7 @@ class MainHeader extends React.Component {
               {!this.props.auth.isAuthenticated ?
                   <li className="nav-item">
                     <a className="nav-link">
-                    <Button onClick={this.toggleSigninModal} type="link">
+                    <Button onClick={this.toggleRegisterModal} type="link">
                       Đăng kí
                     </Button>
                     </a>
@@ -159,13 +160,17 @@ class MainHeader extends React.Component {
                     </Form>
                 </ModalBody>
             </Modal>
+            <UserRegistration
+              isOpen={this.state.isRegisterModalOpen}
+              toggle={this.toggleRegisterModal}
+            />
           </div>
         </nav>
     );
   }
 
   componentDidMount() {
-    //fetch 
+    //fetch
   }
 }
 
