@@ -1,0 +1,12 @@
+# Request
+GET /booking/5ce120e4953712209297bb3b
+
+
+# Response
+## Susccess: not tested yet
+
+
+## Errors
+{
+    "err": "Booking not found"
+}

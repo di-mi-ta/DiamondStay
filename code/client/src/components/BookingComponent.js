@@ -15,7 +15,15 @@ class Booking extends React.Component{
                     fetchSystemPromos={this.props.fetchSystemPromos}
                     fetchHomeposts = {this.props.fetchHomeposts}
                 />
-                <BookingForm/>
+                <BookingForm
+                    auth={this.props.auth} 
+                    loginUser={this.props.loginUser} 
+                    logoutUser={this.props.logoutUser}
+                    promotions={this.props.promotions}
+                    homeposts={this.props.homeposts}
+                    fetchSystemPromos={this.props.fetchSystemPromos}
+                    fetchHomeposts = {this.props.fetchHomeposts}
+                />
             </div>
         )
     }

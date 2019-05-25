@@ -25,7 +25,8 @@ const reservationSchema = new Schema({
     },
     home: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'HomePosts'
+        ref: 'HomePosts',
+        required: true
     },
     dateStart: {
         type: Date,

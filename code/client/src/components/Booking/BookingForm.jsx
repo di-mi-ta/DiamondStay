@@ -6,6 +6,7 @@ import {Button} from 'reactstrap';
 class BookingForm extends React.Component{
     constructor(props){
         super(props);
+        const user = this.props.auth.user.info;
         this.state = { //information of booking lies here
             //homestay
             homestayName: undefined,
@@ -17,11 +18,11 @@ class BookingForm extends React.Component{
             homestayCheckIn: undefined,
             homestayCheckOut: undefined,
             //user
-            userName: undefined,
-            userAccount: undefined,
-            userPhoneNumber: undefined,
-            userAddress: undefined,
-            userEmail: undefined,
+            userName: user.fullName,
+            userAccount: user.username,
+            userPhoneNumber: user.phone,
+            userAddress: 'NO ADDRESS!',
+            userEmail: user.email,
             //acount
             accName: undefined,
             accNumber: undefined
