@@ -1,6 +1,5 @@
 const
     Message = require('../models/message'),
-    errors = require('./errors'),
     User = require('../models/user'),
     debug = require('debug')('CUONG');
 
@@ -11,31 +10,27 @@ function getUserInboxMessages(req, res, next) {
         .exec((err, messages) => {
             if (err) {
                 debug(err)
-                return errors.sendQueryError(res);
+                res.status(500).json({ err: 'Internal server error' });
             }
             res.status(200).json({
-                success: true,
                 messages,
             });
         });
 }
 
 function deleteMessage(req, res, next) {
-    Message.findByIdAndDelete(req.body.messageId).exec((err, message) => {
+    Message.findByIdAndDelete(req.params.messageId).exec((err, message) => {
         if (err)
-            return errors.sendQueryError(res);
+            return res.status(500).json({ err: 'Internal server error' });
         if (message === null)
-            return res.json({ success: false, message: 'Message not found' })
-        res.status(200).json({ success: true });
+            return res.json({ err: 'Message not found' })
+        res.status(200).json({});
     });
 }
 
 function addMessage(req, res, next) {
     if (req.user._id.toString() === req.body.receiverId)
-        return res.json({
-            success: false,
-            message: 'Sender and receiver are the same'
-        });
+        return res.json({ err: 'Sender and receiver cannot be the same' });
     const newMessage = {
         sender: req.user._id,
         receiver: req.body.receiverId,
@@ -46,19 +41,29 @@ function addMessage(req, res, next) {
 
     User.findById(newMessage.receiver).exec((err, user) => {
         if (err)
-            errors.sendQueryError(res);
+            return res.status(500).json({ err: 'Internal server error' });
 
         // Receiver not exists
-        if (user === null)
-            return res.json({ success: false, message: 'Receiver not found' });
+        if (!user)
+            return res.json({ err: 'Receiver not found' });
 
         Message.create(newMessage, (err, message) => {
             if (err)
-                return errors.sendQueryError(res);
+                return res.status(500).json({ err: 'Internal server error' });
 
-            res.json({ success: true, message });
+            res.json({ message });
         });
 
+    });
+}
+
+function seenMessage(req, res, next) {
+    Message.findByIdAndUpdate(req.body.messageId, { seen: true }).exec((err, message) => {
+        if (err)
+            return res.status(500).json({ err: 'Internal server error' });
+        // if (message === null)
+        //     return res.json({ err: 'Message not found' })
+        res.status(200).json({});
     });
 }
 
@@ -66,4 +71,5 @@ module.exports = {
     getUserInboxMessages,
     addMessage,
     deleteMessage,
+    seenMessage,
 }

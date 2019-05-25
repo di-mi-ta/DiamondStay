@@ -1,9 +1,11 @@
-var AuthCtrl = require('./auth')
-var PromoCtrl = require('./promotions')
-var HomePostCtrl = require('./homeposts')
+const AuthCtrl = require('./auth');
+const PromoCtrl = require('./promotions');
+const HomePostCtrl = require('./homeposts');
+const CommentCtrl = require('./comment'); 
 
 module.exports = {
     AuthCtrl,
     PromoCtrl,
     HomePostCtrl,
+    CommentCtrl
 }
