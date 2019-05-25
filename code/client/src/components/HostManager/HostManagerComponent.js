@@ -7,7 +7,6 @@ import HomepostManager from './HomepostManager';
 import Reservation from '../Booking/ReservationComponent'
 import Header from '../Header/HostHeader';
 
-
 import '../../css/host/host-manager.css';
 
 class HostManager extends Component{
