@@ -61,11 +61,12 @@ const logIn = (req, res, next) => {
         return res.status(401).json({success: false, status: 'Login Unsuccessful!', err: 'Could not log in user!'});
       }
       var token = authenticate.getToken({_id: req.user._id});
+
       return res.status(200).json({
         success: true,
         status: 'Login Successful!',
-        token: token,
-        info: {
+        token: `Bearer ${token}`,
+        userInfo: {
           firstName: req.user.firstName,
           lastName: req.user.lastName,
           email: req.user.email,

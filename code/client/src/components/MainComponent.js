@@ -13,6 +13,7 @@ import HostManager from '../components/HostManager/HostManagerComponent';
 import House from './Homestay/House';
 import Home from "./HomeComponent";
 import Footer from "./FooterComponent";
+import Booking from "./BookingComponent";
 import UpdatedHomepostManager from './HostManager/HomepostUpdate/UpdatedManager';
 import HostHeader from './Header/HostHeader'
 
@@ -108,7 +109,7 @@ class Main extends Component {
           />
           <Route path="/properties" 
                 render={() => 
-                              <div>
+                            <div>
                               <HostHeader 
                                 auth={this.props.auth}
                                 loginUser={this.props.loginUser} 
@@ -124,8 +125,20 @@ class Main extends Component {
                                   fetchUpdateHomepost={this.props.fetchUpdateHomepost}
                                   updateCurrentHomepost={this.props.updateCurrentHomepost}
                               />
-                              </div>
+                            </div>
           }/>
+
+          <Route path="/booking"
+                  render={() => <Booking
+                                  auth={this.props.auth} 
+                                  loginUser={this.props.loginUser} 
+                                  logoutUser={this.props.logoutUser}
+                                  promotions={this.props.promotions}
+                                  homeposts={this.props.homeposts}
+                                  fetchSystemPromos={this.props.fetchSystemPromos}
+                                  fetchHomeposts = {this.props.fetchHomeposts}
+                              />}
+          />
           <Redirect to='/home'/>
         </Switch>
         <Footer/>

@@ -1,0 +1,16 @@
+# Request
+POST /booking
+{
+    renter
+    paymentStatus
+    numNights
+    appliedHostPromo
+    appliedSystemPromo
+    home
+    dateStart
+    dateEnd
+}
+
+
+# Response
+## Susccess: not tested yet

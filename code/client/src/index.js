@@ -10,5 +10,5 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import Testy from './components/Host/Page';
 
-ReactDOM.render(<Testy />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
