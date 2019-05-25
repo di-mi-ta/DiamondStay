@@ -19,11 +19,11 @@ function getUserInboxMessages(req, res, next) {
 }
 
 function deleteMessage(req, res, next) {
-    Message.findByIdAndDelete(req.params.messageId).exec((err, message) => {
+    Message.findByIdAndDelete(req.params.id).exec((err, message) => {
         if (err)
             return res.status(500).json({ err: 'Internal server error' });
-        if (message === null)
-            return res.json({ err: 'Message not found' })
+        if (!message)
+            return res.status(404).json({ err: 'Message not found' })
         res.status(200).json({});
     });
 }
@@ -58,7 +58,7 @@ function addMessage(req, res, next) {
 }
 
 function seenMessage(req, res, next) {
-    Message.findByIdAndUpdate(req.body.messageId, { seen: true }).exec((err, message) => {
+    Message.findByIdAndUpdate(req.body.id, { seen: true }).exec((err, message) => {
         if (err)
             return res.status(500).json({ err: 'Internal server error' });
         // if (message === null)

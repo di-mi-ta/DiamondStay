@@ -2,11 +2,8 @@ import { baseUrl } from '../../../shared/baseUrl';
 const moment = require('moment');
 const axios = require('axios');
 
-// localStorage.setItem('token', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Y2UxMWFmZjUyNzdmNjc4ZThkYThhNzIiLCJpYXQiOjE1NTg3MTQwMDcsImV4cCI6MTU2MTMwNjAwN30.TvDQ3_o-4V-qaKC_AVX9DFbyoQdIHEvBhOFWWhaB0E0');
-const AUTH_TOKEN = localStorage.getItem('token');
-
 axios.defaults.baseURL = baseUrl;
-axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
 axios.defaults.validateStatus = function (status) { return true; }; // don't care about status codes
 
 export function fetchMessages() {
@@ -46,9 +43,7 @@ export function fetchMessages() {
 export function deleteMessage(messageId) {
   console.log(messageId);
   return new Promise((resolve, reject) => {
-    axios.delete('/messages', {
-      params: { messageId: messageId }
-    }).then(response => {
+    axios.delete(`/messages/${messageId}`, {}).then(response => {
       if (response.data.err) reject(response.data.err);
       else resolve();
     }).catch(err => reject(err));
@@ -71,7 +66,7 @@ export function sendReplyMessage(message) {
 
 export function seenMessage(messageId) {
   return new Promise((resolve, reject) => {
-    axios.put('/messages', { messageId: messageId }).then(res => {
+    axios.put(`/messages/${messageId}`, {}).then(res => {
       if (res.data.err) reject(res.data.err);
       else resolve();
     }).catch(err => reject(err));

@@ -9,14 +9,14 @@ var passport = require('passport');
 const Controllers  = require('../controllers');
 const AuthCtrl = Controllers.AuthCtrl;
 
-router.use(bodyParser.json());
+// router.use(bodyParser.json());
 
 router.options('*', cors.corsWithOptions,(req, res) => {res.sendStatus(200);})
 
 router
   .get('/', authenticate.verifyUser, authenticate.verifyAdmin, AuthCtrl.getListUser)
   .delete('/', authenticate.verifyUser, AuthCtrl.deleteAllUsers)
-  .post('/signup', AuthCtrl.signUp);
+  .post('/signup', cors.allowAll, AuthCtrl.signUp);
 
 router
   .post('/login', cors.corsWithOptions, AuthCtrl.logIn);

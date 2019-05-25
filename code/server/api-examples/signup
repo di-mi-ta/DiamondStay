@@ -1,0 +1,28 @@
+POST http://localhost:4444/users/signup
+{
+	"username": "cuong",
+	"password": "a",
+	"firstName": "Cuong",
+	"lastName": "Van",
+	"email": "cuongvt@gmail.com",
+	"typeUser": 1
+}
+-----------------------------------
+{
+    "success": true,
+    "status": "Registration Successful!"
+}
+
+{
+    "err": {
+        "name": "UserExistsError",
+        "message": "A user with the given username is already registered"
+    }
+}
+
+{
+    "err": {
+        "name": "MissingPasswordError",
+        "message": "No password was given"
+    }
+}

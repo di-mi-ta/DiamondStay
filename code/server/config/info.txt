@@ -1,0 +1,4 @@
+mongoDB Atlas: vtcincognito3@gmail.com		ttcnpm2@
+
+group:group12345
+mongodb+srv://group:group12345@diamondstaycluster-qk0vb.gcp.mongodb.net/diamond-stay?retryWrites=true

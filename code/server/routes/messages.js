@@ -14,9 +14,9 @@ router
 router
     .route('/')
     .get(controller.getUserInboxMessages)
-    .post(controller.addMessage)
-    .put(controller.seenMessage)
+    .post(controller.addMessage);
     
-router.delete('/:messageId', controller.deleteMessage);
+router.put('/:id', controller.seenMessage);
+router.delete('/:id', controller.deleteMessage);
 
 module.exports = router;

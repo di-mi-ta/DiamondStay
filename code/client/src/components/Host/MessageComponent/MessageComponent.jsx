@@ -18,6 +18,7 @@ class MessageComponent extends React.Component {
   };
 
   componentDidMount() {
+    console.log('MessageComponent mounted');
     helper.fetchMessages()
       .then(messages => {
         this.setState({ messages });

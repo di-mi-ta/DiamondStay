@@ -67,6 +67,7 @@ const logIn = (req, res, next) => {
         status: 'Login Successful!',
         token: `Bearer ${token}`,
         userInfo: {
+          _id: req.user._id,
           firstName: req.user.firstName,
           lastName: req.user.lastName,
           email: req.user.email,
