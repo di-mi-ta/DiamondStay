@@ -5,21 +5,24 @@ const DescForm = Form.create({ name: 'desc' })(
     class extends React.Component {
       render() {
         const { form } = this.props;
-        const { getFieldDecorator } = form;
+        const { getFieldDecorator, setFieldsValue } = form;
         return (
             <Form  layout="vertical">
               <Form.Item label="Tiêu đề">
-                {getFieldDecorator('name', {
-                  rules: [{ required: true, message: 'Vui lòng nhập tên chỗ ở !!!' }],
+                {getFieldDecorator('name', 
+                  { initialValue: this.props.homeposts.currentHomepost.name,
+                    rules: [{ required: true, message: 'Vui lòng nhập tên chỗ ở !!!', 
+                    }],
                 })(
-                  <Input />
+                  <Input/>
                 )}
               </Form.Item>
               <Form.Item label="Mô tả">
-                {getFieldDecorator('description', {
-                  rules: [{ required: false}],
+                {getFieldDecorator('description', 
+                  { initialValue: this.props.homeposts.currentHomepost.description,
+                    rules: [{required: false}],
                 })(
-                  <Input />
+                  <Input/>
                 )}
               </Form.Item>
             </Form>
@@ -29,7 +32,6 @@ const DescForm = Form.create({ name: 'desc' })(
 );
 
 class Desc extends Component {
-
   constructor(props){
     super(props);
     this.onUpdateBtnClick = this.onUpdateBtnClick.bind(this);
@@ -45,7 +47,13 @@ class Desc extends Component {
         if (err) {
           return;
         }
-        alert(JSON.stringify(values))
+        const updatedHomepost = {
+          ...this.props.homeposts.currentHomepost,
+          name: values.name,
+          description: values.description
+        }
+        this.props.fetchUpdateHomepost(updatedHomepost);
+        this.props.updateCurrentHomepost(updatedHomepost);
       form.resetFields();
     });
   }
@@ -57,6 +65,7 @@ class Desc extends Component {
                   wrappedComponentRef={this.saveFormRef}
                   onCancel={this.handleCancel}
                   onCreate={this.handleCreate}
+                  homeposts={this.props.homeposts}
               /> 
               <Button onClick={this.onUpdateBtnClick}> 
                   Cập nhật

@@ -97,8 +97,6 @@ class HomepostManager extends Component {
           if (err) {
             return;
           }
-    
-          console.log('Received values of form: ', values);
           form.resetFields();
           this.setState({ visible: false });
         });
@@ -107,6 +105,15 @@ class HomepostManager extends Component {
     saveFormRef = formRef => {
         this.formRef = formRef;
     };
+
+    comProps = {
+        auth: this.props.auth,
+        homeposts: this.props.homeposts,
+        fetchHomeposts: this.props.fetchHomeposts,
+        fetchUpdateHomepost: this.props.fetchUpdateHomepost,
+        currentHomepost: this.props.currentHomepost,
+        updateCurrentHomepost: this.props.updateCurrentHomepost,
+    }
 
     render(){
         return(
@@ -174,37 +181,56 @@ class HomepostManager extends Component {
                 /> 
                 <Switch>
                     <Route path="/host/my-homes/all" 
-                            render={() => <All
-                                        />}/>
-                    <Route path="/host/my-homes/close" render={() => <Close/>}/>
-                    <Route path="/host/my-homes/new-home" 
-                            render={(props) => <NewHomepost 
+                            render={({ match }) => <All
+                                            // {...this.comProps}
+                                            auth={this.props.auth}
                                             homeposts={this.props.homeposts}
-                                            auth={this.props.auth}
-                                            />}/>
-                    <Route path="/host/my-homes/open" 
-                            render={() => <Open
-                                            homeposts={this.props.homeposts}  
-                                            auth={this.props.auth}
+                                            fetchHomeposts = {this.props.fetchHomeposts}
+                                            fetchUpdateHomepost = {this.props.fetchUpdateHomepost}
+                                            updateCurrentHomepost={this.props.updateCurrentHomepost}
+                                            match={match}
                                             
-                                            />}/>
+                    />}/>
                     <Route path="/host/my-homes/close" 
                             render={() => <Close
-                                            homeposts={this.props.homeposts}
                                             auth={this.props.auth}
-                                            
-                                            />}/>
+                                            homeposts={this.props.homeposts}
+                                            fetchHomeposts = {this.props.fetchHomeposts}
+                                            fetchUpdateHomepost = {this.props.fetchUpdateHomepost}
+                                            updateCurrentHomepost={this.props.updateCurrentHomepost}
+                    />}/>
+                    <Route path="/host/my-homes/new-home" 
+                            render={() => <NewHomepost 
+                                            auth={this.props.auth}
+                                            homeposts={this.props.homeposts}                       
+                                            fetchHomeposts = {this.props.fetchHomeposts}
+                                            fetchUpdateHomepost = {this.props.fetchUpdateHomepost}
+                                            updateCurrentHomepost={this.props.updateCurrentHomepost}
+                    />}/>
+                    <Route path="/host/my-homes/open" 
+                            render={() => <Open
+                                            auth={this.props.auth}
+                                            homeposts={this.props.homeposts}                       
+                                            fetchHomeposts = {this.props.fetchHomeposts}   
+                                            fetchUpdateHomepost = {this.props.fetchUpdateHomepost}   
+                                            updateCurrentHomepost={this.props.updateCurrentHomepost}     
+                    />}/>
                     <Route path="/host/my-homes/reject" 
                             render={() => <Reject
-                                            homeposts={this.props.homeposts}
                                             auth={this.props.auth}
-                                            
-                                            />}/>
+                                            homeposts={this.props.homeposts}                       
+                                            fetchHomeposts = {this.props.fetchHomeposts}
+                                            fetchUpdateHomepost = {this.props.fetchUpdateHomepost} 
+                                            updateCurrentHomepost={this.props.updateCurrentHomepost}
+                    />}/>
                     <Route path="/host/my-homes/waiting" 
                             render={() => <Waiting
-                                            homeposts={this.props.homeposts}  
                                             auth={this.props.auth}
-                                            />}/>
+                                            homeposts={this.props.homeposts}                       
+                                            fetchHomeposts = {this.props.fetchHomeposts}  
+                                            fetchUpdateHomepost = {this.props.fetchUpdateHomepost}
+                                            updateCurrentHomepost={this.props.updateCurrentHomepost}
+                    />}/>
                 </Switch>
             </div>
         )

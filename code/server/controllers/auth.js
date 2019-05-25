@@ -60,12 +60,19 @@ const logIn = (req, res, next) => {
       if (err) {
         return res.status(401).json({success: false, status: 'Login Unsuccessful!', err: 'Could not log in user!'});
       }
-
       var token = authenticate.getToken({_id: req.user._id});
       return res.status(200).json({
         success: true,
         status: 'Login Successful!',
-        token: token
+        token: token,
+        info: {
+          firstName: req.user.firstName,
+          lastName: req.user.lastName,
+          email: req.user.email,
+          phone: req.user.phone,
+          typeUser: req.user.typeUser,
+          coin: req.user.coin,
+        }
       });
     });
   }) (req, res, next);

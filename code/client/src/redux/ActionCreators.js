@@ -346,6 +346,11 @@ export const fetchCreateSystemPromo = (promo) => (dispatch) => {
 
 
 // for homepost 
+export const updateCurrentHomepost = (homepost) => ({
+    type: ActionTypes.UPDATE_CURRENT_HOMEPOST,
+    payload: homepost
+})
+
 export const addHomeposts = (homeposts) => ({
     type: ActionTypes.ADD_HOMEPOSTS,
     payload: homeposts

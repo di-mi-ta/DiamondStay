@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import {Divider, Input, Form, Menu, Select, InputNumber} from 'antd';
-import {Link, Switch, Route} from 'react-router-dom';
+import {Menu} from 'antd';
+import {Link, Switch, Route, Redirect} from 'react-router-dom';
 
 import Desc from './Overview/Desc';
-import Policy from './Overview/Policy';
 import RoomBed from './Overview/RoomBed';
 
 class Overview extends Component {
@@ -13,7 +12,6 @@ class Overview extends Component {
             visible: false,
         };
     }
-
     render(){
         return(
             <div style={{paddingTop: 30, paddingLeft: 50, paddingRight: 50, 
@@ -41,33 +39,27 @@ class Overview extends Component {
                         </span>
                         </Link>
                     </Menu.Item>
-                    <Menu.Item key="3">
-                        <Link to='/properties/overview/policy'> 
-                        <span>  
-                            <b>Qui tắc chỗ ở</b> 
-                        </span>
-                        </Link>
-                    </Menu.Item>
                 </Menu>
                 <Switch>
                     <Route path="/properties/overview/desc" 
                             render={() => <Desc
-                                                //
-                                            />
-                                    }
-                    />
-                    <Route path="/properties/overview/policy" 
-                            render={() => <Policy
-                                                //
+                                            homeposts={this.props.homeposts}
+                                            fetchUpdateHomepost = {this.props.fetchUpdateHomepost}
+                                            currentHomepost ={this.props.currentHomepost}
+                                            updateCurrentHomepost={this.props.updateCurrentHomepost}
                                         />
                                     }
                     />
                     <Route path="/properties/overview/room-bed" 
-                            render={(props) => <RoomBed
-                                                // 
+                            render={() => <RoomBed
+                                            homeposts={this.props.homeposts}
+                                            fetchUpdateHomepost = {this.props.fetchUpdateHomepost}
+                                            currentHomepost ={this.props.currentHomepost}
+                                            updateCurrentHomepost={this.props.updateCurrentHomepost}
                                         />
                                     }
                     />
+                    <Redirect to='/properties/overview/desc'/>
                 </Switch>
             </div>
         )

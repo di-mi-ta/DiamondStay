@@ -1,14 +1,16 @@
 import React, {Component} from 'react';
-import { Upload, Icon, Modal, Button } from 'antd';
+import {Upload, Icon, Modal, Button, message} from 'antd';
 import axios, {post} from 'axios';
+import {baseUrl} from '../../../shared/baseUrl';
 
 const uploadFile = (file) => {
-  const url = 'http://localhost:4444/upload';
+  const url = baseUrl + 'upload';
   const formData = new FormData();
   fetch(file)
   .then(res => res.blob())
   .then(blob => {
-    formData.append('image', blob, file.name)
+    const date = Date();
+    formData.append('image', blob, (date + '_' + file.name).replace(/ /g,''));
     const config = {
         headers: {
             'Content-type': 'multipart/form-data',
@@ -16,8 +18,13 @@ const uploadFile = (file) => {
         }
     }
     post(url, formData, config)
+    .then((resp)=> {
+      lstImgs.push('public/images/'+ (date + '_' + file.name).replace(/ /g,''))
+    })
   })
 }
+
+let lstImgs = [];
 
 class Images extends Component {
     constructor(props){
@@ -25,13 +32,20 @@ class Images extends Component {
         this.state = {
             previewVisible: false,
             previewImage: '',
-            fileList: [],
+            fileList: []
         }
         this.onUpdateBtnClick = this.onUpdateBtnClick.bind(this);
     }
 
     onUpdateBtnClick = () => {
-      this.state.fileList.forEach(uploadFile)
+      this.state.fileList.forEach(uploadFile);
+      const updatedHomepost = {
+        ...this.props.homeposts.currentHomepost,
+        image: lstImgs
+      }
+      this.props.fetchUpdateHomepost(updatedHomepost);
+      message.success('Cập nhật thành công');
+      this.props.updateCurrentHomepost(updatedHomepost);
     }
   
     handleCancel = () => {

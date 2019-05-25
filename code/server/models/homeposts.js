@@ -66,6 +66,11 @@ const HomePostSchema = new Schema({
         require: true,
         default: 0
     },
+    basicPeoples: {
+        type: Number,
+        default: 1,
+        required: true
+    },
     maxPeoples: {
         type: Number,
         default: 1,

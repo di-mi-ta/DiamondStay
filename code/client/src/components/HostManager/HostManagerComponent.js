@@ -30,11 +30,16 @@ class HostManager extends Component{
                       background: "#d6ebff"
                     }}
             >
-              <Menu.Item key="1" to='/'>
+              {/* <Menu.Item key="1" to='/'>
                 <Link to='/host/promotions'>
                   <span>
                     <b>Bảng thông tin</b>
                   </span>
+                </Link>
+              </Menu.Item> */}
+              <Menu.Item key="4">
+                <Link to='/host/my-homes'>
+                  <span> <b> Chỗ ở của tôi </b> </span>
                 </Link>
               </Menu.Item>
               <Menu.Item key="2">
@@ -49,11 +54,6 @@ class HostManager extends Component{
                   <span>  
                     <b> Đặt phòng </b> 
                   </span>
-                </Link>
-              </Menu.Item>
-              <Menu.Item key="4">
-                <Link to='/host/my-homes'>
-                  <span> <b> Chỗ ở của tôi </b> </span>
                 </Link>
               </Menu.Item>
               <Menu.Item key="5">
@@ -79,11 +79,15 @@ class HostManager extends Component{
                                   />}/>
               <Route path="/host/calendars" render={() => <CalendarComponent/>}/>
               <Route path="/host/my-homes" 
-                     render={() => <HomepostManager 
-                                    auth={this.props.auth}
-                                    homeposts={this.props.homeposts}
-                                    fetchHomeposts = {this.props.fetchHomeposts}
-                                    fetchCreateHomepost = {this.props.fetchCreateHomepost}         
+                     render={(location) => <HomepostManager 
+                                        auth={this.props.auth}
+                                        homeposts={this.props.homeposts}
+                                        fetchHomeposts = {this.props.fetchHomeposts}
+                                        fetchCreateHomepost = {this.props.fetchCreateHomepost}  
+                                        fetchUpdateHomepost = {this.props.fetchUpdateHomepost}  
+                                        currentHomepost={this.props.currentHomepost}
+                                        updateCurrentHomepost={this.props.updateCurrentHomepost} 
+                                        location={location}    
                                     />}/>
               <Route path="/host/reservations" 
                      render={() => <Reservation

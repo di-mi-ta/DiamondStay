@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {Divider, Input, Form, Menu, Select, InputNumber} from 'antd';
-import {Link, Switch, Route} from 'react-router-dom';
+import {Divider, Menu} from 'antd';
+import {Link, Switch, Route, Redirect} from 'react-router-dom';
 
 import Facilities from './Facilities';
 import Overview from './Overview';
@@ -26,7 +26,6 @@ class UpdatedManager extends Component {
           if (err) {
             return;
           }
-    
           console.log('Received values of form: ', values);
           form.resetFields();
           this.setState({ visible: false });
@@ -41,7 +40,7 @@ class UpdatedManager extends Component {
         return(
             <div style={{paddingTop: 30, paddingLeft: 50, paddingRight: 50, 
                         paddingBottom: 50, background: '#f1f1f1'}}> 
-                <h2> <b> Homestay </b></h2>
+                <h3><b>{this.props.homeposts.currentHomepost.name}</b></h3>
                 <Divider/>
                 <Menu
                     defaultSelectedKeys={['1']}
@@ -53,7 +52,7 @@ class UpdatedManager extends Component {
                     }}
                 >
                     <Menu.Item key="1" to='/'>
-                        <Link to='/properties/overview '>
+                        <Link to='/properties/overview'>
                         <span>
                             <b>Tổng quan</b>
                         </span>
@@ -87,34 +86,45 @@ class UpdatedManager extends Component {
                 <Switch>
                     <Route path="/properties/overview" 
                             render={() => <Overview
-                                                //
+                                                homeposts={this.props.homeposts}
+                                                fetchUpdateHomepost = {this.props.fetchUpdateHomepost}
+                                                updateCurrentHomepost={this.props.updateCurrentHomepost}
                                             />
                                     }
                     />
                     <Route path="/properties/price-policy" 
                             render={() => <PricePolicy
-                                                //
-                                        />
+                                                homeposts={this.props.homeposts}
+                                                fetchUpdateHomepost = {this.props.fetchUpdateHomepost}
+                                                updateCurrentHomepost={this.props.updateCurrentHomepost}
+                                            />
                                     }
                     />
                     <Route path="/properties/images" 
-                            render={(props) => <Images
-                                                // 
-                                        />
+                            render={() => <Images
+                                                homeposts={this.props.homeposts}
+                                                fetchUpdateHomepost = {this.props.fetchUpdateHomepost}
+                                                updateCurrentHomepost={this.props.updateCurrentHomepost}
+                                            />
                                     }
                     />
                     <Route path="/properties/facilities" 
                             render={() => <Facilities
-                                            //
-                                        />
+                                                homeposts={this.props.homeposts}
+                                                fetchUpdateHomepost = {this.props.fetchUpdateHomepost}
+                                                updateCurrentHomepost={this.props.updateCurrentHomepost}
+                                            />
                                     }
                     />
                     <Route path="/properties/location" 
                             render={() => <Location
-                                            //
-                                        />
+                                                homeposts={this.props.homeposts}
+                                                fetchUpdateHomepost = {this.props.fetchUpdateHomepost}
+                                                updateCurrentHomepost={this.props.updateCurrentHomepost}
+                                            />
                                     }
                     />
+                    <Redirect to="/properties/overview"/>
                 </Switch>
             </div>
         )
