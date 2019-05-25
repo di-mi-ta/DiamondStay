@@ -62,10 +62,15 @@ const logIn = (req, res, next) => {
       }
 
       var token = authenticate.getToken({_id: req.user._id});
+      // Delete sensitive info
+      user.salt = undefined;
+      user.hash = undefined;
+
       return res.status(200).json({
         success: true,
         status: 'Login Successful!',
-        token: token
+        token: `Bearer ${token}`,
+        userInfo: user,
       });
     });
   }) (req, res, next);

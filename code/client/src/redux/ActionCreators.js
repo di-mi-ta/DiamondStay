@@ -48,7 +48,11 @@ export const loginUser = (creds) => (dispatch) => {
     .then(response => {
         if (response.success) {
             localStorage.setItem('token', response.token);
-            localStorage.setItem('creds', JSON.stringify(creds));
+            localStorage.setItem('creds', JSON.stringify({
+                username: creds.username,
+                password: creds.password,
+                info: response.userInfo,
+            }));
             dispatch(fetchFavorites());
             dispatch(receiveLogin(response));
         }
