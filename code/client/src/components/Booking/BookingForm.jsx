@@ -36,26 +36,64 @@ class BookingForm extends React.Component{
                     </div>
                 </div>
                 <div className="searchBox container-fluid">
-                    <div className="inputBox">
-                        <div className="first-row-info">
-                            <div className="homestay-info">
-                                There lie homestay information.
+                    <div className="first-col-info">
+                        <div className="homestay-info">
+                            Thông tin homestay
+                            <div className="inputField">Tên homestay</div>
+                            <div className="inputContent">a</div>
+                            <div className="inputField">Loại homestay</div>
+                            <div className="inputContent">w</div>
+                            <div className="inputField">Giá/đêm</div>
+                            <div className="inputContent">w</div>
+                            <div className="inputField">Địa chỉ: </div>
+                            <div className="inputContent">w</div>
+                            <div className="inputField">Số điện thoại liên hệ: </div>
+                            <div className="inputContent">w</div>
+                            <div className="inputField">Email liên hệ:</div>
+                            <div className="inputContent">w</div>
+                        </div>
+                        <br/>
+                        <div className="user-info">
+                            Thông tin người dùng
+                            <div className="inputField">Tên của bạn</div>
+                            <div className="inputContent">
+                                <input type="text"/>
                             </div>
-                            <div className="user-info">
-                                There lie User information.
+                            <div className="inputField">Tên tài khoản</div>
+                            <div className="inputContent">
+                                <input type="text"/>
+                            </div>
+                            <div className="inputField">Số diện thoại</div>
+                            <div className="inputContent">
+                                <input type="text"/>
+                            </div>
+                            <div className="inputField">Địa chỉ</div>
+                            <div className="inputContent">
+                                <input type="text"/>
+                            </div>
+                            <div className="inputField">Email</div>
+                            <div className="inputContent">
+                                <input type="text"/>
                             </div>
                         </div>
-                        <div classsName="second-row-info">
-                            <div className="date-picker">
-                                There lie Date picker.
+                    </div>
+                    <div classsName="second-col-info inputBox">
+                        <div className="date-picker">
+                            There lie Date picker.
+                        </div>
+                        <div className="banking-info">
+                            <div className="inputField">Tên tài khoản ngân hàng</div>
+                            <div className="inputContent">
+                                <input type="text"/>
                             </div>
-                            <div className="banking-info">
-                                There lie banking info.
+                            <div className="inputField">Số tài khoản ngân hàng</div>
+                            <div className="inputContent">
+                                <input type="text"/>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className=" searchBox container-fluid">Book</div>
+                <div className="hello">Book</div>
             </div>
         )
     }
