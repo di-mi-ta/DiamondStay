@@ -2,6 +2,8 @@ import React from 'react';
 import '../../css/SearchBox.css';
 import DatePicker from 'react-datepicker';
 import {Button} from 'reactstrap';
+import {connect} from 'react-redux';
+import * as actions from '../../redux/ActionCreators';
 
 class BookingForm extends React.Component{
     constructor(props){
@@ -52,7 +54,7 @@ class BookingForm extends React.Component{
 
     handleAddressChange(value){
         this.setState({
-            userAddress:value.target.value 
+            userAddress:value.target.value
         });
     }
 
@@ -76,7 +78,7 @@ class BookingForm extends React.Component{
           dateCome: date
         });
       }
-    
+
     handleDateLeaveChange(date) {
         this.setState({
             dateLeave: date
@@ -162,4 +164,15 @@ class BookingForm extends React.Component{
     }
 }
 
-export default BookingForm;
+const mapStateToProps = state => ({
+  auth: state.auth,
+  homeposts: state.homeposts,
+  promotions: state.promotions,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchSystemPromos: () => {dispatch(actions.fetchSystemPromos())},
+  fetchHomeposts: (query='') => {dispatch(actions.fetchHomeposts(query))},
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(BookingForm);

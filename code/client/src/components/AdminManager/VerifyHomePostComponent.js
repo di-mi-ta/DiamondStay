@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import { Steps, Icon, Button, Input, 
+import { Steps, Icon, Button, Input,
         Radio, Row, Col, Card,
         Modal, Table, Tag,
         message, Popover, Carousel} from 'antd';
 
 import {Form} from 'semantic-ui-react'
 import '../../css/verifyHome.css';
+import {connect} from 'react-redux';
+import * as actions from '../../redux/ActionCreators';
+import {withRouter} from 'react-router-dom';
 
 const Step = Steps.Step;
 const ButtonGroup = Button.Group;
@@ -82,7 +85,7 @@ class VerifyHomepostComponent extends Component {
             this.setState({
                 noteResult: {...this.state.noteResult, location: e.target.value}
             })
-        } 
+        }
     }
 
     onChangeRatio(e){
@@ -122,7 +125,7 @@ class VerifyHomepostComponent extends Component {
                 verifiedResult: {...this.state.verifiedResult, location: res},
                 valueRatio: {...this.state.valueRatio, location: e.target.value}
             })
-        } 
+        }
     }
 
     onCancelClick(){
@@ -142,7 +145,7 @@ class VerifyHomepostComponent extends Component {
             note: JSON.stringify(this.state.noteResult)
         }
 
-        //fetch 
+        //fetch
         this.props.fetchUpdateHomepost(updatedHome);
         message.success('Tin đăng đã được duyệt thành công');
     }
@@ -157,13 +160,13 @@ class VerifyHomepostComponent extends Component {
             state: 'Rejected',
             note: JSON.stringify(this.state.noteResult)
         }
-        
-        //fetch 
+
+        //fetch
         this.props.fetchUpdateHomepost(updatedHome);
         message.success('Tin đăng đã được duyệt thành công');
     }
 
-    // render content 
+    // render content
     renderContent = () => {
         if (this.state.currentStep === 0){
             return(
@@ -301,12 +304,12 @@ class VerifyHomepostComponent extends Component {
                canBack: false,
                canNext: true,
             })
-        } 
+        }
         else{
             this.setState({
                currentStep: this.state.currentStep - 1,
                canBack: true,
-               canNext: true, 
+               canNext: true,
             })
         }
     }
@@ -326,7 +329,7 @@ class VerifyHomepostComponent extends Component {
             render: (text) => (<Popover content={text}
                 ><p>
                     {
-                        text.length > 10 ? 
+                        text.length > 10 ?
                         text.substr(0,9) + '...':
                         text
                     }
@@ -387,7 +390,7 @@ class VerifyHomepostComponent extends Component {
             states: [this.state.verifiedResult.location],
         }];
         return(
-            <div style = {{paddingTop: 30, paddingLeft: 50, paddingRight: 50, 
+            <div style = {{paddingTop: 30, paddingLeft: 50, paddingRight: 50,
                             paddingBottom: 50, background: '#f1f1f1'}}>
                 <h2><b>Duyệt tin</b></h2>
                 <Steps current={this.state.currentStep} style={{marginBottom: '10px'}}>
@@ -400,7 +403,7 @@ class VerifyHomepostComponent extends Component {
                 </Steps>
                 <Row style={{paddingRight: '10px'}}>
                     <Col span={18} >
-                        <Card style={{marginTop: '20px', 
+                        <Card style={{marginTop: '20px',
                                     boxShadow: "1px 3px 1px #9E9E9E",
                                     marginRight: '10px',
                                     height: '400px',
@@ -410,17 +413,17 @@ class VerifyHomepostComponent extends Component {
                     </Col>
                     <Col span={6} onBackClickstyle={{marginTop: '10px'}}>
                         <span>
-                            <Card style={{marginTop: '20px', 
+                            <Card style={{marginTop: '20px',
                                         textAlign:'center',
                                         boxShadow: "1px 3px 1px #9E9E9E",
                                         height: '100%',
                                         }} >
                                 <h4><b>Phản hồi</b></h4>
-                                <TextArea placeholder="Cung cấp phản hồi cho người dùng (nếu cần)" 
+                                <TextArea placeholder="Cung cấp phản hồi cho người dùng (nếu cần)"
                                         rows={4}
                                         onChange = {this.onNoteChange}
                                         value={
-                                            this.state.currentStep === 0 ? 
+                                            this.state.currentStep === 0 ?
                                             this.state.noteResult.description :
                                             this.state.currentStep === 1 ?
                                             this.state.noteResult.image :
@@ -435,17 +438,17 @@ class VerifyHomepostComponent extends Component {
                                             ''
                                         }/>
                             </Card>
-                            <Card style={{marginTop: '20px', 
-                                        textAlign:'center', 
+                            <Card style={{marginTop: '20px',
+                                        textAlign:'center',
                                         boxShadow: "1px 3px 1px #9E9E9E",
                                         background: "#ffe4da"}} >
                             <h4><b>Xác nhận</b></h4>
-                            <RadioGroup onChange={this.onChangeRatio} 
+                            <RadioGroup onChange={this.onChangeRatio}
                                         style = {{
                                             alignItems: 'center'
                                         }}
                                         value={
-                                            this.state.currentStep === 0 ? 
+                                            this.state.currentStep === 0 ?
                                             this.state.valueRatio.description :
                                             this.state.currentStep === 1 ?
                                             this.state.valueRatio.image :
@@ -458,7 +461,7 @@ class VerifyHomepostComponent extends Component {
                                             this.state.currentStep === 5 ?
                                             this.state.valueRatio.location :
                                             ''
-                                        }     
+                                        }
                             >
                                 <Radio value={1}>
                                     Hợp lệ
@@ -468,11 +471,11 @@ class VerifyHomepostComponent extends Component {
                             </Card>
                             <div align='center'>
                                 <ButtonGroup style={{marginTop: '20px'}}>
-                                    <Button type="primary" onClick={this.onBackBtnClicked} 
+                                    <Button type="primary" onClick={this.onBackBtnClicked}
                                             disabled={!this.state.canBack}>
                                         <Icon type="left" />Quay lại
                                     </Button>
-                                    <Button type="primary" onClick={this.onNextBtnClicked} 
+                                    <Button type="primary" onClick={this.onNextBtnClicked}
                                             disabled={!this.state.canNext}>
                                         Tiếp theo <Icon type="right" />
                                     </Button>
@@ -493,7 +496,7 @@ class VerifyHomepostComponent extends Component {
                         <Button onClick={this.onCancelClick}> Hủy bỏ </Button>,
                     ]}
                     >
-                    <Table columns={columns} dataSource={data}  
+                    <Table columns={columns} dataSource={data}
                            pagination={{ pageSize: 5}} bordered/>
                 </Modal>
             </div>
@@ -501,4 +504,12 @@ class VerifyHomepostComponent extends Component {
     }
 }
 
-export default VerifyHomepostComponent;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchUpdateHomepost: (homepost) => {dispatch(actions.fetchUpdateHomepost(homepost))},
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(VerifyHomepostComponent);

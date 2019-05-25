@@ -5,6 +5,9 @@ import HouseCard from '../Homestay/HouseCard';
 import GlideSlide from './GlideSlide';
 import SearchBox from './SearchBox';
 import {Link, Route, Switch} from 'react-router-dom';
+import {connect} from 'react-redux';
+import * as actions from '../../redux/ActionCreators';
+
 
 class MainPage extends React.Component {
   constructor(props) {
@@ -69,7 +72,7 @@ class MainPage extends React.Component {
           <h2>DiamondStay có thể giúp gì cho bạn</h2>
         </div>
         <SearchBox/>
-        
+
         <div className="title">
           <h2>Không gian ưa thích</h2>
         </div>
@@ -77,16 +80,16 @@ class MainPage extends React.Component {
           hasControl: false,
           itemList: this.spaceList.map(space => <ImageCard data={space}/>)
         }} />
-        
+
         <div className="title">
           <h2>Chỗ ở tốt nhất</h2>
           <p>Thêm trải nghiệm, thêm nhiều niềm vui tại những chỗ ở được yêu thích nhất tại Diamond Stay</p>
           {/*for test list homepost*/}
           <b>{JSON.stringify(this.props.homeposts.homeposts)}</b>
         </div>
-        <GlideSlide ref={this.placeRef} 
+        <GlideSlide ref={this.placeRef}
                     data={{ hasControl: true,
-                            itemList: this.bestPlaces.map(place => 
+                            itemList: this.bestPlaces.map(place =>
                             <Link to={`/room/${place.id}`}>
                               <HouseCard houseData={place}/>
                             </Link>
@@ -99,7 +102,7 @@ class MainPage extends React.Component {
                               bound: true,
                               autoplay: false
                             }
-                          }} 
+                          }}
         />
         <div className="title">
           <h2>Ưu đãi hiện hành</h2>
@@ -153,4 +156,13 @@ class MainPage extends React.Component {
   }
 }
 
-export default MainPage;
+const mapStateToProps = state => ({
+  homeposts: state.homeposts,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchHomeposts: (query='') => {dispatch(actions.fetchHomeposts(query))},
+  fetchSystemPromos: () => {dispatch(actions.fetchSystemPromos())},
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

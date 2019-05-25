@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Button, Input, Form, Select, InputNumber, Divider, message} from 'antd';
+import {connect} from 'react-redux';
+import * as actions from '../../../redux/ActionCreators';
 
 const Option = Select.Option;
 
@@ -18,7 +20,7 @@ const PriceForm = Form.create({ name:'desc'})(
                   rules: [{ required: true, message: 'Trường này không được bỏ trống !!!' }],
                 })(
                     <InputNumber min='0' style={{width: '100%'}}/>
-                    
+
                 )}
               </Form.Item>
               <Form.Item label="Giá cuối tuần">
@@ -49,7 +51,7 @@ const PriceForm = Form.create({ name:'desc'})(
 //                   rules: [{ required: true, message: 'Trường này không được bỏ trống !!!' }],
 //                 })(
 //                     <InputNumber min='0' style={{width: '100%'}}/>
-                    
+
 //                 )}
 //               </Form.Item>
 //               <Form.Item label="Giá cuối tuần">
@@ -74,7 +76,7 @@ const CurrencyUnitForm = Form.create({name: 'desc'})(
             <div>
             <h4><b>Đơn vị tiền tệ</b></h4>
             <Form  layout="vertical">
-               <Form.Item label="Đơn vị tiền tệ:"> 
+               <Form.Item label="Đơn vị tiền tệ:">
                 {getFieldDecorator('currencyUnit', {
                   initialValue: this.props.homeposts.currentHomepost.currencyUnit,
                   rules: [{ required: true, message: 'Trường này không được bỏ trống !!!' }],
@@ -123,7 +125,7 @@ class PricePolicy extends Component {
         });
         priceForm.resetFields();
       });
-      
+
   }
 
   savePriceFormRef = formRef => {
@@ -141,13 +143,13 @@ class PricePolicy extends Component {
               <CurrencyUnitForm
                   wrappedComponentRef={this.saveCurrencyUnitFormRef}
                   homeposts={this.props.homeposts}
-              /> 
+              />
               <Divider/>
               <PriceForm
                   wrappedComponentRef={this.savePriceFormRef}
                   homeposts={this.props.homeposts}
-              /> 
-              <Button onClick={this.onUpdateBtnClick}> 
+              />
+              <Button onClick={this.onUpdateBtnClick}>
                   Cập nhật
               </Button>
           </div>
@@ -155,4 +157,13 @@ class PricePolicy extends Component {
   }
 }
 
-export default PricePolicy;
+const mapStateToProps = state => ({
+  homeposts: state.homeposts,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchUpdateHomepost: (homepost) => {dispatch(actions.fetchUpdateHomepost(homepost))},
+  updateCurrentHomepost: (homepost) => {dispatch(actions.updateCurrentHomepost(homepost))},
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PricePolicy);

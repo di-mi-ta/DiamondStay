@@ -6,6 +6,8 @@ import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem,
 import {Button, Dropdown, Icon, Menu} from 'antd';
 import {Link, Redirect} from 'react-router-dom';
 import UserRegistration from './UserRegistration';
+import {connect} from 'react-redux';
+import * as actions from '../../redux/ActionCreators';
 
 class MainHeader extends React.Component {
   constructor(props) {
@@ -174,4 +176,13 @@ class MainHeader extends React.Component {
   }
 }
 
-export default MainHeader;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  loginUser: (creds) => dispatch(actions.loginUser(creds)),
+  logoutUser: () => dispatch(actions.logoutUser()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainHeader);

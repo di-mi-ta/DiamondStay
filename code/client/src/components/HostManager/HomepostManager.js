@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Button, Modal, Input, Form, Menu, Select, InputNumber} from 'antd';
-import {Link, Switch, Route} from 'react-router-dom';
+import {Link, Switch, Route, withRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
+import * as actions from '../../redux/ActionCreators';
 import Waiting from './HomepostManager/Waiting';
 import Open from './HomepostManager/Open'
 import Reject from './HomepostManager/Reject'
@@ -54,7 +56,7 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
                     </Select>
                 )}
               </Form.Item>
-              <Form.Item label="Số khách tiêu chuẩn"> 
+              <Form.Item label="Số khách tiêu chuẩn">
                 {getFieldDecorator('basicNumRenter', {
                   rules: [{ required: true, message: 'Vui lòng nhập trường này !!!' }],
                 })(<InputNumber min='0' style={{width: '100%'}}/>)}
@@ -106,20 +108,11 @@ class HomepostManager extends Component {
         this.formRef = formRef;
     };
 
-    comProps = {
-        auth: this.props.auth,
-        homeposts: this.props.homeposts,
-        fetchHomeposts: this.props.fetchHomeposts,
-        fetchUpdateHomepost: this.props.fetchUpdateHomepost,
-        currentHomepost: this.props.currentHomepost,
-        updateCurrentHomepost: this.props.updateCurrentHomepost,
-    }
-
     render(){
         return(
-            <div style={{paddingTop: 30, paddingLeft: 50, paddingRight: 50, 
-                        paddingBottom: 50, background: '#f1f1f1'}}> 
-                
+            <div style={{paddingTop: 30, paddingLeft: 50, paddingRight: 50,
+                        paddingBottom: 50, background: '#f1f1f1'}}>
+
                 <Button type="primary" icon="plus" ghost
                     onClick = {this.showModal}
                     style={{marginBottom: '20px'}}
@@ -131,8 +124,8 @@ class HomepostManager extends Component {
                     defaultSelectedKeys={['1']}
                     mode= "horizontal"
                     theme= 'light'
-                    style={{ 
-                        textAlign: 'center', 
+                    style={{
+                        textAlign: 'center',
                         background: "#F1F1F1"
                     }}
                 >
@@ -144,16 +137,16 @@ class HomepostManager extends Component {
                         </Link>
                     </Menu.Item>
                     <Menu.Item key="2">
-                        <Link to='/host/my-homes/new-home'> 
-                        <span>  
-                            <b>Chỗ ở mới</b> 
+                        <Link to='/host/my-homes/new-home'>
+                        <span>
+                            <b>Chỗ ở mới</b>
                         </span>
                         </Link>
                     </Menu.Item>
                     <Menu.Item key="3">
-                        <Link to='/host/my-homes/open'> 
-                        <span>  
-                            <b>Mở</b> 
+                        <Link to='/host/my-homes/open'>
+                        <span>
+                            <b>Mở</b>
                         </span>
                         </Link>
                     </Menu.Item>
@@ -163,12 +156,12 @@ class HomepostManager extends Component {
                         </Link>
                     </Menu.Item>
                     <Menu.Item key="5">
-                        <Link to='/host/my-homes/waiting' > 
+                        <Link to='/host/my-homes/waiting' >
                         <span><b>Chờ duyệt</b></span>
                         </Link>
                     </Menu.Item>
                     <Menu.Item key="6" >
-                        <Link to='/host/my-homes/reject' > 
+                        <Link to='/host/my-homes/reject' >
                             <span> <b>Bị từ chối</b> </span>
                         </Link>
                     </Menu.Item>
@@ -178,59 +171,14 @@ class HomepostManager extends Component {
                     visible={this.state.visible}
                     onCancel={this.handleCancel}
                     onCreate={this.handleCreate}
-                /> 
+                />
                 <Switch>
-                    <Route path="/host/my-homes/all" 
-                            render={({ match }) => <All
-                                            // {...this.comProps}
-                                            auth={this.props.auth}
-                                            homeposts={this.props.homeposts}
-                                            fetchHomeposts = {this.props.fetchHomeposts}
-                                            fetchUpdateHomepost = {this.props.fetchUpdateHomepost}
-                                            updateCurrentHomepost={this.props.updateCurrentHomepost}
-                                            match={match}
-                                            
-                    />}/>
-                    <Route path="/host/my-homes/close" 
-                            render={() => <Close
-                                            auth={this.props.auth}
-                                            homeposts={this.props.homeposts}
-                                            fetchHomeposts = {this.props.fetchHomeposts}
-                                            fetchUpdateHomepost = {this.props.fetchUpdateHomepost}
-                                            updateCurrentHomepost={this.props.updateCurrentHomepost}
-                    />}/>
-                    <Route path="/host/my-homes/new-home" 
-                            render={() => <NewHomepost 
-                                            auth={this.props.auth}
-                                            homeposts={this.props.homeposts}                       
-                                            fetchHomeposts = {this.props.fetchHomeposts}
-                                            fetchUpdateHomepost = {this.props.fetchUpdateHomepost}
-                                            updateCurrentHomepost={this.props.updateCurrentHomepost}
-                    />}/>
-                    <Route path="/host/my-homes/open" 
-                            render={() => <Open
-                                            auth={this.props.auth}
-                                            homeposts={this.props.homeposts}                       
-                                            fetchHomeposts = {this.props.fetchHomeposts}   
-                                            fetchUpdateHomepost = {this.props.fetchUpdateHomepost}   
-                                            updateCurrentHomepost={this.props.updateCurrentHomepost}     
-                    />}/>
-                    <Route path="/host/my-homes/reject" 
-                            render={() => <Reject
-                                            auth={this.props.auth}
-                                            homeposts={this.props.homeposts}                       
-                                            fetchHomeposts = {this.props.fetchHomeposts}
-                                            fetchUpdateHomepost = {this.props.fetchUpdateHomepost} 
-                                            updateCurrentHomepost={this.props.updateCurrentHomepost}
-                    />}/>
-                    <Route path="/host/my-homes/waiting" 
-                            render={() => <Waiting
-                                            auth={this.props.auth}
-                                            homeposts={this.props.homeposts}                       
-                                            fetchHomeposts = {this.props.fetchHomeposts}  
-                                            fetchUpdateHomepost = {this.props.fetchUpdateHomepost}
-                                            updateCurrentHomepost={this.props.updateCurrentHomepost}
-                    />}/>
+                    <Route path="/host/my-homes/all" component={All} />
+                    <Route path="/host/my-homes/close" component={Close} />
+                    <Route path="/host/my-homes/new-home" component={NewHomepost} />
+                    <Route path="/host/my-homes/open" component={Open} />
+                    <Route path="/host/my-homes/reject" component={Reject} />
+                    <Route path="/host/my-homes/waiting" component={Waiting} />
                 </Switch>
             </div>
         )
@@ -238,4 +186,16 @@ class HomepostManager extends Component {
 
 }
 
-export default HomepostManager;
+const mapStateToProps = state => ({
+  auth: state.auth,
+  homeposts: state.homeposts,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchHomeposts: (query='') => {dispatch(actions.fetchHomeposts(query))},
+  fetchCreateHomepost: (homepost) => {dispatch(actions.fetchCreateHomepost(homepost))},
+  fetchUpdateHomepost: (homepost) => {dispatch(actions.fetchUpdateHomepost(homepost))},
+  updateCurrentHomepost: (homepost) => {dispatch(actions.updateCurrentHomepost(homepost))},
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomepostManager));

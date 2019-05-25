@@ -9,24 +9,22 @@ import Header from '../Header/HostHeader';
 
 import '../../css/host/host-manager.css';
 import MessageComponent from '../Host/MessageComponent';
+import {connect} from 'react-redux';
+import * as actions from '../../redux/ActionCreators';
 
 class HostManager extends Component{
     render() {
         return (
           <div>
-            <Header 
-              auth={this.props.auth}
-              loginUser={this.props.loginUser} 
-              logoutUser={this.props.logoutUser} 
-            />
-            {this.props.auth.isAuthenticated ? 
+            <Header />
+            {this.props.auth.isAuthenticated ?
               <div>
             <Menu
               defaultSelectedKeys={['1']}
               mode= "horizontal"
               theme= 'light'
-              style={{ 
-                      textAlign: 'center', 
+              style={{
+                      textAlign: 'center',
                       background: "#d6ebff"
                     }}
             >
@@ -43,21 +41,21 @@ class HostManager extends Component{
                 </Link>
               </Menu.Item>
               <Menu.Item key="2">
-                <Link to='/host/calendars'> 
-                  <span>  
-                    <b> Lịch </b> 
+                <Link to='/host/calendars'>
+                  <span>
+                    <b> Lịch </b>
                   </span>
                 </Link>
               </Menu.Item>
               <Menu.Item key="3">
-                <Link to='/host/reservations'> 
-                  <span>  
-                    <b> Đặt phòng </b> 
+                <Link to='/host/reservations'>
+                  <span>
+                    <b> Đặt phòng </b>
                   </span>
                 </Link>
               </Menu.Item>
               <Menu.Item key="5">
-                <Link to='/host/host-promotions' > 
+                <Link to='/host/host-promotions' >
                   <span><b>Khuyến mãi của tôi</b></span>
                 </Link>
               </Menu.Item>
@@ -68,44 +66,21 @@ class HostManager extends Component{
               </Menu.Item>
             </Menu>
             <Switch>
-              <Route path="/host/host-promotions" 
-                    render={() => <PromotionComponent 
-                                        auth={this.props.auth} 
-                                        promotions={this.props.promotions}
-                                        homeposts={this.props.homeposts}
-                                        fetchHostPromos={this.props.fetchHostPromos}
-                                        fetchHomeposts = {this.props.fetchHomeposts}
-                                        fetchUpdateHostPromo = {this.props.fetchUpdateHostPromo}
-                                        fetchDeleteHostPromo= {this.props.fetchDeleteHostPromo}
-                                        fetchCreateHostPromo= {this.props.fetchCreateHostPromo}
-                                  />}/>
-              <Route path="/host/calendars" render={() => <CalendarComponent/>}/>
-              <Route path="/host/my-homes" 
-                     render={(location) => <HomepostManager 
-                                        auth={this.props.auth}
-                                        homeposts={this.props.homeposts}
-                                        fetchHomeposts = {this.props.fetchHomeposts}
-                                        fetchCreateHomepost = {this.props.fetchCreateHomepost}  
-                                        fetchUpdateHomepost = {this.props.fetchUpdateHomepost}  
-                                        currentHomepost={this.props.currentHomepost}
-                                        updateCurrentHomepost={this.props.updateCurrentHomepost} 
-                                        location={location}    
-                                    />}/>
-              <Route path="/host/reservations" 
-                     render={() => <Reservation
-                                    auth={this.props.auth}
-                                    />}/>
-              <Route
-                path="/host/messages"
-                component={MessageComponent}
-              />
+              <Route path="/host/host-promotions" component={PromotionComponent}/>
+              <Route path="/host/calendars" component={CalendarComponent}/>
+              <Route path="/host/my-homes" component={HomepostManager}/>
+              <Route path="/host/reservations" component={Reservation}/>
+              <Route path="/host/messages" component={MessageComponent} />
             </Switch>
             </div>
-            : <div/> 
+            : <div/>
           }
           </div>
         );
     }
 }
+const mapStateToProps = state => ({
+  auth: state.auth,
+});
 
-export default HostManager;
+export default connect(mapStateToProps, null)(HostManager);

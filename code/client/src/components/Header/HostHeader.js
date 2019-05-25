@@ -4,7 +4,8 @@ import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem,
     Form, FormGroup, Input, Label } from 'reactstrap';
 import {Button, Dropdown, Icon, Menu} from 'antd';
 import {Link, Redirect} from 'react-router-dom';
-
+import {connect} from 'react-redux';
+import * as actions from '../../redux/ActionCreators';
 
 class Header extends Component {
     constructor(props) {
@@ -22,12 +23,12 @@ class Header extends Component {
         this.handleMenuClick = this.handleMenuClick.bind(this);
     }
 
-    
+
     handleMenuClick = ({ item, key, keyPath }) => {
         if (key == 5){
             this.handleLogout();
         }
-    }  
+    }
 
     toggleNav() {
         this.setState({
@@ -63,7 +64,7 @@ class Header extends Component {
             <Menu onClick={this.handleMenuClick}>
                 <Menu.Item key="3">
                     <span>
-                        <Link to='/host'> 
+                        <Link to='/host'>
                         <Icon type="setting" /> Cài đặt tài khoản
                         </Link>
                     </span>
@@ -78,7 +79,7 @@ class Header extends Component {
 
         return(
             <React.Fragment>
-                <Navbar light expand="md" 
+                <Navbar light expand="md"
                         style= {{
                             backgroundImage: "linear-gradient(to right, red , yellow)",
                             top: 0,
@@ -87,7 +88,7 @@ class Header extends Component {
                     <div className="container">
                     <NavbarToggler onClick={this.toggleNav} />
                     <NavbarBrand className="mr-auto" href="/host" style={{color: 'while'}}>
-                            <img src="http://www.iconeasy.com/icon/png/Business/Pretty%20Office%204/Home.png" 
+                            <img src="http://www.iconeasy.com/icon/png/Business/Pretty%20Office%204/Home.png"
                             height="30" width="30"/>
                             <b>{' Diamond Stay'}</b>
                     </NavbarBrand>
@@ -96,15 +97,15 @@ class Header extends Component {
                             <NavItem>
                                 {!this.props.auth.isAuthenticated ?
                                     <div>
-                                        <Button onClick={this.toggleSigninModal} type="link" 
+                                        <Button onClick={this.toggleSigninModal} type="link"
                                         >
-                                            Đăng kí 
-                                        </Button> 
-                                        <Button onClick={this.toggleLoginModal} type="link" 
+                                            Đăng kí
+                                        </Button>
+                                        <Button onClick={this.toggleLoginModal} type="link"
                                         >
-                                            Đăng nhập 
-                                        </Button>  
-                                    </div>      
+                                            Đăng nhập
+                                        </Button>
+                                    </div>
                                     :
                                     <div>
                                         <Dropdown overlay={menu}>
@@ -114,7 +115,7 @@ class Header extends Component {
                                         </Dropdown>
                                     </div>
                                 }
-                            </NavItem> 
+                            </NavItem>
                         </Nav>
                     </Collapse>
                     </div>
@@ -148,4 +149,14 @@ class Header extends Component {
         );
     }
 }
-export default Header;
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  loginUser: (creds) => dispatch(actions.loginUser(creds)),
+  logoutUser: () => dispatch(actions.logoutUser()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

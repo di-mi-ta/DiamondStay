@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 
-import { Table, Button, Icon, Card,} from 'antd'; 
+import { Table, Button, Icon, Card,} from 'antd';
 
 import {Link, Switch, Router} from 'react-router-dom';
+import {connect} from 'react-redux';
+import * as actions from '../../redux/ActionCreators';
+
+
 
 class WaitingHomepostList extends Component {
     columns = [{
@@ -24,7 +28,7 @@ class WaitingHomepostList extends Component {
         key: 'createdAt',
         align: 'center',
         render: text => <p>{text}</p>,
-    },{ 
+    },{
         title: 'Hành động',
         key: 'action',
         align: 'center',
@@ -32,11 +36,11 @@ class WaitingHomepostList extends Component {
             <Link to={{pathname:`/admin/${homepost._id}`,
                         state: {
                             homepost: homepost
-                        }}} 
+                        }}}
                 style={{color: 'white' }}>
                 <Button style={{color: 'green'}}>
-                    <Icon type="security-scan" /> 
-                    Duyệt 
+                    <Icon type="security-scan" />
+                    Duyệt
                 </Button>
             </Link>
         ),
@@ -44,12 +48,12 @@ class WaitingHomepostList extends Component {
     render(){
         return(
             <div style = {{padding: 50, background: '#f1f1f1'}}>
-                <Card style={{ 
+                <Card style={{
                             boxShadow: "1px 3px 1px #9E9E9E",
                             borderRadius: "10px",
                             minHeight: '300px'}}>
-                <Table columns={this.columns} 
-                    dataSource={this.props.homeposts.homeposts} 
+                <Table columns={this.columns}
+                    dataSource={this.props.homeposts.homeposts}
                 />
                 </Card>
             </div>
@@ -59,6 +63,15 @@ class WaitingHomepostList extends Component {
         this.props.fetchHomeposts('?state=Waiting');
     }
 }
-  
-export default WaitingHomepostList;
 
+const mapStateToProps = state => ({
+  auth: state.auth,
+  homeposts: state.homeposts,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchHomeposts: (query='') => {dispatch(actions.fetchHomeposts(query))},
+  fetchUpdateHomepost: (homepost) => {dispatch(actions.fetchUpdateHomepost(homepost))},
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(WaitingHomepostList);

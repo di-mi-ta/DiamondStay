@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Button, Input, Form, Select, InputNumber, Divider, message} from 'antd';
+import {connect} from 'react-redux';
+import * as actions from '../../../../redux/ActionCreators';
 
 const Option = Select.Option;
 
@@ -63,13 +65,13 @@ const RoomBedForm = Form.create({name: 'desc'})(
         const { getFieldDecorator } = form;
         return (
             <Form  layout="vertical">
-               <Form.Item label="Phòng ngủ"> 
+               <Form.Item label="Phòng ngủ">
                     {getFieldDecorator('numBed', {
                       initialValue: this.props.homeposts.currentHomepost.numBed,
                       rules: [{ required: true, message: 'Vui lòng nhập trường này !!!' }],
                     })(<InputNumber min='0' style={{width: '100%'}}/>)}
                 </Form.Item>
-                <Form.Item label="Giường"> 
+                <Form.Item label="Giường">
                     {getFieldDecorator('numBedroom', {
                       initialValue: this.props.homeposts.currentHomepost.numBedroom,
                       rules: [{ required: true, message: 'Vui lòng nhập trường này !!!' }],
@@ -122,7 +124,7 @@ class RoomBed extends Component {
         });
         basicForm.resetFields();
       });
-      
+
   }
 
   saveBasicFormRef = formRef => {
@@ -140,14 +142,14 @@ class RoomBed extends Component {
               <BasicForm
                   wrappedComponentRef={this.saveBasicFormRef}
                   homeposts={this.props.homeposts}
-              /> 
+              />
               <h3>Phòng và giường</h3>
               <Divider/>
               <RoomBedForm
                   wrappedComponentRef={this.saveRoomBedFormRef}
                   homeposts={this.props.homeposts}
-              /> 
-              <Button onClick={this.onUpdateBtnClick}> 
+              />
+              <Button onClick={this.onUpdateBtnClick}>
                   Cập nhật
               </Button>
           </div>
@@ -155,4 +157,13 @@ class RoomBed extends Component {
   }
 }
 
-export default RoomBed;
+const mapStateToProps = state => ({
+  homeposts: state.homeposts,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchUpdateHomepost: (homepost) => {dispatch(actions.fetchUpdateHomepost(homepost))},
+  updateCurrentHomepost: (homepost) => {dispatch(actions.updateCurrentHomepost(homepost))},
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(RoomBed);

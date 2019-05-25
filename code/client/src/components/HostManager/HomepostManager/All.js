@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 
-import { Table, Button, Icon, Card,} from 'antd'; 
+import { Table, Button, Icon, Card,} from 'antd';
 
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
+import * as actions from '../../../redux/ActionCreators';
 
 class All extends Component {
     constructor(props){
@@ -32,16 +34,16 @@ class All extends Component {
         align: 'center',
         render: text => <p>{text}</p>,
     }
-    ,{ 
+    ,{
         title: 'Hành động',
         key: 'action',
         align: 'center',
         render: (homepost) => {
             return (
-                <Link  to={`/properties/${homepost._id}`} 
+                <Link  to={`/properties/${homepost._id}`}
                         style={{color: 'white' }}>
                     <Button style={{color: 'green'}} onClick={() => this.onSetCurrentHomepost(homepost)}>
-                        <Icon type="edit" /> 
+                        <Icon type="edit" />
                         Cập nhật
                     </Button>
                 </Link>
@@ -51,12 +53,12 @@ class All extends Component {
     render(){
         return(
             <div style = {{padding: 50, background: '#f1f1f1'}}>
-                <Card style={{ 
+                <Card style={{
                             boxShadow: "1px 3px 1px #9E9E9E",
                             borderRadius: "10px",
                             minHeight: '300px'}}>
-                <Table columns={this.columns} 
-                    dataSource={this.props.homeposts.homeposts} 
+                <Table columns={this.columns}
+                    dataSource={this.props.homeposts.homeposts}
                 />
                 </Card>
             </div>
@@ -66,6 +68,16 @@ class All extends Component {
         this.props.fetchHomeposts('?state=Waiting');
     }
 }
-  
-export default All;
 
+const mapStateToProps = state => ({
+  auth: state.auth,
+  homeposts: state.homeposts,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchHomeposts: (query='') => {dispatch(actions.fetchHomeposts(query))},
+  fetchUpdateHomepost: (homepost) => {dispatch(actions.fetchUpdateHomepost(homepost))},
+  updateCurrentHomepost: (homepost) => {dispatch(actions.updateCurrentHomepost(homepost))},
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(All));

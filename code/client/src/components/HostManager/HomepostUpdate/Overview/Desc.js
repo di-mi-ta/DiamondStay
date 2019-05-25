@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Button, Modal, Input, Form, Menu, Select, InputNumber} from 'antd';
+import {connect} from 'react-redux';
+import * as actions from '../../../../redux/ActionCreators';
 
 const DescForm = Form.create({ name: 'desc' })(
     class extends React.Component {
@@ -9,16 +11,16 @@ const DescForm = Form.create({ name: 'desc' })(
         return (
             <Form  layout="vertical">
               <Form.Item label="Tiêu đề">
-                {getFieldDecorator('name', 
+                {getFieldDecorator('name',
                   { initialValue: this.props.homeposts.currentHomepost.name,
-                    rules: [{ required: true, message: 'Vui lòng nhập tên chỗ ở !!!', 
+                    rules: [{ required: true, message: 'Vui lòng nhập tên chỗ ở !!!',
                     }],
                 })(
                   <Input/>
                 )}
               </Form.Item>
               <Form.Item label="Mô tả">
-                {getFieldDecorator('description', 
+                {getFieldDecorator('description',
                   { initialValue: this.props.homeposts.currentHomepost.description,
                     rules: [{required: false}],
                 })(
@@ -66,8 +68,8 @@ class Desc extends Component {
                   onCancel={this.handleCancel}
                   onCreate={this.handleCreate}
                   homeposts={this.props.homeposts}
-              /> 
-              <Button onClick={this.onUpdateBtnClick}> 
+              />
+              <Button onClick={this.onUpdateBtnClick}>
                   Cập nhật
               </Button>
           </div>
@@ -75,4 +77,12 @@ class Desc extends Component {
   }
 }
 
-export default Desc;
+const mapStateToProps = state => ({
+  homeposts: state.homeposts,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  updateCurrentHomepost: (homepost) => {dispatch(actions.updateCurrentHomepost(homepost))},
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Desc);

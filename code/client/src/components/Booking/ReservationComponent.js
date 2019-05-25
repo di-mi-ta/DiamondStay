@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
-
-import {Table, Divider, Button, Icon, 
+import {connect} from 'react-redux';
+import * as actions from '../../redux/ActionCreators';
+import {Table, Divider, Button, Icon,
          Modal, Input, DatePicker,
          message, InputNumber, Tag,
          Popconfirm, Form, Card} from 'antd';
 
 const RangePicker = DatePicker.RangePicker;
+
 
 const columns = [{
     title: 'Khách',
@@ -66,11 +68,11 @@ class Reservation extends Component {
         const formItemLayout = {
             labelCol: { span: 6 },
             wrapperCol: { span: 14 },
-        } 
+        }
         const data = []
         return(
-            <div style={{paddingTop: 30, paddingLeft: 50, paddingRight: 50, 
-                        paddingBottom: 50, background: '#f1f1f1'}}> 
+            <div style={{paddingTop: 30, paddingLeft: 50, paddingRight: 50,
+                        paddingBottom: 50, background: '#f1f1f1'}}>
                 <h2> <b> Đặt phòng </b></h2>
                 <Divider style={{background: '#cac6c6'}}/>
                 <Form layout='inline' style={{ width: '100%'}}>
@@ -92,8 +94,8 @@ class Reservation extends Component {
                             <Button type='primary'> Xem kết quả </Button>
                         </Form.Item>
                 </Form>
-                <Table columns={columns} 
-                    dataSource={data} 
+                <Table columns={columns}
+                    dataSource={data}
                 />
             </div>
         )
@@ -101,4 +103,12 @@ class Reservation extends Component {
 
 }
 
-export default Reservation;
+const mapStateToProps = state => ({
+  auth: state.auth,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Reservation);

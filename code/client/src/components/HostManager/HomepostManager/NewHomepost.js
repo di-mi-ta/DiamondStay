@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import {Table, Divider, Button, Icon, Popconfirm} from 'antd';
+import {connect} from 'react-redux';
+import * as actions from '../../../redux/ActionCreators';
 
 class NewHome extends Component{
     constructor(props){
         super(props);
     }
-    
+
     columns = [{
         title: 'Homestay',
         dataIndex: 'name',
@@ -30,16 +32,16 @@ class NewHome extends Component{
         title: 'Hành động',
         render: (text, record) => (
           <span>
-             <Popconfirm title="Bạn chắc chắn muốn xóa chứ？" 
-                        okText="Xóa" cancelText="Hủy bỏ" 
+             <Popconfirm title="Bạn chắc chắn muốn xóa chứ？"
+                        okText="Xóa" cancelText="Hủy bỏ"
                         onConfirm = {() => this.onConfirmDeleteClick(record)}>
-                  <Button ghost> <Icon type="delete"  
+                  <Button ghost> <Icon type="delete"
                         style={{ color: '#DC143C' }} theme="filled" /> </Button>
              </Popconfirm>
             <Divider type="vertical"/>
-            <Button ghost onClick={()=> {this.setState({currentPromo: record}); this.onEditBtnClick()}}> 
-                <Icon type="edit" style={{ color: '#FF8C00' }} 
-                    theme="filled"/> 
+            <Button ghost onClick={()=> {this.setState({currentPromo: record}); this.onEditBtnClick()}}>
+                <Icon type="edit" style={{ color: '#FF8C00' }}
+                    theme="filled"/>
             </Button>
           </span>
         ),
@@ -48,8 +50,8 @@ class NewHome extends Component{
     render(){
         return(
             <div className="container">
-                <Table columns={this.columns} 
-                        dataSource={this.props.homeposts.homeposts} 
+                <Table columns={this.columns}
+                        dataSource={this.props.homeposts.homeposts}
                         style={{marginTop: '20px', backgroundColor: 'while'}}
                         bordered
                 />
@@ -58,4 +60,15 @@ class NewHome extends Component{
     }
 }
 
-export default NewHome;
+const mapStateToProps = state => ({
+  auth: state.auth,
+  homeposts: state.homeposts,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchHomeposts: (query='') => {dispatch(actions.fetchHomeposts(query))},
+  fetchUpdateHomepost: (homepost) => {dispatch(actions.fetchUpdateHomepost(homepost))},
+  updateCurrentHomepost: (homepost) => {dispatch(actions.updateCurrentHomepost(homepost))},
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewHome);

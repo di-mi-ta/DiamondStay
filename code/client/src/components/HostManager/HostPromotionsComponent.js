@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 
-import { Table, Divider, Button, Icon, 
+import { Table, Divider, Button, Icon,
          Modal, Input, DatePicker,
          message, InputNumber, Select, Tag,
          Popconfirm, Form, Card} from 'antd';
 import moment from 'moment';
+import {connect} from 'react-redux';
+import * as actions from '../../redux/ActionCreators';
 
 const RangePicker = DatePicker.RangePicker;
 const Option = Select.Option;
@@ -23,7 +25,7 @@ class PromotionCompoment extends Component {
         this.handleCancel = this.handleCancel.bind(this);
         this.handleOk = this.handleOk.bind(this);
         this.onConfirmDeleteClick = this.onConfirmDeleteClick.bind(this);
-        this.onEditBtnClick = this.onEditBtnClick.bind(this);   
+        this.onEditBtnClick = this.onEditBtnClick.bind(this);
         this.handleDatePickerChange = this.handleDatePickerChange.bind(this);
         this.handleValueChange = this.handleValueChange.bind(this);
         this.handleHomepostChange = this.handleHomepostChange.bind(this);
@@ -80,31 +82,31 @@ class PromotionCompoment extends Component {
             let now = new Date();
             let dateStart = row.dateStart;
             if (now <= new Date(dateEnd) && now >= new Date(dateStart)){
-                return <Tag color='green' > ĐANG DIỄN RA </Tag>   
+                return <Tag color='green' > ĐANG DIỄN RA </Tag>
             }
             else if (now < new Date(dateStart)){
-                return <Tag color='yellow' > TRONG TƯƠNG LAI </Tag>  
+                return <Tag color='yellow' > TRONG TƯƠNG LAI </Tag>
             }
             else {
-                return <Tag color='red' > ĐÃ KẾT THÚC </Tag>  
+                return <Tag color='red' > ĐÃ KẾT THÚC </Tag>
             }
-        }    
+        }
     },{
         key: 'action',
         align: 'center',
         title: 'Hành động',
         render: (text, record) => (
           <span>
-             <Popconfirm title="Bạn chắc chắn muốn xóa chứ？" 
-                        okText="Xóa" cancelText="Hủy bỏ" 
+             <Popconfirm title="Bạn chắc chắn muốn xóa chứ？"
+                        okText="Xóa" cancelText="Hủy bỏ"
                         onConfirm = {() => this.onConfirmDeleteClick(record)}>
-                  <Button ghost> <Icon type="delete"  
+                  <Button ghost> <Icon type="delete"
                         style={{ color: '#DC143C' }} theme="filled" /> </Button>
              </Popconfirm>
             <Divider type="vertical"/>
-            <Button ghost onClick={()=> {this.setState({currentPromo: record}); this.onEditBtnClick()}}> 
-                <Icon type="edit" style={{ color: '#FF8C00' }} 
-                    theme="filled"/> 
+            <Button ghost onClick={()=> {this.setState({currentPromo: record}); this.onEditBtnClick()}}>
+                <Icon type="edit" style={{ color: '#FF8C00' }}
+                    theme="filled"/>
             </Button>
           </span>
         ),
@@ -119,9 +121,9 @@ class PromotionCompoment extends Component {
     onConfirmDeleteClick = (promo) => {
         this.props.fetchDeleteHostPromo(promo._id)
     }
-      
+
     onAddPromoBtnClick(){
-        let lstHomeposts = this.props.homeposts.homeposts.filter(homepost => 
+        let lstHomeposts = this.props.homeposts.homeposts.filter(homepost =>
             homepost.owner === this.props.auth.user.username)
         let lst = lstHomeposts.map(x=>(<Option key={x._id}>{x.name}</Option>));
         this.setState({
@@ -141,10 +143,10 @@ class PromotionCompoment extends Component {
             message.error('Cập nhật thất bại !!!');
         }
       }
-    
+
     handleCancelEdit = () => {
         this.setState({
-            isModalEditOpen: false 
+            isModalEditOpen: false
         });
     }
 
@@ -167,11 +169,11 @@ class PromotionCompoment extends Component {
             message.error('Thêm khuyến mại thất bại!');
         }
       }
-    
+
     handleCancel = (e) => {
         this.setState({
             isModalOpen: false,
-            lstHomeposts: [], 
+            lstHomeposts: [],
         });
     }
 
@@ -180,11 +182,11 @@ class PromotionCompoment extends Component {
         const formItemLayout = {
             labelCol: { span: 6 },
             wrapperCol: { span: 14 },
-        } 
+        }
 
         return(
             <div style={{padding: 50, background: '#f1f1f1'}}>
-                <div style={{display:'row'}}> 
+                <div style={{display:'row'}}>
                 <h2> <b> Quản lí khuyến mại </b></h2>
                     <Button type="primary" icon="plus" ghost
                         onClick = {this.onAddPromoBtnClick}
@@ -192,14 +194,14 @@ class PromotionCompoment extends Component {
                     Thêm khuyến mại
                 </Button>
                 </div>
-                <Card style={{ 
+                <Card style={{
                             boxShadow: "1px 3px 1px #9E9E9E",
                             borderRadius: "10px",
                             minHeight: '300px',
                             marginTop: '30px'
                             }}>
-                    <Table columns={this.columns} 
-                        dataSource={this.props.promotions.hostPromotions} 
+                    <Table columns={this.columns}
+                        dataSource={this.props.promotions.hostPromotions}
                         style={{marginTop: '20px', backgroundColor: 'while'}}
                         bordered
                     />
@@ -223,9 +225,9 @@ class PromotionCompoment extends Component {
                         <Form.Item
                             label="Mức giảm giá"
                             {...formItemLayout}
-                            
+
                         >
-                            <InputNumber min='0' max='100'  
+                            <InputNumber min='0' max='100'
                                         onChange={this.handleValueChange}
                                         style={{ width: '90%' }}
                             />
@@ -249,7 +251,7 @@ class PromotionCompoment extends Component {
                             label="Thời gian áp dụng"
                             {...formItemLayout}
                         >
-                            <RangePicker style={{ width: '100%' }} 
+                            <RangePicker style={{ width: '100%' }}
                                         onChange={this.handleDatePickerChange}
                                         format="DD-MM-YYYY"
                                         separator='đến'/>
@@ -265,21 +267,21 @@ class PromotionCompoment extends Component {
                     width='60%'
                     okText='Cập nhật'
                     cancelText='Hủy bỏ'
-                > 
+                >
                 <Form layout='Horizontal' style={{ width: '100%'}}>
                     <Form.Item
                         label="Tên khuyến mãi"
                         {...formItemLayout}
                     >
-                        <Input value={this.state.currentPromo.name} 
+                        <Input value={this.state.currentPromo.name}
                         onChange={this.handleNameChange}/>
                     </Form.Item>
                     <Form.Item
                         label="Mức giảm giá"
                         {...formItemLayout}
                     >
-                        <InputNumber min='0' max='100' 
-                                    name='value' 
+                        <InputNumber min='0' max='100'
+                                    name='value'
                                     value={this.state.currentPromo.value}
                                     onChange={this.handleValueChange}/>
                         {' %'}
@@ -303,20 +305,34 @@ class PromotionCompoment extends Component {
                         {...formItemLayout}
                     >
                         <RangePicker style={{ width: '100%' }}
-                                    name='dates' 
+                                    name='dates'
                                     onChange={this.handleDatePickerChange}
                                     format="DD-MM-YYYY"
                                     separator='đến'
-                                    value={[moment(this.state.currentPromo.dateStart), 
+                                    value={[moment(this.state.currentPromo.dateStart),
                                         moment(this.state.currentPromo.dateEnd)]}
                         />
                     </Form.Item>
                 </Form>
-                </Modal> 
+                </Modal>
             </div>
         )
     }
 
 }
 
-export default PromotionCompoment;
+const mapStateToProps = state => ({
+  auth: state.auth,
+  homeposts: state.homeposts,
+  promotions: state.promotions,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchHostPromos: (username) => {dispatch(actions.fetchHostPromos(username))},
+  fetchHomeposts: (query='') => {dispatch(actions.fetchHomeposts(query))},
+  fetchUpdateHostPromo: (updatedPromo) => dispatch(actions.fetchUpdateHostPromo(updatedPromo)),
+  fetchDeleteHostPromo: (promoId) => dispatch(actions.fetchDeleteHostPromo(promoId)),
+  fetchCreateHostPromo: (promo) => dispatch(actions.fetchCreateHostPromo(promo)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PromotionCompoment);

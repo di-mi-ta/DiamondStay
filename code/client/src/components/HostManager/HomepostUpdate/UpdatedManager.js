@@ -7,6 +7,8 @@ import Overview from './Overview';
 import Location from './Location';
 import PricePolicy from './PricePolicy';
 import Images from './Images';
+import {connect} from 'react-redux';
+import * as actions from '../../../redux/ActionCreators';
 
 class UpdatedManager extends Component {
     constructor(props){
@@ -38,16 +40,16 @@ class UpdatedManager extends Component {
 
     render(){
         return(
-            <div style={{paddingTop: 30, paddingLeft: 50, paddingRight: 50, 
-                        paddingBottom: 50, background: '#f1f1f1'}}> 
+            <div style={{paddingTop: 30, paddingLeft: 50, paddingRight: 50,
+                        paddingBottom: 50, background: '#f1f1f1'}}>
                 <h3><b>{this.props.homeposts.currentHomepost.name}</b></h3>
                 <Divider/>
                 <Menu
                     defaultSelectedKeys={['1']}
                     mode= "horizontal"
                     theme= 'light'
-                    style={{ 
-                        textAlign: 'center', 
+                    style={{
+                        textAlign: 'center',
                         background: "#F1F1F1"
                     }}
                 >
@@ -59,16 +61,16 @@ class UpdatedManager extends Component {
                         </Link>
                     </Menu.Item>
                     <Menu.Item key="2">
-                        <Link to='/properties/price-policy'> 
-                        <span>  
-                            <b>Giá và các chính sách</b> 
+                        <Link to='/properties/price-policy'>
+                        <span>
+                            <b>Giá và các chính sách</b>
                         </span>
                         </Link>
                     </Menu.Item>
                     <Menu.Item key="3">
-                        <Link to='/properties/images'> 
-                        <span>  
-                            <b>Hình ảnh</b> 
+                        <Link to='/properties/images'>
+                        <span>
+                            <b>Hình ảnh</b>
                         </span>
                         </Link>
                     </Menu.Item>
@@ -78,52 +80,17 @@ class UpdatedManager extends Component {
                         </Link>
                     </Menu.Item>
                     <Menu.Item key="5">
-                        <Link to='/properties/location' > 
+                        <Link to='/properties/location' >
                         <span><b>Vị trí</b></span>
                         </Link>
                     </Menu.Item>
                 </Menu>
                 <Switch>
-                    <Route path="/properties/overview" 
-                            render={() => <Overview
-                                                homeposts={this.props.homeposts}
-                                                fetchUpdateHomepost = {this.props.fetchUpdateHomepost}
-                                                updateCurrentHomepost={this.props.updateCurrentHomepost}
-                                            />
-                                    }
-                    />
-                    <Route path="/properties/price-policy" 
-                            render={() => <PricePolicy
-                                                homeposts={this.props.homeposts}
-                                                fetchUpdateHomepost = {this.props.fetchUpdateHomepost}
-                                                updateCurrentHomepost={this.props.updateCurrentHomepost}
-                                            />
-                                    }
-                    />
-                    <Route path="/properties/images" 
-                            render={() => <Images
-                                                homeposts={this.props.homeposts}
-                                                fetchUpdateHomepost = {this.props.fetchUpdateHomepost}
-                                                updateCurrentHomepost={this.props.updateCurrentHomepost}
-                                            />
-                                    }
-                    />
-                    <Route path="/properties/facilities" 
-                            render={() => <Facilities
-                                                homeposts={this.props.homeposts}
-                                                fetchUpdateHomepost = {this.props.fetchUpdateHomepost}
-                                                updateCurrentHomepost={this.props.updateCurrentHomepost}
-                                            />
-                                    }
-                    />
-                    <Route path="/properties/location" 
-                            render={() => <Location
-                                                homeposts={this.props.homeposts}
-                                                fetchUpdateHomepost = {this.props.fetchUpdateHomepost}
-                                                updateCurrentHomepost={this.props.updateCurrentHomepost}
-                                            />
-                                    }
-                    />
+                    <Route path="/properties/overview" component={Overview} />
+                    <Route path="/properties/price-policy" component={PricePolicy} />
+                    <Route path="/properties/images" component={Images} />
+                    <Route path="/properties/facilities" component={Facilities} />
+                    <Route path="/properties/location" component={Location} />
                     <Redirect to="/properties/overview"/>
                 </Switch>
             </div>
@@ -132,4 +99,12 @@ class UpdatedManager extends Component {
 
 }
 
-export default UpdatedManager;
+const mapStateToProps = state => ({
+  homeposts: state.homeposts,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchHomeposts: (query='') => {dispatch(actions.fetchHomeposts(query))},
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(UpdatedManager);
