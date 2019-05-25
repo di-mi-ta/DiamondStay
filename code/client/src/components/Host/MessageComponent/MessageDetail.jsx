@@ -25,7 +25,7 @@ class MessageDetail extends React.Component {
         <Form>
           <Item {...formItemLayout} label='Người gửi'>
             <Paragraph>
-              <span><b>{sender}{'   '}</b></span>
+              <span><b>{sender.name}{'   '}</b></span>
               <span>{type}</span>
             </Paragraph>
           </Item>
