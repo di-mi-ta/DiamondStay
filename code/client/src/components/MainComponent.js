@@ -111,7 +111,7 @@ class Main extends Component {
           />
           <Route path="/booking"
                   render={() => <Booking
-                                  gauth={this.props.auth} 
+                                  auth={this.props.auth} 
                                   loginUser={this.props.loginUser} 
                                   logoutUser={this.props.logoutUser}
                                   promotions={this.props.promotions}
