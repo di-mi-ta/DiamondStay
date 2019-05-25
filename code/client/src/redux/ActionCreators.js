@@ -185,7 +185,7 @@ export const deleteHostPromo = (promoId) => ({
 });
 
 export const fetchDeleteHostPromo = (promoId) => (dispatch) => {
-    const bearer = 'Bearer ' + localStorage.getItem('token');
+    const bearer = localStorage.getItem('token');
         fetch(baseUrl + 'host-promotions/' + promoId, {
             method: "DELETE",
             headers: {
@@ -211,7 +211,7 @@ export const fetchDeleteHostPromo = (promoId) => (dispatch) => {
 }
 
 export const fetchDeleteSystemPromo = (promoId) => (dispatch) => {
-    const bearer = 'Bearer ' + localStorage.getItem('token');
+    const bearer = localStorage.getItem('token');
         fetch(baseUrl + 'system-promotions/' + promoId, {
             method: "DELETE",
             headers: {
@@ -237,7 +237,7 @@ export const fetchDeleteSystemPromo = (promoId) => (dispatch) => {
 }
 
 export const fetchUpdateHostPromo = (updatedPromo) => (dispatch) => {
-    const bearer = 'Bearer ' + localStorage.getItem('token');
+    const bearer = localStorage.getItem('token');
         fetch(baseUrl + 'host-promotions/' + updatedPromo._id, {
             method: "PUT",
             body: JSON.stringify(updatedPromo),
@@ -265,7 +265,7 @@ export const fetchUpdateHostPromo = (updatedPromo) => (dispatch) => {
 }
 
 export const fetchUpdateSystemPromo = (updatedPromo) => (dispatch) => {
-    const bearer = 'Bearer ' + localStorage.getItem('token');
+    const bearer = localStorage.getItem('token');
         fetch(baseUrl + 'system-promotions/' + updatedPromo._id, {
             method: "PUT",
             body: JSON.stringify(updatedPromo),
@@ -293,7 +293,7 @@ export const fetchUpdateSystemPromo = (updatedPromo) => (dispatch) => {
 }
 
 export const fetchCreateHostPromo = (promo) => (dispatch) => {
-    const bearer = 'Bearer ' + localStorage.getItem('token');
+    const bearer = localStorage.getItem('token');
         fetch(baseUrl + 'host-promotions/', {
             method: "POST",
             body: JSON.stringify(promo),
@@ -321,7 +321,7 @@ export const fetchCreateHostPromo = (promo) => (dispatch) => {
 }
 
 export const fetchCreateSystemPromo = (promo) => (dispatch) => {
-    const bearer = 'Bearer ' + localStorage.getItem('token');
+    const bearer = localStorage.getItem('token');
         fetch(baseUrl + 'system-promotions/', {
             method: "POST",
             body: JSON.stringify(promo),
@@ -380,7 +380,7 @@ export const homepostsFailed = (errmess) => ({
 });
 
 export const fetchUpdateHomepost = (homepost) => (dispatch) => {
-    const bearer = 'Bearer ' + localStorage.getItem('token');
+    const bearer = localStorage.getItem('token');
         fetch(baseUrl + 'homeposts/' + homepost._id, {
             method: "PUT",
             body: JSON.stringify(homepost),
@@ -429,7 +429,7 @@ export const fetchHomeposts = (query='') => (dispatch) => {
 }
 
 export const fetchCreateHomepost = (homepost) => (dispatch) => {
-    const bearer = 'Bearer ' + localStorage.getItem('token');
+    const bearer = localStorage.getItem('token');
         fetch(baseUrl + 'homeposts', {
             method: "POST",
             body: JSON.stringify(homepost),
@@ -469,7 +469,7 @@ export const postRating = (homepostId, rating, comment) => (dispatch) => {
         rating: rating,
         comment: comment
     }
-    const bearer = 'Bearer ' + localStorage.getItem('token');
+    const bearer = localStorage.getItem('token');
     return fetch(baseUrl + 'ratings', {
         method: 'POST',
         body: JSON.stringify(newRating),
@@ -533,7 +533,7 @@ export const addRatings = (ratings) => ({
 
 // for favorites
 export const postFavorite = (homepostId) => (dispatch) => {
-    const bearer = 'Bearer ' + localStorage.getItem('token');
+    const bearer = localStorage.getItem('token');
     return fetch(baseUrl + 'favorites/' + homepostId, {
         method: "POST",
         body: JSON.stringify({"_id": homepostId}),
@@ -561,7 +561,7 @@ export const postFavorite = (homepostId) => (dispatch) => {
 }
 
 export const deleteFavorite = (homepostId) => (dispatch) => {
-    const bearer = 'Bearer ' + localStorage.getItem('token');
+    const bearer = localStorage.getItem('token');
     return fetch(baseUrl + 'favorites/' + homepostId, {
         method: "DELETE",
         headers: {
@@ -588,7 +588,7 @@ export const deleteFavorite = (homepostId) => (dispatch) => {
 
 export const fetchFavorites = () => (dispatch) => {
     dispatch(favoritesLoading(true));
-    const bearer = 'Bearer ' + localStorage.getItem('token');
+    const bearer = localStorage.getItem('token');
     return fetch(baseUrl + 'favorites', {
         headers: {
             'Authorization': bearer

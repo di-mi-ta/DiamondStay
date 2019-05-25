@@ -1,6 +1,6 @@
 const express = require('express');
 const usersRouter = require('./routes/users');
-// const homepostRouter = require('./routes/homepost');
+const homepostRouter = require('./routes/homepost');
 const hostPromoRouter = require('./routes/hostPromo');
 const systemPromoRouter = require('./routes/systemPromo');
 const uploadFileRouter = require('./routes/upload');
@@ -16,7 +16,7 @@ require('./initialize')(app);
 
 app.use(express.static('public'))
 app.use('/users', usersRouter);
-// app.use('/homeposts', homepostRouter);
+app.use('/homeposts', homepostRouter);
 app.use('/host-promotions', hostPromoRouter);
 app.use('/system-promotions', systemPromoRouter);
 app.use('/messages', messageRouter);
