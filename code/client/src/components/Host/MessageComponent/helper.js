@@ -2,7 +2,7 @@ import { baseUrl } from '../../../shared/baseUrl';
 const moment = require('moment');
 const axios = require('axios');
 
-localStorage.setItem('token', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Y2UxMWFmZjUyNzdmNjc4ZThkYThhNzIiLCJpYXQiOjE1NTg3MTQwMDcsImV4cCI6MTU2MTMwNjAwN30.TvDQ3_o-4V-qaKC_AVX9DFbyoQdIHEvBhOFWWhaB0E0');
+// localStorage.setItem('token', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Y2UxMWFmZjUyNzdmNjc4ZThkYThhNzIiLCJpYXQiOjE1NTg3MTQwMDcsImV4cCI6MTU2MTMwNjAwN30.TvDQ3_o-4V-qaKC_AVX9DFbyoQdIHEvBhOFWWhaB0E0');
 const AUTH_TOKEN = localStorage.getItem('token');
 
 axios.defaults.baseURL = baseUrl;
