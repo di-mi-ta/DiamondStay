@@ -188,6 +188,7 @@ class HomepostManager extends Component {
                     <Route path="/host/my-homes/open" component={Open} />
                     <Route path="/host/my-homes/reject" component={Reject} />
                     <Route path="/host/my-homes/waiting" component={Waiting} />
+                    <Redirect to='/host/my-homes/all'/>
                 </Switch>
             </div>
         )

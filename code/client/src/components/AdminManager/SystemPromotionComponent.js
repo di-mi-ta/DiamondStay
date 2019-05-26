@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios, { post } from 'axios';
-import url from '../../shared/baseUrl'
+import {baseUrl} from '../../shared/baseUrl'
 import {connect} from 'react-redux';
 import * as actions from '../../redux/ActionCreators';
 
@@ -171,13 +171,12 @@ class SystemPromotionCompoment extends Component {
         this.setState({
           isModalOpen: false,
         });
-        const url = 'http://localhost:4444/upload';
+        const url = baseUrl + "upload";
         const formData = new FormData();
         formData.append('image', this.state.logo)
         const config = {
             headers: {
-                'Content-type': 'multipart/form-data',
-                credentials: "same-origin"
+                "Content-type": "multipart/form-data",
             }
         }
         post(url, formData, config)

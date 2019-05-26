@@ -1,11 +1,13 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const uploadRouter = express.Router();
-const cors = require('./cors');
+const
+    express = require('express'),
+    bodyParser = require('body-parser'),
+    corsAllowAll = require('./cors').allowAll,
+    uploadRouter = express.Router(),
+    multer = require('multer');
 
-uploadRouter.use(bodyParser.json());
-
-const multer = require('multer');
+uploadRouter
+    .use(bodyParser.json())
+    .use(corsAllowAll);
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -27,11 +29,10 @@ const imageFileFilter = (req, file, cb) => {
 const upload = multer({ storage: storage, fileFilter: imageFileFilter});
 
 uploadRouter.route('/')
-.options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
-.post(cors.corsWithOptions, upload.single('image'), (req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'application/json');
-    res.json(req.file);
-})
+    .post(upload.single('image'), (req, res) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(req.file);
+    })
 
 module.exports = uploadRouter;

@@ -46,8 +46,7 @@ class Images extends Component {
         formData.append('image', blob, date + '_' + idx + '_' + getTypeFile(file.name));
         const config = {
             headers: {
-                'Content-type': 'multipart/form-data',
-                credentials: "same-origin"
+                "Content-type": "multipart/form-data",
             }
         }
         post(url, formData, config)

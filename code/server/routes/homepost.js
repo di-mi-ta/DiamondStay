@@ -2,12 +2,10 @@ const
     express = require('express'),
     auth = require('../authenticate'),
     bodyParser = require('body-parser'),
-    corsAllowAll = require('./cors').allowAll;
-
-const Controllers  = require('../controllers'),
-      HomePostCtrl = Controllers.HomePostCtrl;
-
-const homePostRouter = express.Router();
+    corsAllowAll = require('./cors').allowAll,
+    Controllers  = require('../controllers'),
+    HomePostCtrl = Controllers.HomePostCtrl,
+    homePostRouter = express.Router();
 
 homePostRouter
     .use(bodyParser.json())

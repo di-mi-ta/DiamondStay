@@ -3,11 +3,9 @@ const
     auth = require('../authenticate'),
     bodyParser = require('body-parser'),
     corsAllowAll = require('./cors').allowAll;
-
-const Controllers  = require('../controllers'),
-      PromoCtrl = Controllers.PromoCtrl;
-
-const promoRouter = express.Router();
+    Controllers  = require('../controllers'),
+    PromoCtrl = Controllers.PromoCtrl;
+    promoRouter = express.Router();
 
 promoRouter
     .use(bodyParser.json())
