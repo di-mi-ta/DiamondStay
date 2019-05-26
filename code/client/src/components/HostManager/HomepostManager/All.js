@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-
 import { Table, Button, Icon, Card,} from 'antd'; 
-
 import {Link} from 'react-router-dom';
+import moment from 'moment';
 
 class All extends Component {
     constructor(props){
@@ -13,32 +12,32 @@ class All extends Component {
         this.props.updateCurrentHomepost(homepost);
     }
     columns = [{
-        title: 'Homestay',
+        title: <b>Homestay</b>,
         dataIndex: 'name',
         key: 'name',
         align: 'center',
         render: text => <b>{text}</b>,
     },
     ,{
-        title: 'Ngày tạo',
+        title: <b>Ngày tạo</b>,
         dataIndex: 'createdAt',
         key: 'createdAt',
         align: 'center',
-        render: text => <p>{text}</p>,
+        render: (text) => <p>{moment(text).format('LLL')}</p>,
     },{
-        title: 'Giá cơ bản',
+        title: <b>Giá cơ bản</b>,
         dataIndex: 'weekdayPrice',
         key: 'createdAt',
         align: 'center',
-        render: text => <p>{text}</p>,
+        render: (text, record) => <p>{text + ' ' + record.currencyUnit}</p>,
     }
     ,{ 
-        title: 'Hành động',
+        title: <b>Hành động</b>,
         key: 'action',
         align: 'center',
         render: (homepost) => {
             return (
-                <Link  to={`/properties/${homepost._id}`} 
+                <Link  to={`/properties/${homepost._id}/overview`} 
                         style={{color: 'white' }}>
                     <Button style={{color: 'green'}} onClick={() => this.onSetCurrentHomepost(homepost)}>
                         <Icon type="edit" /> 

@@ -107,8 +107,8 @@ class Main extends Component {
           <Route path="/room/:homepostId" 
                 render={() => <House/>}
           />
-          <Route path="/properties" 
-                render={() => 
+          <Route path="/properties/" 
+                render={({match}) => 
                             <div>
                               <HostHeader 
                                 auth={this.props.auth}
@@ -124,6 +124,7 @@ class Main extends Component {
                                   fetchCreateHomepost={this.props.fetchCreateHomepost}
                                   fetchUpdateHomepost={this.props.fetchUpdateHomepost}
                                   updateCurrentHomepost={this.props.updateCurrentHomepost}
+                                  match={match}
                               />
                             </div>
           }/>

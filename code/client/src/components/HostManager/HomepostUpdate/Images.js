@@ -3,49 +3,73 @@ import {Upload, Icon, Modal, Button, message} from 'antd';
 import axios, {post} from 'axios';
 import {baseUrl} from '../../../shared/baseUrl';
 
-const uploadFile = (file) => {
-  const url = baseUrl + 'upload';
-  const formData = new FormData();
-  fetch(file)
-  .then(res => res.blob())
-  .then(blob => {
-    const date = Date();
-    formData.append('image', blob, (date + '_' + file.name).replace(/ /g,''));
-    const config = {
-        headers: {
-            'Content-type': 'multipart/form-data',
-            credentials: "same-origin"
-        }
-    }
-    post(url, formData, config)
-    .then((resp)=> {
-      lstImgs.push('public/images/'+ (date + '_' + file.name).replace(/ /g,''))
-    })
-  })
+let lstImgs = [];
+
+const getTypeFile = (name) => {
+  let res = name.split('.');
+  return '.' + res[res.length - 1];
 }
 
-let lstImgs = [];
+const formFileLst = (lst) => {
+  let res = []
+  lst.forEach((img, idx) => {
+    res.push({
+      uid: -idx-1,
+      thumbUrl: baseUrl + img
+    })
+  })
+  return res
+}
 
 class Images extends Component {
     constructor(props){
-        super(props);
-        this.state = {
-            previewVisible: false,
-            previewImage: '',
-            fileList: []
+      super(props);
+      this.state = {
+          previewVisible: false,
+          previewImage: '',
+          lstImgs: this.props.homeposts.currentHomepost.image,
+          fileList: formFileLst(this.props.homeposts.currentHomepost.image)
+      }
+      this.onUpdateBtnClick = this.onUpdateBtnClick.bind(this);
+      this.uploadFile = this.uploadFile.bind(this);
+    }
+
+    uploadFile = (file, idx, arr) => {
+      const url = baseUrl + 'upload';
+      const formData = new FormData();
+      const date = Date.now();
+      fetch(file.thumbUrl)
+      .then(res => res.blob())
+      .then(blob => {
+        formData.append('image', blob, date + '_' + idx + '_' + getTypeFile(file.name));
+        const config = {
+            headers: {
+                'Content-type': 'multipart/form-data',
+                credentials: "same-origin"
+            }
         }
-        this.onUpdateBtnClick = this.onUpdateBtnClick.bind(this);
+        post(url, formData, config)
+        .then((resp)=> {
+          let l = this.state.lstImgs
+          l.push('images/' + date + '_' + idx + '_' + getTypeFile(file.name))
+          this.setState({
+            lstImgs: l
+          });
+          if (arr.length === idx + 1){
+            const updatedHomepost = {
+              ...this.props.homeposts.currentHomepost,
+              image: this.state.lstImgs
+            }
+            this.props.fetchUpdateHomepost(updatedHomepost);
+            message.success('Cập nhật thành công');
+            this.props.updateCurrentHomepost(updatedHomepost);
+          }
+        })
+      })
     }
 
     onUpdateBtnClick = () => {
-      this.state.fileList.forEach(uploadFile);
-      const updatedHomepost = {
-        ...this.props.homeposts.currentHomepost,
-        image: lstImgs
-      }
-      this.props.fetchUpdateHomepost(updatedHomepost);
-      message.success('Cập nhật thành công');
-      this.props.updateCurrentHomepost(updatedHomepost);
+      this.state.fileList.forEach(this.uploadFile);
     }
   
     handleCancel = () => {
@@ -79,7 +103,7 @@ class Images extends Component {
                     background: '#f1f1f1'}}> 
             <div style={{paddingBottom: 20}}>
             <h3><b>Tải lên ít nhất 5 ảnh mô tả homestay của bạn</b></h3>
-            <Button onClick={this.onUpdateBtnClick}> 
+            <Button onClick={this.onUpdateBtnClick } type='primary'> 
                 Cập nhật 
             </Button>
             </div>
@@ -91,7 +115,7 @@ class Images extends Component {
                 onPreview={this.handlePreview}
                 onChange={this.handleChange}
             >
-                {fileList.length >= 3 ? null : uploadButton}
+                {fileList.length >= 5 ? null : uploadButton}
             </Upload>
             <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
                 <img alt="example" style={{ width: '100%' }} src={previewImage} />

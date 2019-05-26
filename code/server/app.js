@@ -7,12 +7,13 @@ const uploadFileRouter = require('./routes/upload');
 const messageRouter = require('./routes/messages');
 const commentRouter = require('./routes/comment');
 const bookingRouter = require('./routes/booking');
+const locationRouter = require('./routes/location');
 
 const app = express();
 require('./initialize')(app);
 
 // for test
-// const test = require('./make-test/create-homepost')
+// const test = require('./make-test/create-location')
 
 app.use(express.static('public'))
 app.use('/users', usersRouter);
@@ -23,6 +24,7 @@ app.use('/messages', messageRouter);
 app.use('/upload', uploadFileRouter);
 app.use('/comments', commentRouter);
 app.use('/booking', bookingRouter);
+app.use('/location', locationRouter);
 
 // Path unmatched any of the routes -> reject
 app.use(function (req, res, next) {

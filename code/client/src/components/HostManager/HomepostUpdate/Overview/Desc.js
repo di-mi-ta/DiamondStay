@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Modal, Input, Form, Menu, Select, InputNumber} from 'antd';
+import {Button, Input, Form, Divider } from 'antd';
 
 const DescForm = Form.create({ name: 'desc' })(
     class extends React.Component {
@@ -61,15 +61,16 @@ class Desc extends Component {
   render(){
       return(
           <div className="container">
+              <h3><b>Thông tin cơ bản</b></h3>
+              <Button onClick={this.onUpdateBtnClick} type='primary'> 
+                  Cập nhật
+              </Button>
               <DescForm
                   wrappedComponentRef={this.saveFormRef}
                   onCancel={this.handleCancel}
                   onCreate={this.handleCreate}
                   homeposts={this.props.homeposts}
               /> 
-              <Button onClick={this.onUpdateBtnClick}> 
-                  Cập nhật
-              </Button>
           </div>
       );
   }

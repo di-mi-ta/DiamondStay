@@ -6,7 +6,6 @@ require('mongoose-currency').loadType(mongoose)
 const locationSchema = 'Locations';
 
 const HomePostSchema = new Schema({
-
     // Chủ nhà
     owner: {
         type: String,
@@ -18,13 +17,11 @@ const HomePostSchema = new Schema({
         type: Number,
         min: 0,
         default: 0,
-        required: true
     },
     weekendPrice: {
         type: Number,
         min: 0,
         default: 0,
-        required: true
     },
     minimumNights: {
         type: Number,
@@ -43,11 +40,9 @@ const HomePostSchema = new Schema({
     },
     description: {
         type: String,
-        required: true
     },
     image: [{
         type: String,
-        required: true
     }],
 
     // Thông tin cơ bản
@@ -63,7 +58,6 @@ const HomePostSchema = new Schema({
     },
     acreage: {
         type: Number,
-        require: true,
         default: 0
     },
     basicPeoples: {
@@ -80,17 +74,14 @@ const HomePostSchema = new Schema({
     // Phòng và giường
     numBed: {
         type: Number,
-        require: true,
         default: 0
     },
     numBedroom: {
         type: Number,
-        require: true,
         default: 0
     },
     numBathroom: {
         type: Number,
-        require: true,
         default: 0
     },
 
@@ -98,14 +89,18 @@ const HomePostSchema = new Schema({
     location: {
         type: mongoose.Schema.Types.ObjectId,
         ref: locationSchema,
-        required: true
+    },
+
+    homeNumber: {
+      type: String,
+      default: ''
     },
 
     // Thông tin về duyệt tin [Dành cho admin]
     state: {
         type: String,
-        default: 'waiting',
-        enum: ['Success', 'Rejected', 'Waiting', 'RequiredEdit', 'Hiden']
+        default: 'New',
+        enum: ['Success', 'Rejected', 'Waiting', 'RequiredEdit', 'Hiden', 'New']
     },
 
     confirmedBy: {

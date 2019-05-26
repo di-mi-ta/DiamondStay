@@ -1,61 +1,88 @@
-import React, {Component} from 'react';
-import {Table, Divider, Button, Icon, Popconfirm} from 'antd';
+import React, { Component } from 'react';
+import {Table, Button, Icon, Card, Divider, message} from 'antd'; 
+import {Link} from 'react-router-dom';
+import moment from 'moment';
 
-class NewHome extends Component{
+class NewHome extends Component {
     constructor(props){
         super(props);
+        this.onSetCurrentHomepost = this.onSetCurrentHomepost.bind(this);
+        this.onSendReqVerify = this.onSendReqVerify.bind(this);
     }
-    
+    onSetCurrentHomepost = (homepost) => {
+        this.props.updateCurrentHomepost(homepost);
+    }
+
+    onSendReqVerify = (homepost) => {
+        const updatedHomepost = {
+            ...homepost,
+            state: 'Waiting'
+        }
+        this.props.fetchUpdateHomepost(updatedHomepost);
+        message.success('Gửi yêu cầu duyệt thành công');
+        this.props.fetchHomeposts('?state=New');
+    }
     columns = [{
-        title: 'Homestay',
+        title: <b>Homestay</b>,
         dataIndex: 'name',
         key: 'name',
         align: 'center',
-        render: text => text,
-    },{
-        title: 'Cập nhật lần cuối',
-        dataIndex: 'updatedAt',
-        key: 'updatedAt',
+        render: text => <b>{text}</b>,
+    },
+    ,{
+        title: <b>Ngày tạo</b>,
+        dataIndex: 'createdAt',
+        key: 'createdAt',
         align: 'center',
-        render: text => text,
+        render: (text) => <p>{moment(text).format('LLL')}</p>,
     },{
-        title: 'Giá',
-        key: 'weekdayPrice',
+        title: <b>Giá cơ bản</b>,
         dataIndex: 'weekdayPrice',
+        key: 'createdAt',
         align: 'center',
-        render: text => text,
-    },{
+        render: (text, record) => <p>{text + ' ' + record.currencyUnit}</p>,
+    }
+    ,{ 
+        title: <b>Hành động</b>,
         key: 'action',
         align: 'center',
-        title: 'Hành động',
-        render: (text, record) => (
-          <span>
-             <Popconfirm title="Bạn chắc chắn muốn xóa chứ？" 
-                        okText="Xóa" cancelText="Hủy bỏ" 
-                        onConfirm = {() => this.onConfirmDeleteClick(record)}>
-                  <Button ghost> <Icon type="delete"  
-                        style={{ color: '#DC143C' }} theme="filled" /> </Button>
-             </Popconfirm>
-            <Divider type="vertical"/>
-            <Button ghost onClick={()=> {this.setState({currentPromo: record}); this.onEditBtnClick()}}> 
-                <Icon type="edit" style={{ color: '#FF8C00' }} 
-                    theme="filled"/> 
-            </Button>
-          </span>
-        ),
-    }];
-
+        render: (homepost) => {
+            return (
+            <span>
+                <Link  to={`/properties/${homepost._id}/overview`} 
+                        style={{color: 'white' }}>
+                    <Button style={{color: 'green'}} onClick={() => this.onSetCurrentHomepost(homepost)}>
+                        <Icon type="edit" /> 
+                        Cập nhật
+                    </Button>
+                </Link>
+                <Divider type="vertical"/>
+                <Button style={{color: 'green'}} onClick={() => this.onSendReqVerify(homepost)}>
+                    <Icon type="edit" /> 
+                    Gửi yêu cầu duyệt
+                </Button>
+            </span>
+            )
+        },
+    }]
     render(){
         return(
-            <div className="container">
+            <div style = {{padding: 50, background: '#f1f1f1'}}>
+                <Card style={{ 
+                            boxShadow: "1px 3px 1px #9E9E9E",
+                            borderRadius: "10px",
+                            minHeight: '300px'}}>
                 <Table columns={this.columns} 
-                        dataSource={this.props.homeposts.homeposts} 
-                        style={{marginTop: '20px', backgroundColor: 'while'}}
-                        bordered
+                    dataSource={this.props.homeposts.homeposts} 
                 />
+                </Card>
             </div>
-        );
+        )
+    }
+    componentDidMount(){
+        this.props.fetchHomeposts('?state=New');
     }
 }
-
+  
 export default NewHome;
+

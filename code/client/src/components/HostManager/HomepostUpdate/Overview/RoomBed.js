@@ -135,8 +135,10 @@ class RoomBed extends Component {
   render(){
       return(
           <div className="container">
-              <h3>Thông tin cơ bản</h3>
-              <Divider/>
+              <h3><b>Thông tin cơ bản</b></h3>
+              <Button onClick={this.onUpdateBtnClick} type='primary' style={{marginRight: 0}}> 
+                  Cập nhật
+              </Button>
               <BasicForm
                   wrappedComponentRef={this.saveBasicFormRef}
                   homeposts={this.props.homeposts}
@@ -147,9 +149,6 @@ class RoomBed extends Component {
                   wrappedComponentRef={this.saveRoomBedFormRef}
                   homeposts={this.props.homeposts}
               /> 
-              <Button onClick={this.onUpdateBtnClick}> 
-                  Cập nhật
-              </Button>
           </div>
       );
   }
