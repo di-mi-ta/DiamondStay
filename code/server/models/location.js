@@ -8,18 +8,14 @@ const locationSchema = new Schema({
     },
     province: {
         type: String,
-        required: true 
+        required: true
     },
     district: {
         type: String,
-        required: true 
+        required: true
     },
-    street: {
+    ward: {
         type: String,
-        default: ''
-    },
-    homeNumber: {
-        type: Number,
         default: ''
     }
 });

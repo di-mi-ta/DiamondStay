@@ -2,13 +2,14 @@ const HomePosts = require('../models/homeposts')
 
 const getHomeposts = (req, res, next) => {
     HomePosts.find(req.query)
+    .populate('location')
     .populate('rating.author')
     .then((homeposts) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json')
         res.json(homeposts)
-    },(err) => next(err)) 
-    .catch((err) => next(err)); 
+    },(err) => next(err))
+    .catch((err) => next(err));
 }
 
 const deleteAllHomePost = (req, res, next) => {
@@ -24,7 +25,8 @@ const deleteAllHomePost = (req, res, next) => {
 
 const findHomePostDetailedById = (req,res,next) => {
     /* Description: Get detailed information of a homepost*/
-    HomePosts.findById(res.params.homePostId)
+    HomePosts.findById(res.params.homepostId)
+    .populate('location')
     .populate('rating.author')
     .then((homepost) => {
         res.statusCode = 200;
@@ -36,18 +38,18 @@ const findHomePostDetailedById = (req,res,next) => {
 
 const deleteHomePost = (req, res, next) => {
     /* Description: Delete a homepost */
-    HomePosts.findByIdAndRemove(res.params.homePostId)
+    HomePosts.findByIdAndRemove(res.params.homepostId)
     .then((resp) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.json(resp);
     }, (err) => next(err))
-    .catch((err) => next(err)); 
+    .catch((err) => next(err));
 }
 
 const updateHomePost = (req, res, next) => {
     /* Description: Update a homepost */
-    HomePosts.findByIdAndUpdate(req.params.homePostId, {
+    HomePosts.findByIdAndUpdate(req.params.homepostId, {
         $set: req.body
     }, { new: true })
     .then((homepost) => {
@@ -69,7 +71,7 @@ const createNewHomePost = (req, res, next) => {
     .catch((err) => next(err));
 }
 
-// export all 
+// export all
 module.exports = {
     getHomeposts,
     deleteAllHomePost,

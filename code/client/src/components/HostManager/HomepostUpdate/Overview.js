@@ -3,7 +3,8 @@ import {Menu} from 'antd';
 import {Link, Switch, Route, Redirect} from 'react-router-dom';
 import Desc from './Overview/Desc';
 import RoomBed from './Overview/RoomBed';
-
+import {connect} from 'react-redux';
+import * as actions from '../../../redux/ActionCreators';
 
 class Overview extends Component {
     constructor(props){
@@ -51,4 +52,12 @@ class Overview extends Component {
 
 }
 
-export default Overview;
+const mapStateToProps = state => ({
+    homeposts: state.homeposts,
+  });
+  
+  const mapDispatchToProps = (dispatch) => ({
+    fetchHomeposts: (query='') => {dispatch(actions.fetchHomeposts(query))},
+  });
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(Overview);

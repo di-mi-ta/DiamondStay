@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Modal, Input, Form, Menu, Select, InputNumber} from 'antd';
+import {Button, Modal, Input, Form, Menu, Select, InputNumber, Divider} from 'antd';
 import {connect} from 'react-redux';
 import * as actions from '../../../../redux/ActionCreators';
 
@@ -63,15 +63,16 @@ class Desc extends Component {
   render(){
       return(
           <div className="container">
+              <h3><b>Thông tin cơ bản</b></h3>
+              <Button onClick={this.onUpdateBtnClick} type='primary'> 
+                  Cập nhật
+              </Button>
               <DescForm
                   wrappedComponentRef={this.saveFormRef}
                   onCancel={this.handleCancel}
                   onCreate={this.handleCreate}
                   homeposts={this.props.homeposts}
-              />
-              <Button onClick={this.onUpdateBtnClick}>
-                  Cập nhật
-              </Button>
+              /> 
           </div>
       );
   }
@@ -83,6 +84,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => ({
   updateCurrentHomepost: (homepost) => {dispatch(actions.updateCurrentHomepost(homepost))},
+  fetchUpdateHomepost: (homepost) => {dispatch(actions.fetchUpdateHomepost(homepost))}
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Desc);

@@ -1,51 +1,55 @@
 const Location = require('../models/location');
 
-// Location.create({
-//     province: 'Quảng Nam',
-//     district: 'Phú Ninh',
-// })
+Location.create({
+    province: 'Quảng Nam',
+    district: 'Phú Ninh',
+    ward: 'Tam Thái'
+})
 
-// Location.create({
-//     province: 'Quảng Nam',
-//     district: 'Tam Kỳ',
-// })
+Location.create({
+    province: 'Quảng Nam',
+    district: 'Phú Ninh',
+    ward: 'Tam Đại'
+})
 
-// Location.create({
-//     province: 'Quảng Nam',
-//     district: 'Thăng Bình',
-// })
+Location.create({
+    province: 'Quảng Nam',
+    district: 'Tam Kỳ',
+    ward: 'An Xuân'
+})
 
-// Location.create({
-//     province: 'Tp. Hồ Chí Minh',
-//     district: '10',
-// })
+Location.create({
+    province: 'Quảng Nam',
+    district: 'Tam Kỳ',
+    ward: 'Trường Xuân'
+})
 
-// Location.create({
-//     province: 'Tp. Hồ Chí Minh',
-//     district: '1',
-// })
+Location.create({
+    province: 'Quảng Nam',
+    district: 'Thăng Bình',
+    ward: 'Bình Tú'
+})
 
-// Location.create({
-//     province: 'Tp. Hồ Chí Minh',
-//     district: 'Bình Thạnh',
-// })
+Location.create({
+    province: 'Quảng Nam',
+    district: 'Thăng Bình',
+    ward: 'Hà Lam'
+})
 
-// Location.create({
-//     province: 'Tp. Hồ Chí Minh',
-//     district: 'Thủ Đức',
-// })
+Location.create({
+    province: 'Tp. Hồ Chí Minh',
+    district: '10',
+    ward: '12'
+})
 
-// Location.create({
-//     province: 'Đà Nẵng',
-//     district: 'Hòa Vang',
-// })
+Location.create({
+    province: 'Tp. Hồ Chí Minh',
+    district: '10',
+    ward: '7'
+})
 
-// Location.create({
-//     province: 'Đà Nẵng',
-//     district: 'Cẩm Lệ',
-// })
-
-Location.find({})
-.then((locations)=>{
-    console.log(JSON.stringify(locations))
+Location.create({
+    province: 'Tp. Hồ Chí Minh',
+    district: 'Thủ Đức',
+    ward: 'Linh Trung'
 })

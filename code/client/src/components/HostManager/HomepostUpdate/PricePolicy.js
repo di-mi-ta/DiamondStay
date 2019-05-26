@@ -36,37 +36,6 @@ const PriceForm = Form.create({ name:'desc'})(
     },
 );
 
-// const Policy = Form.create({ name:'desc'})(
-//     class extends React.Component {
-//       render() {
-//         const { form } = this.props;
-//         const { getFieldDecorator } = form;
-//         return (
-//             <div>
-//             <h4><b>Chính sách</b></h4>
-//             <Form  layout="vertical">
-//               <Form.Item label="Nhận phòng sau">
-//                 {getFieldDecorator('weekdayPrice', {
-//                   initialValue: this.props.homeposts.currentHomepost.weekdayPrice,
-//                   rules: [{ required: true, message: 'Trường này không được bỏ trống !!!' }],
-//                 })(
-//                     <InputNumber min='0' style={{width: '100%'}}/>
-
-//                 )}
-//               </Form.Item>
-//               <Form.Item label="Giá cuối tuần">
-//                 {getFieldDecorator('weekendPrice', {
-//                   initialValue: this.props.homeposts.currentHomepost.weekendPrice,
-//                   rules: [{ required: true, message: 'Trường này không được bỏ trống !!!' }],
-//                 })(<Input />)}
-//               </Form.Item>
-//             </Form>
-//             </div>
-//         );
-//       }
-//     },
-// );
-
 const CurrencyUnitForm = Form.create({name: 'desc'})(
     class extends React.Component {
       render() {
@@ -138,8 +107,10 @@ class PricePolicy extends Component {
   render(){
       return(
           <div className="container">
-              <h3>Giá và các chính sách</h3>
-              <Divider/>
+              <h3><b>Giá và các chính sách</b></h3>
+              <Button onClick={this.onUpdateBtnClick} type='primary'> 
+                  Cập nhật
+              </Button>
               <CurrencyUnitForm
                   wrappedComponentRef={this.saveCurrencyUnitFormRef}
                   homeposts={this.props.homeposts}
@@ -148,10 +119,7 @@ class PricePolicy extends Component {
               <PriceForm
                   wrappedComponentRef={this.savePriceFormRef}
                   homeposts={this.props.homeposts}
-              />
-              <Button onClick={this.onUpdateBtnClick}>
-                  Cập nhật
-              </Button>
+              />        
           </div>
       );
   }

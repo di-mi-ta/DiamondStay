@@ -1,23 +1,25 @@
-const express = require('express')
-const bodyParser = require('body-parser');
+const
+    express = require('express'),
+    auth = require('../authenticate'),
+    bodyParser = require('body-parser'),
+    corsAllowAll = require('./cors').allowAll;
+
+const Controllers  = require('../controllers'),
+      PromoCtrl = Controllers.PromoCtrl;
 
 const promoRouter = express.Router();
-promoRouter.use(bodyParser.json());
-const authenticate = require('../authenticate');
-const cors = require('./cors');
 
-const Controllers  = require('../controllers');
-const PromoCtrl = Controllers.PromoCtrl;
+promoRouter
+    .use(bodyParser.json())
+    .use(corsAllowAll);
 
 promoRouter.route('/')
-    .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
-    .get(cors.cors, PromoCtrl.getFullListPromo)
-    .post(cors.corsWithOptions, PromoCtrl.createSystemPromotion)
+    .get(PromoCtrl.getFullListPromo)
+    .post(PromoCtrl.createSystemPromotion)
 
 promoRouter.route('/:promoId')
-    .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
-    .get(cors.cors, PromoCtrl.getSystemPromoById)
-    .put(cors.corsWithOptions, PromoCtrl.updateSystemPromotion)
-    .delete(cors.corsWithOptions, PromoCtrl.deleteSystemPromotion);
+    .get(PromoCtrl.getSystemPromoById)
+    .put(PromoCtrl.updateSystemPromotion)
+    .delete(PromoCtrl.deleteSystemPromotion);
 
 module.exports = promoRouter;

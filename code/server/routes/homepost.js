@@ -1,24 +1,26 @@
-const express = require('express')
-const bodyParser = require('body-parser');
+const
+    express = require('express'),
+    auth = require('../authenticate'),
+    bodyParser = require('body-parser'),
+    corsAllowAll = require('./cors').allowAll;
 
-const homePostRouter= express.Router();
-const cors = require('./cors');
+const Controllers  = require('../controllers'),
+      HomePostCtrl = Controllers.HomePostCtrl;
 
-homePostRouter.use(bodyParser.json());
+const homePostRouter = express.Router();
 
-const Controllers  = require('../controllers');
-const HomePostCtrl = Controllers.HomePostCtrl;
+homePostRouter
+    .use(bodyParser.json())
+    .use(corsAllowAll);
 
 homePostRouter.route('/')
-    .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
-    .get(cors.cors, HomePostCtrl.getHomeposts)
-    .post(cors.corsWithOptions, HomePostCtrl.createNewHomePost)
-    .delete(cors.corsWithOptions, HomePostCtrl.deleteAllHomePost);
+    .get(HomePostCtrl.getHomeposts)
+    .post(HomePostCtrl.createNewHomePost)
+    .delete(HomePostCtrl.deleteAllHomePost);
 
-homePostRouter.route('/:homePostId')
-    .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
-    .get(cors.cors, HomePostCtrl.findHomePostDetailedById)
-    .put(cors.corsWithOptions,HomePostCtrl.updateHomePost)
-    .delete(cors.corsWithOptions, HomePostCtrl.deleteHomePost);
+homePostRouter.route('/:homepostId')
+    .get(HomePostCtrl.findHomePostDetailedById)
+    .put(HomePostCtrl.updateHomePost)
+    .delete(HomePostCtrl.deleteHomePost);
 
 module.exports = homePostRouter;

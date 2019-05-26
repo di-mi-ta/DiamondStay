@@ -53,7 +53,6 @@ export const loginUser = (creds) => (dispatch) => {
                 password: creds.password,
                 info: response.userInfo,
             }));
-            dispatch(fetchFavorites());
             dispatch(receiveLogin(response));
         }
         else {
@@ -81,7 +80,6 @@ export const logoutUser = () => (dispatch) => {
     dispatch(requestLogout())
     localStorage.removeItem('token');
     localStorage.removeItem('creds');
-    dispatch(favoritesFailed("Error 401: Unauthorized"));
     dispatch(receiveLogout())
 }
 
@@ -189,8 +187,7 @@ export const fetchDeleteHostPromo = (promoId) => (dispatch) => {
         fetch(baseUrl + 'host-promotions/' + promoId, {
             method: "DELETE",
             headers: {
-            'Authorization': bearer,
-            credentials: "same-origin"
+                "Authorization": bearer,
             },
         })
         .then(response => {
@@ -215,8 +212,7 @@ export const fetchDeleteSystemPromo = (promoId) => (dispatch) => {
         fetch(baseUrl + 'system-promotions/' + promoId, {
             method: "DELETE",
             headers: {
-            'Authorization': bearer,
-            credentials: "same-origin"
+                "Authorization": bearer,
             },
         })
         .then(response => {
@@ -242,9 +238,8 @@ export const fetchUpdateHostPromo = (updatedPromo) => (dispatch) => {
             method: "PUT",
             body: JSON.stringify(updatedPromo),
             headers: {
-            "Content-Type": "application/json",
-            'Authorization': bearer,
-            credentials: "same-origin"
+                "Content-Type": "application/json",
+                "Authorization": bearer,
             },
         })
         .then(response => {
@@ -270,9 +265,8 @@ export const fetchUpdateSystemPromo = (updatedPromo) => (dispatch) => {
             method: "PUT",
             body: JSON.stringify(updatedPromo),
             headers: {
-            "Content-Type": "application/json",
-            'Authorization': bearer,
-            credentials: "same-origin"
+                "Content-Type": "application/json",
+                'Authorization': bearer,
             },
         })
         .then(response => {
@@ -298,9 +292,8 @@ export const fetchCreateHostPromo = (promo) => (dispatch) => {
             method: "POST",
             body: JSON.stringify(promo),
             headers: {
-            "Content-Type": "application/json",
-            'Authorization': bearer,
-            credentials: "same-origin"
+                "Content-Type": "application/json",
+                'Authorization': bearer,
             },
         })
         .then(response => {
@@ -326,9 +319,8 @@ export const fetchCreateSystemPromo = (promo) => (dispatch) => {
             method: "POST",
             body: JSON.stringify(promo),
             headers: {
-            "Content-Type": "application/json",
-            'Authorization': bearer,
-            credentials: "same-origin"
+                "Content-Type": "application/json",
+                "Authorization": bearer,
             },
         })
         .then(response => {
@@ -385,9 +377,8 @@ export const fetchUpdateHomepost = (homepost) => (dispatch) => {
             method: "PUT",
             body: JSON.stringify(homepost),
             headers: {
-            "Content-Type": "application/json",
-            'Authorization': bearer,
-            credentials: "same-origin"
+                "Content-Type": "application/json",
+                "Authorization": bearer,
             },
         })
         .then(response => {
@@ -434,9 +425,8 @@ export const fetchCreateHomepost = (homepost) => (dispatch) => {
             method: "POST",
             body: JSON.stringify(homepost),
             headers: {
-            "Content-Type": "application/json",
-            'Authorization': bearer,
-            credentials: "same-origin"
+                "Content-Type": "application/json",
+                "Authorization": bearer,
             },
         })
         .then(response => {
@@ -452,7 +442,6 @@ export const fetchCreateHomepost = (homepost) => (dispatch) => {
                 throw error;
         })
         .then(response => response.json())
-        .then((promo)=> dispatch(addHomepost(homepost)))
         .catch(error => dispatch(homepostsFailed(error.message)));
 }
 
@@ -463,7 +452,6 @@ export const addRating = (rating) => ({
 });
 
 export const postRating = (homepostId, rating, comment) => (dispatch) => {
-
     const newRating = {
         homepost: homepostId,
         rating: rating,
@@ -474,10 +462,9 @@ export const postRating = (homepostId, rating, comment) => (dispatch) => {
         method: 'POST',
         body: JSON.stringify(newRating),
         headers: {
-            'Content-Type': 'application/json',
-            'Authorization': bearer
+            "Content-Type": "application/json",
+            "Authorization": bearer
         },
-        credentials: 'same-origin'
     })
     .then(response => {
         if (response.ok) {
@@ -530,103 +517,3 @@ export const addRatings = (ratings) => ({
     payload: ratings
 });
 
-
-// for favorites
-export const postFavorite = (homepostId) => (dispatch) => {
-    const bearer = localStorage.getItem('token');
-    return fetch(baseUrl + 'favorites/' + homepostId, {
-        method: "POST",
-        body: JSON.stringify({"_id": homepostId}),
-        headers: {
-          "Content-Type": "application/json",
-          'Authorization': bearer
-        },
-        credentials: "same-origin"
-    })
-    .then(response => {
-        if (response.ok) {
-          return response;
-        } else {
-          var error = new Error('Error ' + response.status + ': ' + response.statusText);
-          error.response = response;
-          throw error;
-        }
-      },
-      error => {
-            throw error;
-      })
-    .then(response => response.json())
-    .then(favorites => { console.log('Favorite Added', favorites); dispatch(addFavorites(favorites)); })
-    .catch(error => dispatch(favoritesFailed(error.message)));
-}
-
-export const deleteFavorite = (homepostId) => (dispatch) => {
-    const bearer = localStorage.getItem('token');
-    return fetch(baseUrl + 'favorites/' + homepostId, {
-        method: "DELETE",
-        headers: {
-          'Authorization': bearer
-        },
-        credentials: "same-origin"
-    })
-    .then(response => {
-        if (response.ok) {
-          return response;
-        } else {
-          var error = new Error('Error ' + response.status + ': ' + response.statusText);
-          error.response = response;
-          throw error;
-        }
-      },
-      error => {
-            throw error;
-      })
-    .then(response => response.json())
-    .then(favorites => { console.log('Favorite Deleted', favorites); dispatch(addFavorites(favorites)); })
-    .catch(error => dispatch(favoritesFailed(error.message)));
-};
-
-export const fetchFavorites = () => (dispatch) => {
-    dispatch(favoritesLoading(true));
-    const bearer = localStorage.getItem('token');
-    return fetch(baseUrl + 'favorites', {
-        headers: {
-            'Authorization': bearer
-        },
-    })
-    .then(response => {
-        if (response.ok) {
-            return response;
-        }
-        else {
-            var error = new Error('Error ' + response.status + ': ' + response.statusText);
-            error.response = response;
-            throw error;
-        }
-    },
-    error => {
-        var errmess = new Error(error.message);
-        throw errmess;
-    })
-    .then(response => response.json())
-    .then(favorites => dispatch(addFavorites(favorites)))
-    .catch(error => dispatch(favoritesFailed(error.message)));
-}
-
-export const favoritesLoading = () => ({
-    type: ActionTypes.FAVORITES_LOADING
-});
-
-export const favoritesFailed = (errmess) => ({
-    type: ActionTypes.FAVORITES_FAILED,
-    payload: errmess
-});
-
-export const addFavorites = (favorites) => ({
-    type: ActionTypes.ADD_FAVORITES,
-    payload: favorites
-});
-
-// for messages
-
-// for reservation 
