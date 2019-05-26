@@ -63,6 +63,9 @@ class MainPage extends React.Component {
   componentDidMount(){
     this.props.fetchHomeposts();
     this.props.fetchSystemPromos();
+    this.updatePolicyGlideSize();
+    window.addEventListener('resize', e => this.updatePolicyGlideSize());
+    console.log(this.props);
   }
 
   render() {
@@ -148,11 +151,6 @@ class MainPage extends React.Component {
       spaceGlide.updateGlide({startAt: 0, perView: 4});
       placeGlide.updateGlide({startAt: 0, perView: 4});
     }
-  }
-
-  componentDidMount() {
-    this.updatePolicyGlideSize();
-    window.addEventListener('resize', e => this.updatePolicyGlideSize());
   }
 }
 

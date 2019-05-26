@@ -33,15 +33,19 @@
 }
 
 .mainHeader > .collapse > ul > li.nav-item > a {
+    padding: 0;
+}
+
+.mainHeader > .collapse > ul > li.nav-item > a > button {
     font-family: 'Open Sans', sans-serif;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     font-weight: 400;
     color: #222;
     letter-spacing: .2px;
     padding: 0;
 }
 
-.mainHeader > .collapse > ul > li.nav-item > a:hover {
+.mainHeader > .collapse > ul > li.nav-item > a > button:hover {
     color: #f65e39;
 }
 
