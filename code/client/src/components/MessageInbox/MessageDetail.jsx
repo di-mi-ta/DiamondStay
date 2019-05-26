@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Typography, Button, Col, Popconfirm } from 'antd';
+import { Form, Typography, Button, Col, Popconfirm, Icon, Input } from 'antd';
 const Item = Form.Item;
 const { Paragraph } = Typography;
 
@@ -25,8 +25,7 @@ class MessageDetail extends React.Component {
         <Form>
           <Item {...formItemLayout} label='Người gửi'>
             <Paragraph>
-              <span><b>{sender.name}{'   '}</b></span>
-              <span>{type}</span>
+              <span><b>{sender.fullname}</b></span>
             </Paragraph>
           </Item>
           <Item {...formItemLayout} label='Thời gian'>
@@ -36,25 +35,35 @@ class MessageDetail extends React.Component {
             <Paragraph strong={true}>{title}</Paragraph>
           </Item>
           <Item {...formItemLayout} label='Nội dung'>
-            <Paragraph>{content}</Paragraph>
+            <Input.TextArea autosize value={content}>
+            </Input.TextArea>
           </Item>
         </Form>
         <Col offset={6}>
-          <Popconfirm
-            title='Bạn chắc chắn muốn xoá tin nhắn này?'
-            okText='Xoá'
-            cancelText='Huỷ'
-            onConfirm={() => this.props.onDeleteMessage()}
-          >
-            <Button type='danger'>Xoá tin nhắn</Button>
-          </Popconfirm>
-          <Button
-            type='primary'
-            onClick={() => this.props.onClickOnRepy()}
-          >
-            Trả lời
-          </Button>
-          <Button type='default' onClick={this.props.onReturn}>Trở lại</Button>
+          <Button.Group>
+            <Popconfirm
+              title='Bạn chắc chắn muốn xoá tin nhắn này?'
+              okText='Xoá'
+              cancelText='Huỷ'
+              onConfirm={() => this.props.onDeleteMessage()}
+            >
+              <Button type='danger'>
+                <Icon type="delete" />
+                Xoá tin nhắn
+              </Button>
+            </Popconfirm>
+            <Button
+              type='primary'
+              onClick={() => this.props.onClickOnRepy()}
+            >
+              <Icon type="edit" />
+              Trả lời
+            </Button>
+            <Button type='default' onClick={this.props.onReturn}>
+              Trở lại
+              <Icon type="arrow-right" />
+            </Button>
+          </Button.Group>
         </Col>
       </div>
     );

@@ -3,7 +3,7 @@ import MessageList from './MessageList';
 import MessageDetail from './MessageDetail';
 import MessageEdit from './MessageEdit';
 
-import { Empty, message as antdMessage } from 'antd';
+import { Empty, Col, Row, message as antdMessage } from 'antd';
 import * as helper from './helper';
 
 const MESSAGE_LIST = 1;
@@ -109,9 +109,9 @@ class MessageInboxComponent extends React.Component {
   };
 
   render() {
-    // No messages
+    let component;
     if (this.state.messages.length === 0) {
-      return (
+      component = (
         <Empty
           description={<span>Bạn không có tin nhắn</span>}
         />
@@ -119,14 +119,14 @@ class MessageInboxComponent extends React.Component {
     }
 
     if (this.state.openingComponent === MESSAGE_LIST) {
-      return (
+      component = (
         <MessageList
           messages={this.state.messages}
           onClickOnMessage={this.onOpenMessageDetail}
         />
       );
     } else if (this.state.openingComponent === MESSAGE_DETAIL) {
-      return (
+      component = (
         <MessageDetail
           message={this.state.openingMessage}
           onDeleteMessage={() => this.onDeleteCurrentMessage()}
@@ -136,7 +136,7 @@ class MessageInboxComponent extends React.Component {
       );
     }
     else {
-      return (
+      component = (
         <MessageEdit
           receiver={this.state.openingMessage.sender}
           defaultTitle={helper.makeDefaultTitle(this.state.openingMessage.title)}
@@ -146,6 +146,14 @@ class MessageInboxComponent extends React.Component {
         />
       )
     }
+
+    return (
+      <Row>
+        <Col span={20} offset={2}>
+          {component}
+        </Col>
+      </Row>
+    );
   }
 }
 

@@ -11,10 +11,21 @@ const columns = [
   }, {
     title: 'Chủ đề',
     dataIndex: 'title',
-  }, {
-    title: 'Chú thích',
-    dataIndex: 'type',
-  }, {
+  },
+  // {
+  //   title: 'Chú thích',
+  //   dataIndex: 'type',
+  // },
+  {
+    title: 'Nội dung',
+    dataIndex: 'content',
+    render: (content) => {
+      if (content.length > 50)
+        return content.substr(0, 50) + '...';
+      else return content;
+    }
+  },
+  {
     title: 'Trạng thái',
     dataIndex: 'seen',
     render: (seen) => {
@@ -26,7 +37,7 @@ const columns = [
   }
 ];
 
-class MessageList extends React.Component {z
+class MessageList extends React.Component {
   // componentDidMount() {
   //   this.updateInterval = setInterval(() => this.forceUpdate(), 3000);
   // }

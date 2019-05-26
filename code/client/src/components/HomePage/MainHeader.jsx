@@ -16,6 +16,7 @@ class MainHeader extends React.Component {
       isNavOpen: false,
       isLoginModalOpen: false,
       isRegisterModalOpen: false,
+      clickedLogout: false,
     };
     this.toggleNav = this.toggleNav.bind(this);
     this.toggleLoginModal = this.toggleLoginModal.bind(this);
@@ -49,16 +50,15 @@ class MainHeader extends React.Component {
 
   handleLogout() {
       this.props.logoutUser();
-      return <Redirect to='/home'/>
   }
 
   render() {
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light mainHeader">
-          <a className="navbar-brand" href="#">
+          <Link to='/' className="navbar-brand">
             <img src="assets/images/logo.png" alt=""/>
             <span>DiamondStay</span>
-          </a>
+          </Link>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainHeaderNavbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
