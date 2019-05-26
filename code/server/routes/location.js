@@ -2,12 +2,10 @@ const
     express = require('express'),
     auth = require('../authenticate'),
     bodyParser = require('body-parser'),
-    corsAllowAll = require('./cors').allowAll;
-
-const Controllers  = require('../controllers'),
-      LocationCtrl = Controllers.LocationCtrl;
-
-const locationRouter = express.Router();
+    corsAllowAll = require('./cors').allowAll,
+    Controllers  = require('../controllers'),
+    LocationCtrl = Controllers.LocationCtrl,
+    locationRouter = express.Router();
 
 locationRouter
   .use(bodyParser.json())

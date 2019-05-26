@@ -6,7 +6,6 @@ import CalendarComponent from '../Common/CalendarComponent';
 import HomepostManager from './HomepostManager';
 import Reservation from '../Booking/ReservationComponent'
 import Header from '../Header/HostHeader';
-
 import '../../css/host/host-manager.css';
 import MessageInbox from '../MessageInbox';
 import {connect} from 'react-redux';
@@ -64,6 +63,7 @@ class HostManager extends Component{
               <Route path="/host/my-homes" component={HomepostManager}/>
               <Route path="/host/reservations" component={Reservation}/>
               <Route path="/host/messages" component={MessageInbox} />
+              <Redirect to='/host/my-homes'/>
             </Switch>
             </div>
             : <div/>
