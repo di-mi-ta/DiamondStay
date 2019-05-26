@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Button, Input, Form, Select, InputNumber, Divider, message} from 'antd';
 import {baseUrl} from '../../../shared/baseUrl';
+import {connect} from 'react-redux';
+import * as actions from '../../../redux/ActionCreators';
 
 const Option = Select.Option;
 
@@ -164,4 +166,13 @@ class Location extends Component {
   }
 }
 
-export default Location;
+const mapStateToProps = state => ({
+  homeposts: state.homeposts,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  updateCurrentHomepost: (homepost) => {dispatch(actions.updateCurrentHomepost(homepost))},
+  fetchUpdateHomepost: (homepost) => {dispatch(actions.fetchUpdateHomepost(homepost))}
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Location);

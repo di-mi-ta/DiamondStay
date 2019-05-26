@@ -1,23 +1,25 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('./cors');
+const
+    express = require('express'),
+    auth = require('../authenticate'),
+    bodyParser = require('body-parser'),
+    corsAllowAll = require('./cors').allowAll;
+
+const Controllers = require('../controllers'),
+      CommentCtrl = Controllers.CommentCtrl;
 
 const commentRouter = express.Router();
-commentRouter.use(bodyParser.json());
 
-const Controllers  = require('../controllers');
-const CommentCtrl = Controllers.CommentCtrl;
+commentRouter
+    .use(bodyParser.json())
+    .use(corsAllowAll);
 
 commentRouter.route('/')
-.options(cors.corsWithOptions, (req, res) => { res.sendStatus(200);})
-.get(cors.cors, CommentCtrl.getComments)
-.post(cors.corsWithOptions, CommentCtrl.postComment)
+  .get(CommentCtrl.getComments)
+  .post(CommentCtrl.postComment)
 
 commentRouter.route('/:commentId')
-.options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
-.get(cors.cors, CommentCtrl.getCommentById)
-
-.put(cors.corsWithOptions, CommentCtrl.updateComment)
-.delete(cors.corsWithOptions, CommentCtrl.deleteComment);
+  .get(CommentCtrl.getCommentById)
+  .put(CommentCtrl.updateComment)
+  .delete(CommentCtrl.deleteComment);
 
 module.exports = commentRouter;

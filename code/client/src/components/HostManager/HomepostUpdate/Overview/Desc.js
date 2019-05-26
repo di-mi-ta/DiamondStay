@@ -84,6 +84,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => ({
   updateCurrentHomepost: (homepost) => {dispatch(actions.updateCurrentHomepost(homepost))},
+  fetchUpdateHomepost: (homepost) => {dispatch(actions.fetchUpdateHomepost(homepost))}
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Desc);

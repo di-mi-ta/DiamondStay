@@ -1,16 +1,20 @@
-const express = require('express')
-const bodyParser = require('body-parser');
+const
+    express = require('express'),
+    auth = require('../authenticate'),
+    bodyParser = require('body-parser'),
+    corsAllowAll = require('./cors').allowAll;
+
+const Controllers  = require('../controllers'),
+      LocationCtrl = Controllers.LocationCtrl;
 
 const locationRouter = express.Router();
-locationRouter.use(bodyParser.json());
-const cors = require('./cors');
 
-const Controllers  = require('../controllers');
-const LocationCtrl = Controllers.LocationCtrl;
+locationRouter
+  .use(bodyParser.json())
+  .use(corsAllowAll);
 
 locationRouter.route('/')
-    .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
-    .get(cors.cors, LocationCtrl.getLocations)
-    .delete(cors.corsWithOptions, LocationCtrl.deleteAll)
+    .get(LocationCtrl.getLocations)
+    .delete(LocationCtrl.deleteAll)
 
 module.exports = locationRouter;

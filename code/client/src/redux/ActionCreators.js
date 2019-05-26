@@ -187,8 +187,7 @@ export const fetchDeleteHostPromo = (promoId) => (dispatch) => {
         fetch(baseUrl + 'host-promotions/' + promoId, {
             method: "DELETE",
             headers: {
-            'Authorization': bearer,
-            credentials: "same-origin"
+                "Authorization": bearer,
             },
         })
         .then(response => {
@@ -213,8 +212,7 @@ export const fetchDeleteSystemPromo = (promoId) => (dispatch) => {
         fetch(baseUrl + 'system-promotions/' + promoId, {
             method: "DELETE",
             headers: {
-            'Authorization': bearer,
-            credentials: "same-origin"
+                "Authorization": bearer,
             },
         })
         .then(response => {
@@ -240,9 +238,8 @@ export const fetchUpdateHostPromo = (updatedPromo) => (dispatch) => {
             method: "PUT",
             body: JSON.stringify(updatedPromo),
             headers: {
-            "Content-Type": "application/json",
-            'Authorization': bearer,
-            credentials: "same-origin"
+                "Content-Type": "application/json",
+                "Authorization": bearer,
             },
         })
         .then(response => {
@@ -268,9 +265,8 @@ export const fetchUpdateSystemPromo = (updatedPromo) => (dispatch) => {
             method: "PUT",
             body: JSON.stringify(updatedPromo),
             headers: {
-            "Content-Type": "application/json",
-            'Authorization': bearer,
-            credentials: "same-origin"
+                "Content-Type": "application/json",
+                'Authorization': bearer,
             },
         })
         .then(response => {
@@ -296,9 +292,8 @@ export const fetchCreateHostPromo = (promo) => (dispatch) => {
             method: "POST",
             body: JSON.stringify(promo),
             headers: {
-            "Content-Type": "application/json",
-            'Authorization': bearer,
-            credentials: "same-origin"
+                "Content-Type": "application/json",
+                'Authorization': bearer,
             },
         })
         .then(response => {
@@ -324,9 +319,8 @@ export const fetchCreateSystemPromo = (promo) => (dispatch) => {
             method: "POST",
             body: JSON.stringify(promo),
             headers: {
-            "Content-Type": "application/json",
-            'Authorization': bearer,
-            credentials: "same-origin"
+                "Content-Type": "application/json",
+                "Authorization": bearer,
             },
         })
         .then(response => {
@@ -383,9 +377,8 @@ export const fetchUpdateHomepost = (homepost) => (dispatch) => {
             method: "PUT",
             body: JSON.stringify(homepost),
             headers: {
-            "Content-Type": "application/json",
-            'Authorization': bearer,
-            credentials: "same-origin"
+                "Content-Type": "application/json",
+                "Authorization": bearer,
             },
         })
         .then(response => {
@@ -433,8 +426,7 @@ export const fetchCreateHomepost = (homepost) => (dispatch) => {
             body: JSON.stringify(homepost),
             headers: {
                 "Content-Type": "application/json",
-                'Authorization': bearer,
-                credentials: "same-origin"
+                "Authorization": bearer,
             },
         })
         .then(response => {
@@ -460,7 +452,6 @@ export const addRating = (rating) => ({
 });
 
 export const postRating = (homepostId, rating, comment) => (dispatch) => {
-
     const newRating = {
         homepost: homepostId,
         rating: rating,
@@ -471,10 +462,9 @@ export const postRating = (homepostId, rating, comment) => (dispatch) => {
         method: 'POST',
         body: JSON.stringify(newRating),
         headers: {
-            'Content-Type': 'application/json',
-            'Authorization': bearer
+            "Content-Type": "application/json",
+            "Authorization": bearer
         },
-        credentials: 'same-origin'
     })
     .then(response => {
         if (response.ok) {

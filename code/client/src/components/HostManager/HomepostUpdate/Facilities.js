@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Button, Input, Form, Checkbox, Divider} from 'antd';
+import {connect} from 'react-redux';
+import * as actions from '../../../redux/ActionCreators';
 
 const CheckboxGroup = Checkbox.Group;
 
@@ -130,4 +132,13 @@ class Facilities extends Component {
   }
 }
 
-export default Facilities;
+const mapStateToProps = state => ({
+  homeposts: state.homeposts,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  updateCurrentHomepost: (homepost) => {dispatch(actions.updateCurrentHomepost(homepost))},
+  fetchUpdateHomepost: (homepost) => {dispatch(actions.fetchUpdateHomepost(homepost))}
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Facilities);
