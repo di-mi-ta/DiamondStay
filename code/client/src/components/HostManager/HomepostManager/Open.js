@@ -9,19 +9,19 @@ class Open extends Component {
     constructor(props){
         super(props);
         this.onSetCurrentHomepost = this.onSetCurrentHomepost.bind(this);
-        this.onSendReqVerify = this.onSendReqVerify.bind(this);
+        this.onHidenBtnHome = this.onHidenBtnHome.bind(this);
     }
     onSetCurrentHomepost = (homepost) => {
         this.props.updateCurrentHomepost(homepost);
     }
 
-    onSendReqVerify = (homepost) => {
+    onHidenBtnHome = (homepost) => {
         const updatedHomepost = {
             ...homepost,
-            state: 'Waiting'
+            state: 'Hiden'
         }
         this.props.fetchUpdateHomepost(updatedHomepost);
-        message.success('Gửi yêu cầu duyệt thành công');
+        message.success('Homestay đã chuyển sang trạng thái đóng, homestay tạm thời bị khóa, khách không thể tìm thấy và đặt phòng!');
         this.props.fetchHomeposts('?state=Success');
     }
     columns = [{
@@ -59,9 +59,9 @@ class Open extends Component {
                     </Button>
                 </Link>
                 <Divider type="vertical"/>
-                <Button style={{color: 'green'}} onClick={() => this.onSendReqVerify(homepost)}>
-                    <Icon type="edit" /> 
-                    Gửi yêu cầu duyệt
+                <Button style={{color: '#ff8c00'}} onClick={() => this.onHidenBtnHome(homepost)}>
+                    <Icon type="close-circle" /> 
+                    Ẩn
                 </Button>
             </span>
             )

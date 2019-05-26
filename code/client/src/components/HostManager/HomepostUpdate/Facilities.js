@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Input, Form, Checkbox, Divider} from 'antd';
+import {Button, message, Form, Checkbox, Divider} from 'antd';
 import {connect} from 'react-redux';
 import * as actions from '../../../redux/ActionCreators';
 
@@ -112,6 +112,7 @@ class Facilities extends Component {
           
         }
         this.props.fetchUpdateHomepost(updatedHomepost);
+        message.success('Cập nhật thành công');
         this.props.updateCurrentHomepost(updatedHomepost);
       form.resetFields();
     });
@@ -120,9 +121,11 @@ class Facilities extends Component {
   render(){
       return(
           <div className="container">
-              <Button onClick={this.onUpdateBtnClick} type='primary'> 
+              <h3><b>Tiện ích</b></h3>
+              <Button onClick={this.onUpdateBtnClick} type='primary' style={{marginBottom: 10}}> 
                   Cập nhật
               </Button>
+              <Divider/>
               <FacilityForm
                   wrappedComponentRef={this.saveFormRef}
                   homeposts={this.props.homeposts}

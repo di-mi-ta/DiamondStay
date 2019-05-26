@@ -8,23 +8,23 @@ import moment from 'moment';
 class Rejected extends Component {
     constructor(props){
         super(props);
-        this.onSetCurrentHomepost = this.onSetCurrentHomepost.bind(this);
-        this.onSendReqVerify = this.onSendReqVerify.bind(this);
+        this.onDeleteRejectedHome = this.onDeleteRejectedHome.bind(this);
+        this.onViewVerifyResult = this.onViewVerifyResult.bind(this);
     }
 
-    onSetCurrentHomepost = (homepost) => {
-        this.props.updateCurrentHomepost(homepost);
-    }
-
-    onSendReqVerify = (homepost) => {
-        const updatedHomepost = {
-            ...homepost,
-            state: 'Waiting'
-        }
-        this.props.fetchUpdateHomepost(updatedHomepost);
-        message.success('Gửi yêu cầu duyệt thành công');
+    componentWillMount(){
         this.props.fetchHomeposts('?state=Rejected');
     }
+
+    onDeleteRejectedHome = (homepost) => {
+        this.props.fetchDeleteHomepost(homepost);
+        this.props.fetchHomeposts('?state=Rejected');
+    }
+
+    onViewVerifyResult = (homepost) => {
+        alert(JSON.parse(homepost.note).description)
+    }
+
     columns = [{
         title: <b>Homestay</b>,
         dataIndex: 'name',
@@ -52,17 +52,14 @@ class Rejected extends Component {
         render: (homepost) => {
             return (
             <span>
-                <Link  to={`/properties/${homepost._id}/overview`} 
-                        style={{color: 'white' }}>
-                    <Button style={{color: 'green'}} onClick={() => this.onSetCurrentHomepost(homepost)}>
-                        <Icon type="edit" /> 
-                        Cập nhật
-                    </Button>
-                </Link>
+                <Button style={{color: '#E31B36'}} onClick={() => this.onDeleteRejectedHome(homepost)}>
+                    <Icon type="delete" /> 
+                    Xóa
+                </Button>
                 <Divider type="vertical"/>
-                <Button style={{color: 'green'}} onClick={() => this.onSendReqVerify(homepost)}>
+                <Button style={{color: 'green'}} onClick={() => this.onViewVerifyResult(homepost)}>
                     <Icon type="edit" /> 
-                    Gửi yêu cầu duyệt
+                    Kết quả duyệt
                 </Button>
             </span>
             )
@@ -95,6 +92,7 @@ const mapStateToProps = state => ({
   const mapDispatchToProps = (dispatch) => ({
     fetchHomeposts: (query='') => {dispatch(actions.fetchHomeposts(query))},
     fetchUpdateHomepost: (homepost) => {dispatch(actions.fetchUpdateHomepost(homepost))},
+    fetchDeleteHomepost: (homepost) => {dispatch(actions.fetchDeleteHomepost(homepost))},
     updateCurrentHomepost: (homepost) => {dispatch(actions.updateCurrentHomepost(homepost))},
   });
   

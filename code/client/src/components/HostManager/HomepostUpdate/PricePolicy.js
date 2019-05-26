@@ -108,9 +108,10 @@ class PricePolicy extends Component {
       return(
           <div className="container">
               <h3><b>Giá và các chính sách</b></h3>
-              <Button onClick={this.onUpdateBtnClick} type='primary'> 
+              <Button onClick={this.onUpdateBtnClick} type='primary' style={{marginBottom: 10}}> 
                   Cập nhật
               </Button>
+              <Divider/>
               <CurrencyUnitForm
                   wrappedComponentRef={this.saveCurrencyUnitFormRef}
                   homeposts={this.props.homeposts}

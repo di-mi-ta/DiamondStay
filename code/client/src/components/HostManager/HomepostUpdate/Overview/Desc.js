@@ -64,9 +64,10 @@ class Desc extends Component {
       return(
           <div className="container">
               <h3><b>Thông tin cơ bản</b></h3>
-              <Button onClick={this.onUpdateBtnClick} type='primary'> 
+              <Button onClick={this.onUpdateBtnClick} type='primary' style={{marginBottom: 10}}> 
                   Cập nhật
               </Button>
+              <Divider/>
               <DescForm
                   wrappedComponentRef={this.saveFormRef}
                   onCancel={this.handleCancel}

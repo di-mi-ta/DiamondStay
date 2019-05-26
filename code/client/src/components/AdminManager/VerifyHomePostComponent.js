@@ -6,6 +6,7 @@ import { Steps, Icon, Button, Input,
 
 import {Form} from 'semantic-ui-react'
 import '../../css/verifyHome.css';
+import {baseUrl} from '../../shared/baseUrl';
 import {connect} from 'react-redux';
 import * as actions from '../../redux/ActionCreators';
 import {withRouter} from 'react-router-dom';
@@ -41,14 +42,7 @@ class VerifyHomepostComponent extends Component {
                 roomBedInfo: -1,
                 price: -1,
             },
-            noteResult: {
-                description: '',
-                image: '',
-                location: '',
-                basicInfo: '',
-                roomBedInfo: '',
-                price: '',
-            }
+            
         }
         this.renderContent = this.renderContent.bind(this);
         this.onNextBtnClicked = this.onNextBtnClicked.bind(this);
@@ -58,6 +52,27 @@ class VerifyHomepostComponent extends Component {
         this.onConfirmedClick = this.onConfirmedClick.bind(this);
         this.onRejectedClick = this.onRejectedClick.bind(this);
         this.onNoteChange = this.onNoteChange.bind(this);
+    }
+
+    componentWillMount(){
+        this.setState({
+            noteResult: this.state.homepost.note === '' ? {
+                description: '',
+                image: '',
+                location: '',
+                basicInfo: '',
+                roomBedInfo: '',
+                price: '',
+            } :
+            {
+                description: JSON.parse(this.state.homepost.note).description,
+                image: JSON.parse(this.state.homepost.note).image,
+                location: JSON.parse(this.state.homepost.note).location,
+                basicInfo: JSON.parse(this.state.homepost.note).basicInfo,
+                roomBedInfo: JSON.parse(this.state.homepost.note).roomBedInfo,
+                price: JSON.parse(this.state.homepost.note).price,
+            }
+        })
     }
 
     onNoteChange = e => {
@@ -186,22 +201,14 @@ class VerifyHomepostComponent extends Component {
             )
         }
         else if (this.state.currentStep === 1){
+            let lstImages = this.state.homepost.image.map(img => (
+                <img src={baseUrl + img} />
+            ))
             return(
                 <div>
                     <h4><b>Hình ảnh</b></h4>
                     <Carousel autoplay >
-                        <div>
-                        <h3>Image 1</h3>
-                        </div>
-                        <div>
-                        <h3>Image 2</h3>
-                        </div>
-                        <div>
-                        <h3>Image 3</h3>
-                        </div>
-                        <div>
-                        <h3>Image 4</h3>
-                        </div>
+                        {lstImages}
                     </Carousel>
                 </div>
             )
@@ -277,6 +284,27 @@ class VerifyHomepostComponent extends Component {
             return(
                 <div>
                     <h4><b>Vị trí</b></h4>
+                    {this.state.homepost.location === null || !this.state.homepost.hasOwnProperty('location')
+                        ? <div> Chưa được chủ nhà cung cấp </div> :
+                        <Form>
+                            <Form.Field>
+                                <label>Tỉnh, thành phố</label>
+                                <input value={this.state.homepost.location.province}/>
+                            </Form.Field>
+                            <Form.Field>
+                                <label>Quận, huyện</label>
+                                <input value={this.state.homepost.location.district}/>
+                            </Form.Field>
+                            <Form.Field>
+                                <label>Phường, xã</label>
+                                <input value={this.state.homepost.location.ward}/>
+                            </Form.Field>
+                            <Form.Field>
+                                <label>Số nhà, đường</label>
+                                <input value={this.state.homepost.numHome}/>
+                            </Form.Field>
+                        </Form>
+                    }
                 </div>
             )
         }

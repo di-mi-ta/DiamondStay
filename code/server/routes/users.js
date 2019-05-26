@@ -1,6 +1,4 @@
 var express = require('express');
-const bodyParser = require('body-parser');
-
 var router = express.Router();
 var authenticate = require('../authenticate');
 const cors = require('./cors');
@@ -9,20 +7,18 @@ var passport = require('passport');
 const Controllers  = require('../controllers');
 const AuthCtrl = Controllers.AuthCtrl;
 
-// router.use(bodyParser.json());
-
 router.options('*', cors.corsWithOptions,(req, res) => {res.sendStatus(200);})
 
 router
-  .get('/', authenticate.verifyUser, authenticate.verifyAdmin, AuthCtrl.getListUser)
+  .get('/',  AuthCtrl.getListUser)
   .delete('/', authenticate.verifyUser, AuthCtrl.deleteAllUsers)
   .post('/signup', cors.allowAll, AuthCtrl.signUp);
 
 router
-  .post('/login', cors.corsWithOptions, AuthCtrl.logIn);
+  .post('/login', cors.allowAll, AuthCtrl.logIn);
 
 router
-  .get('/checkJWTtoken', cors.corsWithOptions, (req, res) => {
+  .get('/checkJWTtoken', cors.allowAll, (req, res) => {
     passport.authenticate('jwt', {session: false}, (err, user, info) => {
       if (err)
         return next(err);
