@@ -18,7 +18,6 @@ class MessageInboxComponent extends React.Component {
   };
 
   componentDidMount() {
-    console.log('MessageInboxComponent mounted');
     helper.fetchMessages()
       .then(messages => {
         this.setState({ messages });

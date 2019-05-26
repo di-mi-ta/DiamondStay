@@ -8,6 +8,8 @@ import Footer from "./FooterComponent";
 import Booking from "./BookingComponent";
 import UpdatedHomepostManager from './HostManager/HomepostUpdate/UpdatedManager';
 import HostHeader from './Header/HostHeader'
+import MessageInbox from './MessageInbox';
+import MainHeader from './HomePage/MainHeader';
 import {connect} from 'react-redux';
 import * as actions from '../redux/ActionCreators';
 
@@ -33,6 +35,14 @@ class Main extends Component {
                  )}
           />
           <Route path="/booking" component={Booking} />
+          <Route path="/messages"
+                 component={() => (
+                   <div>
+                     <MainHeader />
+                     <MessageInbox />
+                   </div>
+                 )}
+          />
           <Redirect to='/home'/>
         </Switch>
         <Footer/>
