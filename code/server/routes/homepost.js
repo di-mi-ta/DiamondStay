@@ -15,7 +15,7 @@ homePostRouter.route('/')
     .post(cors.corsWithOptions, HomePostCtrl.createNewHomePost)
     .delete(cors.corsWithOptions, HomePostCtrl.deleteAllHomePost);
 
-homePostRouter.route('/:homePostId')
+homePostRouter.route('/:homepostId')
     .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
     .get(cors.cors, HomePostCtrl.findHomePostDetailedById)
     .put(cors.corsWithOptions,HomePostCtrl.updateHomePost)

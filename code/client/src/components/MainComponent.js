@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Switch, Route, Redirect} from 'react-router-dom';
+import {Switch, Route, Redirect, withRouter} from 'react-router-dom';
 import AdminManager from '../components/AdminManager/AdminManagerComponent';
 import HostManager from '../components/HostManager/HostManagerComponent';
 import House from './Homestay/House';
@@ -56,4 +56,5 @@ const mapDispatchToProps = (dispatch) => ({
   fetchHomeposts: (query='') => {dispatch(actions.fetchHomeposts(query))},
   fetchSystemPromos: () => {dispatch(actions.fetchSystemPromos())},
 });
-export default connect(null, mapDispatchToProps)(Main);
+
+export default withRouter(connect(null, mapDispatchToProps)(Main));

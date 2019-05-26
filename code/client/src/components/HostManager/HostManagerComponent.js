@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link, Switch, Route} from 'react-router-dom';
+import {Link, Switch, Route, Redirect} from 'react-router-dom';
 import {Menu} from 'antd';
 import PromotionComponent from './HostPromotionsComponent';
 import CalendarComponent from '../Common/CalendarComponent';
@@ -28,13 +28,6 @@ class HostManager extends Component{
                       background: "#d6ebff"
                     }}
             >
-              {/* <Menu.Item key="1" to='/'>
-                <Link to='/host/promotions'>
-                  <span>
-                    <b>Bảng thông tin</b>
-                  </span>
-                </Link>
-              </Menu.Item> */}
               <Menu.Item key="4">
                 <Link to='/host/my-homes'>
                   <span> <b> Chỗ ở của tôi </b> </span>

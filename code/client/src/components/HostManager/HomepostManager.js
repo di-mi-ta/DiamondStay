@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {Button, Modal, Input, Form, Menu, Select, InputNumber} from 'antd';
-import {Link, Switch, Route, withRouter} from 'react-router-dom';
+import {Button, Modal, Input, Form, Menu, Select, InputNumber, message} from 'antd';
+import {Link, Switch, Route, withRouter, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actions from '../../redux/ActionCreators';
 import Waiting from './HomepostManager/Waiting';
@@ -37,12 +37,12 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
                   rules: [{ required: true, message: 'Vui lòng chọn loại chỗ ở !!!' }],
                 })(
                     <Select>
-                        <Option value="chungcu">Chung cư</Option>
-                        <Option value="bietthu">Biệt thự</Option>
-                        <Option value="canhostudio">Căn hộ Studio</Option>
-                        <Option value="nharieng">Nhà riêng</Option>
-                        <Option value="canhodichvu">Căn hộ dịch vụ</Option>
-                        <Option value="khac">Khác</Option>
+                        <Option value="Chung cư">Chung cư</Option>
+                        <Option value="Biệt thự">Biệt thự</Option>
+                        <Option value="Căn hộ Studio">Căn hộ Studio</Option>
+                        <Option value="Nhà riêng">Nhà riêng</Option>
+                        <Option value="Căn hộ dịch vụ">Căn hộ dịch vụ</Option>
+                        <Option value="Khác">Khác</Option>
                     </Select>
                 )}
               </Form.Item>
@@ -51,18 +51,18 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
                   rules: [{ required: true, message: 'Vui lòng chọn loại phòng !!!' }],
                 })(
                     <Select>
-                        <Option value="nguyencan">Nguyên căn</Option>
-                        <Option value="phongrieng">Phòng riêng</Option>
+                        <Option value="Nguyên căn">Nguyên căn</Option>
+                        <Option value="Phòng riêng">Phòng riêng</Option>
                     </Select>
                 )}
               </Form.Item>
-              <Form.Item label="Số khách tiêu chuẩn">
-                {getFieldDecorator('basicNumRenter', {
+              <Form.Item label="Số khách tiêu chuẩn"> 
+                {getFieldDecorator('basicPeoples', {
                   rules: [{ required: true, message: 'Vui lòng nhập trường này !!!' }],
                 })(<InputNumber min='0' style={{width: '100%'}}/>)}
               </Form.Item>
               <Form.Item label="Số khách tối đa">
-                {getFieldDecorator('maxNumRenter', {
+                {getFieldDecorator('maxPeoples', {
                   rules: [{ required: true, message: 'Vui lòng nhập trường này !!!' }],
                 })(<InputNumber min='0' style={{width: '100%'}}/>)}
               </Form.Item>
@@ -99,8 +99,18 @@ class HomepostManager extends Component {
           if (err) {
             return;
           }
-          form.resetFields();
+          const homepost = {
+            owner: this.props.auth.user.username,
+            typeHome: values.typeHome,
+            typeRoom: values.typeRoom,
+            maxPeoples: values.maxPeoples,
+            basicPeoples: values.basicPeoples,
+            name: values.name
+          }
+          this.props.fetchCreateHomepost(homepost);
+          message.success('Tạo chỗ ở mới thành công. Vui lòng cập nhật các thông tin cần thiết về nhà trước khi gửi yêu cầu duyệt !!!')
           this.setState({ visible: false });
+          this.props.history.push('/host/my-homes/new-home');
         });
     };
 
@@ -121,7 +131,6 @@ class HomepostManager extends Component {
                 </Button>
                 <h2> <b> Chỗ ở của tôi </b></h2>
                 <Menu
-                    defaultSelectedKeys={['1']}
                     mode= "horizontal"
                     theme= 'light'
                     style={{
