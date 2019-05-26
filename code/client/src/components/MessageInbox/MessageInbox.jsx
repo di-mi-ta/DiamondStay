@@ -1,7 +1,7 @@
 import React from 'react';
 import MessageList from './MessageList';
 import MessageDetail from './MessageDetail';
-import MessageReply from './MessageReply';
+import MessageEdit from './MessageEdit';
 
 import { Empty, message as antdMessage } from 'antd';
 import * as helper from './helper';
@@ -10,7 +10,7 @@ const MESSAGE_LIST = 1;
 const MESSAGE_DETAIL = 2;
 const MESSAGE_REPLY = 3;
 
-class MessageComponent extends React.Component {
+class MessageInboxComponent extends React.Component {
   state = {
     messages: [],             // messages receive from above
     openingComponent: MESSAGE_LIST, // the component rendered by this class
@@ -18,7 +18,7 @@ class MessageComponent extends React.Component {
   };
 
   componentDidMount() {
-    console.log('MessageComponent mounted');
+    console.log('MessageInboxComponent mounted');
     helper.fetchMessages()
       .then(messages => {
         this.setState({ messages });
@@ -93,7 +93,7 @@ class MessageComponent extends React.Component {
           openingMessage: null
         });
       });
-    
+
   };
 
   onSendReplyMessage = (replyMessage) => {
@@ -138,8 +138,10 @@ class MessageComponent extends React.Component {
     }
     else {
       return (
-        <MessageReply
-          message={this.state.openingMessage}
+        <MessageEdit
+          receiver={this.state.openingMessage.sender}
+          defaultTitle={helper.makeDefaultTitle(this.state.openingMessage.title)}
+          defaultContent={helper.makeDefaultContent(this.state.openingMessage.content)}
           onSendReplyMessage={this.onSendReplyMessage}
           onReturn={() => this.onOpenMessageDetail(this.state.openingMessage) /* return to message detail window */}
         />
@@ -148,4 +150,4 @@ class MessageComponent extends React.Component {
   }
 }
 
-export default MessageComponent;
+export default MessageInboxComponent;

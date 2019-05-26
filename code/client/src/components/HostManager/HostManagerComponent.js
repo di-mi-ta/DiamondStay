@@ -8,7 +8,7 @@ import Reservation from '../Booking/ReservationComponent'
 import Header from '../Header/HostHeader';
 
 import '../../css/host/host-manager.css';
-import MessageComponent from '../Host/MessageComponent';
+import MessageInbox from '../MessageInbox';
 import {connect} from 'react-redux';
 import * as actions from '../../redux/ActionCreators';
 
@@ -70,7 +70,7 @@ class HostManager extends Component{
               <Route path="/host/calendars" component={CalendarComponent}/>
               <Route path="/host/my-homes" component={HomepostManager}/>
               <Route path="/host/reservations" component={Reservation}/>
-              <Route path="/host/messages" component={MessageComponent} />
+              <Route path="/host/messages" component={MessageInbox} />
             </Switch>
             </div>
             : <div/>

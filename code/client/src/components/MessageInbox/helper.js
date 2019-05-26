@@ -1,4 +1,4 @@
-import { baseUrl } from '../../../shared/baseUrl';
+import { baseUrl } from '../../shared/baseUrl';
 const moment = require('moment');
 const axios = require('axios');
 
@@ -71,4 +71,12 @@ export function seenMessage(messageId) {
       else resolve();
     }).catch(err => reject(err));
   });
+}
+
+export function makeDefaultTitle(oldTitle) {
+  return 'Re: ' + oldTitle.replace(/(Re: )+/, '');
+};
+
+export function makeDefaultContent(oldContent) {
+  return '\n\n\n\n\n  ------------------------------------\n' + oldContent;
 }

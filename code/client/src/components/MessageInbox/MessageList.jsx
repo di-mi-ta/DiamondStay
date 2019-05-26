@@ -26,7 +26,13 @@ const columns = [
   }
 ];
 
-class MessageList extends React.Component {
+class MessageList extends React.Component {z
+  // componentDidMount() {
+  //   this.updateInterval = setInterval(() => this.forceUpdate(), 3000);
+  // }
+  // componentWillUnmount() {
+  //   clearInterval(this.updateInterval);
+  // }
   render() {
     return (
       <Table
@@ -38,7 +44,7 @@ class MessageList extends React.Component {
             onClick: () => {
               this.props.onClickOnMessage(message);
             }
-          } 
+          }
         }}
       />
     );

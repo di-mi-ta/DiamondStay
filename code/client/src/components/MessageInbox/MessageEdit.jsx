@@ -13,15 +13,10 @@ const formItemLayout = {
 };
 
 
-const getDefaultTitle = (oldTitle) => 'Re: ' + oldTitle.replace(/(Re: )+/, '');
-function getDefaultConent(oldContent) {
-  return '\n\n\n\n\n  ------------------------------------\n' + oldContent;
-}
-
-export default class MessageReply extends React.Component {
+export default class MessageEdit extends React.Component {
   state = {
-    title: getDefaultTitle(this.props.message.title),
-    content: getDefaultConent(this.props.message.content),
+    title: this.props.defaultTitle || '',
+    content: this.props.defaultContent || '',
   };
 
   onConfirmReturn = () => {
@@ -37,7 +32,7 @@ export default class MessageReply extends React.Component {
 
   makeReplyMessage = () => {
     return {
-      receiverId: this.props.message.sender._id,
+      receiverId: this.props.receiver._id,
       title: this.state.title,
       content: this.state.content
     };
@@ -48,7 +43,7 @@ export default class MessageReply extends React.Component {
       <div>
         <Form {...formItemLayout}>
           <Item label='Người nhận'>
-            <Paragraph>{this.props.message.sender.fullname}</Paragraph>
+            <Paragraph>{this.props.receiver.fullname}</Paragraph>
           </Item>
           <Item label='Chủ đề'>
             <Input name='title' value={this.state.title} onChange={this.onTextChange} />

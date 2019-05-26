@@ -58,7 +58,7 @@ function addMessage(req, res, next) {
 }
 
 function seenMessage(req, res, next) {
-    Message.findByIdAndUpdate(req.body.id, { seen: true }).exec((err, message) => {
+    Message.findByIdAndUpdate(req.params.id, { seen: true }).exec((err, message) => {
         if (err)
             return res.status(500).json({ err: 'Internal server error' });
         // if (message === null)

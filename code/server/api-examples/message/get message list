@@ -1,0 +1,50 @@
+GET
+{
+
+}
+
+------
+
+{
+    "success": true,
+    "messages": [
+        {
+            "title": "Test title",
+            "seen": false,
+            "_id": "5ce12f24deb723234656d6fd",
+            "sender": {
+                "firstName": "Linh",
+                "lastName": "Van",
+                "email": "linh@gmail.com",
+                "phone": "01231212212",
+                "typeUser": 0,
+                "_id": "5ce120e4953712209297bb3b",
+                "username": "linh",
+                "__v": 0
+            },
+            "receiver": "5ce11aff5277f678e8da8a72",
+            "content": "hello, this is the content",
+            "time": "2019-05-19T10:25:40.632Z",
+            "__v": 0
+        },
+        {
+            "title": "Second message",
+            "seen": false,
+            "_id": "5ce12f35deb723234656d6fe",
+            "sender": {
+                "firstName": "Linh",
+                "lastName": "Van",
+                "email": "linh@gmail.com",
+                "phone": "01231212212",
+                "typeUser": 0,
+                "_id": "5ce120e4953712209297bb3b",
+                "username": "linh",
+                "__v": 0
+            },
+            "receiver": "5ce11aff5277f678e8da8a72",
+            "content": "hello, this is the content of the second message",
+            "time": "2019-05-19T10:25:57.607Z",
+            "__v": 0
+        }
+    ]
+}

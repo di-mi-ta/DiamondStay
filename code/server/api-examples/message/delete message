@@ -1,0 +1,14 @@
+DELETE
+{
+	"messageId": "5ce127a6cc933e1b6edc77e9"
+}
+
+-----------------------
+{
+    "success": true
+}
+
+{
+    "success": false,
+    "message": "Message not found"
+}

@@ -1,0 +1,74 @@
+# Create users
+POST http://localhost:4444/users/signup
+{
+	"username": "user1",
+	"password": "a",
+	"firstName": "User 1",
+	"lastName": "",
+	"email": "user1@gmail.com",
+	"typeUser": 1
+}
+-> id 5ce21bc6d1a6142e684eea20
+
+{
+	"username": "user2",
+	"password": "a",
+	"firstName": "User 2",
+	"lastName": "",
+	"email": "user2@gmail.com",
+	"typeUser": 1
+}
+-> id 5ce21bcdd1a6142e684eea21
+
+# Login
+POST http://localhost:4444/users/login
+{
+	"username": "user1",
+	"password": "a"
+}
+
+Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Y2UyMWJjNmQxYTYxNDJlNjg0ZWVhMjAiLCJpYXQiOjE1NTgzMjIxOTgsImV4cCI6MTU1ODMyNTc5OH0.R8-NB0ItVXVpepvJQqE8YpYFGgnWaYM27CNu6jDMGOY
+{
+	"username": "user2",
+	"password": "a"
+}
+
+Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Y2UyMWJjZGQxYTYxNDJlNjg0ZWVhMjEiLCJpYXQiOjE1NTgzMjIyMTcsImV4cCI6MTU1ODMyNTgxN30.RZPAMi-cMy3eiVQ7ItmLUnbXv9M3uGtDylsxZTapVJ8
+--------------------------------------------------------------------------------------------------------------------------------------------
+# User 1 send message to user 2
+POST http://localhost:4444/messages
+* User 1
+{
+	"receiverId": "5ce21bcdd1a6142e684eea21",
+	"title": "From user 1 to user 2",
+	"content": "Content of the message"
+}
+{
+	"receiverId": "5ce21bcdd1a6142e684eea21",
+	"title": "Second message from user 1 to user 2",
+	"content": "Content of the message"
+}
+* User 2
+{
+	"receiverId": "5ce21bc6d1a6142e684eea20",
+	"title": "User 2 --> user 1",
+	"content": "Content of the message"
+}
+--------------------------------------------------------------------------------------------------------------------------------------------
+CHECK MESSAGES
+GET http://localhost:4444/messages
+* user 1: 5ce21d9fd1a6142e684eea24
+* user 2: 5ce21d8dd1a6142e684eea22  5ce21d93d1a6142e684eea23
+--------------------------------------------------------------------------------------------------------------------------------------------
+DELETE MESSAGE
+DELETE http://localhost:4444/messages
+* User 1
+{
+	"messageId": "5ce21d9fd1a6142e684eea24"
+}
+
+* user 2
+{
+	"messageId": "5ce21d93d1a6142e684eea23"
+}
+--------------------------------------------------------------------------------------------------------------------------------------------
