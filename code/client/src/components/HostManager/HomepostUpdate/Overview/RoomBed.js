@@ -138,9 +138,10 @@ class RoomBed extends Component {
       return(
           <div className="container">
               <h3><b>Thông tin cơ bản</b></h3>
-              <Button onClick={this.onUpdateBtnClick} type='primary' style={{marginRight: 0}}> 
+              <Button onClick={this.onUpdateBtnClick} type='primary' style={{marginBottom: 10}}> 
                   Cập nhật
               </Button>
+              <Divider/>
               <BasicForm
                   wrappedComponentRef={this.saveBasicFormRef}
                   homeposts={this.props.homeposts}

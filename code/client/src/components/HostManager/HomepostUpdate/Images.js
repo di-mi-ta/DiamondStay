@@ -5,8 +5,6 @@ import {baseUrl} from '../../../shared/baseUrl';
 import {connect} from 'react-redux';
 import * as actions from '../../../redux/ActionCreators';
 
-let lstImgs = [];
-
 const getTypeFile = (name) => {
   let res = name.split('.');
   return '.' + res[res.length - 1];
@@ -21,6 +19,12 @@ const formFileLst = (lst) => {
     })
   })
   return res
+}
+
+const getBase64 = (img, callback) => {
+  const reader = new FileReader();
+  reader.addEventListener('load', () => callback(reader.result));
+  reader.readAsDataURL(img);
 }
 
 class Images extends Component {
@@ -40,33 +44,39 @@ class Images extends Component {
       const url = baseUrl + 'upload';
       const formData = new FormData();
       const date = Date.now();
-      fetch(file.thumbUrl)
-      .then(res => res.blob())
-      .then(blob => {
-        formData.append('image', blob, date + '_' + idx + '_' + getTypeFile(file.name));
-        const config = {
-            headers: {
-                "Content-type": "multipart/form-data",
+      if (file.status === 'done') {
+        getBase64(file.originFileObj, imageUrl => {
+          fetch(imageUrl)
+          .then(res => res.blob())
+          .then(blob => {
+            formData.append('image', blob, date + '_' + idx + '_' + 
+                                      this.props.homeposts.currentHomepost._id + '_' + getTypeFile(file.name));
+            const config = {
+                headers: {
+                    "Content-type": "multipart/form-data",
+                }
             }
-        }
-        post(url, formData, config)
-        .then((resp)=> {
-          let l = this.state.lstImgs
-          l.push('images/' + date + '_' + idx + '_' + getTypeFile(file.name))
-          this.setState({
-            lstImgs: l
-          });
-          if (arr.length === idx + 1){
-            const updatedHomepost = {
-              ...this.props.homeposts.currentHomepost,
-              image: this.state.lstImgs
-            }
-            this.props.fetchUpdateHomepost(updatedHomepost);
-            message.success('Cập nhật thành công');
-            this.props.updateCurrentHomepost(updatedHomepost);
-          }
+            post(url, formData, config)
+            .then((resp)=> {
+              let l = this.state.lstImgs
+              l.push('images/' + date + '_' + idx + '_' + 
+                                    this.props.homeposts.currentHomepost._id + '_' + getTypeFile(file.name));
+              this.setState({
+                lstImgs: l
+              });
+              if (arr.length === idx + 1){
+                const updatedHomepost = {
+                  ...this.props.homeposts.currentHomepost,
+                  image: this.state.lstImgs
+                }
+                this.props.fetchUpdateHomepost(updatedHomepost);
+                message.success('Cập nhật thành công');
+                this.props.updateCurrentHomepost(updatedHomepost);
+              }
+            })
+          })
         })
-      })
+      }
     }
 
     onUpdateBtnClick = () => {
@@ -100,7 +110,6 @@ class Images extends Component {
         <div style={{paddingRight: 50,
                     paddingLeft: 50,
                     paddingBottom: 50,
-                    paddingTop: 20,
                     background: '#f1f1f1'}}>
             <div style={{paddingBottom: 20}}>
             <h3><b>Tải lên ít nhất 5 ảnh mô tả homestay của bạn</b></h3>

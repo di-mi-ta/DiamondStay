@@ -15,7 +15,7 @@ class Overview extends Component {
     }
     render(){
         return(
-            <div style={{paddingTop: 30, paddingLeft: 50, paddingRight: 50,
+            <div style={{paddingLeft: 50, paddingRight: 50,
                         paddingBottom: 50, background: '#f1f1f1'}}>
                 <Menu
                     defaultSelectedKeys={['1']}
@@ -23,7 +23,8 @@ class Overview extends Component {
                     theme= 'light'
                     style={{
                         textAlign: 'center',
-                        background: "#F1F1F1"
+                        background: "#F1F1F1",
+                        marginBottom: 20
                     }}
                 >
                     <Menu.Item key="1" to='/'>

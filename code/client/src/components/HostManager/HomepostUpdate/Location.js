@@ -151,11 +151,11 @@ class Location extends Component {
   render(){
       return(
           <div className="container">
-              <h4><b>Vị trí</b></h4>
-              <Divider/>
-              <Button onClick={this.onUpdateBtnClick} type='primary'> 
+              <h3><b>Vị trí</b></h3>
+              <Button onClick={this.onUpdateBtnClick} type='primary' style={{marginBottom: 10}}> 
                   Cập nhật
               </Button>
+              <Divider/>
               <LocationForm
                   wrappedComponentRef={this.saveLocationFormRef}
                   homeposts={this.props.homeposts}

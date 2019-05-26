@@ -9,19 +9,25 @@ class Waiting extends Component {
     constructor(props){
         super(props);
         this.onSetCurrentHomepost = this.onSetCurrentHomepost.bind(this);
-        this.onSendReqVerify = this.onSendReqVerify.bind(this);
+        this.onCancelReqVerify = this.onCancelReqVerify.bind(this);
+        this.onDeleteHome = this.onDeleteHome.bind(this);
     }
     onSetCurrentHomepost = (homepost) => {
         this.props.updateCurrentHomepost(homepost);
     }
 
-    onSendReqVerify = (homepost) => {
+    onDeleteHome = (homepost) => {
+        this.props.fetchDeleteHomepost(homepost);
+        this.props.fetchHomeposts('?state=Waiting');
+    }
+
+    onCancelReqVerify = (homepost) => {
         const updatedHomepost = {
             ...homepost,
-            state: 'Waiting'
+            state: 'New'
         }
         this.props.fetchUpdateHomepost(updatedHomepost);
-        message.success('Gửi yêu cầu duyệt thành công');
+        message.success('Bạn đã hủy bỏ yêu cầu duyệt thành công đối với nhà này!');
         this.props.fetchHomeposts('?state=Waiting');
     }
     columns = [{
@@ -59,9 +65,14 @@ class Waiting extends Component {
                     </Button>
                 </Link>
                 <Divider type="vertical"/>
-                <Button style={{color: 'green'}} onClick={() => this.onSendReqVerify(homepost)}>
-                    <Icon type="edit" /> 
-                    Gửi yêu cầu duyệt
+                <Button style={{color: '#1F87EF'}} onClick={() => this.onCancelReqVerify(homepost)}>
+                    <Icon type="stop" /> 
+                    Hủy bỏ
+                </Button>
+                <Divider type="vertical"/>
+                <Button style={{color: '#EF1F3B'}} onClick={() => this.onDeleteHome(homepost)}>
+                    <Icon type="close" /> 
+                    Xóa
                 </Button>
             </span>
             )
@@ -94,6 +105,7 @@ const mapStateToProps = state => ({
   const mapDispatchToProps = (dispatch) => ({
     fetchHomeposts: (query='') => {dispatch(actions.fetchHomeposts(query))},
     fetchUpdateHomepost: (homepost) => {dispatch(actions.fetchUpdateHomepost(homepost))},
+    fetchDeleteHomepost: (homepost) => {dispatch(actions.fetchDeleteHomepost(homepost))},
     updateCurrentHomepost: (homepost) => {dispatch(actions.updateCurrentHomepost(homepost))},
   });
   

@@ -10,9 +10,15 @@ class NewHome extends Component {
         super(props);
         this.onSetCurrentHomepost = this.onSetCurrentHomepost.bind(this);
         this.onSendReqVerify = this.onSendReqVerify.bind(this);
+        this.onDeleteHome = this.onDeleteHome.bind(this);
     }
     onSetCurrentHomepost = (homepost) => {
         this.props.updateCurrentHomepost(homepost);
+    }
+
+    onDeleteHome = (homepost) => {
+        this.props.fetchDeleteHomepost(homepost);
+        this.props.fetchHomeposts('?state=Waiting');
     }
 
     onSendReqVerify = (homepost) => {
@@ -59,9 +65,14 @@ class NewHome extends Component {
                     </Button>
                 </Link>
                 <Divider type="vertical"/>
-                <Button style={{color: 'green'}} onClick={() => this.onSendReqVerify(homepost)}>
-                    <Icon type="edit" /> 
+                <Button style={{color: '#1F87EF'}} onClick={() => this.onSendReqVerify(homepost)}>
+                    <Icon type="step-forward" /> 
                     Gửi yêu cầu duyệt
+                </Button>
+                <Divider type="vertical"/>
+                <Button style={{color: '#EF1F3B'}} onClick={() => this.onDeleteHome(homepost)}>
+                    <Icon type="close" /> 
+                    Xóa
                 </Button>
             </span>
             )
@@ -94,6 +105,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => ({
   fetchHomeposts: (query='') => {dispatch(actions.fetchHomeposts(query))},
   fetchUpdateHomepost: (homepost) => {dispatch(actions.fetchUpdateHomepost(homepost))},
+  fetchDeleteHomepost: (homepost) => {dispatch(actions.fetchDeleteHomepost(homepost))},
   updateCurrentHomepost: (homepost) => {dispatch(actions.updateCurrentHomepost(homepost))},
 });
 

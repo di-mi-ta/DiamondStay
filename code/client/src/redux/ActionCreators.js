@@ -445,6 +445,30 @@ export const fetchCreateHomepost = (homepost) => (dispatch) => {
         .catch(error => dispatch(homepostsFailed(error.message)));
 }
 
+
+export const fetchDeleteHomepost = (homepost) => (dispatch) => {
+    const bearer = localStorage.getItem('token');
+    fetch(baseUrl + 'homeposts/' + homepost._id, {
+        method: "DELETE",
+        headers: {
+            "Authorization": bearer,
+        },
+    })
+    .then(response => {
+        if (response.ok) {
+        return response;
+        } else {
+        var error = new Error('Error ' + response.status + ': ' + response.statusText);
+        error.response = response;
+        throw error;
+        }
+    },
+    error => {
+            throw error;
+    })
+    .then(response => response.json())
+    .catch(error => dispatch(homepostsFailed(error.message)));
+}
 // for ratings
 export const addRating = (rating) => ({
     type: ActionTypes.ADD_RATING,

@@ -65,7 +65,7 @@ class All extends Component {
         )
     }
     componentWillMount(){
-        this.props.fetchHomeposts('?state=Waiting');
+        this.props.fetchHomeposts();
     }
 }
 

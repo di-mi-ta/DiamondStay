@@ -52,7 +52,8 @@ class UpdatedManager extends Component {
                     theme= 'light'
                     style={{
                         textAlign: 'center',
-                        background: "#F1F1F1"
+                        background: "#F1F1F1",
+                        marginBottom: 10
                     }}
                 >
                     <Menu.Item key="1" to='/'>

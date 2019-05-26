@@ -13,7 +13,6 @@ const getHomeposts = (req, res, next) => {
 }
 
 const deleteAllHomePost = (req, res, next) => {
-    /* Description: Delete all homeposts (hope never use :))) [FOR ADMIN]*/
     HomePosts.remove({})
     .then((resp) => {
         res.statusCode = 200;
@@ -24,8 +23,7 @@ const deleteAllHomePost = (req, res, next) => {
 }
 
 const findHomePostDetailedById = (req,res,next) => {
-    /* Description: Get detailed information of a homepost*/
-    HomePosts.findById(res.params.homepostId)
+    HomePosts.findById(req.params.homepostId)
     .populate('location')
     .populate('rating.author')
     .then((homepost) => {
@@ -37,8 +35,7 @@ const findHomePostDetailedById = (req,res,next) => {
 }
 
 const deleteHomePost = (req, res, next) => {
-    /* Description: Delete a homepost */
-    HomePosts.findByIdAndRemove(res.params.homepostId)
+    HomePosts.findByIdAndRemove(req.params.homepostId)
     .then((resp) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
@@ -48,7 +45,6 @@ const deleteHomePost = (req, res, next) => {
 }
 
 const updateHomePost = (req, res, next) => {
-    /* Description: Update a homepost */
     HomePosts.findByIdAndUpdate(req.params.homepostId, {
         $set: req.body
     }, { new: true })
@@ -61,7 +57,6 @@ const updateHomePost = (req, res, next) => {
 }
 
 const createNewHomePost = (req, res, next) => {
-    /* Description: Create new homepost */
     HomePosts.create(req.body)
     .then((homepost) => {
         res.statusCode = 200;
@@ -71,7 +66,6 @@ const createNewHomePost = (req, res, next) => {
     .catch((err) => next(err));
 }
 
-// export all
 module.exports = {
     getHomeposts,
     deleteAllHomePost,
