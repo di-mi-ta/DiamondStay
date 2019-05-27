@@ -51,6 +51,8 @@
 
 /* drop down item */
 .mainHeader > .collapse > ul > li.nav-item.dropdown {
+    display: flex;
+    align-items: center;
     background: #f6f6f6;
     border-radius: 2rem;
 }

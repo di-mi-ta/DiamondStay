@@ -5,7 +5,6 @@ class HouseCard extends React.Component {
   constructor(props) {
     super(props);
     this.data = props.houseData;
-    
     /*
     props.houseData = {
       image: "http://imagelink",
@@ -21,18 +20,22 @@ class HouseCard extends React.Component {
   }
 
   render() {
-    console.log(this.data);
     return (
       <div className="houseCard container-fluid" ref={this.ref}>
         <div className="houseImage">
-          <img src={this.data.image}></img>
+          <img src={this.data.image} alt=""/>
         </div>
         <div className="houseInfo">
           {this.data.type? <h5 className="houseType">{this.data.type}</h5>: null}
           <h4 className="houseName">{this.data.houseName}</h4>
           <div className="location">
             <i className="fa fa-map-marker" aria-hidden="true"></i>
-            <span>{`${this.data.location.district} - ${this.data.location.province}`}</span>
+            {
+              this.data.location?
+              <span>{`${this.data.location.district} - ${this.data.location.province}`}</span>
+              : <span>Chưa rõ</span>
+            }
+            
           </div>
           <div className="price">
             <i className="fa fa-usd" aria-hidden="true"></i>
@@ -46,7 +49,6 @@ class HouseCard extends React.Component {
             <span>Số lượt đánh giá: {this.data.numRating}</span>
           </div>
           }
-          
         </div>
       </div>
     );

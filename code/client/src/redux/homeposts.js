@@ -8,7 +8,7 @@ export const Homeposts = (state = {
     }, action) => {
     switch(action.type) {
         case ActionTypes.ADD_HOMEPOSTS:
-            return {...state, homeposts: action.payload}
+            return {...state, isLoading: false, errMess: null, homeposts: action.payload}
         
         case ActionTypes.ADD_HOMEPOST:
             return {...state, isLoading: false, errMess: null, homeposts: action.payload};
@@ -20,9 +20,10 @@ export const Homeposts = (state = {
             let idx1 = state.homeposts.findIndex(homepost => homepost._id === action.payload._id)
             state.homeposts[idx1] = action.payload;
             return {...state, homeposts: state.homeposts}
-            
+
         case ActionTypes.UPDATE_CURRENT_HOMEPOST:
             return {...state, currentHomepost: action.payload}
+        
         default:
             return state;
     }

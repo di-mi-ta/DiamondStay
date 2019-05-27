@@ -7,20 +7,16 @@ import Glide from '@glidejs/glide';
 class GlideSlide extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      hasControl: props.data.hasControl? props.data.hasControl : false
-    }
-    this.options = Object.assign({
+    this.defaultOptions = {
       type: 'slider',
       startAt: 0,
       perView: 4,
       gap: 20,
       bound: true,
       autoplay: false
-    }, props.data.options);
+    };
     this.ref = React.createRef();
     this.id = 'glideslide_' + Math.random().toString(36).substr(2, 9);
-    this.updateGlide = this.updateGlide.bind(this);
   }
 
   render() {
@@ -36,7 +32,7 @@ class GlideSlide extends React.Component {
           </ul>
         </div>
         {
-          this.state.hasControl &&
+          (this.props.hasControl && this.props.hasControl == true) &&
           <div className="glide__arrows" data-glide-el="controls">
             <button className="glide__arrow glide__arrow--left" data-glide-dir="<">
               <i className="fa fa-chevron-left" aria-hidden="true"></i>
@@ -50,24 +46,22 @@ class GlideSlide extends React.Component {
     );
   }
 
-  updateGlide(newOptions) {
-    let options = newOptions;
-    if (newOptions.perView > this.props.itemList.length) {
-      options = {...options, perView: this.props.itemList.length};
+  componentDidUpdate(prevProps) {
+    if (prevProps != this.props) {
+      this.glide.destroy();
+      let options = {...this.defaultOptions, ...this.props.options};
+      if (options.perView > this.props.itemList.length) {
+        options.perView = this.props.itemList.length;
+      }
+      this.glide = new Glide(`.glideSlide[data-id=${this.id}]`, options).mount();
+      console.log("update", this.glide);
+      // this.updateGlide(this.props.options);
     }
-    this.glide.update(options);
-  }
-
-  componentDidUpdate() {
-    // console.log("update", this.glide);
-    // this.glide.destroy();
-    // this.glide = new Glide(`.glideSlide[data-id=${this.id}]`, this.options);
-    // this.glide.mount();
   }
 
   componentDidMount() {
-    console.log("mount");
-    this.glide = new Glide(`.glideSlide[data-id=${this.id}]`, this.options).mount();
+    const options = {...this.defaultOptions, ...this.props.options};
+    this.glide = new Glide(`.glideSlide[data-id=${this.id}]`, options).mount();
   }
 }
 
