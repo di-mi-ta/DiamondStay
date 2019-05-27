@@ -1,1 +1,1 @@
-export const baseUrl = 'http://bku-diamond-stay-api.herokuapp.com/';
+export const baseUrl = 'https://bku-diamond-stay-api.herokuapp.com/';
