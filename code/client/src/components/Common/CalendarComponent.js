@@ -30,7 +30,6 @@ class CalendarCom extends Component{
             <div style = {{padding: 30, background: '#f1f1f1'}}>
                 <Card style={{ 
                                 boxShadow: "1px 3px 1px #9E9E9E",
-                                borderRadius: "10px",
                                 minHeight: '300px',
                             }}>
                 <Alert message={`Bạn đang chọn: ${selectedValue && selectedValue.format('DD-MM-YYYY')}`} />

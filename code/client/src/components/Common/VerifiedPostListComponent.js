@@ -49,7 +49,6 @@ class VerifiedHomepostList extends Component {
             <div style = {{padding: 50, background: '#f1f1f1'}}>
                 <Card style={{
                                 boxShadow: "1px 3px 1px #9E9E9E",
-                                borderRadius: "10px",
                                 minHeight: '300px'}}>
                     <Table columns={columns}
                         dataSource={this.props.homeposts.homeposts}

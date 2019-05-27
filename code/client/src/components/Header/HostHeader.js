@@ -81,7 +81,7 @@ class Header extends Component {
             <React.Fragment>
                 <Navbar light expand="md"
                         style= {{
-                            backgroundImage: "linear-gradient(to right, red , yellow)",
+                            // backgroundImage: "linear-gradient(to right, red , yellow)",
                             top: 0,
                             width: '100%',
                         }}>

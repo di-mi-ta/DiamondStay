@@ -6,8 +6,6 @@ import {Link, Switch, Router} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actions from '../../redux/ActionCreators';
 
-
-
 class WaitingHomepostList extends Component {
     columns = [{
         title: 'Homestay',
@@ -50,7 +48,6 @@ class WaitingHomepostList extends Component {
             <div style = {{padding: 50, background: '#f1f1f1'}}>
                 <Card style={{
                             boxShadow: "1px 3px 1px #9E9E9E",
-                            borderRadius: "10px",
                             minHeight: '300px'}}>
                 <Table columns={this.columns}
                     dataSource={this.props.homeposts.homeposts}
