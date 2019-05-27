@@ -21,7 +21,8 @@ const DescForm = Form.create({ name: 'desc' })(
               </Form.Item>
               <Form.Item label="Mô tả">
                 {getFieldDecorator('description',
-                  { initialValue: this.props.homeposts.currentHomepost ? this.props.homeposts.currentHomepost.description : '',
+                  { initialValue: this.props.homeposts.currentHomepost 
+                                  ? this.props.homeposts.currentHomepost.description : '',
                     rules: [{required: false}],
                 })(
                   <Input/>

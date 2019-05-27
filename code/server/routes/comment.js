@@ -13,11 +13,11 @@ commentRouter
 
 commentRouter.route('/')
   .get(CommentCtrl.getComments)
-  .post(CommentCtrl.postComment)
+  .post(auth.verifyUser, CommentCtrl.postComment)
 
 commentRouter.route('/:commentId')
   .get(CommentCtrl.getCommentById)
-  .put(CommentCtrl.updateComment)
-  .delete(CommentCtrl.deleteComment);
+  .put(auth.verifyUser, CommentCtrl.updateComment)
+  .delete(auth.verifyUser, CommentCtrl.deleteComment);
 
 module.exports = commentRouter;

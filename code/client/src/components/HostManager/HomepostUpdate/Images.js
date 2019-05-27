@@ -40,9 +40,6 @@ class Images extends Component {
       this.uploadFile = this.uploadFile.bind(this);
     }
 
-    componentWillMount(){
-    }
-
     uploadFile = (file, idx, arr) => {
       const url = baseUrl + 'upload';
       const formData = new FormData();
@@ -70,11 +67,14 @@ class Images extends Component {
               if (arr.length === idx + 1){
                 const updatedHomepost = {
                   ...this.props.homeposts.currentHomepost,
-                  image: this.state.lstImgs
+                  image: l
                 }
                 this.props.fetchUpdateHomepost(updatedHomepost);
                 message.success('Cập nhật thành công');
                 this.props.updateCurrentHomepost(updatedHomepost);
+                this.setState({
+                  lstImgs: l
+                });
               }
             })
           })
@@ -83,6 +83,15 @@ class Images extends Component {
     }
 
     onUpdateBtnClick = () => {
+      if (this.state.fileList.length === 0){
+        const updatedHomepost = {
+          ...this.props.homeposts.currentHomepost,
+          image: []
+        }
+        this.props.fetchUpdateHomepost(updatedHomepost);
+        message.success('Cập nhật thành công');
+        this.props.updateCurrentHomepost(updatedHomepost);
+      }
       this.state.fileList.forEach(this.uploadFile);
     }
 
