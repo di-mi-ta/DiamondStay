@@ -31,6 +31,7 @@
 }
 
 .houseCard > .houseInfo > div > * {
+    color: #111;
     line-height: 1.6rem;
     font-weight: 550;
 }

@@ -8,17 +8,16 @@ class GlideSlide extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hasControl: props.data.hasControl? props.data.hasControl : false,
-      itemList: props.data.itemList? props.data.itemList: []
+      hasControl: props.data.hasControl? props.data.hasControl : false
     }
-    this.options = props.data.options? props.data.options : {
+    this.options = Object.assign({
       type: 'slider',
       startAt: 0,
       perView: 4,
       gap: 20,
       bound: true,
-      autoplay: 5000
-    }
+      autoplay: false
+    }, props.data.options);
     this.ref = React.createRef();
     this.id = 'glideslide_' + Math.random().toString(36).substr(2, 9);
     this.updateGlide = this.updateGlide.bind(this);
@@ -26,16 +25,14 @@ class GlideSlide extends React.Component {
 
   render() {
     return (
-      <div className={`glide glideSlide ${this.props.className}`} ref={this.ref} data-id={this.id}>
+      <div className={`glide glideSlide`} ref={this.ref} data-id={this.id}>
         <div className="glide__track" data-glide-el="track">
           <ul className="glide__slides">
-            {
-            this.state.itemList.map((item, index) =>
+            {this.props.itemList.map((item, index) =>
               <li className="glide__slide" key={index}>
                 {item}
               </li>
-            )
-            }
+            )}
           </ul>
         </div>
         {
@@ -53,14 +50,24 @@ class GlideSlide extends React.Component {
     );
   }
 
-  updateGlide(options) {
-    return this.glide.update(options);
+  updateGlide(newOptions) {
+    let options = newOptions;
+    if (newOptions.perView > this.props.itemList.length) {
+      options = {...options, perView: this.props.itemList.length};
+    }
+    this.glide.update(options);
+  }
+
+  componentDidUpdate() {
+    // console.log("update", this.glide);
+    // this.glide.destroy();
+    // this.glide = new Glide(`.glideSlide[data-id=${this.id}]`, this.options);
+    // this.glide.mount();
   }
 
   componentDidMount() {
-    const options = this.options;
-    const glide = new Glide(`.glideSlide[data-id=${this.id}]`, options).mount();
-    this.glide = glide;
+    console.log("mount");
+    this.glide = new Glide(`.glideSlide[data-id=${this.id}]`, this.options).mount();
   }
 }
 

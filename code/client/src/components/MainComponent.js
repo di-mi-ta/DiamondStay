@@ -26,12 +26,12 @@ class Main extends Component {
           <Route path="/admin" component={AdminManager} />
           <Route path="/room/:homepostId" component={House} />
           <Route path="/properties"
-                 component={() => (
-                   <div>
-                     <HostHeader />
-                     <UpdatedHomepostManager />
-                   </div>
-                 )}
+            component={() => (
+              <div>
+                <HostHeader />
+                <UpdatedHomepostManager />
+              </div>
+            )}
           />
           <Route path="/booking" component={Booking} />
           <Route path="/messages" component={NormalUserMessageInbox} />
