@@ -32,7 +32,7 @@ export default class MessageEdit extends React.Component {
 
   makeReplyMessage = () => {
     return {
-      receiverId: this.props.receiver._id,
+      receiverId: this.props.receiverId,
       title: this.state.title,
       content: this.state.content
     };
@@ -43,7 +43,7 @@ export default class MessageEdit extends React.Component {
       <div>
         <Form {...formItemLayout}>
           <Item label='Người nhận'>
-            <Paragraph>{this.props.receiver.fullname}</Paragraph>
+            <Paragraph>{this.props.receiverName}</Paragraph>
           </Item>
           <Item label='Chủ đề'>
             <Input name='title' value={this.state.title} onChange={this.onTextChange} />
@@ -57,7 +57,7 @@ export default class MessageEdit extends React.Component {
             />
           </Item>
           <Item wrapperCol={{ offset: 14 }}>
-            <Button type='primary' onClick={() => this.props.onSendReplyMessage(this.makeReplyMessage())}>Gửi</Button>
+            <Button type='primary' onClick={() => this.props.onSendMessage(this.makeReplyMessage())}>Gửi</Button>
             <Popconfirm
               title='Huỷ thư đang soạn?'
               okText='Huỷ thư'

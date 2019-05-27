@@ -9,7 +9,7 @@ export const Homeposts = (state = {
     switch(action.type) {
         case ActionTypes.ADD_HOMEPOSTS:
             return {...state, isLoading: false, errMess: null, homeposts: action.payload}
-        
+
         case ActionTypes.ADD_HOMEPOST:
             return {...state, isLoading: false, errMess: null, homeposts: action.payload};
 
@@ -23,7 +23,7 @@ export const Homeposts = (state = {
 
         case ActionTypes.UPDATE_CURRENT_HOMEPOST:
             return {...state, currentHomepost: action.payload}
-        
+
         default:
             return state;
     }

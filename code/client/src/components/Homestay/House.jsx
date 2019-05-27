@@ -6,6 +6,7 @@ import HouseComment from './HouseComment';
 import {connect} from 'react-redux';
 import * as actions from '../../redux/ActionCreators';
 import MainHeader from '../HomePage/MainHeader';
+import { Link } from 'react-router-dom';
 
 class House extends Component {
     constructor(props) {
@@ -16,7 +17,7 @@ class House extends Component {
         location: "Sóc Sơn, Hà Nội, Vietnam",
         rating: 5,
         numRating: 6,
-        //home info 
+        //home info
         name: 'Babylon House - Bungalow Bằng Lăng Trắng ',
         minimumNights: 1,
         weekdayPrice: 10,
@@ -36,7 +37,12 @@ class House extends Component {
                   <div className="title col-12">
                     <div className="booking">
                       <h1>{this.state.name}</h1>
-                      <button type="button" className="btn book-house">Đặt ngay</button>
+                      <button type="button" className="btn book-house">
+                        <Link to='/booking'>
+                          Đặt ngay
+                        </Link>
+                      </button>
+
                     </div>
                     <span className="label-house-id">Mã chỗ ở: {this.state.id}</span>
                     <span className={this.state.verify? "label-verify": "label-not-verify"}>
@@ -120,7 +126,7 @@ class House extends Component {
     }
 
     componentDidMount() {
-       // fetch data from server 
+       // fetch data from server
     }
 }
 

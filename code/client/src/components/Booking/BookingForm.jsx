@@ -2,13 +2,15 @@ import React from 'react';
 import '../../css/SearchBox.css';
 import DatePicker from 'react-datepicker';
 import {Button} from 'reactstrap';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import * as actions from '../../redux/ActionCreators';
 
 class BookingForm extends React.Component{
     constructor(props){
         super(props);
         const user = this.props.auth.user.info;
+        const homepost = this.props.currentHomepost;
         this.state = { //information of booking lies here
             //homestay
             homestayName: undefined,
@@ -30,62 +32,53 @@ class BookingForm extends React.Component{
             accNumber: undefined
         }
         this.ref = React.createRef();
-        this.handleDateComeChange = this.handleDateComeChange.bind(this);
-        this.handleDateLeaveChange = this.handleDateLeaveChange.bind(this);
-        this.changeName = this.handleUserNameChange.bind(this);
-        this.changePhoneNumber = this.handlePhoneNumberChange.bind(this);
-        this.changeAddress = this.handleAddressChange.bind(this);
-        this.changeAccName = this.handleAccNameChange.bind(this);
-        this.changeAccNumber = this.handleAccNumberChange.bind(this);
-        //functions lies here
     }
 
-    handleAccNumberChange(value){
+    handleAccNumberChange = (value) => {
         this.setState({
             accNumber: value.target.value
         });
-    }
+    };
 
-    handleAccNameChange(value){
+    handleAccNameChange = (value) => {
         this.setState({
             accName: value.target.value
         });
-    }
+    };
 
-    handleAddressChange(value){
+    handleAddressChange = (value) => {
         this.setState({
             userAddress:value.target.value
         });
-    }
+    };
 
 
-    handlePhoneNumberChange(value){
+    handlePhoneNumberChange = (value) =>{
         this.setState({
             userPhoneNumber:value.target.value
         });
-    }
+    };
 
-    handleUserNameChange(value){
+    handleUserNameChange = (value) => {
         this.setState({
             userName: value.target.value
         });
-    }
+    };
 
-
-
-    handleDateComeChange(date) {
+    handleDateComeChange = (date) => {
         this.setState({
           dateCome: date
         });
-      }
+    };
 
-    handleDateLeaveChange(date) {
+    handleDateLeaveChange = (date) => {
         this.setState({
             dateLeave: date
         });
-    }
+    };
 
     render(){
+        const homepost = this.props.currentHomepost;
         return(
             <div className="huge-input-container" ref={this.ref}>
                 <div className="searchBox container-fluid">
@@ -131,7 +124,7 @@ class BookingForm extends React.Component{
                             <div className="inputContent">{this.state.userEmail}</div>
                         </div>
                     </div>
-                    <div classsName="second-col-info inputBox">
+                    <div className="second-col-info inputBox">
                         <div className="date-picker">
                         <div className="inputField">Ngày đi</div>
                             <DatePicker
@@ -168,6 +161,7 @@ const mapStateToProps = state => ({
   auth: state.auth,
   homeposts: state.homeposts,
   promotions: state.promotions,
+  currentHomepost: state.homeposts.currentHomepost,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -175,4 +169,4 @@ const mapDispatchToProps = (dispatch) => ({
   fetchHomeposts: (query='') => {dispatch(actions.fetchHomeposts(query))},
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(BookingForm);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BookingForm));
