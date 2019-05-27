@@ -66,7 +66,6 @@ class MainPage extends React.Component {
   }
 
   render() {
-    console.log(this.props.promotions.systemPromos);
     return (
       <div className="mainPage container-fluid">
         <div className="title">

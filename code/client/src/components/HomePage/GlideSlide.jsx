@@ -7,6 +7,22 @@ import Glide from '@glidejs/glide';
 class GlideSlide extends React.Component {
   constructor(props) {
     super(props);
+    /*
+    this.props = {
+      hasControl: true/false,
+      options: {
+        perView: 1,
+        type: 'carrousel',
+        autoplay: 5000 or false
+      },
+      itemList: {
+        [
+          <Component/>,
+          ...
+        ]
+      }
+    }
+    */
     this.defaultOptions = {
       type: 'slider',
       startAt: 0,

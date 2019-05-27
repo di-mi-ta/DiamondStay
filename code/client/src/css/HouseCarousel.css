@@ -3,10 +3,10 @@
 }
 
 .houseCarousel > .glideSlide {
-    max-height: 60vh;
+    max-height: 36vw;
 }
 
 .houseCarousel > .glideSlide > .glide__arrows {
-    left: 30px;
-    right: 30px; 
+    left: 5vw;
+    right: 5vw;
 }
