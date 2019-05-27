@@ -66,7 +66,7 @@ class MainPage extends React.Component {
   }
 
   render() {
-    console.log(this.props.homeposts);
+    console.log(this.props.promotions.systemPromos);
     return (
       <div className="mainPage container-fluid">
         <div className="title">
@@ -116,7 +116,6 @@ class MainPage extends React.Component {
         <div className="title">
           <h2>Ưu đãi hiện hành</h2>
           <p>Cập nhật ưu đãi từ Diamond Stay để trải nghiệm chỗ ở xa hoa với giá tốt nhất</p>
-          {JSON.stringify(this.props.promotions.systemPromos)}
         </div>
         <GlideSlide className="currentPolicy"
           hasControl = {true}
@@ -170,7 +169,6 @@ class MainPage extends React.Component {
   componentDidMount() {
     this.updatePolicyGlideSize();
     window.addEventListener('resize', e => this.updatePolicyGlideSize());
-    this.props.fetchSystemPromos();
   }
 }
 
