@@ -399,7 +399,7 @@ export const fetchUpdateHomepost = (homepost) => (dispatch) => {
 }
 
 export const fetchHomeposts = (query='') => (dispatch) => {
-    return fetch(baseUrl + 'homeposts' + query)
+    return fetch(baseUrl + 'homeposts/' + query)
         .then(response => {
             if (response.ok) {
                 return response;

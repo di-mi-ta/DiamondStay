@@ -9,19 +9,20 @@ import MainHeader from '../HomePage/MainHeader';
 
 class House extends Component {
     constructor(props) {
-        super(props);
-        this.state = {
-          id: "4313421",
-          verify: false,
-          location: "Sóc Sơn, Hà Nội, Vietnam",
-          rating: 5,
-          numRating: 6,
-          //home info 
-          name: 'Babylon House - Bungalow Bằng Lăng Trắng ',
-          minimumNights: 1,
-          weekdayPrice: 10,
-          weekendPrice: 100,
-        }
+      super(props);
+      this.state = {
+        id: "4313421",
+        verify: false,
+        location: "Sóc Sơn, Hà Nội, Vietnam",
+        rating: 5,
+        numRating: 6,
+        //home info 
+        name: 'Babylon House - Bungalow Bằng Lăng Trắng ',
+        minimumNights: 1,
+        weekdayPrice: 10,
+        weekendPrice: 100,
+      }
+      console.log(props);
     }
 
     render() {

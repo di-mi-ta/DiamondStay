@@ -13,15 +13,17 @@ import {connect} from 'react-redux';
 import * as actions from '../redux/ActionCreators';
 
 class Main extends Component {
+
   componentDidMount(){
     this.props.fetchHomeposts();
     this.props.fetchSystemPromos();
   }
+
   render() {
     return (
       <div>
         <Switch>
-          <Route path="/home" component={Home} />
+          <Route path="/" exact={true} component={Home} />
           <Route path="/host" component={HostManager} />
           <Route path="/admin" component={AdminManager} />
           <Route path="/room/:homepostId" component={House} />
@@ -35,14 +37,13 @@ class Main extends Component {
           />
           <Route path="/booking" component={Booking} />
           <Route path="/messages" component={NormalUserMessageInbox} />
-          <Redirect to='/home'/>
+          <Redirect to='/'/>
         </Switch>
         <Footer/>
       </div>
     );
   }
 }
-
 
 const mapDispatchToProps = (dispatch) => ({
   fetchHomeposts: (query='') => {dispatch(actions.fetchHomeposts(query))},
