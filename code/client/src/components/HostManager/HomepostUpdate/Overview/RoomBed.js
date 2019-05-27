@@ -14,7 +14,7 @@ const BasicForm = Form.create({ name:'desc'})(
             <Form  layout="vertical">
               <Form.Item label="Loại chỗ ở">
                 {getFieldDecorator('typeHome', {
-                  initialValue: this.props.homeposts.currentHomepost.typeHome,
+                  initialValue: this.props.homeposts.currentHomepost ? this.props.homeposts.currentHomepost.typeHome : '',
                   rules: [{ required: true, message: 'Trường này không được bỏ trống !!!' }],
                 })(
                     <Select>
@@ -29,7 +29,7 @@ const BasicForm = Form.create({ name:'desc'})(
               </Form.Item>
               <Form.Item label="Loại phòng">
                 {getFieldDecorator('typeRoom', {
-                  initialValue: this.props.homeposts.currentHomepost.typeRoom,
+                  initialValue: this.props.homeposts.currentHomepost ? this.props.homeposts.currentHomepost.typeRoom : '',
                   rules: [{ required: true, message: 'Trường này không được bỏ trống !!!' }],
                 })(
                     <Select>
@@ -40,7 +40,7 @@ const BasicForm = Form.create({ name:'desc'})(
               </Form.Item>
               <Form.Item label="Số khách tối đa">
                 {getFieldDecorator('maxPeoples', {
-                  initialValue: this.props.homeposts.currentHomepost.maxPeoples,
+                  initialValue: this.props.homeposts.currentHomepost ? this.props.homeposts.currentHomepost.maxPeoples : '',
                   rules: [{ required: true, message: 'Trường này không được bỏ trống !!!' }],
                 })(
                     <InputNumber min='0' style={{width: '100%'}}/>
@@ -48,7 +48,7 @@ const BasicForm = Form.create({ name:'desc'})(
               </Form.Item>
               <Form.Item label="Diện tích chỗ ở (m2)">
                 {getFieldDecorator('acreage', {
-                  initialValue: this.props.homeposts.currentHomepost.acreage,
+                  initialValue: this.props.homeposts.currentHomepost ? this.props.homeposts.currentHomepost.acreage : '',
                   rules: [{ required: true, message: 'Trường này không được bỏ trống !!!' }],
                 })(<Input />)}
               </Form.Item>
@@ -67,19 +67,19 @@ const RoomBedForm = Form.create({name: 'desc'})(
             <Form  layout="vertical">
                <Form.Item label="Phòng ngủ">
                     {getFieldDecorator('numBed', {
-                      initialValue: this.props.homeposts.currentHomepost.numBed,
+                      initialValue: this.props.homeposts.currentHomepost ? this.props.homeposts.currentHomepost.numBed : '',
                       rules: [{ required: true, message: 'Vui lòng nhập trường này !!!' }],
                     })(<InputNumber min='0' style={{width: '100%'}}/>)}
                 </Form.Item>
                 <Form.Item label="Giường">
                     {getFieldDecorator('numBedroom', {
-                      initialValue: this.props.homeposts.currentHomepost.numBedroom,
+                      initialValue: this.props.homeposts.currentHomepost ? this.props.homeposts.currentHomepost.numBedroom : '',
                       rules: [{ required: true, message: 'Vui lòng nhập trường này !!!' }],
                     })(<InputNumber min='0' style={{width: '100%'}}/>)}
                 </Form.Item>
                 <Form.Item label="Phòng tắm">
                     {getFieldDecorator('numBathroom', {
-                      initialValue: this.props.homeposts.currentHomepost.numBathroom,
+                      initialValue: this.props.homeposts.currentHomepost ? this.props.homeposts.currentHomepost.numBathroom : '',
                       rules: [{ required: true, message: 'Vui lòng nhập trường này !!!' }],
                     })(<InputNumber min='0' style={{width: '100%'}}/>)}
                 </Form.Item>

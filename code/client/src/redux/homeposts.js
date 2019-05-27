@@ -23,7 +23,6 @@ export const Homeposts = (state = {
 
         case ActionTypes.UPDATE_CURRENT_HOMEPOST:
             return {...state, currentHomepost: action.payload}
-
         default:
             return state;
     }

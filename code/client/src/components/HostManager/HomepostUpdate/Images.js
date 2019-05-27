@@ -33,8 +33,8 @@ class Images extends Component {
       this.state = {
           previewVisible: false,
           previewImage: '',
-          lstImgs: this.props.homeposts.currentHomepost.image,
-          fileList: formFileLst(this.props.homeposts.currentHomepost.image)
+          lstImgs: this.props.homeposts.currentHomepost ? this.props.homeposts.currentHomepost.image: [],
+          fileList: this.props.homeposts.currentHomepost ? formFileLst(this.props.homeposts.currentHomepost.image) : []
       }
       this.onUpdateBtnClick = this.onUpdateBtnClick.bind(this);
       this.uploadFile = this.uploadFile.bind(this);
@@ -67,11 +67,14 @@ class Images extends Component {
               if (arr.length === idx + 1){
                 const updatedHomepost = {
                   ...this.props.homeposts.currentHomepost,
-                  image: this.state.lstImgs
+                  image: l
                 }
                 this.props.fetchUpdateHomepost(updatedHomepost);
                 message.success('Cập nhật thành công');
                 this.props.updateCurrentHomepost(updatedHomepost);
+                this.setState({
+                  lstImgs: l
+                });
               }
             })
           })
@@ -80,6 +83,15 @@ class Images extends Component {
     }
 
     onUpdateBtnClick = () => {
+      if (this.state.fileList.length === 0){
+        const updatedHomepost = {
+          ...this.props.homeposts.currentHomepost,
+          image: []
+        }
+        this.props.fetchUpdateHomepost(updatedHomepost);
+        message.success('Cập nhật thành công');
+        this.props.updateCurrentHomepost(updatedHomepost);
+      }
       this.state.fileList.forEach(this.uploadFile);
     }
 
@@ -143,6 +155,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => ({
   fetchUpdateHomepost: (homepost) => {dispatch(actions.fetchUpdateHomepost(homepost))},
   updateCurrentHomepost: (homepost) => {dispatch(actions.updateCurrentHomepost(homepost))},
+  fetchHomepostById: (homepostId) => {dispatch(actions.fetchHomepostById(homepostId))}
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Images);

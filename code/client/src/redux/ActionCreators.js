@@ -341,6 +341,8 @@ export const fetchCreateSystemPromo = (promo) => (dispatch) => {
 }
 
 
+
+
 // for homepost 
 export const updateCurrentHomepost = (homepost) => ({
     type: ActionTypes.UPDATE_CURRENT_HOMEPOST,
@@ -416,6 +418,27 @@ export const fetchHomeposts = (query='') => (dispatch) => {
         })
         .then(response => response.json())
         .then(homeposts => dispatch(addHomeposts(homeposts)))
+        .catch(error => dispatch(homepostsFailed(error.message)));
+}
+
+export const fetchHomepostById = (homepostId) => (dispatch) => {
+    return fetch(baseUrl + 'homeposts/' + homepostId)
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+        error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+        })
+        .then(response => response.json())
+        .then(homepost => dispatch(updateCurrentHomepost(homepost)))
         .catch(error => dispatch(homepostsFailed(error.message)));
 }
 

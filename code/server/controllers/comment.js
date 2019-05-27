@@ -46,14 +46,14 @@ const deleteComment = (req, res, next) => {
             .then((resp) => {
                 res.statusCode = 200;
                 res.setHeader('Content-Type', 'application/json');
-                res.json(resp); 
+                res.json(resp);
             }, (err) => next(err))
             .catch((err) => next(err));
         }
         else {
             err = new Error('Comment ' + req.params.commentId + ' not found');
             err.status = 404;
-            return next(err);            
+            return next(err);
         }
     }, (err) => next(err))
     .catch((err) => next(err));
@@ -78,14 +78,14 @@ const updateComment = (req, res, next) => {
                 .then((comment) => {
                     res.statusCode = 200;
                     res.setHeader('Content-Type', 'application/json');
-                    res.json(comment); 
-                })               
+                    res.json(comment);
+                })
             }, (err) => next(err));
         }
         else {
             err = new Error('Comment ' + req.params.commentId + ' not found');
             err.status = 404;
-            return next(err);            
+            return next(err);
         }
     }, (err) => next(err))
     .catch((err) => next(err));

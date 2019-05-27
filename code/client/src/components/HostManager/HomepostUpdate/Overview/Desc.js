@@ -12,7 +12,7 @@ const DescForm = Form.create({ name: 'desc' })(
             <Form  layout="vertical">
               <Form.Item label="Tiêu đề">
                 {getFieldDecorator('name',
-                  { initialValue: this.props.homeposts.currentHomepost.name,
+                  { initialValue: this.props.homeposts.currentHomepost ? this.props.homeposts.currentHomepost.name : '',
                     rules: [{ required: true, message: 'Vui lòng nhập tên chỗ ở !!!',
                     }],
                 })(
@@ -21,7 +21,8 @@ const DescForm = Form.create({ name: 'desc' })(
               </Form.Item>
               <Form.Item label="Mô tả">
                 {getFieldDecorator('description',
-                  { initialValue: this.props.homeposts.currentHomepost.description,
+                  { initialValue: this.props.homeposts.currentHomepost 
+                                  ? this.props.homeposts.currentHomepost.description : '',
                     rules: [{required: false}],
                 })(
                   <Input/>
