@@ -13,6 +13,25 @@ import moment from 'moment';
 
 const RangePicker = DatePicker.RangePicker;
 
+function beforeUpload(file) {
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+      message.error('Image must smaller than 2MB!');
+    }
+    return isLt2M;
+}
+
+function getBase64(img, callback) {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result));
+    reader.readAsDataURL(img);
+}
+
+const getTypeFile = (name) => {
+    let res = name.split('.');
+    return '.' + res[res.length - 1];
+}
+
 class SystemPromotionCompoment extends Component {
     constructor(props){
         super(props);
@@ -22,6 +41,8 @@ class SystemPromotionCompoment extends Component {
             isModalEditOpen: false,
             currentPromo: '',
             logo: null,
+            imageUrl: null,
+            fileName: ''
         };
         this.onAddPromoBtnClick = this.onAddPromoBtnClick.bind(this)
         this.handleCancel = this.handleCancel.bind(this);
@@ -34,8 +55,25 @@ class SystemPromotionCompoment extends Component {
         this.handleMinValueChange = this.handleMinValueChange.bind(this);
         this.handleNumTimeChange = this.handleNumTimeChange.bind(this);
         this.handleCodeChange = this.handleCodeChange.bind(this);
-        this.onLogoChange = this.onLogoChange.bind(this);
+        this.handleLogoChange = this.handleLogoChange.bind(this);
     }
+
+    handleLogoChange = info => {
+        if (info.file.status === 'uploading') {
+          this.setState({ loading: true });
+          return;
+        }
+        if (info.file.status === 'done') {
+          // Get this url from response in real world.
+          getBase64(info.file.originFileObj, imageUrl =>
+            this.setState({
+              imageUrl: imageUrl,
+              loading: false,
+              fileName: info.file.name
+            }),
+          );
+        }
+    };
 
     componentWillMount(){
         this.props.fetchSystemPromos();
@@ -153,13 +191,29 @@ class SystemPromotionCompoment extends Component {
         this.setState({
           isModalEditOpen: false,
         });
-        this.props.fetchUpdateSystemPromo(this.state.currentPromo);
-        if (true){
-            message.success('Cập nhật thành công !!!');
-        } else {
-            message.error('Cập nhật thất bại !!!');
-        }
-      }
+        const url = baseUrl + 'upload';
+        const formData = new FormData();
+        fetch(this.state.imageUrl)
+          .then(res => res.blob())
+          .then(blob => {
+            formData.append('image', blob, this.state.currentPromo._id + getTypeFile(this.state.fileName));
+            const config = {
+                headers: {
+                    "Content-type": "multipart/form-data",
+                }
+            }
+            post(url, formData, config)
+            .then((resp)=> {
+                const promo = {
+                    ...this.state.currentPromo,
+                    logoPath: 'images/' + this.state.currentPromo._id + getTypeFile(this.state.fileName),
+                }
+                this.props.fetchUpdateSystemPromo(promo);
+                message.success('Cập nhật khuyến mãi thành công');            
+            })
+        })
+    }
+
 
     handleCancelEdit = () => {
         this.setState({
@@ -171,36 +225,29 @@ class SystemPromotionCompoment extends Component {
         this.setState({
           isModalOpen: false,
         });
-        const url = baseUrl + "upload";
+        const url = baseUrl + 'upload';
         const formData = new FormData();
-        formData.append('image', this.state.logo)
-        const config = {
-            headers: {
-                "Content-type": "multipart/form-data",
+        fetch(this.state.imageUrl)
+          .then(res => res.blob())
+          .then(blob => {
+            formData.append('image', blob, this.state.currentPromo._id + getTypeFile(this.state.fileName));
+            const config = {
+                headers: {
+                    "Content-type": "multipart/form-data",
+                }
             }
-        }
-        post(url, formData, config)
-        .then((image) => {
-            alert(JSON.stringify(image))
-            const promo = {
-                name: this.state.currentPromo.name,
-                logo: image.filename,
-                dateStart: this.state.currentPromo.dateStart,
-                dateEnd: this.state.currentPromo.dateEnd,
-                value: this.state.currentPromo.value,
-                creator: this.props.auth.user.username,
-                minValueBooking: this.state.currentPromo.minValueBooking,
-                maxNumBookingApplied: this.state.currentPromo.maxNumBookingApplied,
-                code: this.state.currentPromo.code
-            }
-            this.props.fetchCreateSystemPromo(promo);
-            if (true){
-                message.success('Bạn đã thêm một khuyến mại mới thành công!');
-            } else {
-                message.error('Thêm khuyến mại thất bại!');
-            }
+            post(url, formData, config)
+            .then((resp)=> {
+                const promo = {
+                    ...this.state.currentPromo,
+                    logoPath: 'images/' + this.state.currentPromo._id + getTypeFile(this.state.fileName),
+                    creator: this.props.auth.user.username
+                }
+                this.props.fetchCreateSystemPromo(promo);
+                message.success('Tạo khuyến mãi mới thành công!');            
+            })
         })
-      }
+    }
 
     handleCancel = (e) => {
         this.setState({
@@ -209,12 +256,16 @@ class SystemPromotionCompoment extends Component {
     }
 
     render(){
-
+        const uploadButton = (
+            <div>
+              <Icon type={this.state.loading ? 'loading' : 'plus'} />
+              <div className="ant-upload-text">Upload</div>
+            </div>
+        );
         const formItemLayout = {
             labelCol: { span: 6 },
             wrapperCol: { span: 14 },
         }
-
         return(
             <div style={{paddingTop: 30, paddingLeft: 50, paddingRight: 50,
                         paddingBottom: 50, background: '#f1f1f1'}}>
@@ -258,7 +309,17 @@ class SystemPromotionCompoment extends Component {
                             label="Logo"
                             {...formItemLayout}
                         >
-                            <input type="file" onChange={this.onLogoChange} />
+                            <Upload
+                                name="avatar"
+                                listType="picture-card"
+                                className="avatar-uploader"
+                                showUploadList={false}
+                                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                beforeUpload={beforeUpload}
+                                onChange={this.handleLogoChange}
+                            >
+                                {this.state.imageUrl ? <img src={this.state.imageUrl} alt="avatar" /> : uploadButton}
+                            </Upload>
                         </Form.Item>
                         <Form.Item
                             label="Code"
@@ -311,6 +372,22 @@ class SystemPromotionCompoment extends Component {
                             {...formItemLayout}
                         >
                             <Input onChange={this.handleNameChange} value={this.state.currentPromo.name}/>
+                        </Form.Item>
+                        <Form.Item
+                            label="Logo"
+                            {...formItemLayout}
+                        >
+                            <Upload
+                                name="avatar"
+                                listType="picture-card"
+                                className="avatar-uploader"
+                                showUploadList={false}
+                                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                beforeUpload={beforeUpload}
+                                onChange={this.handleLogoChange}
+                            >
+                                {this.state.imageUrl ? <img src={this.state.imageUrl} alt="avatar" /> : uploadButton}
+                            </Upload>
                         </Form.Item>
                         <Form.Item
                             label="Code"

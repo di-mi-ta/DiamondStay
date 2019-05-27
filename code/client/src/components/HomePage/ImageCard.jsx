@@ -1,12 +1,13 @@
 import React from 'react';
 import '../../css/ImageCard.css';
+import {baseUrl} from '../../shared/baseUrl';
 
 class ImageCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      image: props.data.image,
-      description: props.data.description? props.data.description : ''
+      image: baseUrl + props.data.logoPath,
+      description: props.data.description ? props.data.description : ''
     };
     this.ref = React.createRef();
   }
