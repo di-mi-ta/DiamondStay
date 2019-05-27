@@ -4,7 +4,6 @@ import '../../css/HouseCard.css';
 class HouseCard extends React.Component {
   constructor(props) {
     super(props);
-    this.data = props.houseData;
     /*
     props.houseData = {
       image: "http://imagelink",
@@ -23,30 +22,30 @@ class HouseCard extends React.Component {
     return (
       <div className="houseCard container-fluid" ref={this.ref}>
         <div className="houseImage">
-          <img src={this.data.image} alt=""/>
+          <img src={this.props.houseData.image} alt=""/>
         </div>
         <div className="houseInfo">
-          {this.data.type? <h5 className="houseType">{this.data.type}</h5>: null}
-          <h4 className="houseName">{this.data.houseName}</h4>
+          {this.props.houseData.type? <h5 className="houseType">{this.props.houseData.type}</h5>: null}
+          <h4 className="houseName">{this.props.houseData.houseName}</h4>
           <div className="location">
             <i className="fa fa-map-marker" aria-hidden="true"></i>
             {
-              this.data.location?
-              <span>{`${this.data.location.district} - ${this.data.location.province}`}</span>
+              this.props.houseData.location?
+              <span>{`${this.props.houseData.location.district} - ${this.props.houseData.location.province}`}</span>
               : <span>Chưa rõ</span>
             }
             
           </div>
           <div className="price">
             <i className="fa fa-usd" aria-hidden="true"></i>
-            <span>{this.data.price}</span>
+            <span>{this.props.houseData.price}</span>
           </div>
           {
-          this.data.rating > 0 && 
+          this.props.houseData.rating > 0 && 
           <div className="star">
             <i className="fa fa-star fill" aria-hidden="true"></i>
-            <span className="rating">{this.data.rating}</span>
-            <span>Số lượt đánh giá: {this.data.numRating}</span>
+            <span className="rating">{this.props.houseData.rating}</span>
+            <span>Số lượt đánh giá: {this.props.houseData.numRating}</span>
           </div>
           }
         </div>

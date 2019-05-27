@@ -10,9 +10,6 @@ export const Homeposts = (state = {
         case ActionTypes.ADD_HOMEPOSTS:
             return {...state, isLoading: false, errMess: null, homeposts: action.payload}
 
-        case ActionTypes.ADD_HOMEPOST:
-            return {...state, isLoading: false, errMess: null, homeposts: action.payload};
-
         case ActionTypes.HOMEPOSTS_FAILED:
             return {...state, isLoading: false, errMess: action.payload, homeposts: []};
 
