@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Steps, Icon, Button, Input,
         Radio, Row, Col, Card,
         Modal, Table, Tag,
-        message, Popover, Carousel} from 'antd';
+        message, Popover, Carousel, Divider} from 'antd';
 
 import {Form} from 'semantic-ui-react'
 import '../../css/verifyHome.css';
@@ -186,7 +186,7 @@ class VerifyHomepostComponent extends Component {
         if (this.state.currentStep === 0){
             return(
                 <div>
-                    <h4><b>Mô tả</b></h4>
+                    <h3><b>Mô tả</b></h3>
                     <Form>
                         <Form.Field>
                         <label>Tiêu đề</label>
@@ -194,7 +194,10 @@ class VerifyHomepostComponent extends Component {
                         </Form.Field>
                         <Form.Field>
                         <label>Mô tả</label>
-                        <input value={this.state.homepost.description}/>
+                        <TextArea placeholder="Cung cấp phản hồi cho người dùng (nếu cần)"
+                                        rows={10}
+                                        value={this.state.homepost.description}
+                        />
                         </Form.Field>
                     </Form>
                 </div>
@@ -216,7 +219,7 @@ class VerifyHomepostComponent extends Component {
         else if (this.state.currentStep === 2){
             return(
                 <div>
-                    <h4><b>Thông tin cơ bản</b></h4>
+                    <h3><b>Thông tin cơ bản</b></h3>
                     <Form>
                         <Form.Field>
                         <label>Loại chỗ ở</label>
@@ -241,7 +244,7 @@ class VerifyHomepostComponent extends Component {
         else if (this.state.currentStep === 3){
             return(
                 <div>
-                    <h4><b>Giá</b></h4>
+                    <h3><b>Giá</b></h3>
                     <Form>
                         <Form.Field>
                         <label>Giá cơ bản</label>
@@ -262,7 +265,7 @@ class VerifyHomepostComponent extends Component {
         else if (this.state.currentStep === 4){
             return(
                 <div>
-                   <h4><b>Phòng và giường</b></h4>
+                   <h3><b>Phòng và giường</b></h3>
                     <Form>
                         <Form.Field>
                         <label>Số phòng ngủ</label>
@@ -283,7 +286,7 @@ class VerifyHomepostComponent extends Component {
         else if (this.state.currentStep === 5){
             return(
                 <div>
-                    <h4><b>Vị trí</b></h4>
+                    <h3><b>Vị trí</b></h3>
                     {this.state.homepost.location === null || !this.state.homepost.hasOwnProperty('location')
                         ? <div> Chưa được chủ nhà cung cấp </div> :
                         <Form>
@@ -419,9 +422,10 @@ class VerifyHomepostComponent extends Component {
         }];
         return(
             <div style = {{paddingTop: 30, paddingLeft: 50, paddingRight: 50,
-                            paddingBottom: 50, background: '#f1f1f1'}}>
+                            paddingBottom: 50}}>
                 <h2><b>Duyệt tin</b></h2>
-                <Steps current={this.state.currentStep} style={{marginBottom: '10px'}}>
+                <Divider/>
+                <Steps current={this.state.currentStep} style={{marginBottom: '10px', marginTop: 10}}>
                     <Step title="Mô tả" />
                     <Step title="Hình ảnh" />
                     <Step title="Thông tin cơ bản" />
@@ -429,10 +433,11 @@ class VerifyHomepostComponent extends Component {
                     <Step title="Phòng và giường"/>
                     <Step title="Vị trí" />
                 </Steps>
+                <Divider/>
                 <Row style={{paddingRight: '10px'}}>
                     <Col span={18} >
                         <Card style={{marginTop: '20px',
-                                    boxShadow: "1px 3px 1px #9E9E9E",
+                                    boxShadow: '0 8px 12px rgba(0,0,0,.1)',
                                     marginRight: '10px',
                                     height: '400px',
                                     overflowY: 'scroll'}}>
@@ -443,7 +448,7 @@ class VerifyHomepostComponent extends Component {
                         <span>
                             <Card style={{marginTop: '20px',
                                         textAlign:'center',
-                                        boxShadow: "1px 3px 1px #9E9E9E",
+                                        boxShadow: '0 8px 12px rgba(0,0,0,.1)',
                                         height: '100%',
                                         }} >
                                 <h4><b>Phản hồi</b></h4>
@@ -468,7 +473,7 @@ class VerifyHomepostComponent extends Component {
                             </Card>
                             <Card style={{marginTop: '20px',
                                         textAlign:'center',
-                                        boxShadow: "1px 3px 1px #9E9E9E",
+                                        boxShadow: '0 8px 12px rgba(0,0,0,.1)',
                                         background: "#ffe4da"}} >
                             <h4><b>Xác nhận</b></h4>
                             <RadioGroup onChange={this.onChangeRatio}

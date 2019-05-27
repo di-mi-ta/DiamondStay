@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Modal, Input, Form, Menu, Select, InputNumber, Divider} from 'antd';
+import {Button, Input, Form, Row, Divider, Card, Col} from 'antd';
 import {connect} from 'react-redux';
 import * as actions from '../../../../redux/ActionCreators';
 
@@ -10,7 +10,7 @@ const DescForm = Form.create({ name: 'desc' })(
         const { getFieldDecorator, setFieldsValue } = form;
         return (
             <Form  layout="vertical">
-              <Form.Item label="Tiêu đề">
+              <Form.Item label={<b>Tiêu đề</b>}>
                 {getFieldDecorator('name',
                   { initialValue: this.props.homeposts.currentHomepost ? this.props.homeposts.currentHomepost.name : '',
                     rules: [{ required: true, message: 'Vui lòng nhập tên chỗ ở !!!',
@@ -19,13 +19,13 @@ const DescForm = Form.create({ name: 'desc' })(
                   <Input/>
                 )}
               </Form.Item>
-              <Form.Item label="Mô tả">
+              <Form.Item label={<b>Mô tả</b>}>
                 {getFieldDecorator('description',
                   { initialValue: this.props.homeposts.currentHomepost 
                                   ? this.props.homeposts.currentHomepost.description : '',
                     rules: [{required: false}],
                 })(
-                  <Input/>
+                  <Input.TextArea rows={8} />
                 )}
               </Form.Item>
             </Form>
@@ -64,17 +64,27 @@ class Desc extends Component {
   render(){
       return(
           <div className="container">
-              <h3><b>Thông tin cơ bản</b></h3>
-              <Button onClick={this.onUpdateBtnClick} type='primary' style={{marginBottom: 10}}> 
-                  Cập nhật
-              </Button>
-              <Divider/>
+              <Row>
+                <Col span={6}> 
+                  <h3><b>Thông tin cơ bản</b></h3>
+                </Col>
+                <Col span={6} offset={12}>
+                <Button onClick={this.onUpdateBtnClick} style={{marginBottom: 10, boxShadow: '0 8px 12px rgba(0,0,0,.1)'}}> 
+                    Cập nhật
+                  </Button>
+                </Col>
+              </Row>
+              <Card style={{
+                        width: '100%', padding: 10, 
+                        marginTop: 10, marginBottom: 10,
+                        boxShadow: '0 8px 12px rgba(0,0,0,.1)',}}>
               <DescForm
                   wrappedComponentRef={this.saveFormRef}
                   onCancel={this.handleCancel}
                   onCreate={this.handleCreate}
                   homeposts={this.props.homeposts}
               /> 
+              </Card>
           </div>
       );
   }

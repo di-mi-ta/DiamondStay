@@ -11,6 +11,7 @@ import HostHeader from './Header/HostHeader'
 import NormalUserMessageInbox from './single-pages/NormalUserMessageInbox';
 import {connect} from 'react-redux';
 import * as actions from '../redux/ActionCreators';
+import {Divider} from 'antd';
 
 class Main extends Component {
 
@@ -30,7 +31,11 @@ class Main extends Component {
           <Route path="/properties/:homepostId"
             component={({match}) => (
               <div>
-                <HostHeader />
+                <HostHeader/>
+                <Divider style={{
+                          boxShadow: '0 8px 12px rgba(0,0,0,.1)',
+                          margin: 0
+                        }} />
                 <UpdatedHomepostManager 
                   match={match}
                 />

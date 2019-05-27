@@ -490,6 +490,7 @@ export const fetchDeleteHomepost = (homepost) => (dispatch) => {
             throw error;
     })
     .then(response => response.json())
+    .then((resp) => dispatch(fetchHomeposts()))
     .catch(error => dispatch(homepostsFailed(error.message)));
 }
 // for ratings

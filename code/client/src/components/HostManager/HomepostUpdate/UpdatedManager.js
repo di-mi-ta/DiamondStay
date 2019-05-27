@@ -53,11 +53,17 @@ class UpdatedManager extends Component {
 
     render(){
         return(
-            <div style={{paddingTop: 30, paddingLeft: 50, paddingRight: 50,
-                        paddingBottom: 50, background: '#f1f1f1'}}>
-                <h3><b>{this.props.homeposts.currentHomepost ? this.props.homeposts.currentHomepost.name
-                        : ''}</b></h3>
-                <Divider/>
+            <div style={{
+                    paddingTop: 30, 
+                    paddingLeft: 50, 
+                    paddingRight: 50,
+                    paddingBottom: 50
+                }}>
+                <h3>
+                    <b>
+                    {this.props.homeposts.currentHomepost ? this.props.homeposts.currentHomepost.name: ''}
+                    </b>
+                </h3>
                 <Menu
                     defaultSelectedKeys={['1']}
                     selectedKeys={this.state.key}
@@ -66,8 +72,9 @@ class UpdatedManager extends Component {
                     theme= 'light'
                     style={{
                         textAlign: 'center',
-                        background: "#F1F1F1",
-                        marginBottom: 10
+                        boxShadow: '0 8px 12px rgba(0,0,0,.1)',
+                        marginBottom: 20,
+                        marginTop: 20
                     }}
                 >
                     <Menu.Item key="1" to='/'>

@@ -268,19 +268,16 @@ class SystemPromotionCompoment extends Component {
         }
         return(
             <div style={{paddingTop: 30, paddingLeft: 50, paddingRight: 50,
-                        paddingBottom: 50, background: '#f1f1f1'}}>
-                <div style={{flex: 'row'}}>
-                    <h2> <b> Quản lí khuyến mại </b></h2>
-                    <Button type="primary" icon="plus" ghost
-                        onClick = {this.onAddPromoBtnClick}
-                    >
+                        paddingBottom: 50}}>
+                <h3> <b> Quản lí khuyến mại </b></h3>
+                <Divider/>
+                <Button type="primary" icon="plus" ghost
+                    onClick = {this.onAddPromoBtnClick}
+                >
                     Thêm khuyến mại
                 </Button>
-                </div>
-
                 <Card style={{
-                    boxShadow: "1px 3px 1px #9E9E9E",
-                    borderRadius: "10px",
+                    boxShadow: '0 8px 12px rgba(0,0,0,.1)',
                     minHeight: '300px',
                     marginTop: '30px'}}>
                     <Table columns={this.columns}
