@@ -60,7 +60,7 @@ class MainPage extends React.Component {
     this.updatePolicyGlideSize = this.updatePolicyGlideSize.bind(this);
   }
 
-  componentDidMount(){
+  componentWillMount(){
     this.props.fetchHomeposts();
     this.props.fetchSystemPromos();
   }
@@ -107,10 +107,12 @@ class MainPage extends React.Component {
         <div className="title">
           <h2>Ưu đãi hiện hành</h2>
           <p>Cập nhật ưu đãi từ Diamond Stay để trải nghiệm chỗ ở xa hoa với giá tốt nhất</p>
+          {JSON.stringify(this.props.promotions.systemPromos)}
         </div>
         <GlideSlide ref={this.policyRef} className="currentPolicy" data={{
           hasControl: true,
-          itemList: this.currentPolicies.map(policy => <ImageCard data={policy}/> ),
+          // list promos: this.props.promotions.systemPromos
+          itemList: this.currentPolicies.map(promo => <ImageCard data={promo}/>),
           options: {
             type: 'carousel',
             startAt: 0,
@@ -153,11 +155,13 @@ class MainPage extends React.Component {
   componentDidMount() {
     this.updatePolicyGlideSize();
     window.addEventListener('resize', e => this.updatePolicyGlideSize());
+    this.props.fetchSystemPromos();
   }
 }
 
 const mapStateToProps = state => ({
   homeposts: state.homeposts,
+  promotions: state.promotions,
 });
 
 const mapDispatchToProps = (dispatch) => ({
