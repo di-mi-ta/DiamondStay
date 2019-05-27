@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../../redux/ActionCreators';
-
+import moment from 'moment';
 
 import { Table, Divider, Button, Icon,
     Popconfirm, Card } from 'antd';
@@ -17,7 +17,7 @@ const columns = [{
     dataIndex: 'timeUpdate',
     key: 'timeUpdate',
     align: 'center',
-    render: text => <a href="javascript:;">{text}</a>,
+    render: text => <p>{moment(text).format('LLL')} </p>,
 },{
     key: 'action',
     align: 'center',
@@ -46,12 +46,17 @@ class VerifiedHomepostList extends Component {
 
     render(){
         return(
-            <div style = {{padding: 50, background: '#f1f1f1'}}>
+            <div style = {{padding: 50}}>
+                <h3> <b> Tin đã duyệt </b></h3>
                 <Card style={{
-                                boxShadow: "1px 3px 1px #9E9E9E",
-                                minHeight: '300px'}}>
+                        boxShadow: '0 8px 12px rgba(0,0,0,.1)',
+                        minHeight: '300px',
+                        marginTop: 10,
+                    }}
+                >
                     <Table columns={columns}
                         dataSource={this.props.homeposts.homeposts}
+                        bordered
                     />
                 </Card>
             </div>

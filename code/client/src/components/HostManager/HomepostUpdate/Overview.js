@@ -25,7 +25,7 @@ class Overview extends Component {
     render(){
         return(
             <div style={{paddingLeft: 50, paddingRight: 50,
-                        paddingBottom: 50, background: '#f1f1f1'}}>
+                        paddingBottom: 50}}>
                 <Menu
                     defaultSelectedKeys={['1']}
                     mode= "horizontal"
@@ -34,7 +34,7 @@ class Overview extends Component {
                     onSelect={this.onSelect}
                     style={{
                         textAlign: 'center',
-                        background: "#F1F1F1",
+                        boxShadow: '0 8px 12px rgba(0,0,0,.1)',
                         marginBottom: 20
                     }}
                 >

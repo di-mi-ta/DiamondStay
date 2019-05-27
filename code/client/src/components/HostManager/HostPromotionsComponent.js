@@ -185,25 +185,19 @@ class PromotionCompoment extends Component {
         }
 
         return(
-            <div style={{padding: 30, background: '#f1f1f1', minHeight: '90%'}}>
-                <h2> <b> Quản lí khuyến mại </b></h2>
-                <Divider style={{background: '#cac6c6'}}/>
+            <div style={{padding: 30, minHeight: '90%'}}>
+                <h3> <b> Quản lí khuyến mại </b></h3>
+                <Divider/>
                 <Button type="primary" icon="plus" ghost
                     onClick = {this.onAddPromoBtnClick}
                 >
                     Thêm khuyến mại
                 </Button>
-                <Card style={{
-                                boxShadow: "1px 3px 1px #9E9E9E",
-                                minHeight: '300px',
-                                marginTop: 20
-                            }}>
-                    <Table columns={this.columns}
-                        dataSource={this.props.promotions.hostPromotions}
-                        style={{marginTop: '20px', backgroundColor: 'while'}}
-                        bordered
-                    />
-                </Card>
+                <Table columns={this.columns}
+                    dataSource={this.props.promotions.hostPromotions}
+                    style={{marginTop: '20px', backgroundColor: 'while'}}
+                    bordered
+                />
                 <Modal
                     title="Thêm khuyến mại"
                     visible={this.state.isModalOpen}

@@ -3,7 +3,7 @@ import {Menu} from 'antd';
 import SystemPromotionComponent from './SystemPromotionComponent';
 import CalendarComponent from '../Common/CalendarComponent';
 import WaitingHomepostList from '../Common/WaitingHomepostComponent';
-import {Link, Switch, Route} from 'react-router-dom';
+import {Link, Switch, Route, Redirect} from 'react-router-dom';
 import VerifyHomepostComponent from './VerifyHomePostComponent';
 import VerifiedHomepostList from '../Common/VerifiedPostListComponent';
 import Header from '../Header/HostHeader';
@@ -22,10 +22,10 @@ class AdminManager extends Component{
         <Menu
           defaultSelectedKeys={['1']}
           mode= "horizontal"
-          theme= 'light'
+          // theme= 'light'
           style={{
             textAlign: 'center',
-            background: "#d6ebff"
+            boxShadow: '0 8px 12px rgba(0,0,0,.1)',
           }}
         >
           <Menu.Item key="1" style={{Right: '20px'}}>
@@ -71,7 +71,8 @@ class AdminManager extends Component{
           <Route path="/admin/calendars" component={CalendarComponent}/>
           <Route path="/admin/waiting-posts" component={WaitingHomepostList}/>
           <Route path="/admin/verified-posts" component={VerifiedHomepostList}/>
-          <Route path='/admin/:homepostId' component={VerifyHomepostComponent} />
+          <Route path='/admin/:homepostId' component={VerifyHomepostComponent}/>
+          <Redirect to="/admin/promotions"/>
         </Switch>
         </div>
         : <div/>
