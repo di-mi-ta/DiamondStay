@@ -65,12 +65,8 @@ class MainPage extends React.Component {
     this.updatePolicyGlideSize = this.updatePolicyGlideSize.bind(this);
   }
 
-  componentWillMount(){
-    this.props.fetchHomeposts();
-    this.props.fetchSystemPromos();
-  }
-
   render() {
+    console.log(this.props.homeposts);
     return (
       <div className="mainPage container-fluid">
         <div className="title">
@@ -122,19 +118,20 @@ class MainPage extends React.Component {
           <p>Cập nhật ưu đãi từ Diamond Stay để trải nghiệm chỗ ở xa hoa với giá tốt nhất</p>
           {JSON.stringify(this.props.promotions.systemPromos)}
         </div>
-        <GlideSlide ref={this.policyRef} className="currentPolicy" data={{
-          hasControl: true,
-          // list promos: this.props.promotions.systemPromos
-          itemList: this.currentPolicies.map(promo => <ImageCard data={promo}/>),
-          options: {
-            type: 'carousel',
-            startAt: 0,
-            perView: 3,
-            gap: 20,
-            focusAt: 'center',
-            autoplay: 5000
-          }
-        }} />
+        <GlideSlide className="currentPolicy"
+          hasControl = {true}
+          options = {this.state.policyGlideOptions}
+          itemList = {
+            (
+              (this.props.promotions.systemPromos.length > 0)?
+              this.props.promotions.systemPromos.map(promo => 
+                ({
+                  image: baseUrl + promo.logoPath
+                })
+              ): this.currentPolicies
+            ).map(policy => <ImageCard data={policy}/>
+          )}
+        />
       </div>
     );
   }
