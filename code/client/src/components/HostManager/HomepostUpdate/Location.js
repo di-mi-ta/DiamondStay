@@ -38,8 +38,8 @@ const LocationForm = Form.create({ name:'desc'})(
             <Form  layout="vertical">
               <Form.Item label="Chọn tỉnh, thành phố">
                 {getFieldDecorator('province', {
-                  initialValue: this.props.homeposts.currentHomepost.location !== null ? 
-                                    this.props.homeposts.currentHomepost.location.province: '',
+                  initialValue: this.props.homeposts.currentHomepost ? 
+                                this.props.homeposts.currentHomepost.location.province: '',
                   rules: [{required: true, message: "Trường này không được để trống!!!"}],
                 })(
                     <Select>
@@ -50,8 +50,8 @@ const LocationForm = Form.create({ name:'desc'})(
               </Form.Item>
               <Form.Item label="Chọn quận, huyện">
                 {getFieldDecorator('district', {
-                  initialValue: this.props.homeposts.currentHomepost.location !== null ? 
-                                  this.props.homeposts.currentHomepost.location.district: '',
+                  initialValue: this.props.homeposts.currentHomepost ? 
+                                this.props.homeposts.currentHomepost.location.district: '',
                   rules: [{required: true, message: "Trường này không được để trống!!!"}],
                 })(
                     <Select>
@@ -62,8 +62,8 @@ const LocationForm = Form.create({ name:'desc'})(
               </Form.Item>
               <Form.Item label="Chọn xã, phường">
                 {getFieldDecorator('ward', {
-                  initialValue: this.props.homeposts.currentHomepost.location !== null ? 
-                        this.props.homeposts.currentHomepost.location.ward: '',
+                  initialValue: this.props.homeposts.currentHomepost ? 
+                                this.props.homeposts.currentHomepost.location.ward: '',
                   rules: [{ required: true, message: "Trường này không được để trống!!!"}],
                 })(
                   <Select>
@@ -74,7 +74,8 @@ const LocationForm = Form.create({ name:'desc'})(
               </Form.Item>
               <Form.Item label="Số nhà, đường">
                 {getFieldDecorator('homeNumber', {
-                  initialValue: this.props.homeposts.currentHomepost.homeNumber,
+                  initialValue: this.props.homeposts.currentHomepost ? 
+                                this.props.homeposts.currentHomepost.homeNumber : '',
                   rules: [{ required: false}],
                 })(<Input />)}
               </Form.Item>

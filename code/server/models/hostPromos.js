@@ -1,13 +1,6 @@
 var mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const homeAppliedPromotion = new Schema({
-    home: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'HomePosts'
-    }
-})
-
 const promotionSchema = new Schema({
     name: {
         type: String,
@@ -33,7 +26,10 @@ const promotionSchema = new Schema({
         type: String,
         required: true
     },
-    homeposts: [homeAppliedPromotion]
+    homeposts: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'HomePosts'
+    }]
 },{
     timestamps: true
 })

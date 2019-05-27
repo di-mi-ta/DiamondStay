@@ -16,7 +16,8 @@ const PriceForm = Form.create({ name:'desc'})(
             <Form  layout="vertical">
               <Form.Item label="Giá cơ bản">
                 {getFieldDecorator('weekdayPrice', {
-                  initialValue: this.props.homeposts.currentHomepost.weekdayPrice,
+                  initialValue: this.props.homeposts.currentHomepost ? 
+                                this.props.homeposts.currentHomepost.weekdayPrice : '',
                   rules: [{ required: true, message: 'Trường này không được bỏ trống !!!' }],
                 })(
                     <InputNumber min='0' style={{width: '100%'}}/>
@@ -25,7 +26,8 @@ const PriceForm = Form.create({ name:'desc'})(
               </Form.Item>
               <Form.Item label="Giá cuối tuần">
                 {getFieldDecorator('weekendPrice', {
-                  initialValue: this.props.homeposts.currentHomepost.weekendPrice,
+                  initialValue: this.props.homeposts.currentHomepost ? 
+                                this.props.homeposts.currentHomepost.weekendPrice : '',
                   rules: [{ required: true, message: 'Trường này không được bỏ trống !!!' }],
                 })(<Input />)}
               </Form.Item>
@@ -47,7 +49,8 @@ const CurrencyUnitForm = Form.create({name: 'desc'})(
             <Form  layout="vertical">
                <Form.Item label="Đơn vị tiền tệ:">
                 {getFieldDecorator('currencyUnit', {
-                  initialValue: this.props.homeposts.currentHomepost.currencyUnit,
+                  initialValue: this.props.homeposts.currentHomepost ? 
+                                this.props.homeposts.currentHomepost.currencyUnit : '',
                   rules: [{ required: true, message: 'Trường này không được bỏ trống !!!' }],
                 })(
                     <Select>

@@ -113,9 +113,13 @@ class PromotionCompoment extends Component {
     }];
 
     onEditBtnClick = () => {
+        let lstHomeposts = this.props.homeposts.homeposts.filter(homepost =>
+            homepost.owner === this.props.auth.user.username)
+        let lst = lstHomeposts.map(x=>(<Option key={x._id}>{x.name}</Option>));
         this.setState({
+            lstHomeposts: lst,
             isModalEditOpen: true,
-        })
+        });
     }
 
     onConfirmDeleteClick = (promo) => {
@@ -160,15 +164,11 @@ class PromotionCompoment extends Component {
             dateEnd: this.state.currentPromo.dateEnd,
             value: this.state.currentPromo.value,
             creator: this.props.auth.user.username,
-            homeposts: []
+            homeposts: this.state.currentPromo.homeposts
         }
         this.props.fetchCreateHostPromo(promo);
-        if (true){
-            message.success('Bạn đã thêm một khuyến mại mới thành công!');
-        } else {
-            message.error('Thêm khuyến mại thất bại!');
-        }
-      }
+        message.success('Bạn đã thêm một khuyến mại mới thành công!');
+    }
 
     handleCancel = (e) => {
         this.setState({
@@ -185,20 +185,18 @@ class PromotionCompoment extends Component {
         }
 
         return(
-            <div style={{padding: 50, background: '#f1f1f1'}}>
-                <div style={{display:'row'}}>
+            <div style={{padding: 30, background: '#f1f1f1', minHeight: '90%'}}>
                 <h2> <b> Quản lí khuyến mại </b></h2>
-                    <Button type="primary" icon="plus" ghost
-                        onClick = {this.onAddPromoBtnClick}
-                    >
+                <Divider style={{background: '#cac6c6'}}/>
+                <Button type="primary" icon="plus" ghost
+                    onClick = {this.onAddPromoBtnClick}
+                >
                     Thêm khuyến mại
                 </Button>
-                </div>
                 <Card style={{
-                            boxShadow: "1px 3px 1px #9E9E9E",
-                            borderRadius: "10px",
-                            minHeight: '300px',
-                            marginTop: '30px'
+                                boxShadow: "1px 3px 1px #9E9E9E",
+                                minHeight: '300px',
+                                marginTop: 20
                             }}>
                     <Table columns={this.columns}
                         dataSource={this.props.promotions.hostPromotions}
@@ -242,6 +240,7 @@ class PromotionCompoment extends Component {
                                 placeholder="Chọn nhà bạn muốn áp dụng khuyến mãi"
                                 style={{ width: '100%' }}
                                 onChange={this.handleHomepostChange}
+                                value={this.state.currentPromo.homeposts}
                                 allowClear
                             >
                                 {this.state.lstHomeposts}
@@ -296,6 +295,8 @@ class PromotionCompoment extends Component {
                             allowClear
                             name="homeposts"
                             placeholder='Nhấn vào để xem'
+                            value={this.state.currentPromo.homeposts}
+                            onChange={this.handleHomepostChange}
                         >
                             {this.state.lstHomeposts}
                         </Select>

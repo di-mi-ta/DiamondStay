@@ -27,11 +27,13 @@ class Main extends Component {
           <Route path="/host" component={HostManager} />
           <Route path="/admin" component={AdminManager} />
           <Route path="/room/:homepostId" component={House} />
-          <Route path="/properties"
-            component={() => (
+          <Route path="/properties/:homepostId"
+            component={({match}) => (
               <div>
                 <HostHeader />
-                <UpdatedHomepostManager />
+                <UpdatedHomepostManager 
+                  match={match}
+                />
               </div>
             )}
           />

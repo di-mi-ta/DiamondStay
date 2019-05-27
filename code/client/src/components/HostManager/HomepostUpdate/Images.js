@@ -33,11 +33,14 @@ class Images extends Component {
       this.state = {
           previewVisible: false,
           previewImage: '',
-          lstImgs: this.props.homeposts.currentHomepost.image,
-          fileList: formFileLst(this.props.homeposts.currentHomepost.image)
+          lstImgs: this.props.homeposts.currentHomepost ? this.props.homeposts.currentHomepost.image: [],
+          fileList: this.props.homeposts.currentHomepost ? formFileLst(this.props.homeposts.currentHomepost.image) : []
       }
       this.onUpdateBtnClick = this.onUpdateBtnClick.bind(this);
       this.uploadFile = this.uploadFile.bind(this);
+    }
+
+    componentWillMount(){
     }
 
     uploadFile = (file, idx, arr) => {
@@ -143,6 +146,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => ({
   fetchUpdateHomepost: (homepost) => {dispatch(actions.fetchUpdateHomepost(homepost))},
   updateCurrentHomepost: (homepost) => {dispatch(actions.updateCurrentHomepost(homepost))},
+  fetchHomepostById: (homepostId) => {dispatch(actions.fetchHomepostById(homepostId))}
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Images);

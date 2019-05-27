@@ -14,7 +14,8 @@ const FacilityForm = Form.create({ name: 'facilities' })(
             <Form  layout="vertical">
               <Form.Item label={<h4><b>Dành cho gia đình</b></h4>}>
                 {getFieldDecorator('forFamily', {
-                  initialValue: this.props.homeposts.currentHomepost.forFamily,
+                  initialValue: this.props.homeposts.currentHomepost ?
+                                this.props.homeposts.currentHomepost.forFamily : '',
                   rules: [{ required: false}],
                 })(
                   <CheckboxGroup
@@ -25,7 +26,8 @@ const FacilityForm = Form.create({ name: 'facilities' })(
               <Divider/>
               <Form.Item label={<h4><b>Nhà bếp</b></h4>}>
                 {getFieldDecorator('kitchenFacs', {
-                  initialValue: this.props.homeposts.currentHomepost.kitchenFacs,
+                  initialValue: this.props.homeposts.currentHomepost ?
+                                this.props.homeposts.currentHomepost.kitchenFacs : '',
                   rules: [{ required: false}],
                 })(
                   <CheckboxGroup
@@ -36,7 +38,8 @@ const FacilityForm = Form.create({ name: 'facilities' })(
               <Divider/>
               <Form.Item label={<h4><b>Hoạt động giải trí</b></h4>}>
                 {getFieldDecorator('funnyActs', {
-                  initialValue: this.props.homeposts.currentHomepost.funnyActs,
+                  initialValue: this.props.homeposts.currentHomepost ? 
+                                this.props.homeposts.currentHomepost.funnyActs : '',
                   rules: [{ required: false}],
                 })(
                   <CheckboxGroup
@@ -47,7 +50,8 @@ const FacilityForm = Form.create({ name: 'facilities' })(
               <Divider/>
               <Form.Item label={<h4><b>Tiện ích phòng</b></h4>}>
                 {getFieldDecorator('roomFacs', {
-                  initialValue: this.props.homeposts.currentHomepost.roomFacs,
+                  initialValue: this.props.homeposts.currentHomepost ? 
+                                this.props.homeposts.currentHomepost.roomFacs : '',
                   rules: [{ required: false}],
                 })(
                   <CheckboxGroup
@@ -58,7 +62,8 @@ const FacilityForm = Form.create({ name: 'facilities' })(
               <Divider/>
               <Form.Item label={<h4><b>Tiện ích</b></h4>}>
                 {getFieldDecorator('convenience', {
-                  initialValue: this.props.homeposts.currentHomepost.convenience,
+                  initialValue: this.props.homeposts.currentHomepost ? 
+                                this.props.homeposts.currentHomepost.convenience : '',
                   rules: [{ required: false}],
                 })(
                   <CheckboxGroup
@@ -71,7 +76,8 @@ const FacilityForm = Form.create({ name: 'facilities' })(
               <Divider/>
               <Form.Item label={<h4><b>Tiện ích nổi bật</b></h4>}>
                 {getFieldDecorator('highlightFacs', {
-                  initialValue: this.props.homeposts.currentHomepost.highlightFacs,
+                  initialValue: this.props.homeposts.currentHomepost ? 
+                                this.props.homeposts.currentHomepost.highlightFacs : '',
                   rules: [{ required: false}],
                 })(
                   <CheckboxGroup
