@@ -6,18 +6,23 @@ import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from 'react-datepicker';
 import {Dropdown,DropdownToggle,DropdownMenu,DropdownItem, Collapse} from 'reactstrap';
 import PropTypes from 'prop-types';
+import { Link, withRouter } from 'react-router-dom';
+import queryString from 'query-string';
+import moment from 'moment';
+import { time as timeSerializer } from '../../utils/serialize';
 
 class SearchBox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      homestayName: undefined,
       dateCome: undefined,
       dateLeave: undefined,
       numGuests: 1,
       numChildren: 0,
       priceValue: 1,
       homeStayOpen: false,
-      homeStayValue: "Chọn loại HomeStay",
+      homeStayValue: undefined,
       kitchenChecked: false,
       childrenChecked: false,
       noSmokingChecked: false,
@@ -49,15 +54,76 @@ class SearchBox extends React.Component {
       isOpen: PropTypes.bool,
       toggle: PropTypes.func,
     };
-    
+
     DropdownToggle.propTypes = {
       caret: PropTypes.bool,
       onClick: PropTypes.func
     };
   }
 
+  componentDidMount() {
+    // this component is renderred in 2 urls: / & /search?query=...
+    if (this.props.location.pathname === '/search') {
+      const query = this.getQueryObject();
+      console.log('mount', query);
+      this.setState(query);
+    }
+  }
+
+  handleSearch = () => {
+    // TODO use utils/api/homepostSearch
+    this.getQueryString();
+  }
+
+  // convert states to url's query string
+  getQueryString = () => {
+      const query = {...this.state};
+
+      // Delete unwanted values
+      delete query.criteriaOpen;
+      const dontCareValues = [
+        undefined, // text values
+        '', // text values
+        false,  // check boxes
+      ];
+      for (let prop in query) {
+        if (dontCareValues.indexOf(query[prop]) !== -1) // this props contains dont care value
+            delete query[prop];
+      }
+
+      // Reformat dateCome & dateLeave
+      if (query.dateCome !== undefined) {
+          query.dateCome = moment(query.dateCome).format('DD-MM-YYYY');
+      }
+
+      if (query.dateLeave !== undefined) {
+          query.dateLeave = moment(query.dateLeave).format('DD-MM-YYYY');
+      }
+      return queryString.stringify(query);
+  };
+
+  // convert query string in url to object to pass to setState
+  getQueryObject = () => {
+    const query = queryString.parse(this.props.location.search);
+    console.log(query);
+    // Deserialize date
+    if (query.dateCome)
+      query.dateCome = moment(query.dateCome, 'DD-MM-YYYY').toDate();
+    if (query.dateLeave)
+      query.dateLeave = moment(query.dateLeave, 'DD-MM-YYYY').toDate();
+
+    return query;
+  }
+
+  handleHomepostNameChanged = (e) => {
+    e.persist();
+    this.setState({
+      homestayName: e.target.value
+    });
+  }
+
   handleNumChidlrenChanged(value){
-    if(value.target.value <= 5 && value.target.value >= 0)
+    // if(value.target.value <= 5 && value.target.value >= 0)
       this.setState({
         numChildren: value.target.value
       });
@@ -77,6 +143,8 @@ class SearchBox extends React.Component {
   }
 
   handleDateComeChange(date) {
+    console.log('Is moment: ', date instanceof moment);
+    console.log('Is Date: ', date instanceof Date)
     this.setState({
       dateCome: date
     });
@@ -94,9 +162,10 @@ class SearchBox extends React.Component {
     }));
   }
 
-  handleHomeStayValue(value){
+  handleHomeStayValue(e){
+    e.persist();
     this.setState({
-      homeStayValue: value.target.innerText
+      homeStayValue: e.target.innerText
     });
   }
 
@@ -154,14 +223,16 @@ class SearchBox extends React.Component {
       niceViewChecked: !this.state.niceViewChecked
     });
   }
+
   render() {
+    console.log('Render', this.state.dateCome);
     return (
       <div className="searchBox" ref={this.ref}>
         <div className="searchBox-container container-fluid">
           <div className="where inputBox">
             <div className="inputField">Nơi bạn muốn đến</div>
             <div className="inputContent">
-              <input type="text" placeholder="Tìm kiếm"/>
+              <input type="text" placeholder="Tên homestay" value={this.state.homestayName} onChange={this.handleHomepostNameChanged} />
             </div>
             <img src="https://www.luxstay.com/icons/earth.svg"></img>
           </div>
@@ -170,10 +241,16 @@ class SearchBox extends React.Component {
             <div className="inputContent">
               <DatePicker
                 selected={this.state.dateCome}
+                placeholderText='Ngày đến'
+                dateFormat='dd/MM/yyyy'
+                minDate={new Date()}
                 onChange={this.handleDateComeChange}
               />
               <DatePicker
                 selected={this.state.dateLeave}
+                dateFormat='dd/MM/yyyy'
+                minDate={new Date()}
+                placeholderText='Ngày đi'
                 onChange={this.handleDateLeaveChange}
               />
             </div>
@@ -206,7 +283,7 @@ class SearchBox extends React.Component {
             <div className="inputField">Loại HomeStay?</div>
             <div className="inputContent">
               <Dropdown isOpen={this.state.homeStayOpen} toggle={this.homeStayToggle}>
-                <DropdownToggle caret>{this.state.homeStayValue}</DropdownToggle>
+                <DropdownToggle caret>{this.state.homeStayValue || 'Chọn loại homestay'}</DropdownToggle>
                 <DropdownMenu>
                   <DropdownItem onClick={this.setHomeStayValue}>Căn hộ dịch vụ</DropdownItem>
                   <DropdownItem onClick={this.setHomeStayValue}>Biệt thự</DropdownItem>
@@ -238,15 +315,13 @@ class SearchBox extends React.Component {
             <img src="http://www.clker.com/cliparts/5/d/c/2/12456876931527240042Soeb_Plain_Arrow_6.svg.hi.png"></img>
           </div>
         </div>
-        <button type="button" className="btn">Tìm kiếm</button>
+        <button type="button" className="btn" onClick={this.handleSearch}>
+          <Link to={`/search?${this.getQueryString()}`}>
+            Tìm kiếm
+          </Link>
+        </button>
       </div>
     );
   }
-
-  componentDidMount() {
-    const dateInputs = this.ref.current.querySelector('.calendar > .inputContent').childNodes;
-    dateInputs[0].querySelector('input').placeholder = "Ngày đến";
-    dateInputs[1].querySelector('input').placeholder = "Ngày đi";
-  }
 }
-export default SearchBox;
+export default withRouter(SearchBox);

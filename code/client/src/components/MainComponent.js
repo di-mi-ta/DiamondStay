@@ -9,6 +9,7 @@ import NewBookingPage from "./single-pages/NewBookingPage";
 import UpdatedHomepostManager from './HostManager/HomepostUpdate/UpdatedManager';
 import HostHeader from './Header/HostHeader'
 import NormalUserMessageInbox from './single-pages/NormalUserMessageInbox';
+import SearchResults from './single-pages/SearchResults';
 import {connect} from 'react-redux';
 import * as actions from '../redux/ActionCreators';
 import {Divider} from 'antd';
@@ -25,6 +26,7 @@ class Main extends Component {
       <div>
         <Switch>
           <Route path="/" exact={true} component={Home} />
+          <Route path="/search" component={SearchResults} />
           <Route path="/host" component={HostManager} />
           <Route path="/admin" component={AdminManager} />
           <Route path="/room/:homepostId" component={House} />
