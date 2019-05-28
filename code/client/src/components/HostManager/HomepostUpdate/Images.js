@@ -14,8 +14,10 @@ const formFileLst = (lst) => {
   let res = []
   lst.forEach((img, idx) => {
     res.push({
-      uid: -idx-1,
-      thumbUrl: baseUrl + img
+      uid: -idx - 1,
+      thumbUrl: baseUrl + img,
+      notNeededBase64: true,
+      status: 'done'
     })
   })
   return res
@@ -27,63 +29,73 @@ const getBase64 = (img, callback) => {
   reader.readAsDataURL(img);
 }
 
+let lstImgs = []
+
 class Images extends Component {
     constructor(props){
       super(props);
       this.state = {
           previewVisible: false,
           previewImage: '',
-          lstImgs: this.props.homeposts.currentHomepost ? this.props.homeposts.currentHomepost.image: [],
+          // lstImgs: this.props.homeposts.currentHomepost ? this.props.homeposts.currentHomepost.image: [],
           fileList: this.props.homeposts.currentHomepost ? formFileLst(this.props.homeposts.currentHomepost.image) : []
       }
       this.onUpdateBtnClick = this.onUpdateBtnClick.bind(this);
       this.uploadFile = this.uploadFile.bind(this);
+      
     }
 
     uploadFile = (file, idx, arr) => {
       const url = baseUrl + 'upload';
       const formData = new FormData();
       const date = Date.now();
-      if (file.status === 'done') {
-        getBase64(file.originFileObj, imageUrl => {
-          fetch(imageUrl)
-          .then(res => res.blob())
-          .then(blob => {
-            formData.append('image', blob, date + '_' + idx + '_' + 
-                                      this.props.homeposts.currentHomepost._id + '_' + getTypeFile(file.name));
-            const config = {
-                headers: {
-                    "Content-type": "multipart/form-data",
-                }
-            }
-            post(url, formData, config)
-            .then((resp)=> {
-              let l = this.state.lstImgs
-              l.push('images/' + date + '_' + idx + '_' + 
-                                    this.props.homeposts.currentHomepost._id + '_' + getTypeFile(file.name));
-              this.setState({
-                lstImgs: l
-              });
-              if (arr.length === idx + 1){
-                const updatedHomepost = {
-                  ...this.props.homeposts.currentHomepost,
-                  image: l
-                }
-                this.props.fetchUpdateHomepost(updatedHomepost);
-                message.success('Cập nhật thành công');
-                this.props.updateCurrentHomepost(updatedHomepost);
-                this.setState({
-                  lstImgs: l
-                });
+      if (file.status === 'done'){
+        if (!file.hasOwnProperty('notNeededBase64')){
+          getBase64(file.originFileObj, imageUrl => {
+            fetch(imageUrl)
+            .then(res => res.blob())
+            .then(blob => {
+              formData.append('image', blob, date + '_' + idx + '_' + 
+                                        this.props.homeposts.currentHomepost._id + '_' + getTypeFile(file.name));
+              const config = {
+                  headers: {
+                      "Content-type": "multipart/form-data",
+                  }
               }
+              post(url, formData, config)
+              .then((resp)=> {
+                lstImgs.push('images/' + date + '_' + idx + '_' + 
+                          this.props.homeposts.currentHomepost._id + '_' + getTypeFile(file.name));
+                if (idx === arr.length - 1){
+                  const updatedHomepost = {
+                    ...this.props.homeposts.currentHomepost,
+                    image: lstImgs,
+                  }
+                  this.props.fetchUpdateHomepost(updatedHomepost);
+                  message.success('Cập nhật thành công');
+                  lstImgs = [];
+                }
+              })
             })
           })
-        })
+        }else{
+          lstImgs.push('images/' + date + '_' + idx + '_' + 
+                          this.props.homeposts.currentHomepost._id + '_' + getTypeFile(file.name));
+          if (idx === arr.length - 1){
+            const updatedHomepost = {
+              ...this.props.homeposts.currentHomepost,
+              image: lstImgs,
+            }
+            this.props.fetchUpdateHomepost(updatedHomepost);
+            message.success('Cập nhật thành công');
+            lstImgs = [];
+          }
+        }
       }
     }
 
     onUpdateBtnClick = () => {
-      alert(JSON.stringify(this.state.fileList))
+      this.state.fileList.forEach(this.uploadFile);
       if (this.state.fileList.length === 0){
         const updatedHomepost = {
           ...this.props.homeposts.currentHomepost,
@@ -91,9 +103,8 @@ class Images extends Component {
         }
         this.props.fetchUpdateHomepost(updatedHomepost);
         message.success('Cập nhật thành công');
-        this.props.updateCurrentHomepost(updatedHomepost);
+        lstImgs = [];
       }
-      this.state.fileList.forEach(this.uploadFile);
     }
 
     handleCancel = () => {

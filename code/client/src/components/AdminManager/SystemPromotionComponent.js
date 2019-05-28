@@ -63,6 +63,7 @@ class SystemPromotionCompoment extends Component {
           this.setState({ loading: true });
           return;
         }
+
         if (info.file.status === 'done') {
           // Get this url from response in real world.
           getBase64(info.file.originFileObj, imageUrl =>
@@ -163,7 +164,7 @@ class SystemPromotionCompoment extends Component {
                         style={{ color: '#DC143C' }} theme="filled" /> </Button>
              </Popconfirm>
             <Divider type="vertical"/>
-            <Button ghost onClick={()=> {this.setState({currentPromo: record}); this.onEditBtnClick()}}>
+            <Button ghost onClick={()=> {this.setState({currentPromo: record, imageUrl: baseUrl + record.logoPath}); this.onEditBtnClick()}}>
                 <Icon type="edit" style={{ color: '#FF8C00' }}
                     theme="filled"/>
             </Button>
@@ -217,7 +218,8 @@ class SystemPromotionCompoment extends Component {
 
     handleCancelEdit = () => {
         this.setState({
-            isModalEditOpen: false
+            isModalEditOpen: false,
+            imageUrl: ''
         });
     }
 
@@ -252,6 +254,8 @@ class SystemPromotionCompoment extends Component {
     handleCancel = (e) => {
         this.setState({
             isModalOpen: false,
+            imageUrl: '',
+            currentPromo: ''
         });
     }
 
@@ -328,15 +332,15 @@ class SystemPromotionCompoment extends Component {
                             label="Giá trị booking tối thiểu"
                             {...formItemLayout}
                         >
-                            <InputNumber min='0' max='100'  onChange={this.handleMinValueChange}/>
-                            VND
+                            <InputNumber min='0' onChange={this.handleMinValueChange}/>
+                            {'  VND'}
                         </Form.Item>
                         <Form.Item
                             label="Giá trị khuyến mãi"
                             {...formItemLayout}
                         >
                             <InputNumber min='0' onChange={this.handleValueChange}/>
-                            VND
+                            {'  VND'}
                         </Form.Item>
                         <Form.Item
                             label="Số lần sử dụng tối đa"
