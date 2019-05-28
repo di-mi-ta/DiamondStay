@@ -9,89 +9,70 @@ import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
 import queryString from 'query-string';
 import moment from 'moment';
-import { time as timeSerializer } from '../../utils/serialize';
+import update from 'immutability-helper';
 
 class SearchBox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      homestayName: undefined,
-      dateCome: undefined,
-      dateLeave: undefined,
-      numGuests: 1,
-      numChildren: 0,
-      priceValue: 1,
-      homeStayOpen: false,
-      homeStayValue: undefined,
-      kitchenChecked: false,
-      childrenChecked: false,
-      noSmokingChecked: false,
-      barAvailableChecked: false,
-      niceViewChecked: false,
-      poolAvailableChecked: false,
-      gymAvailableChecked: false,
-      wifiAvailableChecked: false
+      search: {
+        homestayName: undefined,
+        dateCome: undefined,  // Date | undefined
+        dateLeave: undefined, // Date | undefined
+        numGuests: 1,
+        numChildren: 0,
+        price: 1,
+        homestayType: undefined,
+        kitchenChecked: false,
+        childrenChecked: false,
+        noSmokingChecked: false,
+        barAvailableChecked: false,
+        niceViewChecked: false,
+        poolAvailableChecked: false,
+        gymAvailableChecked: false,
+        wifiAvailableChecked: false,
+      },
+      ui: {
+        homestayTypeDropdownOpen: false,        // homestay box
+        criteriaDropdownOpen: false,        // critera box
+      }
     };
-    this.handleDateComeChange = this.handleDateComeChange.bind(this);
-    this.handleDateLeaveChange = this.handleDateLeaveChange.bind(this);
     this.ref = React.createRef();
-    this.homeStayToggle = this.handleHomeStayToggle.bind(this);
-    this.setHomeStayValue = this.handleHomeStayValue.bind(this);
-    this.criteriaToggle = this.handleCriteriaToggle.bind(this);
-    this.keepingDropdown = this.handleKeepingDropdown.bind(this);
-    this.kitchenChecked = this.handleKitchenChecked.bind(this);
-    this.childrenChecked = this.handleChildrenChecked.bind(this);
-    this.noSmokingChecked = this.handlenoSmokingChecked.bind(this);
-    this.barAvailableChecked = this.handleBarChecked.bind(this);
-    this.niceViewChecked = this.handleNiceViewChecked.bind(this);
-    this.poolAvailableChecked = this.handlePoolChecked.bind(this);
-    this.gymAvailableChecked = this.handleGymChecked.bind(this);
-    this.wifiAvailableChecked = this.handleWifiChecked.bind(this);
-    this.changeValue = this.handleValueChanged.bind(this);
-    this.numGuestsChanged = this.handleNumGuestsChanged.bind(this);
-    this.numChildrenChanged = this.handleNumChidlrenChanged.bind(this);
-    Dropdown.propTypes = {
-      isOpen: PropTypes.bool,
-      toggle: PropTypes.func,
-    };
-
-    DropdownToggle.propTypes = {
-      caret: PropTypes.bool,
-      onClick: PropTypes.func
-    };
   }
 
   componentDidMount() {
     // this component is renderred in 2 urls: / & /search?query=...
     if (this.props.location.pathname === '/search') {
-      const query = this.getQueryObject();
-      console.log('mount', query);
-      this.setState(query);
+      const query = this.convertQueryStringToState();
+      this.setState({
+        search: {
+          ...this.state.search,
+          ...query,
+        }
+      });
     }
   }
 
   handleSearch = () => {
     // TODO use utils/api/homepostSearch
-    this.getQueryString();
+    this.convertStateToQueryString();
   }
 
-  // convert states to url's query string
-  getQueryString = () => {
-      const query = {...this.state};
+  convertStateToQueryString = () => {
+      const query = {...this.state.search};
 
-      // Delete unwanted values
-      delete query.criteriaOpen;
+      // Delete default values
       const dontCareValues = [
-        undefined, // text values
-        '', // text values
-        false,  // check boxes
+        undefined,  // text values
+        '',         // text values
+        false,      // checkboxes
       ];
       for (let prop in query) {
         if (dontCareValues.indexOf(query[prop]) !== -1) // this props contains dont care value
             delete query[prop];
       }
 
-      // Reformat dateCome & dateLeave
+      // Serialize dateCome & dateLeave
       if (query.dateCome !== undefined) {
           query.dateCome = moment(query.dateCome).format('DD-MM-YYYY');
       }
@@ -102,10 +83,10 @@ class SearchBox extends React.Component {
       return queryString.stringify(query);
   };
 
-  // convert query string in url to object to pass to setState
-  getQueryObject = () => {
-    const query = queryString.parse(this.props.location.search);
-    console.log(query);
+  convertQueryStringToState = () => {
+    const queryInUrl = this.props.location.search;
+    const query = queryString.parse(queryInUrl);
+
     // Deserialize date
     if (query.dateCome)
       query.dateCome = moment(query.dateCome, 'DD-MM-YYYY').toDate();
@@ -117,122 +98,91 @@ class SearchBox extends React.Component {
 
   handleHomepostNameChanged = (e) => {
     e.persist();
-    this.setState({
-      homestayName: e.target.value
-    });
-  }
+    this.setState(update(this.state, {
+      search: {
+        homestayName: {
+          $set: e.target.value
+        }
+      }
+    }));
+  };
 
-  handleNumChidlrenChanged(value){
-    // if(value.target.value <= 5 && value.target.value >= 0)
-      this.setState({
-        numChildren: value.target.value
-      });
-  }
+  handleChangeWithEvent = (prop, event) => {
+    this.setState(update(this.state, {
+      search: {
+        [prop]: {
+          $set: event.target.value
+        }
+      }
+    }));
+  };
 
-  handleNumGuestsChanged(value){
-    if(value.target.value <= 10 && value.target.value >= 0)
-      this.setState({
-        numGuests: value.target.value
-      });
-  }
+  handleDateChange = (prop, newDate) => {
+    this.setState(update(this.state, {
+      search: {
+        [prop]: {
+          $set: newDate
+        }
+      }
+    }));
+  };
 
-  handleValueChanged(value){
-    this.setState({
-      priceValue: value.target.value
-    });
-  }
+  handleCheckboxChange = (prop) => {
+    this.setState(prevState => update(prevState, {
+      search: {
+        [prop]: {
+          $apply: oldVal => !oldVal
+        }
+      }
+    }))
+  };
 
-  handleDateComeChange(date) {
-    console.log('Is moment: ', date instanceof moment);
-    console.log('Is Date: ', date instanceof Date)
-    this.setState({
-      dateCome: date
-    });
-  }
+  handleToggle = (prop) => {
+    this.setState(prevState => update(prevState, {
+      ui: {
+        [prop]: {
+          $apply: oldVal => !oldVal
+        }
+      }
+    }))
+  };
 
-  handleDateLeaveChange(date) {
-    this.setState({
-      dateLeave: date
-    });
-  }
-
-  handleHomeStayToggle() {
-    this.setState(prevState => ({
-      homeStayOpen: !prevState.homeStayOpen
+  handleHomestayTypeChanged = (e) => {
+    this.setState(update(this.state, {
+      search: {
+        homestayType: {
+          $set: e.target.innerText
+        }
+      }
     }));
   }
 
-  handleHomeStayValue(e){
-    e.persist();
-    this.setState({
-      homeStayValue: e.target.innerText
-    });
-  }
+  keepDropdown = (prop) => {
+    this.handleCheckboxChange(prop);
+    this.handleToggle('criteriaDropdownOpen');
+  };
 
-  handleCriteriaToggle(){
-    this.setState(prevState => ({
-      criteriaOpen: !prevState.criteriaOpen
-    }));
-  }
-
-  handleKeepingDropdown(){
-    this.setState({
-      criteriaOpen: !this.state.criteriaOpen
-    });
-  }
-
-  handleKitchenChecked(){
-    this.setState({
-      kitchenChecked: !this.state.kitchenChecked
-    });
-  }
-
-  handleChildrenChecked(){
-    this.setState({
-      childrenChecked: !this.state.childrenChecked
-    });
-  }
-  handlenoSmokingChecked(){
-    this.setState({
-      noSmokingChecked: !this.state.noSmokingChecked
-    });
-  }
-  handleBarChecked(){
-    this.setState({
-      barAvailableChecked: !this.state.barAvailableChecked
-    });
-  }
-  handlePoolChecked(){
-    this.setState({
-      poolAvailableChecked: !this.state.poolAvailableChecked
-    });
-  }
-  handleGymChecked(){
-    this.setState({
-      gymAvailableChecked: !this.state.gymAvailableChecked
-    });
-  }
-  handleWifiChecked(){
-    this.setState({
-      wifiAvailableChecked: !this.state.wifiAvailableChecked
-    });
-  }
-
-  handleNiceViewChecked(){
-    this.setState({
-      niceViewChecked: !this.state.niceViewChecked
-    });
-  }
+  MyDropdownCheckbox = ({ label, prop }) => (
+    <DropdownItem onClick={() => this.keepDropdown(prop)}>
+      {label}
+      <input
+        type='checkbox'
+        checked={this.state.search[prop]}
+        onChange={() => this.handleCheckboxChange(prop)}
+        style={{ marginLeft: '5px' }}
+      />
+    </DropdownItem>
+  );
 
   render() {
-    console.log('Render', this.state.dateCome);
+    const MyDropdownCheckbox = this.MyDropdownCheckbox;
     return (
       <div className="searchBox" ref={this.ref}>
         <div className="searchBox-container container-fluid">
           <div className="where inputBox">
             <div className="inputField">Nơi bạn muốn đến</div>
             <div className="inputContent">
-              <input type="text" placeholder="Tên homestay" value={this.state.homestayName} onChange={this.handleHomepostNameChanged} />
+              <input type="text" placeholder="Tên homestay" value={this.state.search.homestayName} onChange={this.handleHomepostNameChanged} />
             </div>
             <img src="https://www.luxstay.com/icons/earth.svg"></img>
           </div>
@@ -240,18 +190,18 @@ class SearchBox extends React.Component {
             <div className="inputField">Chọn lịch</div>
             <div className="inputContent">
               <DatePicker
-                selected={this.state.dateCome}
+                selected={this.state.search.dateCome}
                 placeholderText='Ngày đến'
                 dateFormat='dd/MM/yyyy'
                 minDate={new Date()}
-                onChange={this.handleDateComeChange}
+                onChange={newDate => this.handleDateChange('dateCome', newDate)}
               />
               <DatePicker
-                selected={this.state.dateLeave}
+                selected={this.state.search.dateLeave}
                 dateFormat='dd/MM/yyyy'
                 minDate={new Date()}
                 placeholderText='Ngày đi'
-                onChange={this.handleDateLeaveChange}
+                onChange={newDate => this.handleDateChange('dateLeave', newDate)}
               />
             </div>
             <img src="https://www.luxstay.com/icons/moon.svg"></img>
@@ -259,22 +209,22 @@ class SearchBox extends React.Component {
           <div className="numOfGuests inputBox">
             <div className="inputField">Số khách</div>
             <div className="inputContent">
-              <input type="number" value={this.state.numGuests} onChange={this.numGuestsChanged}/>
+              <input type="number" value={this.state.search.numGuests} onChange={e => this.handleChangeWithEvent('numGuests', e)}/>
             </div>
             <img src="https://png.pngtree.com/svg/20170518/274aed119e.svg"></img>
           </div>
           <div className="numOfChildren inputBox">
             <div className="inputField">Số trẻ em</div>
             <div className="inputContent">
-              <input type="number" value={this.state.numChildren} onChange={this.numChildrenChanged}/>
+              <input type="number" value={this.state.search.numChildren} onChange={e => this.handleChangeWithEvent('numChildren', e)}/>
             </div>
             <img src="https://static.thenounproject.com/png/257710-200.png"></img>
           </div>
 
           <div className="priceValue inputBox">
-            <div className="inputField">Tối đa {this.state.priceValue}$ / đêm</div>
+            <div className="inputField">Tối đa {this.state.search.price}$ / đêm</div>
             <div className="inputContent">
-              <input type="range" name="weight" min="10" max="100000" value={this.state.priceValue} onChange={this.changeValue} step="10"></input>
+              <input type="range" name="weight" min="10" max="2000" value={this.state.search.price} onChange={e => this.handleChangeWithEvent('price', e)} step="10"></input>
             </div>
             <img src="https://images.vexels.com/media/users/3/135829/isolated/preview/1a857d341d8b6dd31426d6a62a8d9054-dollar-coin-currency-icon-by-vexels.png"></img>
           </div>
@@ -282,13 +232,15 @@ class SearchBox extends React.Component {
           <div className="typeOfHomeStay inputBox">
             <div className="inputField">Loại HomeStay?</div>
             <div className="inputContent">
-              <Dropdown isOpen={this.state.homeStayOpen} toggle={this.homeStayToggle}>
-                <DropdownToggle caret>{this.state.homeStayValue || 'Chọn loại homestay'}</DropdownToggle>
+              <Dropdown
+                isOpen={this.state.ui.homestayTypeDropdownOpen}
+                toggle={() => this.handleToggle('homestayTypeDropdownOpen')}>
+                <DropdownToggle caret>{this.state.search.homestayType || 'Chọn loại homestay'}</DropdownToggle>
                 <DropdownMenu>
-                  <DropdownItem onClick={this.setHomeStayValue}>Căn hộ dịch vụ</DropdownItem>
-                  <DropdownItem onClick={this.setHomeStayValue}>Biệt thự</DropdownItem>
-                  <DropdownItem onClick={this.setHomeStayValue}>Nhà riêng</DropdownItem>
-                  <DropdownItem onClick={this.setHomeStayValue}>Studio</DropdownItem>
+                  <DropdownItem onClick={this.handleHomestayTypeChanged}>Căn hộ dịch vụ</DropdownItem>
+                  <DropdownItem onClick={this.handleHomestayTypeChanged}>Biệt thự</DropdownItem>
+                  <DropdownItem onClick={this.handleHomestayTypeChanged}>Nhà riêng</DropdownItem>
+                  <DropdownItem onClick={this.handleHomestayTypeChanged}>Studio</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
             </div>
@@ -298,17 +250,19 @@ class SearchBox extends React.Component {
           <div className="otherCriteria inputBox">
             <div className="inputField">Các yêu cầu khác</div>
             <div className="inputContent">
-              <Dropdown isOpen={this.state.criteriaOpen} toggle={this.criteriaToggle}>
+              <Dropdown
+                isOpen={this.state.ui.criteriaDropdownOpen}
+                toggle={() => this.handleToggle('criteriaDropdownOpen')}>
                 <DropdownToggle caret>Nhấn để xem tiêu chí</DropdownToggle>
                 <DropdownMenu>
-                  <DropdownItem onClick={this.keepingDropdown}>Có bếp? <input type="checkbox" onChange={this.kitchenChecked} checked={this.state.kitchenChecked}/></DropdownItem>
-                  <DropdownItem onClick={this.keepingDropdown}>Phù hợp với trẻ nhỏ? <input type="checkbox" onChange={this.childrenChecked} checked={this.state.childrenChecked}/></DropdownItem>
-                  <DropdownItem onClick={this.keepingDropdown}>Không hút thuốc? <input type="checkbox" onChange={this.noSmokingChecked} checked={this.state.noSmokingChecked}/></DropdownItem>
-                  <DropdownItem onClick={this.keepingDropdown}>Có bar? <input type="checkbox" onChange={this.barAvailableChecked} checked={this.state.barAvailableChecked}/></DropdownItem>
-                  <DropdownItem onClick={this.keepingDropdown}>Cảnh quan đẹp? <input type="checkbox" onChange={this.niceViewChecked} checked={this.state.niceViewChecked}/></DropdownItem>
-                  <DropdownItem onClick={this.keepingDropdown}>Có bể bơi? <input type="checkbox" onChange={this.poolAvailableChecked} checked={this.state.poolAvailableChecked}/></DropdownItem>
-                  <DropdownItem onClick={this.keepingDropdown}>Có phòng tập? <input type="checkbox" onChange={this.gymAvailableChecked} checked={this.state.gymAvailableChecked}/></DropdownItem>
-                  <DropdownItem onClick={this.keepingDropdown}>Có wifi? <input type="checkbox" onChange={this.wifiAvailableChecked} checked={this.state.wifiAvailableChecked}/></DropdownItem>
+                  <MyDropdownCheckbox label='Có bếp?' prop='kitchenChecked' />
+                  <MyDropdownCheckbox label='Phù hợp với trẻ nhỏ?' prop='childrenChecked' />
+                  <MyDropdownCheckbox label='Không hút thuốc?' prop='noSmokingChecked' />
+                  <MyDropdownCheckbox label='Có bar?' prop='barAvailableChecked' />
+                  <MyDropdownCheckbox label='Cảnh quan đẹp?' prop='niceViewChecked' />
+                  <MyDropdownCheckbox label='Có bể bơi?' prop='poolAvailableChecked' />
+                  <MyDropdownCheckbox label='Có phòng tập?' prop='gymAvailableChecked' />
+                  <MyDropdownCheckbox label='Có wifi?' prop='wifiAvailableChecked' />
                 </DropdownMenu>
               </Dropdown>
             </div>
@@ -316,7 +270,7 @@ class SearchBox extends React.Component {
           </div>
         </div>
         <button type="button" className="btn" onClick={this.handleSearch}>
-          <Link to={`/search?${this.getQueryString()}`}>
+          <Link to={`/search?${this.convertStateToQueryString()}`}>
             Tìm kiếm
           </Link>
         </button>
@@ -324,4 +278,5 @@ class SearchBox extends React.Component {
     );
   }
 }
+
 export default withRouter(SearchBox);
