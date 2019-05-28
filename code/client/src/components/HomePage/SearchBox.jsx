@@ -15,9 +15,11 @@ class SearchBox extends React.Component {
       dateLeave: undefined,
       numGuests: 1,
       numChildren: 0,
-      priceValue: 1,
+      priceValue: 10,
       homeStayOpen: false,
       homeStayValue: "Chọn loại HomeStay",
+      roomOpen: false,
+      roomValue: "Chọn loại phòng",
       kitchenChecked: false,
       childrenChecked: false,
       noSmokingChecked: false,
@@ -25,12 +27,15 @@ class SearchBox extends React.Component {
       niceViewChecked: false,
       poolAvailableChecked: false,
       gymAvailableChecked: false,
-      wifiAvailableChecked: false
+      wifiAvailableChecked: false,
+      numBed: 1
     };
     this.handleDateComeChange = this.handleDateComeChange.bind(this);
     this.handleDateLeaveChange = this.handleDateLeaveChange.bind(this);
     this.ref = React.createRef();
     this.homeStayToggle = this.handleHomeStayToggle.bind(this);
+    this.roomToggle = this.handleRoomToggle.bind(this);
+    this.setRoomValue = this.handleRoomValue.bind(this);
     this.setHomeStayValue = this.handleHomeStayValue.bind(this);
     this.criteriaToggle = this.handleCriteriaToggle.bind(this);
     this.keepingDropdown = this.handleKeepingDropdown.bind(this);
@@ -45,6 +50,7 @@ class SearchBox extends React.Component {
     this.changeValue = this.handleValueChanged.bind(this);
     this.numGuestsChanged = this.handleNumGuestsChanged.bind(this);
     this.numChildrenChanged = this.handleNumChidlrenChanged.bind(this);
+    this.numBedChanged = this.handleNumBedChanged.bind(this);
     Dropdown.propTypes = {
       isOpen: PropTypes.bool,
       toggle: PropTypes.func,
@@ -54,6 +60,25 @@ class SearchBox extends React.Component {
       caret: PropTypes.bool,
       onClick: PropTypes.func
     };
+  }
+
+  handleNumBedChanged(value){
+    if(value.target.value <= 3 && value.target.value >= 1)
+      this.setState({
+        numBed: value.target.value
+      });
+  }
+
+  handleRoomToggle() {
+    this.setState(prevState => ({
+      roomOpen: !prevState.roomOpen
+    }));
+  }
+
+  handleRoomValue(value){
+    this.setState({
+      roomValue: value.target.innerText
+    });
   }
 
   handleNumChidlrenChanged(value){
@@ -209,11 +234,29 @@ class SearchBox extends React.Component {
             <Dropdown isOpen={this.state.homeStayOpen} toggle={this.homeStayToggle}>
               <DropdownToggle caret>{this.state.homeStayValue}</DropdownToggle>
               <DropdownMenu>
-                <DropdownItem onClick={this.setHomeStayValue}>Studio</DropdownItem>
-                <DropdownItem onClick={this.setHomeStayValue}>Nhà thuê</DropdownItem>
+              <DropdownItem onClick={this.setHomeStayValue}>Khác</DropdownItem>
+                <DropdownItem onClick={this.setHomeStayValue}>Căn hộ Studio</DropdownItem>
+                <DropdownItem onClick={this.setHomeStayValue}>Nhà riêng</DropdownItem>
                 <DropdownItem onClick={this.setHomeStayValue}>Chung cư</DropdownItem>
+                <DropdownItem onClick={this.setHomeStayValue}>Biệt thự</DropdownItem>
               </DropdownMenu>
             </Dropdown>
+            <div className="inputField">Loại phòng?</div>
+            <Dropdown isOpen={this.state.roomOpen} toggle={this.roomToggle}>
+              <DropdownToggle caret>{this.state.roomValue}</DropdownToggle>
+              <DropdownMenu>
+              <DropdownItem onClick={this.setRoomValue}>Phòng riêng</DropdownItem>
+                <DropdownItem onClick={this.setRoomValue}>Nguyên căn</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          </div>
+
+          <div className="bedBedRoomAndBathRoom inputBox">
+            <div className="inputField">Số giường</div>
+            <div className="inputContent">
+              <input type="number" value={this.state.numBed} onChange={this.numBedChanged}/>
+            </div>
+            <img src="https://www.luxstay.com/icons/earth.svg"></img>
           </div>
 
           <div className="otherCriteria inputBox">
