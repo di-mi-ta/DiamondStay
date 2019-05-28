@@ -9,29 +9,32 @@ import * as actions from '../../redux/ActionCreators';
 class BookingForm extends React.Component{
     constructor(props){
         super(props);
-        const user = this.props.auth.user.info;
-        const homepost = this.props.currentHomepost;
         this.state = { //information of booking lies here
             //homestay
-            homestayName: undefined,
-            homestayType: undefined,
-            homestayPrice: undefined,
-            homestayAddress: undefined,
-            homestayPhoneNumber: undefined,
-            homestayEmail: undefined,
-            homestayCheckIn: undefined,
-            homestayCheckOut: undefined,
-            //user
-            userName: user.fullName,
-            userAccount: user.username,
-            userPhoneNumber: user.phone,
-            userAddress: 'NO ADDRESS!',
-            userEmail: user.email,
-            //acount
-            accName: undefined,
-            accNumber: undefined
+            // homestayName: undefined,
+            // homestayType: undefined,
+            // homestayPrice: undefined,
+            // homestayAddress: undefined,
+            // homestayPhoneNumber: undefined,
+            // homestayEmail: undefined,
+            // homestayCheckIn: undefined,
+            // homestayCheckOut: undefined,
+            // //user
+            // userName: user.fullName,
+            // userAccount: user.username,
+            // userPhoneNumber: user.phone,
+            // userAddress: 'NO ADDRESS!',
+            // userEmail: user.email,
+            // //acount
+            // accName: undefined,
+            // accNumber: undefined
         }
         this.ref = React.createRef();
+    }
+
+    componentDidMount() {
+      const homepostId = this.props.match.params.homepostId;
+      this.props.fetchHomepostById(homepostId);
     }
 
     handleAccNumberChange = (value) => {
@@ -78,7 +81,14 @@ class BookingForm extends React.Component{
     };
 
     render(){
-        const homepost = this.props.currentHomepost;
+        // KHOA
+        let homepost = this.props.currentHomepost || {};
+        const user = this.props.auth.user.info
+        if (homepost !== {}) {
+          console.log(homepost);
+          console.log(user);
+        }
+
         return(
             <div className="huge-input-container" ref={this.ref}>
                 <div className="searchBox container-fluid">
@@ -91,13 +101,13 @@ class BookingForm extends React.Component{
                         <div className="homestay-info">
                             Thông tin homestay
                             <div className="inputField">Tên homestay</div>
-                            <div className="inputContent">{this.state.homestayName}</div>
+                            <div className="inputContent">{homepost.name}</div>
                             <div className="inputField">Loại homestay</div>
-                            <div className="inputContent">{this.state.homestayType}</div>
+                            <div className="inputContent">{homepost.typeHome}</div>
                             <div className="inputField">Giá/đêm</div>
                             <div className="inputContent">{this.state.homestayPrice}$/đêm</div>
                             <div className="inputField">Địa chỉ</div>
-                            <div className="inputContent">{this.state.homestayAddress}</div>
+                            <div className="inputContent">{JSON.stringify(homepost.location)}</div>
                             <div className="inputField">Số điện thoại liên hệ</div>
                             <div className="inputContent">{this.state.homestayPhoneNumber}</div>
                             <div className="inputField">Email liên hệ:</div>
@@ -167,6 +177,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => ({
   fetchSystemPromos: () => {dispatch(actions.fetchSystemPromos())},
   fetchHomeposts: (query='') => {dispatch(actions.fetchHomeposts(query))},
+  fetchHomepostById: (homepostId) => {dispatch(actions.fetchHomepostById(homepostId))},
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BookingForm));

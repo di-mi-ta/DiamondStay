@@ -7,6 +7,8 @@ import {connect} from 'react-redux';
 import * as actions from '../../redux/ActionCreators';
 import MainHeader from '../HomePage/MainHeader';
 import {baseUrl} from '../../shared/baseUrl';
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 class House extends Component {
   constructor(props) {
@@ -30,6 +32,7 @@ class House extends Component {
     this.props.fetchHomepostById(this.props.match.params.homepostId);
   }
 
+
   render() {
     console.log("comment: ", 
     this.props.homeposts.currentHomepost? 
@@ -48,7 +51,11 @@ class House extends Component {
                 <div className="title col-12">
                   <div className="booking">
                     <h1>{this.props.homeposts.currentHomepost.name}</h1>
-                    <button type="button" className="btn book-house">Đặt ngay</button>
+                    <button type="button" className="btn book-house">
+                      <Link to={`/booking/new/${this.props.match.params.homepostId}`}>
+                        Đặt ngay
+                      </Link>
+                    </button>
                   </div>
                   <span className="label-house-id">
                     Mã chỗ ở: {this.props.homeposts.currentHomepost._id}
@@ -183,4 +190,4 @@ const mapDispatchToProps = (dispatch) => ({
   fetchHomepostById: homeId => {dispatch(actions.fetchHomepostById(homeId))}
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(House);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(House));

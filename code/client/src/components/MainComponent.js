@@ -5,7 +5,7 @@ import HostManager from '../components/HostManager/HostManagerComponent';
 import House from './Homestay/House';
 import Home from "./HomeComponent";
 import Footer from "./FooterComponent";
-import Booking from "./BookingComponent";
+import NewBookingPage from "./single-pages/NewBookingPage";
 import UpdatedHomepostManager from './HostManager/HomepostUpdate/UpdatedManager';
 import HostHeader from './Header/HostHeader'
 import NormalUserMessageInbox from './single-pages/NormalUserMessageInbox';
@@ -42,7 +42,7 @@ class Main extends Component {
               </div>
             )}
           />
-          <Route path="/booking" component={Booking} />
+          <Route path="/booking/new/:homepostId" component={NewBookingPage} />
           <Route path="/messages" component={NormalUserMessageInbox} />
           <Redirect to='/'/>
         </Switch>
