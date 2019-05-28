@@ -1,8 +1,8 @@
-import BookingForm from './Booking/BookingForm';
-import MainHeader from './HomePage/MainHeader';
+import BookingForm from '../Booking/BookingForm';
+import MainHeader from '../HomePage/MainHeader';
 import React from 'react';
 
-class Booking extends React.Component{
+class NewBookingPage extends React.Component{
     render(){
         return (
             <React.Fragment>
@@ -13,4 +13,4 @@ class Booking extends React.Component{
     }
 }
 
-export default Booking;
+export default NewBookingPage;

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Upload, Icon, Modal, Button, message} from 'antd';
+import {Upload, Icon, Modal, Button, message, Card} from 'antd';
 import axios, {post} from 'axios';
 import {baseUrl} from '../../../shared/baseUrl';
 import {connect} from 'react-redux';
@@ -33,8 +33,8 @@ class Images extends Component {
       this.state = {
           previewVisible: false,
           previewImage: '',
-          lstImgs: this.props.homeposts.currentHomepost.image,
-          fileList: formFileLst(this.props.homeposts.currentHomepost.image)
+          lstImgs: this.props.homeposts.currentHomepost ? this.props.homeposts.currentHomepost.image: [],
+          fileList: this.props.homeposts.currentHomepost ? formFileLst(this.props.homeposts.currentHomepost.image) : []
       }
       this.onUpdateBtnClick = this.onUpdateBtnClick.bind(this);
       this.uploadFile = this.uploadFile.bind(this);
@@ -67,11 +67,14 @@ class Images extends Component {
               if (arr.length === idx + 1){
                 const updatedHomepost = {
                   ...this.props.homeposts.currentHomepost,
-                  image: this.state.lstImgs
+                  image: l
                 }
                 this.props.fetchUpdateHomepost(updatedHomepost);
                 message.success('Cập nhật thành công');
                 this.props.updateCurrentHomepost(updatedHomepost);
+                this.setState({
+                  lstImgs: l
+                });
               }
             })
           })
@@ -80,6 +83,16 @@ class Images extends Component {
     }
 
     onUpdateBtnClick = () => {
+      alert(JSON.stringify(this.state.fileList))
+      if (this.state.fileList.length === 0){
+        const updatedHomepost = {
+          ...this.props.homeposts.currentHomepost,
+          image: []
+        }
+        this.props.fetchUpdateHomepost(updatedHomepost);
+        message.success('Cập nhật thành công');
+        this.props.updateCurrentHomepost(updatedHomepost);
+      }
       this.state.fileList.forEach(this.uploadFile);
     }
 
@@ -110,14 +123,13 @@ class Images extends Component {
         <div style={{paddingRight: 50,
                     paddingLeft: 50,
                     paddingBottom: 50,
-                    background: '#f1f1f1'}}>
-            <div style={{paddingBottom: 20}}>
-            <h3><b>Tải lên ít nhất 5 ảnh mô tả homestay của bạn</b></h3>
-            <Button onClick={this.onUpdateBtnClick } type='primary'> 
-                Cập nhật 
-            </Button>
-            </div>
+                    }}>
+            <h4><b>Tải lên ít nhất 5 ảnh mô tả homestay của bạn</b></h4>
             <div className="clearfix">
+            <Card style={{
+                        width: '100%', padding: 0, 
+                        marginTop: 10, marginBottom: 10,
+                        boxShadow: '0 8px 12px rgba(0,0,0,.1)',}}>
             <Upload
                 action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                 listType="picture-card"
@@ -127,10 +139,19 @@ class Images extends Component {
             >
                 {fileList.length >= 5 ? null : uploadButton}
             </Upload>
+            </Card>
             <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
                 <img alt="example" style={{ width: '100%' }} src={previewImage} />
             </Modal>
             </div>
+            <Button onClick={this.onUpdateBtnClick} 
+                    style={{
+                      marginBottom: 10,
+                      marginTop: 20, 
+                      boxShadow: '0 8px 12px rgba(0,0,0,.1)'
+                    }}> 
+              Cập nhật 
+            </Button>
         </div>
       );
     }
@@ -143,6 +164,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => ({
   fetchUpdateHomepost: (homepost) => {dispatch(actions.fetchUpdateHomepost(homepost))},
   updateCurrentHomepost: (homepost) => {dispatch(actions.updateCurrentHomepost(homepost))},
+  fetchHomepostById: (homepostId) => {dispatch(actions.fetchHomepostById(homepostId))}
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Images);

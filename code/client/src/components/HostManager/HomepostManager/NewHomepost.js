@@ -12,13 +12,13 @@ class NewHome extends Component {
         this.onSendReqVerify = this.onSendReqVerify.bind(this);
         this.onDeleteHome = this.onDeleteHome.bind(this);
     }
+    
     onSetCurrentHomepost = (homepost) => {
         this.props.updateCurrentHomepost(homepost);
     }
 
     onDeleteHome = (homepost) => {
         this.props.fetchDeleteHomepost(homepost);
-        this.props.fetchHomeposts('?state=Waiting');
     }
 
     onSendReqVerify = (homepost) => {
@@ -28,7 +28,6 @@ class NewHome extends Component {
         }
         this.props.fetchUpdateHomepost(updatedHomepost);
         message.success('Gửi yêu cầu duyệt thành công');
-        this.props.fetchHomeposts('?state=New');
     }
     columns = [{
         title: <b>Homestay</b>,
@@ -80,20 +79,19 @@ class NewHome extends Component {
     }]
     render(){
         return(
-            <div style = {{padding: 50, background: '#f1f1f1'}}>
+            <div style = {{padding: 50}}>
                 <Card style={{ 
-                            boxShadow: "1px 3px 1px #9E9E9E",
-                            borderRadius: "10px",
+                            boxShadow: '0 8px 12px rgba(0,0,0,.1)',
                             minHeight: '300px'}}>
                 <Table columns={this.columns} 
-                    dataSource={this.props.homeposts.homeposts} 
+                    dataSource={this.props.homeposts.homeposts.filter(home => home.state === 'New')} 
                 />
                 </Card>
             </div>
         )
     }
     componentDidMount(){
-        this.props.fetchHomeposts('?state=New');
+        this.props.fetchHomeposts();
     }
 }
   

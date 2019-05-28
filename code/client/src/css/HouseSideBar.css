@@ -22,3 +22,7 @@ img {
 .houseSideBar > .housePromotion {
     margin-top: 30px;
 }
+
+.houseSideBar > .housePromotion > a {
+    display: block;
+}

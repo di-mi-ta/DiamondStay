@@ -22,8 +22,8 @@ class Close extends Component {
         }
         this.props.fetchUpdateHomepost(updatedHomepost);
         message.success('Homestay đã chuyển sang trạng thái mở, khách có thể tìm kiếm và đặt phòng!');
-        this.props.fetchHomeposts('?state=Hiden');
     }
+
     columns = [{
         title: <b>Homestay</b>,
         dataIndex: 'name',
@@ -69,20 +69,19 @@ class Close extends Component {
     }]
     render(){
         return(
-            <div style = {{padding: 50, background: '#f1f1f1'}}>
+            <div style = {{padding: 50}}>
                 <Card style={{ 
-                            boxShadow: "1px 3px 1px #9E9E9E",
-                            borderRadius: "10px",
+                            boxShadow: '0 8px 12px rgba(0,0,0,.1)',
                             minHeight: '300px'}}>
                 <Table columns={this.columns} 
-                    dataSource={this.props.homeposts.homeposts} 
+                    dataSource={this.props.homeposts.homeposts.filter(home => home.state === 'Hiden')} 
                 />
                 </Card>
             </div>
         )
     }
     componentDidMount(){
-        this.props.fetchHomeposts('?state=Hiden');
+        this.props.fetchHomeposts();
     }
 }
   

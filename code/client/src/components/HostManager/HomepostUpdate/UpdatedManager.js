@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {Divider, Menu} from 'antd';
 import {Link, Switch, Route, Redirect} from 'react-router-dom';
-import axios from 'axios';
-import {baseUrl} from '../../../shared/baseUrl';
 
 import Facilities from './Facilities';
 import Overview from './Overview';
@@ -17,11 +15,24 @@ class UpdatedManager extends Component {
         super(props);
         this.state = {
             visible: false,
+            key: [1],
         };
+        this.onSelect = this.onSelect.bind(this);
+    }
+
+    onSelect = (e) => {
+        this.setState({
+            key: e.key,
+        })
     }
 
     componentWillMount(){
       this.props.fetchHomeposts();
+      this.props.fetchHomepostById(this.props.match.params.homepostId);
+    }
+
+    componentDidMount(){
+        this.props.fetchHomepostById(this.props.match.params.homepostId);
     }
 
     handleCreate = () => {
@@ -42,64 +53,78 @@ class UpdatedManager extends Component {
 
     render(){
         return(
-            <div style={{paddingTop: 30, paddingLeft: 50, paddingRight: 50,
-                        paddingBottom: 50, background: '#f1f1f1'}}>
-                <h3><b>{this.props.homeposts.currentHomepost.name}</b></h3>
-                <Divider/>
+            <div style={{
+                    paddingTop: 30, 
+                    paddingLeft: 50, 
+                    paddingRight: 50,
+                    paddingBottom: 50
+                }}>
+                <h3>
+                    <b>
+                    {this.props.homeposts.currentHomepost ? this.props.homeposts.currentHomepost.name: ''}
+                    </b>
+                </h3>
                 <Menu
                     defaultSelectedKeys={['1']}
+                    selectedKeys={this.state.key}
+                    onSelect={this.onSelect}
                     mode= "horizontal"
                     theme= 'light'
                     style={{
                         textAlign: 'center',
-                        background: "#F1F1F1",
-                        marginBottom: 10
+                        boxShadow: '0 8px 12px rgba(0,0,0,.1)',
+                        marginBottom: 20,
+                        marginTop: 20
                     }}
                 >
                     <Menu.Item key="1" to='/'>
-                        <Link to='/properties/overview'>
+                        <Link to={`/properties/${this.props.match.params.homepostId}/overview`}>
                         <span>
                             <b>Tổng quan</b>
                         </span>
                         </Link>
                     </Menu.Item>
                     <Menu.Item key="2">
-                        <Link to='/properties/price-policy'>
+                        <Link to={`/properties/${this.props.match.params.homepostId}/price-policy`}>
                         <span>
                             <b>Giá và các chính sách</b>
                         </span>
                         </Link>
                     </Menu.Item>
                     <Menu.Item key="3">
-                        <Link to='/properties/images'>
+                        <Link to={`/properties/${this.props.match.params.homepostId}/images`}>
                         <span>
                             <b>Hình ảnh</b>
                         </span>
                         </Link>
                     </Menu.Item>
                     <Menu.Item key="4">
-                        <Link to='/properties/facilities'>
+                        <Link to={`/properties/${this.props.match.params.homepostId}/facilities`}>
                         <span> <b>Tiện nghi</b> </span>
                         </Link>
                     </Menu.Item>
                     <Menu.Item key="5">
-                        <Link to='/properties/location' >
+                        <Link to={`/properties/${this.props.match.params.homepostId}/location`}>
                         <span><b>Vị trí</b></span>
                         </Link>
                     </Menu.Item>
                 </Menu>
                 <Switch>
-                    <Route path="/properties/overview" component={Overview} />
-                    <Route path="/properties/price-policy" component={PricePolicy} />
-                    <Route path="/properties/images" component={Images} />
-                    <Route path="/properties/facilities" component={Facilities} />
-                    <Route path="/properties/location" component={Location} />
-                    <Redirect to="/properties/overview"/>
+                    <Route  path={`/properties/${this.props.match.params.homepostId}/overview`}
+                            component={() => <Overview match={this.props.match}/>}/>
+                    <Route  path={`/properties/${this.props.match.params.homepostId}/price-policy`}
+                            component={PricePolicy} />
+                    <Route  path={`/properties/${this.props.match.params.homepostId}/images`}
+                            component={Images} />
+                    <Route  path={`/properties/${this.props.match.params.homepostId}/facilities`}
+                            component={Facilities} />
+                    <Route  path={`/properties/${this.props.match.params.homepostId}/location`}
+                            component={Location} />
+                    <Redirect to={`/properties/${this.props.match.params.homepostId}/overview`}/>
                 </Switch>
             </div>
         )
     }
-
 }
 
 const mapStateToProps = state => ({
@@ -108,6 +133,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchHomeposts: (query='') => {dispatch(actions.fetchHomeposts(query))},
+  fetchHomepostById: (homepostId) => {dispatch(actions.fetchHomepostById(homepostId))}
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UpdatedManager);

@@ -4,15 +4,14 @@ import ImageCard from './ImageCard';
 import HouseCard from '../Homestay/HouseCard';
 import GlideSlide from './GlideSlide';
 import SearchBox from './SearchBox';
-import {Link, Route, Switch} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actions from '../../redux/ActionCreators';
-
+import {baseUrl} from '../../shared/baseUrl';
 
 class MainPage extends React.Component {
   constructor(props) {
     super(props);
-    this.bestPlaces = this.props.homeposts.homeposts;
     this.spaceList = [
       {
         id: "1",
@@ -35,7 +34,6 @@ class MainPage extends React.Component {
         description: 'Studio'
       }
     ];
-
     this.currentPolicies = [
       {
         id: "1",
@@ -54,15 +52,17 @@ class MainPage extends React.Component {
         image: "https://cdn.luxstay.com/home/event/event_1_1558005546.png"
       }
     ];
-    this.policyRef = React.createRef();
-    this.spaceRef = React.createRef();
-    this.placeRef = React.createRef();
+    this.state = {
+      policyGlideOptions: {
+        type: 'carousel',
+        perView: 3,
+        focusAt: 'center',
+        autoplay: 5000
+      },
+      spaceGlideOptions: {},
+      placeGlideOptions: {perView: 4, autoplay: false}
+    };
     this.updatePolicyGlideSize = this.updatePolicyGlideSize.bind(this);
-  }
-
-  componentDidMount(){
-    this.props.fetchHomeposts();
-    this.props.fetchSystemPromos();
   }
 
   render() {
@@ -76,77 +76,92 @@ class MainPage extends React.Component {
         <div className="title">
           <h2>Không gian ưa thích</h2>
         </div>
-        <GlideSlide ref={this.spaceRef} data={{
-          hasControl: false,
-          itemList: this.spaceList.map(space => <ImageCard data={space}/>)
-        }} />
+        <GlideSlide
+          hasControl = {false}
+          options = {this.state.spaceGlideOptions}
+          itemList = {
+            this.spaceList.map(space => <ImageCard data={space}/>)
+          }
+        />
 
         <div className="title">
           <h2>Chỗ ở tốt nhất</h2>
           <p>Thêm trải nghiệm, thêm nhiều niềm vui tại những chỗ ở được yêu thích nhất tại Diamond Stay</p>
-          {/*for test list homepost*/}
-          <b>{JSON.stringify(this.props.homeposts.homeposts)}</b>
         </div>
-        <GlideSlide ref={this.placeRef}
-                    data={{ hasControl: true,
-                            itemList: this.bestPlaces.map(place =>
-                            <Link to={`/room/${place.id}`}>
-                              <HouseCard houseData={place}/>
-                            </Link>
-                    ),
-                            options: {
-                              type: 'slider',
-                              startAt: 0,
-                              perView: 4,
-                              gap: 20,
-                              bound: true,
-                              autoplay: false
-                            }
-                          }}
+        <GlideSlide
+          hasControl = {true}
+          options = {this.state.placeGlideOptions}
+          itemList = {
+            this.props.homeposts?
+            this.props.homeposts.homeposts.map(homepost => ({
+              id: homepost._id,
+              image: (homepost.image && homepost.image.length > 0)? 
+                `${baseUrl}${homepost.image[0]}`
+                : 'https://cdn.luxstay.com/home/suggestion/location_10_1556013549.png',
+              type: homepost.typeHome,
+              houseName: homepost.name,
+              location: homepost.location,
+              price: homepost.weekdayPrice,
+              rating: 2,
+              numRating: 5
+            })).map(place =>
+              <Link to={`/room/${place.id}`}>
+                <HouseCard houseData={place}/>
+              </Link>
+            )
+            : []
+          }
         />
         <div className="title">
           <h2>Ưu đãi hiện hành</h2>
           <p>Cập nhật ưu đãi từ Diamond Stay để trải nghiệm chỗ ở xa hoa với giá tốt nhất</p>
         </div>
-        <GlideSlide ref={this.policyRef} className="currentPolicy" data={{
-          hasControl: true,
-          itemList: this.currentPolicies.map(policy => <ImageCard data={policy}/> ),
-          options: {
-            type: 'carousel',
-            startAt: 0,
-            perView: 3,
-            gap: 20,
-            focusAt: 'center',
-            autoplay: 5000
-          }
-        }} />
+        <GlideSlide className="currentPolicy"
+          hasControl = {true}
+          options = {this.state.policyGlideOptions}
+          itemList = {
+            (
+              (this.props.promotions.systemPromos.length > 0)?
+              this.props.promotions.systemPromos.map(promo => 
+                ({
+                  image: baseUrl + promo.logoPath
+                })
+              ): this.currentPolicies
+            ).map(policy => <ImageCard data={policy}/>
+          )}
+        />
       </div>
     );
   }
 
   updatePolicyGlideSize() {
-    const policyGlide = this.policyRef.current;
-    const placeGlide = this.placeRef.current;
-    const spaceGlide = this.spaceRef.current;
     if (window.innerWidth < 600) {
-      policyGlide.updateGlide({startAt: 0, perView: 1});
-      spaceGlide.updateGlide({startAt: 0, perView: 1});
-      placeGlide.updateGlide({startAt: 0, perView: 1});
+      this.setState({
+        policyGlideOptions: {...this.state.policyGlideOptions, startAt: 0, perView: 1},
+        spaceGlideOptions: {...this.state.spaceGlideOptions, startAt: 0, perView: 1},
+        placeGlideOptions: {...this.state.placeGlideOptions, startAt: 0, perView: 1}
+      });
     }
     else if (window.innerWidth < 675) {
-      policyGlide.updateGlide({startAt: 0, perView: 2});
-      spaceGlide.updateGlide({startAt: 0, perView: 2});
-      placeGlide.updateGlide({startAt: 0, perView: 2});
+      this.setState({
+        policyGlideOptions: {...this.state.policyGlideOptions, startAt: 0, perView: 2},
+        spaceGlideOptions: {...this.state.spaceGlideOptions, startAt: 0, perView: 2},
+        placeGlideOptions: {...this.state.placeGlideOptions, startAt: 0, perView: 2}
+      });
     }
     else if (window.innerWidth < 800) {
-      policyGlide.updateGlide({startAt: 0, perView: 2});
-      spaceGlide.updateGlide({startAt: 0, perView: 3});
-      placeGlide.updateGlide({startAt: 0, perView: 3});
+      this.setState({
+        policyGlideOptions: {...this.state.policyGlideOptions, startAt: 0, perView: 2},
+        spaceGlideOptions: {...this.state.spaceGlideOptions, startAt: 0, perView: 3},
+        placeGlideOptions: {...this.state.placeGlideOptions, startAt: 0, perView: 3}
+      });
     }
     else {
-      policyGlide.updateGlide({startAt: 0, perView: 3});
-      spaceGlide.updateGlide({startAt: 0, perView: 4});
-      placeGlide.updateGlide({startAt: 0, perView: 4});
+      this.setState({
+        policyGlideOptions: {...this.state.policyGlideOptions, startAt: 0, perView: 3},
+        spaceGlideOptions: {...this.state.spaceGlideOptions, startAt: 0, perView: 4},
+        placeGlideOptions: {...this.state.placeGlideOptions, startAt: 0, perView: 3}
+      });
     }
   }
 
@@ -158,6 +173,7 @@ class MainPage extends React.Component {
 
 const mapStateToProps = state => ({
   homeposts: state.homeposts,
+  promotions: state.promotions,
 });
 
 const mapDispatchToProps = (dispatch) => ({

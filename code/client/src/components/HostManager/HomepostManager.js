@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Modal, Input, Form, Menu, Select, InputNumber, message} from 'antd';
+import {Button, Modal, Input, Form, Menu, Select, InputNumber, message, Row, Col} from 'antd';
 import {Link, Switch, Route, withRouter, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actions from '../../redux/ActionCreators';
@@ -121,21 +121,26 @@ class HomepostManager extends Component {
     render(){
         return(
             <div style={{paddingTop: 30, paddingLeft: 50, paddingRight: 50,
-                        paddingBottom: 50, background: '#f1f1f1'}}>
-
-                <Button type="primary" icon="plus" ghost
-                    onClick = {this.showModal}
-                    style={{marginBottom: '20px'}}
-                >
-                    Thêm chỗ ở mới
-                </Button>
-                <h2> <b> Chỗ ở của tôi </b></h2>
+                        paddingBottom: 30}}>              
+                <Row>
+                  <Col span={6}> 
+                    <h3> <b> Chỗ ở của tôi </b></h3>
+                  </Col>
+                  <Col span={6} offset={12}>
+                    <Button icon="plus"
+                        onClick = {this.showModal}
+                        style={{marginBottom: 20, boxShadow: '0 8px 12px rgba(0,0,0,.1)'}}
+                    >
+                        Thêm chỗ ở mới
+                    </Button>
+                  </Col>
+                </Row>
                 <Menu
                     mode= "horizontal"
                     theme= 'light'
                     style={{
                         textAlign: 'center',
-                        background: "#F1F1F1"
+                        boxShadow: '0 8px 12px rgba(0,0,0,.1)'
                     }}
                 >
                     <Menu.Item key="1" to='/'>

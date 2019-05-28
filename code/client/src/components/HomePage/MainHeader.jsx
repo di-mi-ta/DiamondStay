@@ -56,7 +56,7 @@ class MainHeader extends React.Component {
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light mainHeader">
           <Link to='/' className="navbar-brand">
-            <img src="assets/images/logo.png" alt=""/>
+            <img src="../assets/images/diamond.ico" alt=""/>
             <span>DiamondStay</span>
           </Link>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainHeaderNavbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -119,7 +119,7 @@ class MainHeader extends React.Component {
                   </div>
                 </li>
               }
-              <li className="nav-item dropdown">
+              <li className="nav-item dropdown" style={{display: "none"}}>
                 <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <img src="https://www.luxstay.com/icons/vi.svg" width="24" height="24"/>
                   <span>VND</span>
