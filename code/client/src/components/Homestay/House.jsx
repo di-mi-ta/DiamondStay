@@ -9,6 +9,7 @@ import MainHeader from '../HomePage/MainHeader';
 import {baseUrl} from '../../shared/baseUrl';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
+import queryString from 'query-string';
 
 class House extends Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class House extends Component {
       location: "Sóc Sơn, Hà Nội, Vietnam",
       rating: 5,
       numRating: 6,
-      //home info 
+      //home info
       name: 'Babylon House - Bungalow Bằng Lăng Trắng ',
       minimumNights: 1,
       weekdayPrice: 10,
@@ -34,11 +35,16 @@ class House extends Component {
 
 
   render() {
-    console.log("comment: ", 
-    this.props.homeposts.currentHomepost? 
+    console.log("comment: ",
+    this.props.homeposts.currentHomepost?
     this.props.homeposts.currentHomepost.rating
     : ""
     );
+    const queryInUrl = this.props.location.search;
+    const query = {
+      ...queryString.parse(queryInUrl),
+      homepostId: this.props.match.params.homepostId,
+    }
     return (
       <div>
         <MainHeader/>
@@ -52,7 +58,7 @@ class House extends Component {
                   <div className="booking">
                     <h1>{this.props.homeposts.currentHomepost.name}</h1>
                     <button type="button" className="btn book-house">
-                      <Link to={`/booking/new/${this.props.match.params.homepostId}`}>
+                      <Link to={`/booking/new?${queryString.stringify(query)}`}>
                         Đặt ngay
                       </Link>
                     </button>
@@ -122,7 +128,7 @@ class House extends Component {
                     </div>
                   </div>
                   <HouseComment
-                    style={{"margin-top": "40px"}} 
+                    style={{"margin-top": "40px"}}
                     comments={
                       this.props.homeposts.currentHomepost.rating.map(rating => ({
                         id: rating._id,
@@ -167,7 +173,7 @@ class House extends Component {
                   </div>
                 </div>
                 <div className="sidebar col-12 col-md-4">
-                  <HouseSideBar 
+                  <HouseSideBar
                     currentHomepost = {this.props.homeposts.currentHomepost}
                   />
                 </div>

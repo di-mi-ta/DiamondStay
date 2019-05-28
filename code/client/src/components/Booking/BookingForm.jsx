@@ -5,6 +5,7 @@ import {Button} from 'reactstrap';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../../redux/ActionCreators';
+import queryString from 'query-string';
 
 class BookingForm extends React.Component{
     constructor(props){
@@ -30,11 +31,27 @@ class BookingForm extends React.Component{
             // accNumber: undefined
         }
         this.ref = React.createRef();
+
     }
 
     componentDidMount() {
-      const homepostId = this.props.match.params.homepostId;
-      this.props.fetchHomepostById(homepostId);
+      // Parse query trên url
+      const queryInUrl = this.props.location.search;
+      const query = queryString.parse(queryInUrl);
+
+      // Chỉ lấy những trường cần
+      // Bỏ qua những trường khác người dùng nhập vào
+      const data = {
+          homepostId: query.homepostId,
+          //.....
+      };
+
+      // Validate các trường nhập vào (OPTIONAL)
+
+      // Lấy thông tin homepost nếu cần
+      this.props.fetchHomepostById(data.homepostId);
+      // Sau khi xong, component sẽ tự render() lại
+      // homepost nằm trong this.props.currentHomepost
     }
 
     handleAccNumberChange = (value) => {

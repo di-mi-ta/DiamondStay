@@ -36,13 +36,13 @@ class Main extends Component {
                           boxShadow: '0 8px 12px rgba(0,0,0,.1)',
                           margin: 0
                         }} />
-                <UpdatedHomepostManager 
+                <UpdatedHomepostManager
                   match={match}
                 />
               </div>
             )}
           />
-          <Route path="/booking/new/:homepostId" component={NewBookingPage} />
+          <Route path="/booking/new" component={NewBookingPage} />
           <Route path="/messages" component={NormalUserMessageInbox} />
           <Redirect to='/'/>
         </Switch>
