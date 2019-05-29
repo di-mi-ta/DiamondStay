@@ -152,17 +152,27 @@ class VerifyHomepostComponent extends Component {
     onConfirmedClick(){
         this.setState({
             isOpenModal: false
-        })
-        const updatedHome = {
-            ...this.state.homepost,
-            confirmedBy: this.props.auth.user.username,
-            state: 'Success',
-            note: JSON.stringify(this.state.noteResult)
-        }
+        });
 
-        //fetch
-        this.props.fetchUpdateHomepost(updatedHome);
-        message.success('Tin đăng đã được duyệt thành công');
+        if (this.state.verifiedResult.description === -1 ||
+            this.state.verifiedResult.image === -1 ||
+            this.state.verifiedResult.price === -1 ||
+            this.state.verifiedResult.roomBedInfo === -1 ||
+            this.state.verifiedResult.roomBedInfo === -1 ||
+            this.state.verifiedResult.location === -1 ) {
+            message.error('Bạn cần xác nhận tính hợp lệ của các trường thông tin trước khi xác nhận kết quả duyệt!')
+        }
+        else {
+            const updatedHome = {
+                ...this.state.homepost,
+                confirmedBy: this.props.auth.user.username,
+                state: 'Success',
+                note: JSON.stringify(this.state.noteResult)
+            }
+            this.props.fetchUpdateHomepost(updatedHome);
+            message.success('Tin đăng đã được duyệt thành công');
+            this.context.router.history.push('/admin/waiting-posts');
+        }
     }
 
     onRejectedClick(){

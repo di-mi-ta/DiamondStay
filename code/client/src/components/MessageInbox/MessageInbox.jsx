@@ -149,11 +149,13 @@ class MessageInbox extends React.Component {
     }
 
     return (
+      <div style={{padding: 30}}>
       <Row>
         <Col span={20} offset={2}>
           {component}
         </Col>
       </Row>
+      </div>
     );
   }
 }

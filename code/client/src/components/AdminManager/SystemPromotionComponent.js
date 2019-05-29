@@ -7,7 +7,7 @@ import * as actions from '../../redux/ActionCreators';
 import {Table, Divider, Button, Icon,
          Modal, Input, DatePicker,
          message, InputNumber, Tag,
-         Popconfirm, Form, Card, Upload} from 'antd';
+         Popconfirm, Form, Card, Upload, Row, Col} from 'antd';
 
 import moment from 'moment';
 
@@ -273,13 +273,21 @@ class SystemPromotionCompoment extends Component {
         return(
             <div style={{paddingTop: 30, paddingLeft: 50, paddingRight: 50,
                         paddingBottom: 50}}>
-                <h3> <b> Quản lí khuyến mại </b></h3>
-                <Divider/>
-                <Button type="primary" icon="plus" ghost
-                    onClick = {this.onAddPromoBtnClick}
-                >
-                    Thêm khuyến mại
+                <Row>
+                  <Col span={6}> 
+                    <h3> <b> Quản lí khuyến mại </b></h3>
+                  </Col>
+                  <Col span={6} offset={12}>
+                    <Button style={{boxShadow: '0 8px 12px rgba(0,0,0,.1)'}}
+                             icon="plus" 
+                        onClick = {this.onAddPromoBtnClick}
+                    >
+                        Thêm khuyến mại
                 </Button>
+                  </Col>
+                </Row>
+                
+                <Divider/>
                 <Card style={{
                     boxShadow: '0 8px 12px rgba(0,0,0,.1)',
                     minHeight: '300px',
