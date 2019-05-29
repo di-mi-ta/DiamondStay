@@ -85,6 +85,7 @@ class NewHome extends Component {
                             minHeight: '300px'}}>
                 <Table columns={this.columns} 
                     dataSource={this.props.homeposts.homeposts.filter(home => home.state === 'New')} 
+                    bordered
                 />
                 </Card>
             </div>

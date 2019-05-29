@@ -68,6 +68,7 @@ class Rejected extends Component {
                             minHeight: '300px'}}>
                 <Table columns={this.columns} 
                     dataSource={this.props.homeposts.homeposts.filter(home => home.state === 'Rejected')} 
+                    bordered
                 />
                 </Card>
             </div>

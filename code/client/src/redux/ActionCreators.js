@@ -90,9 +90,9 @@ export const  updateResultSearch = (homes) => ({
 })
 
 // for Promotions 
-export const fetchHostPromos = (username) => (dispatch) => {
+export const fetchHostPromos = () => (dispatch) => {
     dispatch(hostPromosLoading(true));
-    return fetch(baseUrl + 'host-promotions?username=' + username)
+    return fetch(baseUrl + 'host-promotions')
         .then(response => {
             if (response.ok) {
                 return response;
@@ -511,7 +511,7 @@ export const postRating = (homepostId, rating, comment) => (dispatch) => {
         comment: comment
     }
     const bearer = localStorage.getItem('token');
-    return fetch(baseUrl + 'ratings', {
+    return fetch(baseUrl + 'comments', {
         method: 'POST',
         body: JSON.stringify(newRating),
         headers: {
@@ -540,7 +540,7 @@ export const postRating = (homepostId, rating, comment) => (dispatch) => {
 }
 
 export const fetchRatings = () => (dispatch) => {
-    return fetch(baseUrl + 'ratings')
+    return fetch(baseUrl + 'comments')
         .then(response => {
             if (response.ok) {
                 return response;

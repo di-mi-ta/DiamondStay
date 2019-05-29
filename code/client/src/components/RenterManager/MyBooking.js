@@ -1,44 +1,38 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../../redux/ActionCreators';
-import {Table, Divider, Button, Input, DatePicker, Form, Card} from 'antd';
+import {Table, Divider, Button, DatePicker, Form, Card, Select} from 'antd';
 
 const RangePicker = DatePicker.RangePicker;
+const Option = Select.Option;
 
-
-const columns = [{
-    title: 'Khách',
-    dataIndex: 'renter',
-    key: 'renter',
-    align: 'center',
-    render: text => <b>{text}</b>,
-},
+const columns = [
 {
-    title: 'Phòng đặt',
+    title: <b>Phòng đặt</b>,
     dataIndex: 'homestay',
     key: 'homestay',
     align: 'center',
     render: text => <p>{text}</p>,
 },{
-    title: 'Ngày đến',
+    title: <b>Ngày đến</b>,
     dataIndex: 'startDate',
     key: 'startDate',
     align: 'center',
     render: text => <p>{text}</p>,
 },{
-    title: 'Ngày đi',
+    title: <b>Ngày đi</b>,
     dataIndex: 'endDate',
     key: 'endDate',
     align: 'center',
     render: text => <p>{text}</p>,
 },{
-    title: 'Tình trạng',
-    dataIndex: 'state',
-    key: 'state',
+    title: <b>Tình trạng thanh toán</b>,
+    dataIndex: 'paymentStatus',
+    key: 'paymentStatus',
     align: 'center',
     render: text => <p>{text}</p>,
 },{
-    title: 'Chi tiết',
+    title: <b>Chi tiết</b>,
     dataIndex: 'detail',
     key: 'detail',
     align: 'center',
@@ -46,7 +40,7 @@ const columns = [{
 }]
 
 
-class Reservation extends Component {
+class MyBooking extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -58,7 +52,7 @@ class Reservation extends Component {
     }
 
     componentWillMount(){
-        //this.props.fetchSystemPromos()
+        
     }
 
     render(){
@@ -70,30 +64,24 @@ class Reservation extends Component {
         return(
             <div style={{paddingTop: 30, paddingLeft: 50, paddingRight: 50,
                         paddingBottom: 50}}>
-                <h3> <b> Đặt phòng </b></h3>
+                <h3> <b> Đặt chỗ của tôi</b></h3>
                 <Divider/>
                 <Card style={{
                     boxShadow: '0 8px 12px rgba(0,0,0,.1)',
                     minHeight: '300px',
                     marginTop: '30px'}}>
                 <Form layout='inline' style={{ width: '100%'}}>
-                        <Form.Item
-                            label="Ngày"
-                            {...formItemLayout}
-                        >
-                            <Input onChange={this.handleNameChange}/>
-                        </Form.Item>
-                        <Form.Item
-                            label="Khoảng thời gian"
-                            {...formItemLayout}
-                        >
-                            <RangePicker style={{ width: '100%' }} onChange={this.handleDatePickerChange}/>
-                        </Form.Item>
-                        <Form.Item
-                            {...formItemLayout}
-                        >
-                            <Button type='primary'> Xem kết quả </Button>
-                        </Form.Item>
+                    <Form.Item
+                        label="Khoảng thời gian"
+                        {...formItemLayout}
+                    >
+                        <RangePicker style={{ width: '100%' }} onChange={this.handleDatePickerChange}/>
+                    </Form.Item>
+                    <Form.Item
+                        {...formItemLayout}
+                    >
+                        <Button type='primary'> Xem kết quả </Button>
+                    </Form.Item>
                 </Form>
                 <Table columns={columns}
                     dataSource={data}
@@ -114,4 +102,4 @@ const mapDispatchToProps = (dispatch) => ({
   
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Reservation);
+export default connect(mapStateToProps, mapDispatchToProps)(MyBooking);

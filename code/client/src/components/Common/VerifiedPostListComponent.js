@@ -30,17 +30,11 @@ const columns = [{
     title: 'Hành động',
     render: (text, record) => (
       <span>
-         {/* <Popconfirm title="Bạn chắc chắn muốn xóa chứ？"
-                    okText="Xóa" cancelText="Hủy bỏ"
-                    onConfirm = {this.onConfirmDeleteClick}>
-              <Button ghost> <Icon type="delete"
-                    style={{ color: '#DC143C' }} theme="filled" /> </Button>
-         </Popconfirm>
-        <Divider type="vertical" />
         <Button ghost onClick={this.onEditBtnClick}>
             <Icon type="edit" style={{ color: '#FF8C00' }}
                 theme="filled"/>
-        </Button> */}
+            Duyệt lại
+        </Button>
       </span>
     ),
 }]

@@ -10,6 +10,7 @@ import UpdatedHomepostManager from './HostManager/HomepostUpdate/UpdatedManager'
 import HostHeader from './Header/HostHeader'
 import NormalUserMessageInbox from './single-pages/NormalUserMessageInbox';
 import SearchResults from './single-pages/SearchResults';
+import RenterManager from './RenterManager/RenterManager';
 import {connect} from 'react-redux';
 import * as actions from '../redux/ActionCreators';
 import {Divider} from 'antd';
@@ -29,6 +30,7 @@ class Main extends Component {
           <Route path="/search" component={SearchResults} />
           <Route path="/host" component={HostManager} />
           <Route path="/admin" component={AdminManager} />
+          <Route path="/me" component={RenterManager} />
           <Route path="/room/:homepostId" component={House} />
           <Route path="/properties/:homepostId"
             component={({match}) => (

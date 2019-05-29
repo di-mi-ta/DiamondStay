@@ -75,6 +75,7 @@ class Close extends Component {
                             minHeight: '300px'}}>
                 <Table columns={this.columns} 
                     dataSource={this.props.homeposts.homeposts.filter(home => home.state === 'Hiden')} 
+                    bordered
                 />
                 </Card>
             </div>

@@ -268,7 +268,7 @@ class SearchBox extends React.Component {
           <div className="priceValue inputBox">
             <div className="inputField">Tối đa {this.state.search.price}$ / đêm</div>
             <div className="inputContent">
-              <input type="range" name="weight" min="0" max="5000" value={this.state.search.price} onChange={e => this.handleChangeWithEvent('price', e)} step="10"></input>
+              <input type="range" name="weight" min="0" max="2000000" value={this.state.search.price} onChange={e => this.handleChangeWithEvent('price', e)} step="10"></input>
             </div>
             <img src="https://images.vexels.com/media/users/3/135829/isolated/preview/1a857d341d8b6dd31426d6a62a8d9054-dollar-coin-currency-icon-by-vexels.png"></img>
           </div>

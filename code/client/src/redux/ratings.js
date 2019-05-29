@@ -13,7 +13,8 @@ export const Ratings = (state = {
 
         case ActionTypes.ADD_RATING:
             var rating = action.payload;
-            return {...state, ratings: state.ratings.concat(rating)};
+            state.ratings.push(rating)
+            return {...state, ratings: state.ratings};
         default:
             return state;
     }

@@ -58,6 +58,7 @@ class All extends Component {
                             minHeight: '300px', padding: 5}}>
                 <Table columns={this.columns}
                     dataSource={this.props.homeposts.homeposts}
+                    bordered
                 />
                 </Card>
             </div>

@@ -74,7 +74,8 @@ class Open extends Component {
                             boxShadow: '0 8px 12px rgba(0,0,0,.1)',
                             minHeight: '300px'}}>
                 <Table columns={this.columns} 
-                    dataSource={this.props.homeposts.homeposts.filter(home => home.state === 'Success')} 
+                    dataSource={this.props.homeposts.homeposts.filter(home => home.state === 'Success')}
+                    bordered 
                 />
                 </Card>
             </div>

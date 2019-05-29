@@ -12,7 +12,7 @@ promoRouter
     .use(corsAllowAll);
 
 promoRouter.route('/')
-    .get(PromoCtrl.getHostPromoOfUser)
+    .get(PromoCtrl.getHostPromotions)
     .post(PromoCtrl.createHostPromotion)
 
 promoRouter.route('/:promoId')
