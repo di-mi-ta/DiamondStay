@@ -285,8 +285,7 @@ class SystemPromotionCompoment extends Component {
                         Thêm khuyến mại
                 </Button>
                   </Col>
-                </Row>
-                
+                </Row>            
                 <Divider/>
                 <Card style={{
                     boxShadow: '0 8px 12px rgba(0,0,0,.1)',

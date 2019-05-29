@@ -88,8 +88,8 @@ const getSystemPromoById = (req,res,next) => {
     .catch((err) => next(err))
 }
 
-const getHostPromoOfUser = (req, res, next) => {
-    HostPromotions.find({creator: req.query.username})
+const getHostPromotions = (req, res, next) => {
+    HostPromotions.find(req.query)
     .then((promotions) => {
         res.statusCode = 200;
         res.setHeader('Content-Type','application/json')
@@ -130,7 +130,7 @@ module.exports = {
     updateHostPromotion,
     deleteHostPromotion,
     getHostPromoById,
-    getHostPromoOfUser,
+    getHostPromotions,
     getFullListPromo,
     getActiveSystemPromo,
     getSystemPromoById

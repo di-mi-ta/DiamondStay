@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Table, Divider, Button, Icon,
          Modal, Input, DatePicker,
          message, InputNumber, Select, Tag,
-         Popconfirm, Form, Card} from 'antd';
+         Popconfirm, Form, Card, Row, Col} from 'antd';
 import moment from 'moment';
 import {connect} from 'react-redux';
 import * as actions from '../../redux/ActionCreators';
@@ -33,7 +33,7 @@ class PromotionCompoment extends Component {
     }
 
     componentDidMount(){
-        this.props.fetchHostPromos(this.props.auth.user.username);
+        this.props.fetchHostPromos();
         this.props.fetchHomeposts();
     }
 
@@ -62,19 +62,19 @@ class PromotionCompoment extends Component {
     }
 
     columns = [{
-        title: 'Tên khuyến mãi',
+        title: <b>Tên khuyến mãi</b>,
         dataIndex: 'name',
         key: 'name',
         align: 'center',
         render: text => text,
     },{
-        title: 'Mức khuyến mãi',
+        title: <b>Mức khuyến mãi</b>,
         dataIndex: 'value',
         key: 'value',
         align: 'center',
         render: text => text + ' %',
     },{
-        title: 'Tình trạng',
+        title: <b>Tình trạng</b>,
         key: 'states',
         dataIndex: 'dateEnd',
         align: 'center',
@@ -94,7 +94,7 @@ class PromotionCompoment extends Component {
     },{
         key: 'action',
         align: 'center',
-        title: 'Hành động',
+        title: <b>Hành động</b>,
         render: (text, record) => (
           <span>
              <Popconfirm title="Bạn chắc chắn muốn xóa chứ？"
@@ -141,12 +141,8 @@ class PromotionCompoment extends Component {
           isModalEditOpen: false,
         });
         this.props.fetchUpdateHostPromo(this.state.currentPromo);
-        if (true){
-            message.success('Cập nhật thành công !!!');
-        } else {
-            message.error('Cập nhật thất bại !!!');
-        }
-      }
+        message.success('Cập nhật thành công !!!');
+    }
 
     handleCancelEdit = () => {
         this.setState({
@@ -165,7 +161,8 @@ class PromotionCompoment extends Component {
             value: this.state.currentPromo.value,
             creator: this.props.auth.user.username,
             homeposts: this.state.currentPromo.homeposts
-        }
+        };
+
         this.props.fetchCreateHostPromo(promo);
         message.success('Bạn đã thêm một khuyến mại mới thành công!');
     }
@@ -185,19 +182,32 @@ class PromotionCompoment extends Component {
         }
 
         return(
-            <div style={{padding: 30, minHeight: '90%'}}>
-                <h3> <b> Quản lí khuyến mại </b></h3>
+            <div style={{padding: 50, minHeight: '90%'}}>
+                <Row>
+                  <Col span={6}> 
+                    <h3> <b> Quản lí khuyến mại </b></h3>
+                  </Col>
+                  <Col span={6} offset={12}>
+                    <Button style={{boxShadow: '0 8px 12px rgba(0,0,0,.1)'}}
+                            icon="plus" 
+                            onClick = {this.onAddPromoBtnClick}
+                    >   
+                        Thêm khuyến mại
+                    </Button>
+                  </Col>
+                </Row>
                 <Divider/>
-                <Button type="primary" icon="plus" ghost
-                    onClick = {this.onAddPromoBtnClick}
-                >
-                    Thêm khuyến mại
-                </Button>
-                <Table columns={this.columns}
-                    dataSource={this.props.promotions.hostPromotions}
-                    style={{marginTop: '20px', backgroundColor: 'while'}}
-                    bordered
-                />
+                <Card style={{
+                    boxShadow: '0 8px 12px rgba(0,0,0,.1)',
+                    minHeight: '300px',
+                    marginTop: '30px'}}>
+                    <Table columns={this.columns}
+                        dataSource={this.props.promotions.hostPromotions.filter(
+                                            promo => promo.creator === this.props.auth.user.username)}
+                        style={{marginTop: '20px', backgroundColor: 'while'}}
+                        bordered
+                    />
+                </Card>
                 <Modal
                     title="Thêm khuyến mại"
                     visible={this.state.isModalOpen}
@@ -323,7 +333,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchHostPromos: (username) => {dispatch(actions.fetchHostPromos(username))},
+  fetchHostPromos: () => {dispatch(actions.fetchHostPromos())},
   fetchHomeposts: (query='') => {dispatch(actions.fetchHomeposts(query))},
   fetchUpdateHostPromo: (updatedPromo) => dispatch(actions.fetchUpdateHostPromo(updatedPromo)),
   fetchDeleteHostPromo: (promoId) => dispatch(actions.fetchDeleteHostPromo(promoId)),
