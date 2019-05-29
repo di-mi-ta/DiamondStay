@@ -3,7 +3,7 @@
 const Homepost = require('../models/homeposts');
 
 function search(req, res, next) {
-  const query = req.body;
+  const query = getCleanQueryObject(req.query);
   let searchObject = {
     state: "Success"
   };
@@ -109,7 +109,7 @@ function search(req, res, next) {
     // for dateCome and dateOut
     // TODO if booking is available
 
-    res.status(200).json(homes);
+    res.status(200).json({ homes });
   })
   .catch(err => {
     res.status(500).json({
@@ -120,6 +120,17 @@ function search(req, res, next) {
       }
     })
   });
+}
+
+function getCleanQueryObject(query) {
+  query = {...query};
+  const numericProps = ['price', 'numBed', 'numGuests', 'numChildren'];
+  numericProps.forEach((prop) => {
+    if (query.hasOwnProperty(prop)) {
+      query[prop] = Number(query[prop]);
+    }
+  });
+  return query;
 }
 
 module.exports = {

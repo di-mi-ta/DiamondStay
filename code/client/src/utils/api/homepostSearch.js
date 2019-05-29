@@ -5,10 +5,23 @@ initAxios(axios);
 
 export function search(searchObject) {
     return new Promise(function(resolve, reject) {
-        axios.get('/search?'+searchObject).then(results => {
-            resolve(results.data);
+        console.log('AXIOS', searchObject)
+        axios.get('/search', {
+          params: searchObject
+        }).then(results => {
+            const data = results.data;
+            if (data.err) {
+              reject(data.err);
+            }
+            resolve(results.data.homes);
         }).catch(err => {
-            reject(err);
+            reject({
+              err: {
+                type: 'NetworkError',
+                message: 'Lỗi mạng khi thực hiện truy vấn',
+                detail: err
+              }
+            });
         });
     });
 }
