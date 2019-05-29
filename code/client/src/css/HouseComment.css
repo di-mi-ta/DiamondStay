@@ -7,6 +7,29 @@
     color: black;
 }
 
+.houseCommentList > .commentForm {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.houseCommentList > .commentForm > .rating {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.houseCommentList > .commentForm > button {
+    background-color: red;
+    text-transform: uppercase;
+    color: white;
+    font-weight: 600;
+    padding: 8px 15px;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /* comments */
 .commentItem {
     display: flex;
@@ -38,19 +61,6 @@
 .commentItem > .commentTitle .user {
     display: flex;
     align-items: center;
-}
-
-.commentItem > .commentTitle .rating > i.fill {
-    text-shadow: 0 0 orange !important;
-}
-
-.commentItem > .commentTitle .rating i:not(:last-of-type) {
-    margin-right: 6px;
-}
-
-.commentItem > .commentTitle .rating i::before {
-    font-size: 18px;
-    color: rgba(0, 0, 0, 0.2);
 }
 
 .commentTitle img {

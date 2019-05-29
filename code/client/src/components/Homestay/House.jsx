@@ -129,6 +129,7 @@ class House extends Component {
                   </div>
                   <HouseComment
                     style={{"margin-top": "40px"}}
+                    homepostId={this.props.homeposts.currentHomepost._id}
                     comments={
                       this.props.homeposts.currentHomepost.rating.map(rating => ({
                         id: rating._id,

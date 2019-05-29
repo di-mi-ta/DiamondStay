@@ -1,5 +1,8 @@
 import React from 'react';
 import '../../css/HouseComment.css';
+import {connect} from 'react-redux';
+import * as actions from '../../redux/ActionCreators';
+import StarRating from './StarRating';
 
 class HouseComment extends React.Component {
   constructor(props) {
@@ -16,50 +19,21 @@ class HouseComment extends React.Component {
       }
     ]
     */
-    console.log(this.props.comments);
+    this.starRatingRef = React.createRef();
     this.comments = this.props.comments;
-    // this.comments = [
-    //   {
-    //     id: "1",
-    //     username: "Thầy phùng",
-    //     avatar: "http://fme.iuh.edu.vn/wp-content/uploads/2017/04/ABET080417-02.jpg",
-    //     time: 4,
-    //     content: "Chỗ này rất có không gian để nghiên cứu PPL :)",
-    //     numStar: 3
-    //   },
-    //   {
-    //     id: "214321",
-    //     username: "Thầy sách",
-    //     avatar: "http://www.hcmut.edu.vn/upload_hcmut/images/CacPhongBanChucNang/TTHTSV_VL/Kh%C3%A1c/6/IMG_4776.JPG",
-    //     time: 4,
-    //     content: "Rút môn?? Tốt Tốt!",
-    //     numStar: 5
-    //   },
-    //   {
-    //     id: "2",
-    //     username: "Đồng chí X",
-    //     avatar: "https://graph.facebook.com/v3.0/1606982409446605/picture?type=normal",
-    //     time: 3,
-    //     content: "Quá tuyệt vời, từ vị trí, địa điểm, phong cách kinh doanh cho đến thái độ thân thiện của anh chủ. Khi về còn được anh tặng thêm gà đồi rất ngon. Rất đáng đến và trải nghiệm",
-    //     numStar: 1
-    //   },
-    //   {
-    //     id: "3",
-    //     username: "Nguyễn Khánh Phúc",
-    //     avatar: "https://graph.facebook.com/v3.0/2301831780085050/picture?type=normal",
-    //     time: 29,
-    //     content: "All in one!!! Mọi thứ tuyệt vời, đã bao gồm trong giá (kể cả bữa ăn, dịch vụ vui chơi)... Rất quý a Hùng chủ nhà và đã tặng chủ nhà những bản nhạc cực chất để chuyến đi của các bạn tiếp theo sẽ hoàn hảo hơn. Hãy đến thưởng thức nhá!!!",
-    //     numStar: 5
-    //   },
-    //   {
-    //     id: "4",
-    //     username: "Pham Vu Phuong",
-    //     avatar: "https://graph.facebook.com/117785469118856/picture?type=large",
-    //     time: 3,
-    //     content: "Quá tuyệt vời, từ vị trí, địa điểm, phong cách kinh doanh cho đến thái độ thân thiện của anh chủ. Khi về còn được anh tặng thêm gà đồi rất ngon. Rất đáng đến và trải nghiệm",
-    //     numStar: 5
-    //   }
-    // ]
+    this.readMoreComment = this.readMoreComment.bind(this);
+    this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.fetchHomepostById(this.props.homepostId);
+  }
+
+  handleCommentSubmit(e) {
+    let content = e.target.parentNode.querySelector('textarea').value;
+    let rating = this.starRatingRef.current.getValue();
+    e.target.parentNode.querySelector('textarea').value = "";
+    this.props.postRating(this.props.homepostId, rating, content);
   }
 
   readMoreComment(e) {
@@ -74,17 +48,11 @@ class HouseComment extends React.Component {
 
   render() {
     let commentList = this.comments.map(comment => {
-      const starRating = [0, 1, 2, 3, 4].map((val, idx) => 
-          val < comment.numStar?
-          <i className="fa fa-star fill" aria-hidden="true" key={idx}></i>:
-          <i className="fa fa-star" aria-hidden="true" key={idx}></i>
-      );
-
       const d = comment.time;
       let timeString = "";
       let timestamp = new Date() - d;
       if (timestamp > 1000*60*60*24) {
-        let numDays = timestamp/(1000*60*60*24);
+        let numDays = Math.floor(timestamp/(1000*60*60*24));
         timeString = numDays > 30?
           d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear()
           : `${numDays} ngày trước`
@@ -109,9 +77,7 @@ class HouseComment extends React.Component {
                 <span>{timeString}</span>
               </div>
             </div>
-            <div className="rating">
-              {starRating}
-            </div>
+            <StarRating options={{numStar: comment.numStar, fixed: true}}/>
           </div>
           <div className="content">
             <p className={comment.content.length > 100? 'collapse': ''}>{comment.content}</p>
@@ -121,14 +87,31 @@ class HouseComment extends React.Component {
       )
     })
     return (
-        <div className="houseCommentList container-fluid">
-          <h2>Đánh giá</h2>
-          <div className="commentList">
-            {commentList}
-          </div>
+      <div className="houseCommentList container-fluid">
+        <h2>Đánh giá</h2>
+        <div className="commentList">
+          {commentList}
         </div>
+        <form className="commentForm">
+          <label htmlFor="comment-textarea">Bình luận của bạn</label>
+          <textarea className="form-control" id="comment-textarea" rows="3"></textarea>
+          <div className="rating">
+            <StarRating options={{numStar: 0}} ref={this.starRatingRef}/>
+          </div>
+          <button type="button" className="btn" onClick={this.handleCommentSubmit}>Đăng</button>
+        </form>
+      </div>
     );
   }
 }
 
-export default HouseComment;
+const mapStateToProps = state => ({
+  currentHomepost: state.homeposts.currentHomepost
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchHomepostById: homeId => {dispatch(actions.fetchHomepostById(homeId))},
+  postRating: (homepostId, rating, comment) => { dispatch(actions.postRating(homepostId, rating, comment)) }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(HouseComment);

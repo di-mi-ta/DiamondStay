@@ -19,26 +19,28 @@ class SearchBox extends React.Component {
     super(props);
     this.state = {
       search: {
-        homestayName: undefined,
         dateCome: undefined,  // Date | undefined
         dateLeave: undefined, // Date | undefined
-        numGuests: 1,
-        numChildren: 0,
-        price: 1000000,
+
+        // Homestay critera
+        homestayName: undefined,
         homestayType: undefined,
         roomType: undefined,
+        price: 0,
         numBed: 1,
+
+        // Family criteria
+        numGuests: 1,
+        numChildren: 0,
+        childrenChecked: false,
+        extraBedChecked: false,
+        noSmokingChecked: false,
 
         // Kitchen criteria
         electricKitchenChecked: false,
         gasKitchenChecked: false,
         microwaveChecked: false,
         freezerChecked: false,
-
-        // Family criteria
-        childrenChecked: false,
-        extraBedChecked: false,
-        noSmokingChecked: false,
 
         // Entertainment criteria
         forPetChecked: false,
@@ -47,6 +49,8 @@ class SearchBox extends React.Component {
         toBeachChecked: false,
         nearGolfChecked: false,
         fishingChecked: false,
+        poolAvailableChecked: false,
+        barChecked: false,
 
         // Room criteria
         balconyChecked: false,
@@ -65,7 +69,6 @@ class SearchBox extends React.Component {
         projectorChecked: false,
         massagerChecked: false,
         smartTiviChecked: false,
-        barChecked: false,
       },
       ui: {
         homestayTypeDropdownOpen: false,        // homestay box
@@ -337,6 +340,7 @@ class SearchBox extends React.Component {
                   <MyDropdownCheckbox label='Gần sân golf' prop='nearGolfChecked' />
                   <MyDropdownCheckbox label='Câu cá' prop='fishingChecked' />
                   <MyDropdownCheckbox label='Bể bơi' prop='poolAvailableChecked' />
+                  <MyDropdownCheckbox label='Quán bar' prop='barChecked' />
                   <DropdownItem divider />
 
                   <DropdownItem header>Tiện ích phòng</DropdownItem>

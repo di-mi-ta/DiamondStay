@@ -1,0 +1,16 @@
+.starRating {
+    display: inline-block;
+}
+
+.starRating > i.fill {
+    text-shadow: 0 0 orange !important;
+}
+
+.starRating > i:not(:last-of-type) {
+    margin-right: 6px;
+}
+
+.starRating > i::before {
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.2);
+}
