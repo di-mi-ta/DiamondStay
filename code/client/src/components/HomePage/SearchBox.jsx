@@ -284,6 +284,9 @@ class SearchBox extends React.Component {
                   <DropdownItem onClick={e => this.handleInnerTextDataChange('homestayType', e)}>Khác</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
+          </div>
+
+          <div className="typeOfRoom inputBox">
             <div className="inputField">Loại phòng?</div>
             <div className="inputContent">
               <Dropdown isOpen={this.state.ui.roomTypeDropdownOpen} toggle={() => this.handleToggle('roomTypeDropdownOpen')}>
@@ -294,15 +297,14 @@ class SearchBox extends React.Component {
                 </DropdownMenu>
               </Dropdown>
             </div>
+          </div>
 
-            <div className="bedBedRoomAndBathRoom inputBox">
-              <div className="inputField">Số giường</div>
-              <div className="inputContent">
-                <input type="number" value={this.state.search.numBed} onChange={e => this.handleChangeWithEvent('numBed', e)}/>
-              </div>
-              <img src="https://www.luxstay.com/icons/earth.svg"></img>
+          <div className="bedBedRoomAndBathRoom inputBox">
+            <div className="inputField">Số giường</div>
+            <div className="inputContent">
+              <input type="number" value={this.state.search.numBed} onChange={e => this.handleChangeWithEvent('numBed', e)}/>
             </div>
-
+            <img src="https://www.luxstay.com/icons/earth.svg"></img>
             <img src="https://image.flaticon.com/icons/png/512/69/69524.png"></img>
           </div>
 
