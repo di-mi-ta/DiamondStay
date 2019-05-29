@@ -15,18 +15,18 @@ import queryString from 'query-string';
 class House extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      id: "",
-      verify: true,
-      location: "",
-      rating: 5,
-      numRating: 6,
-      //home info
-      name: "",
-      minimumNights: 1,
-      weekdayPrice: 10,
-      weekendPrice: 100,
-    }
+    // this.state = {
+    //   id: "4313421",
+    //   verify: true,
+    //   location: "Sóc Sơn, Hà Nội, Vietnam",
+    //   rating: 5,
+    //   numRating: 6,
+    //   //home info
+    //   name: 'Babylon House - Bungalow Bằng Lăng Trắng ',
+    //   minimumNights: 1,
+    //   weekdayPrice: 10,
+    //   weekendPrice: 100,
+    // }
   }
 
   componentWillMount(){
@@ -39,11 +39,6 @@ class House extends Component {
   }
 
   render() {
-    console.log("comment: ",
-    this.props.homeposts.currentHomepost?
-    this.props.homeposts.currentHomepost.rating
-    : ""
-    );
     const queryInUrl = this.props.location.search;
     const query = {
       ...queryString.parse(queryInUrl),
@@ -96,8 +91,8 @@ class House extends Component {
                   <span className="label-house-id">
                     Mã chỗ ở: {this.props.homeposts.currentHomepost._id}
                   </span>
-                  <span className={this.state.verify? "label-verify": "label-not-verify"}>
-                      {this.state.verify? 'Đã xác minh': 'Chưa xác minh'}
+                  <span className={true? "label-verify": "label-not-verify"}>
+                      {true? 'Đã xác minh': 'Chưa xác minh'}
                   </span>
                 </div>
                 <div className="location col-12">

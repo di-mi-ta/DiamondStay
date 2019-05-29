@@ -1,6 +1,6 @@
 .houseCarousel {
     overflow: hidden;
-    background: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 1);
 }
 
 .houseCarousel > .glideSlide {
@@ -8,6 +8,6 @@
 }
 
 .houseCarousel > .glideSlide > .glide__arrows {
-    left: 5vw;
-    right: 5vw;
+    left: 3vw;
+    right: 3vw;
 }

@@ -70,8 +70,6 @@ class GlideSlide extends React.Component {
         options.perView = this.props.itemList.length;
       }
       this.glide = new Glide(`.glideSlide[data-id=${this.id}]`, options).mount();
-      console.log("update", this.glide);
-      // this.updateGlide(this.props.options);
     }
   }
 

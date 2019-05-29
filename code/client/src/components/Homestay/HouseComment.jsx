@@ -94,8 +94,9 @@ class HouseComment extends React.Component {
         </div>
         <form className="commentForm">
           <label htmlFor="comment-textarea">Bình luận của bạn</label>
-          <textarea className="form-control" id="comment-textarea" rows="3"></textarea>
+          <textarea className="form-control" id="comment-textarea" rows="3" placeholder="Nhập bình luận"></textarea>
           <div className="rating">
+            <span>Đánh giá:</span>
             <StarRating options={{numStar: 0}} ref={this.starRatingRef}/>
           </div>
           <button type="button" className="btn" onClick={this.handleCommentSubmit}>Đăng</button>
