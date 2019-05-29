@@ -283,6 +283,7 @@ class SearchBox extends React.Component {
                 </DropdownMenu>
               </Dropdown>
             </div>
+            <img src="https://image.flaticon.com/icons/png/512/69/69524.png"></img>
           </div>
 
           <div className="typeOfRoom inputBox">
@@ -296,6 +297,7 @@ class SearchBox extends React.Component {
                 </DropdownMenu>
               </Dropdown>
             </div>
+            <img src="https://image.flaticon.com/icons/png/512/69/69524.png"></img>
           </div>
 
           <div className="bedBedRoomAndBathRoom inputBox">
@@ -303,8 +305,7 @@ class SearchBox extends React.Component {
             <div className="inputContent">
               <input type="number" value={this.state.search.numBed} onChange={e => this.handleChangeWithEvent('numBed', e)}/>
             </div>
-            <img src="https://www.luxstay.com/icons/earth.svg"></img>
-            <img src="https://image.flaticon.com/icons/png/512/69/69524.png"></img>
+            <img src="https://www.freeiconspng.com/uploads/hotel-bed-icon-png-8.png"></img>
           </div>
 
           <div className="otherCriteria inputBox">

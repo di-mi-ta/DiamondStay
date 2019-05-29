@@ -21,6 +21,10 @@
     margin-top: 10px;
 }
 
+.searchBox > button > a {
+    color: white;
+}
+
 .searchBox > .searchBox-container > .inputBox {
     display: inline-block;
     border: 1px solid #d6d6d6;

@@ -1,5 +1,6 @@
 .houseCarousel {
     overflow: hidden;
+    background: rgb(0, 0, 0);
 }
 
 .houseCarousel > .glideSlide {
