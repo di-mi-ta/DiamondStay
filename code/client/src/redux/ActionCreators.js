@@ -83,6 +83,11 @@ export const logoutUser = () => (dispatch) => {
     dispatch(receiveLogout())
 }
 
+// for search 
+export const  updateResultSearch = (homes) => ({
+    type: ActionTypes.UPDATE_RESULT_HOMES_QUERY,
+    payload: homes
+})
 
 // for Promotions 
 export const fetchHostPromos = (username) => (dispatch) => {

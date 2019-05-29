@@ -147,6 +147,7 @@ const HomePostSchema = new Schema({
         type: String,
         enum: ['Phù hợp với trẻ nhỏ', 'Đệm bổ sung', 'Không hút thuốc']
     }],
+
     // Tiện ích bếp
     kitchenFacs: [{
         type: String,
@@ -156,7 +157,7 @@ const HomePostSchema = new Schema({
     // Tiện ích giải trí
     funnyActs: [{
         type: String,
-        enum: ['Cho thú cưng', 'BBQ', 'Cảnh quan đẹp', 'Hướng biển', 'Gần sân golf', 'Câu cá', 'Bể bơi']
+        enum: ['Cho thú cưng', 'BBQ', 'Cảnh quan đẹp', 'Hướng biển', 'Gần sân golf', 'Câu cá', 'Bể bơi', 'Bar']
     }],
 
     // Tiện ích phòng
@@ -170,13 +171,13 @@ const HomePostSchema = new Schema({
         type: String,
         enum: ['Wifi', 'Tivi', 'Điều hòa', 'Máy giặt', 'Dầu gội, dầu xã', 'Giấy vệ sinh',
                'Giấy ăn', 'Nước khoáng', 'Khăn tắm', 'Kem đánh răng', 'Xà phòng tắm',
-               'Thang máy','Máy sấy']
+               'Thang máy','Máy sấy',]
     }],
 
     // Tiện ích nổi bật
     highlightFacs: [{
         type: String,
-        enum: ['Máy chiếu phim', 'Ghế massage', 'Smart tivi', 'Tủ đựng rượu']
+        enum: ['Máy chiếu phim', 'Ghế massage', 'Smart tivi', 'Tủ đựng rượu', 'Phòng tập gym']
     }]
 },{
     timestamps : true

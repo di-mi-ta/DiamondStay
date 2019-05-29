@@ -4,7 +4,8 @@ export const Homeposts = (state = {
         isLoading: true,
         errMess: null,
         homeposts: [],
-        currentHomepost: null
+        currentHomepost: null,
+        resHomepostsSearch: []
     }, action) => {
     switch(action.type) {
         case ActionTypes.ADD_HOMEPOSTS:
@@ -20,6 +21,9 @@ export const Homeposts = (state = {
 
         case ActionTypes.UPDATE_CURRENT_HOMEPOST:
             return {...state, currentHomepost: action.payload}
+        
+        case ActionTypes.UPDATE_RESULT_HOMES_QUERY:
+            return {...state, resHomepostsSearch: action.payload}
         default:
             return state;
     }

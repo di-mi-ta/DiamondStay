@@ -77,6 +77,9 @@ const FacilityForm = Form.create({ name: 'facilities' })(
                     <Col span={6}>
                       <Checkbox value="Bể bơi">Bể bơi</Checkbox>
                     </Col>
+                    <Col span={6}>
+                      <Checkbox value="Bar">Bar</Checkbox>
+                    </Col>
                   </CheckboxGroup>
                 )}
               </Form.Item>
@@ -163,6 +166,9 @@ const FacilityForm = Form.create({ name: 'facilities' })(
                     </Col>
                     <Col span={8}>
                         <Checkbox value="Tủ đựng rượu">Tủ đựng rượu</Checkbox>
+                    </Col>
+                    <Col span={8}>
+                        <Checkbox value="Phòng tập gym">Phòng tập gym</Checkbox>
                     </Col>
                   </CheckboxGroup>
                 )}

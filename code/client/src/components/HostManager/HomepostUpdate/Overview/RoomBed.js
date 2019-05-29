@@ -18,12 +18,12 @@ const BasicForm = Form.create({ name:'desc'})(
                   rules: [{ required: true, message: 'Trường này không được bỏ trống !!!' }],
                 })(
                     <Select>
-                        <Option value="chungcu">Chung cư</Option>
-                        <Option value="bietthu">Biệt thự</Option>
-                        <Option value="canhostudio">Căn hộ Studio</Option>
-                        <Option value="nharieng">Nhà riêng</Option>
-                        <Option value="canhodichvu">Căn hộ dịch vụ</Option>
-                        <Option value="khac">Khác</Option>
+                        <Option value="Chung cư">Chung cư</Option>
+                        <Option value="Biệt thự">Biệt thự</Option>
+                        <Option value="Căn hộ Studio">Căn hộ Studio</Option>
+                        <Option value="Nhà riêng">Nhà riêng</Option>
+                        <Option value="Căn hộ dịch vụ">Căn hộ dịch vụ</Option>
+                        <Option value="Khác">Khác</Option>
                     </Select>
                 )}
               </Form.Item>
@@ -33,8 +33,8 @@ const BasicForm = Form.create({ name:'desc'})(
                   rules: [{ required: true, message: 'Trường này không được bỏ trống !!!' }],
                 })(
                     <Select>
-                        <Option value="nguyencan">Nguyên căn</Option>
-                        <Option value="phongrieng">Phòng riêng</Option>
+                        <Option value="Nguyên căn">Nguyên căn</Option>
+                        <Option value="Phòng riêng">Phòng riêng</Option>
                     </Select>
                 )}
               </Form.Item>
@@ -114,7 +114,7 @@ class RoomBed extends Component {
             numBedroom: roomBedValues.numBedroom,
             typeHome: basicValues.typeHome,
             maxPeoples: basicValues.maxPeoples,
-            typeRoom: basicValues.typeRoom === 'nguyencan' ? 'Nguyên căn' : 'Phòng riêng',
+            typeRoom: basicValues.typeRoom,
             acreage: basicValues.acreage
           }
           this.props.fetchUpdateHomepost(updatedHomepost);

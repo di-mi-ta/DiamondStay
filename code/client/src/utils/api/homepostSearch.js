@@ -5,8 +5,8 @@ initAxios(axios);
 
 export function search(searchObject) {
     return new Promise(function(resolve, reject) {
-        axios.get('/search', searchObject).then(results => {
-            resolve(results);
+        axios.get('/search?'+searchObject).then(results => {
+            resolve(results.data);
         }).catch(err => {
             reject(err);
         });

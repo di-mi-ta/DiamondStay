@@ -6,10 +6,13 @@ import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from 'react-datepicker';
 import {Dropdown,DropdownToggle,DropdownMenu,DropdownItem, Collapse} from 'reactstrap';
 import PropTypes from 'prop-types';
-import { Link, withRouter } from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import queryString from 'query-string';
 import moment from 'moment';
 import update from 'immutability-helper';
+import {connect} from 'react-redux';
+import {search} from '../../utils/api/homepostSearch';
+import * as actions from '../../redux/ActionCreators';
 
 class SearchBox extends React.Component {
   constructor(props) {
@@ -21,7 +24,7 @@ class SearchBox extends React.Component {
         dateLeave: undefined, // Date | undefined
         numGuests: 1,
         numChildren: 0,
-        price: 1,
+        price: 0,
         homestayType: undefined,
         kitchenChecked: false,
         childrenChecked: false,
@@ -55,18 +58,21 @@ class SearchBox extends React.Component {
 
   handleSearch = () => {
     // TODO use utils/api/homepostSearch
-    this.convertStateToQueryString();
+    search(this.convertStateToQueryString())
+    .then((homes) => {
+      this.props.updateResultSearch(homes);
+    }, err => console.log(err));
   }
 
   convertStateToQueryString = () => {
       const query = {...this.state.search};
-
       // Delete default values
       const dontCareValues = [
         undefined,  // text values
         '',         // text values
         false,      // checkboxes
       ];
+
       for (let prop in query) {
         if (dontCareValues.indexOf(query[prop]) !== -1) // this props contains dont care value
             delete query[prop];
@@ -224,7 +230,7 @@ class SearchBox extends React.Component {
           <div className="priceValue inputBox">
             <div className="inputField">Tối đa {this.state.search.price}$ / đêm</div>
             <div className="inputContent">
-              <input type="range" name="weight" min="10" max="2000" value={this.state.search.price} onChange={e => this.handleChangeWithEvent('price', e)} step="10"></input>
+              <input type="range" name="weight" min="0" max="100000000" value={this.state.search.price} onChange={e => this.handleChangeWithEvent('price', e)} step="10"></input>
             </div>
             <img src="https://images.vexels.com/media/users/3/135829/isolated/preview/1a857d341d8b6dd31426d6a62a8d9054-dollar-coin-currency-icon-by-vexels.png"></img>
           </div>
@@ -279,4 +285,13 @@ class SearchBox extends React.Component {
   }
 }
 
-export default withRouter(SearchBox);
+const mapStateToProps = state => ({
+  homeposts: state.homeposts,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  updateResultSearch: (homes) => dispatch(actions.updateResultSearch(homes)),
+});
+
+export default withRouter((connect(mapStateToProps, mapDispatchToProps)(SearchBox)))
+
