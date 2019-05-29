@@ -28,11 +28,14 @@ class House extends Component {
     }
   }
 
-  componentWillMount() {
-    console.log(this.props);
+  componentWillMount(){
     this.props.fetchHomepostById(this.props.match.params.homepostId);
   }
 
+  componentDidMount(){
+    this.props.fetchSystemPromos();
+    this.props.fetchHostPromos();
+  }
 
   render() {
     console.log("comment: ",
@@ -44,7 +47,32 @@ class House extends Component {
     const query = {
       ...queryString.parse(queryInUrl),
       homepostId: this.props.match.params.homepostId,
-    }
+    };
+    
+    // for promotions 
+
+    // get list system promotions applied for current homeposts
+    let sysPromos = this.props.promotions.systemPromos.filter((promo) => {
+      const currentTime = Date();
+      if (Date(promo.dateStart) >= currentTime && currentTime <= Date(promo.dateEnd)){
+        return true
+      }
+      return false
+    });
+
+    // get list promotions of host applied for current homeposts
+    let hostPromos = this.props.promotions.hostPromotions.filter((promo) => {
+      const currentTime = Date();
+      if (this.props.homeposts.currentHomepost){
+        if (Date(promo.dateStart) >= currentTime && currentTime <= Date(promo.dateEnd)){
+          if (promo.homeposts.includes(this.props.homeposts.currentHomepost._id)){
+            return true;
+          }
+        }
+      }
+      return false
+    });
+
     return (
       <div>
         <MainHeader/>
@@ -97,6 +125,10 @@ class House extends Component {
                     } đánh giá
                   </span>
                 </div>
+                <div>Khuyến mãi hệ thống</div>
+                {JSON.stringify(sysPromos)}
+                <div>Ưu đãi từ chủ nhà</div>
+                {JSON.stringify(hostPromos)}
                 <div className="col-12 col-md-8">
                   {/* <Convenience/> */}
                   <div className="priceTable">
@@ -189,12 +221,15 @@ class House extends Component {
 }
 
 const mapStateToProps = state => ({
-  homeposts: state.homeposts
+  homeposts: state.homeposts,
+  promotions: state.promotions,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   fetchHomeposts: (query='') => {dispatch(actions.fetchHomeposts(query))},
-  fetchHomepostById: homeId => {dispatch(actions.fetchHomepostById(homeId))}
+  fetchHomepostById: homeId => {dispatch(actions.fetchHomepostById(homeId))},
+  fetchSystemPromos: () => {dispatch(actions.fetchSystemPromos())},
+  fetchHostPromos: () => {dispatch(actions.fetchHostPromos())},
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(House));
