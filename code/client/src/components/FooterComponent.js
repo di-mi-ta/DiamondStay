@@ -9,11 +9,12 @@ function Footer(props) {
         <div className="footer">
             <div className="container footer-container">
                 <div className="row justify-content-center">
-                    <div className="col-md-3 col-xs-12 offset-1">
+                    <div className="col-xs-12 col-md-4">
+                        <img src="../assets/images/diamond.ico" alt=""/>
                         <h2 className="mb-0">Diamond Stay</h2>
                         <p>Hệ thống chia sẻ nhà</p>
                     </div>           
-                    <div className="col-md-2 col-xs-12">
+                    <div className="col-xs-12 col-md-4">
                         <h5>Visit</h5>
                         <address>
                             268 Ly Thuong Kiet St.<br />
@@ -27,14 +28,14 @@ function Footer(props) {
                             Diamond Stay<br />
                         </address>
                     </div>
-                    <div className="col-md-4 col-xs-12 align-self-center social-icons-container">
+                    <div className="col-xs-12 col-md-4 align-self-center social-icons-container">
                         <h5>Follow Us</h5>
                         <div>
-                            <SocialIcon style={{height: 30, width: 30, margin: 4}} url="https://www.google.com" fgColor="#ffffff"/>
-                            <SocialIcon style={{height: 30, width: 30, margin: 4}} url="https://www.facebook.com/" fgColor="#ffffff"/>
-                            <SocialIcon style={{height: 30, width: 30, margin: 4}} url="https://www.twitter.com/" fgColor="#ffffff"/>
-                            <SocialIcon style={{height: 30, width: 30, margin: 4}} url="https://linkedin.com/" fgColor="#ffffff"/>
-                            <SocialIcon style={{height: 30, width: 30, margin: 4}} url="https://www.cse.hcmut.edu.vn" label="CSE" fgColor="#ffffff"/>
+                            <SocialIcon url="https://www.google.com" fgColor="#ffffff"/>
+                            <SocialIcon url="https://www.facebook.com/" fgColor="#ffffff"/>
+                            <SocialIcon url="https://www.twitter.com/" fgColor="#ffffff"/>
+                            <SocialIcon url="https://linkedin.com/" fgColor="#ffffff"/>
+                            <SocialIcon url="https://www.cse.hcmut.edu.vn" label="CSE" fgColor="#ffffff"/>
                         </div>
                     </div>
                 </div>

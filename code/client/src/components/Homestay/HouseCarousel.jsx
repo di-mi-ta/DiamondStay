@@ -1,40 +1,52 @@
 import React from 'react';
 import '../../css/HouseCarousel.css';
+import GlideSlide from '../HomePage/GlideSlide';
+import {baseUrl} from '../../shared/baseUrl';
 
 class HouseCarousel extends React.Component {
-  constructor() {
-    super();
-    this.state = { someKey: 'someValue' };
+  constructor(props) {
+    super(props);
+    /*
+    this.props.images = [
+      "http://link1",
+      "http://link2"
+    ] 
+    */
+    this.ref = React.createRef();
+  }
+
+  componentDidMount() {
+    const root = this.ref.current;
+    console.log(root);
   }
 
   render() {
     return (
-      <div id="carouselControl" className="carousel slide" data-ride="carousel">
-        <div className="carousel-inner">
-          <div className="carousel-item active">
-            <img src="https://cdn.luxstay.com/rooms/20242/large/room_20242_13_1549255598.jpg" className="d-block w-100" alt="..."/>
-          </div>
-          <div className="carousel-item">
-            <img src="https://cdn.luxstay.com/rooms/20242/large/room_20242_7_1549255279.jpg" className="d-block w-100" alt="..."/>
-          </div>
-          <div className="carousel-item">
-            <img src="https://cdn.luxstay.com/rooms/20242/large/room_20242_8_1549255422.jpg" className="d-block w-100" alt="..."/>
-          </div>
-        </div>
-        <a className="carousel-control-prev" href="#carouselControl" role="button" data-slide="prev">
-          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span className="sr-only">Previous</span>
-        </a>
-        <a className="carousel-control-next" href="#carouselControl" role="button" data-slide="next">
-          <span className="carousel-control-next-icon" aria-hidden="true"></span>
-          <span className="sr-only">Next</span>
-        </a>
+      <div className="houseCarousel" ref={this.ref}>
+        <GlideSlide
+          hasControl = {true}
+          options = {{
+            gap: 10,
+            type: 'carousel',
+            focusAt: 'center',
+            perView: 1,
+            peek: 100,
+            autoplay: false
+          }}
+          itemList = {
+            this.props.images.map(image =>
+              <img 
+                src={image}
+                style={{
+                  width: '100%',
+                  height: '100%'
+                }}
+              />
+            )
+          }
+        />
       </div>
     );
-  }
-
-  componentDidMount() {
-    this.setState({ someKey: 'otherValue' });
   }
 }
 

@@ -2,14 +2,14 @@ import React from 'react';
 import '../../css/BookingBox.css';
 import DatePicker from 'react-datepicker';
 import {Button} from 'reactstrap';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import * as actions from '../../redux/ActionCreators';
 import PropTypes from 'prop-types';
 
 class BookingForm extends React.Component{
     constructor(props){
         super(props);
-        const user = this.props.auth.user.info;
         this.state = { //information of booking lies here
             //homestay
             homestayName: undefined,
@@ -21,11 +21,11 @@ class BookingForm extends React.Component{
             homestayCheckIn: undefined,
             homestayCheckOut: undefined,
             //user
-            userName: user.fullName,
-            userAccount: user.username,
-            userPhoneNumber: user.phone,
-            userAddress: 'NO ADDRESS!',
-            userEmail: user.email,
+            userName: undefined, //user.fullName,
+            userAccount: undefined,//user.username,
+            userPhoneNumber: undefined,//user.phone,
+            userAddress: undefined,//'NO ADDRESS!',
+            userEmail: undefined,//user.email,
             //acount
             accName: undefined,
             accNumber: undefined,
@@ -68,52 +68,58 @@ class BookingForm extends React.Component{
         });
     }
 
-    handleAccNumberChange(value){
+    handleAccNumberChange = (value) => {
         this.setState({
             accNumber: value.target.value
         });
-    }
+    };
 
-    handleAccNameChange(value){
+    handleAccNameChange = (value) => {
         this.setState({
             accName: value.target.value
         });
-    }
+    };
 
-    handleAddressChange(value){
+    handleAddressChange = (value) => {
         this.setState({
             userAddress:value.target.value
         });
-    }
+    };
 
 
-    handlePhoneNumberChange(value){
+    handlePhoneNumberChange = (value) =>{
         this.setState({
             userPhoneNumber:value.target.value
         });
-    }
+    };
 
-    handleUserNameChange(value){
+    handleUserNameChange = (value) => {
         this.setState({
             userName: value.target.value
         });
-    }
+    };
 
-
-
-    handleDateComeChange(date) {
+    handleDateComeChange = (date) => {
         this.setState({
           dateCome: date
         });
-      }
+    };
 
-    handleDateLeaveChange(date) {
+    handleDateLeaveChange = (date) => {
         this.setState({
             dateLeave: date
         });
-    }
+    };
 
     render(){
+        // KHOA
+        let homepost = this.props.currentHomepost || {};
+        const user = this.props.auth.user.info
+        if (homepost !== {}) {
+          console.log(homepost);
+          console.log(user);
+        }
+
         return(
             <div className="huge-input-container">
                 <div className="searchBox container-fluid">
@@ -203,11 +209,13 @@ const mapStateToProps = state => ({
   auth: state.auth,
   homeposts: state.homeposts,
   promotions: state.promotions,
+  currentHomepost: state.homeposts.currentHomepost,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   fetchSystemPromos: () => {dispatch(actions.fetchSystemPromos())},
   fetchHomeposts: (query='') => {dispatch(actions.fetchHomeposts(query))},
+  fetchHomepostById: (homepostId) => {dispatch(actions.fetchHomepostById(homepostId))},
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(BookingForm);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BookingForm));

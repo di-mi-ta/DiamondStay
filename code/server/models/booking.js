@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 const reservationSchema = new Schema({
     renter: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'Users'
     },
     paymentStatus: {
         type: Number,

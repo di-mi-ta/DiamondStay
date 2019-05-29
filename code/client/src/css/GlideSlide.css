@@ -3,17 +3,16 @@
     position: relative;
 }
 
-.glide > .glide__track > ul > li {
-    /* box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-    height: 100%; */
-}
-
 .glide > .glide__arrows {
     position: absolute;
     top: 50%;
     left: -52px;
     right: -52px;
 }
+
+/* .glide > .glide__track > .glide__slides {
+    align-items: center;
+} */
 
 .glide > .glide__arrows > button {
     background: #fff;

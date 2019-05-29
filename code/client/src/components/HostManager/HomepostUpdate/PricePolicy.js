@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Input, Form, Select, InputNumber, Divider, message} from 'antd';
+import {Button, Input, Form, Select, InputNumber, Divider, message, Row, Col, Card} from 'antd';
 import {connect} from 'react-redux';
 import * as actions from '../../../redux/ActionCreators';
 
@@ -14,18 +14,20 @@ const PriceForm = Form.create({ name:'desc'})(
             <div>
             <h4><b>Giá</b></h4>
             <Form  layout="vertical">
-              <Form.Item label="Giá cơ bản">
+              <Form.Item label={<b>Giá cơ bản</b>}>
                 {getFieldDecorator('weekdayPrice', {
-                  initialValue: this.props.homeposts.currentHomepost.weekdayPrice,
+                  initialValue: this.props.homeposts.currentHomepost ? 
+                                this.props.homeposts.currentHomepost.weekdayPrice : '',
                   rules: [{ required: true, message: 'Trường này không được bỏ trống !!!' }],
                 })(
                     <InputNumber min='0' style={{width: '100%'}}/>
 
                 )}
               </Form.Item>
-              <Form.Item label="Giá cuối tuần">
+              <Form.Item label={<b>Giá cuối tuần</b>}>
                 {getFieldDecorator('weekendPrice', {
-                  initialValue: this.props.homeposts.currentHomepost.weekendPrice,
+                  initialValue: this.props.homeposts.currentHomepost ? 
+                                this.props.homeposts.currentHomepost.weekendPrice : '',
                   rules: [{ required: true, message: 'Trường này không được bỏ trống !!!' }],
                 })(<Input />)}
               </Form.Item>
@@ -43,11 +45,12 @@ const CurrencyUnitForm = Form.create({name: 'desc'})(
         const { getFieldDecorator } = form;
         return (
             <div>
-            <h4><b>Đơn vị tiền tệ</b></h4>
+            <h4><b>Đơn vị tiền tệ</b></h4>        
             <Form  layout="vertical">
-               <Form.Item label="Đơn vị tiền tệ:">
+               <Form.Item label={<b>Đơn vị tiền tệ</b>}>
                 {getFieldDecorator('currencyUnit', {
-                  initialValue: this.props.homeposts.currentHomepost.currencyUnit,
+                  initialValue: this.props.homeposts.currentHomepost ? 
+                                this.props.homeposts.currentHomepost.currencyUnit : '',
                   rules: [{ required: true, message: 'Trường này không được bỏ trống !!!' }],
                 })(
                     <Select>
@@ -107,20 +110,35 @@ class PricePolicy extends Component {
   render(){
       return(
           <div className="container">
-              <h3><b>Giá và các chính sách</b></h3>
-              <Button onClick={this.onUpdateBtnClick} type='primary' style={{marginBottom: 10}}> 
-                  Cập nhật
-              </Button>
-              <Divider/>
-              <CurrencyUnitForm
-                  wrappedComponentRef={this.saveCurrencyUnitFormRef}
-                  homeposts={this.props.homeposts}
-              />
-              <Divider/>
-              <PriceForm
-                  wrappedComponentRef={this.savePriceFormRef}
-                  homeposts={this.props.homeposts}
-              />        
+              <Row>
+                <Col span={6}> 
+                  <h3><b>Giá và các chính sách</b></h3> 
+                </Col>
+                <Col span={6} offset={12}>
+                <Button onClick={this.onUpdateBtnClick} style={{marginBottom: 10, boxShadow: '0 8px 12px rgba(0,0,0,.1)'}}> 
+                    Cập nhật
+                  </Button>
+                </Col>
+              </Row>
+              <Card style={{
+                        width: '100%', padding: 10, 
+                        marginTop: 10, marginBottom: 10,
+                        boxShadow: '0 8px 12px rgba(0,0,0,.1)',}}>
+                <CurrencyUnitForm
+                    wrappedComponentRef={this.saveCurrencyUnitFormRef}
+                    homeposts={this.props.homeposts}
+                />
+              </Card>
+
+              <Card style={{
+                        width: '100%', padding: 10, 
+                        marginTop: 10, marginBottom: 10,
+                        boxShadow: '0 8px 12px rgba(0,0,0,.1)',}}>
+                <PriceForm
+                    wrappedComponentRef={this.savePriceFormRef}
+                    homeposts={this.props.homeposts}
+                />
+              </Card>        
           </div>
       );
   }

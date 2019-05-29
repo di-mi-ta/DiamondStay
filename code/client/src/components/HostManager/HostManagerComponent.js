@@ -9,7 +9,6 @@ import Header from '../Header/HostHeader';
 import '../../css/host/host-manager.css';
 import MessageInbox from '../MessageInbox';
 import {connect} from 'react-redux';
-import * as actions from '../../redux/ActionCreators';
 
 class HostManager extends Component{
     render() {
@@ -21,11 +20,12 @@ class HostManager extends Component{
             <Menu
               defaultSelectedKeys={['1']}
               mode= "horizontal"
-              theme= 'light'
+              // theme= 'light'
               style={{
+                      boxShadow: '0 8px 12px rgba(0,0,0,.1)',
                       textAlign: 'center',
-                      background: "#d6ebff"
-                    }}
+                      // background: "#d6ebff"
+              }}
             >
               <Menu.Item key="4">
                 <Link to='/host/my-homes'>

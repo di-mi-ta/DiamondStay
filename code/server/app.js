@@ -8,6 +8,7 @@ const messageRouter = require('./routes/messages');
 const commentRouter = require('./routes/comment');
 const bookingRouter = require('./routes/booking');
 const locationRouter = require('./routes/location');
+const homepostSearchRouter = require('./routes/homepostSearch');
 
 const app = express();
 require('./initialize')(app);
@@ -18,6 +19,7 @@ require('./initialize')(app);
 app.use(express.static('public'))
 app.use('/users', usersRouter);
 app.use('/homeposts', homepostRouter);
+app.use('/search', homepostSearchRouter);
 app.use('/host-promotions', hostPromoRouter);
 app.use('/system-promotions', systemPromoRouter);
 app.use('/messages', messageRouter);

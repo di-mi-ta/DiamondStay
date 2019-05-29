@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Input, Form, Select, InputNumber, Divider, message} from 'antd';
+import {Button, Input, Form, Select, Row, Col, Card, message} from 'antd';
 import {baseUrl} from '../../../shared/baseUrl';
 import {connect} from 'react-redux';
 import * as actions from '../../../redux/ActionCreators';
@@ -36,10 +36,11 @@ const LocationForm = Form.create({ name:'desc'})(
         const { getFieldDecorator, getFieldValue } = form;
         return (
             <Form  layout="vertical">
-              <Form.Item label="Chọn tỉnh, thành phố">
+              <Form.Item label={<b>Chọn tỉnh, thành phố</b>}>
                 {getFieldDecorator('province', {
-                  initialValue: this.props.homeposts.currentHomepost.location !== null ? 
-                                    this.props.homeposts.currentHomepost.location.province: '',
+                  initialValue: this.props.homeposts.currentHomepost ? 
+                                this.props.homeposts.currentHomepost.location ?
+                                this.props.homeposts.currentHomepost.location.province: '' : '',
                   rules: [{required: true, message: "Trường này không được để trống!!!"}],
                 })(
                     <Select>
@@ -48,10 +49,11 @@ const LocationForm = Form.create({ name:'desc'})(
                     </Select>
                 )}
               </Form.Item>
-              <Form.Item label="Chọn quận, huyện">
+              <Form.Item label={<b>Chọn quận, huyện</b>}>
                 {getFieldDecorator('district', {
-                  initialValue: this.props.homeposts.currentHomepost.location !== null ? 
-                                  this.props.homeposts.currentHomepost.location.district: '',
+                  initialValue: this.props.homeposts.currentHomepost ? 
+                                this.props.homeposts.currentHomepost.location ?
+                                this.props.homeposts.currentHomepost.location.district: '' : '',
                   rules: [{required: true, message: "Trường này không được để trống!!!"}],
                 })(
                     <Select>
@@ -60,10 +62,11 @@ const LocationForm = Form.create({ name:'desc'})(
                     </Select>
                 )}
               </Form.Item>
-              <Form.Item label="Chọn xã, phường">
+              <Form.Item label={<b>Chọn xã, phường</b>}>
                 {getFieldDecorator('ward', {
-                  initialValue: this.props.homeposts.currentHomepost.location !== null ? 
-                        this.props.homeposts.currentHomepost.location.ward: '',
+                  initialValue: this.props.homeposts.currentHomepost ? 
+                                this.props.homeposts.currentHomepost.location ?
+                                this.props.homeposts.currentHomepost.location.ward: '' : '',
                   rules: [{ required: true, message: "Trường này không được để trống!!!"}],
                 })(
                   <Select>
@@ -72,9 +75,10 @@ const LocationForm = Form.create({ name:'desc'})(
                   </Select>
                 )}
               </Form.Item>
-              <Form.Item label="Số nhà, đường">
+              <Form.Item label={<b>Số nhà, đường</b>}>
                 {getFieldDecorator('homeNumber', {
-                  initialValue: this.props.homeposts.currentHomepost.homeNumber,
+                  initialValue: this.props.homeposts.currentHomepost ? 
+                                this.props.homeposts.currentHomepost.homeNumber : '',
                   rules: [{ required: false}],
                 })(<Input />)}
               </Form.Item>
@@ -151,16 +155,26 @@ class Location extends Component {
   render(){
       return(
           <div className="container">
-              <h3><b>Vị trí</b></h3>
-              <Button onClick={this.onUpdateBtnClick} type='primary' style={{marginBottom: 10}}> 
-                  Cập nhật
-              </Button>
-              <Divider/>
-              <LocationForm
-                  wrappedComponentRef={this.saveLocationFormRef}
-                  homeposts={this.props.homeposts}
-                  locations={this.state.locations}
-              /> 
+              <Row>
+                <Col span={6}> 
+                  <h3><b>Vị trí</b></h3>
+                </Col>
+                <Col span={6} offset={12}>
+                <Button onClick={this.onUpdateBtnClick} style={{marginBottom: 10, boxShadow: '0 8px 12px rgba(0,0,0,.1)'}}> 
+                    Cập nhật
+                  </Button>
+                </Col>
+              </Row>
+              <Card style={{
+                        width: '100%', padding: 10, 
+                        marginTop: 10, marginBottom: 10,
+                        boxShadow: '0 8px 12px rgba(0,0,0,.1)',}}>
+                <LocationForm
+                    wrappedComponentRef={this.saveLocationFormRef}
+                    homeposts={this.props.homeposts}
+                    locations={this.state.locations}
+                /> 
+              </Card>
           </div>
       );
   }

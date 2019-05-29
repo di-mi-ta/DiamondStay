@@ -72,8 +72,8 @@ class Reservation extends Component {
         const data = []
         return(
             <div style={{paddingTop: 30, paddingLeft: 50, paddingRight: 50,
-                        paddingBottom: 50, background: '#f1f1f1'}}>
-                <h2> <b> Đặt phòng </b></h2>
+                        paddingBottom: 50}}>
+                <h3> <b> Đặt phòng </b></h3>
                 <Divider style={{background: '#cac6c6'}}/>
                 <Form layout='inline' style={{ width: '100%'}}>
                         <Form.Item

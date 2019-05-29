@@ -12,13 +12,8 @@ class Rejected extends Component {
         this.onViewVerifyResult = this.onViewVerifyResult.bind(this);
     }
 
-    componentWillMount(){
-        this.props.fetchHomeposts('?state=Rejected');
-    }
-
     onDeleteRejectedHome = (homepost) => {
         this.props.fetchDeleteHomepost(homepost);
-        this.props.fetchHomeposts('?state=Rejected');
     }
 
     onViewVerifyResult = (homepost) => {
@@ -67,20 +62,19 @@ class Rejected extends Component {
     }]
     render(){
         return(
-            <div style = {{padding: 50, background: '#f1f1f1'}}>
+            <div style = {{padding: 50}}>
                 <Card style={{ 
-                            boxShadow: "1px 3px 1px #9E9E9E",
-                            borderRadius: "10px",
+                            boxShadow: '0 8px 12px rgba(0,0,0,.1)',
                             minHeight: '300px'}}>
                 <Table columns={this.columns} 
-                    dataSource={this.props.homeposts.homeposts} 
+                    dataSource={this.props.homeposts.homeposts.filter(home => home.state === 'Rejected')} 
                 />
                 </Card>
             </div>
         )
     }
     componentDidMount(){
-        this.props.fetchHomeposts('?state=Rejected');
+        this.props.fetchHomeposts();
     }
 }
 

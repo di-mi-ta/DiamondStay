@@ -33,6 +33,10 @@
 }
 
 .mainHeader > .collapse > ul > li.nav-item > a {
+    padding: 0;
+}
+
+.mainHeader > .collapse > ul > li.nav-item > a > button {
     font-family: 'Open Sans', sans-serif;
     font-size: 1.1rem;
     font-weight: 400;
@@ -41,12 +45,14 @@
     padding: 0;
 }
 
-.mainHeader > .collapse > ul > li.nav-item > a:hover {
+.mainHeader > .collapse > ul > li.nav-item > a > button:hover {
     color: #f65e39;
 }
 
 /* drop down item */
 .mainHeader > .collapse > ul > li.nav-item.dropdown {
+    display: flex;
+    align-items: center;
     background: #f6f6f6;
     border-radius: 2rem;
 }

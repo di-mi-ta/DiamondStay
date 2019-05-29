@@ -2,8 +2,14 @@ const HomePosts = require('../models/homeposts')
 
 const getHomeposts = (req, res, next) => {
     HomePosts.find(req.query)
+    .populate({
+        path:     'rating',			
+        populate: {
+            path:  'author',
+            model: 'Users'
+        }
+    })
     .populate('location')
-    .populate('rating.author')
     .then((homeposts) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json')
@@ -24,8 +30,14 @@ const deleteAllHomePost = (req, res, next) => {
 
 const findHomePostDetailedById = (req,res,next) => {
     HomePosts.findById(req.params.homepostId)
+    .populate({
+        path:     'rating',			
+        populate: {
+            path:  'author',
+            model: 'Users'
+        }
+    })
     .populate('location')
-    .populate('rating.author')
     .then((homepost) => {
         res.statusCode = 200;
         res.setHeader('Content-Type','application/json')

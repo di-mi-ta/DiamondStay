@@ -7,39 +7,48 @@ import Glide from '@glidejs/glide';
 class GlideSlide extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      hasControl: props.data.hasControl? props.data.hasControl : false,
-      itemList: props.data.itemList? props.data.itemList: []
+    /*
+    this.props = {
+      hasControl: true/false,
+      options: {
+        perView: 1,
+        type: 'carrousel',
+        autoplay: 5000 or false
+      },
+      itemList: {
+        [
+          <Component/>,
+          ...
+        ]
+      }
     }
-    this.options = props.data.options? props.data.options : {
+    */
+    this.defaultOptions = {
       type: 'slider',
       startAt: 0,
       perView: 4,
       gap: 20,
       bound: true,
-      autoplay: 5000
-    }
+      autoplay: false
+    };
     this.ref = React.createRef();
     this.id = 'glideslide_' + Math.random().toString(36).substr(2, 9);
-    this.updateGlide = this.updateGlide.bind(this);
   }
 
   render() {
     return (
-      <div className={`glide glideSlide ${this.props.className}`} ref={this.ref} data-id={this.id}>
+      <div className={`glide glideSlide`} ref={this.ref} data-id={this.id}>
         <div className="glide__track" data-glide-el="track">
           <ul className="glide__slides">
-            {
-            this.state.itemList.map((item, index) =>
+            {this.props.itemList.map((item, index) =>
               <li className="glide__slide" key={index}>
                 {item}
               </li>
-            )
-            }
+            )}
           </ul>
         </div>
         {
-          this.state.hasControl &&
+          (this.props.hasControl && this.props.hasControl == true) &&
           <div className="glide__arrows" data-glide-el="controls">
             <button className="glide__arrow glide__arrow--left" data-glide-dir="<">
               <i className="fa fa-chevron-left" aria-hidden="true"></i>
@@ -53,14 +62,22 @@ class GlideSlide extends React.Component {
     );
   }
 
-  updateGlide(options) {
-    return this.glide.update(options);
+  componentDidUpdate(prevProps) {
+    if (prevProps != this.props) {
+      this.glide.destroy();
+      let options = {...this.defaultOptions, ...this.props.options};
+      if (options.perView > this.props.itemList.length) {
+        options.perView = this.props.itemList.length;
+      }
+      this.glide = new Glide(`.glideSlide[data-id=${this.id}]`, options).mount();
+      console.log("update", this.glide);
+      // this.updateGlide(this.props.options);
+    }
   }
 
   componentDidMount() {
-    const options = this.options;
-    const glide = new Glide(`.glideSlide[data-id=${this.id}]`, options).mount();
-    this.glide = glide;
+    const options = {...this.defaultOptions, ...this.props.options};
+    this.glide = new Glide(`.glideSlide[data-id=${this.id}]`, options).mount();
   }
 }
 

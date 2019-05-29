@@ -1,13 +1,10 @@
 import React from 'react';
 import '../../css/ImageCard.css';
+import {baseUrl} from '../../shared/baseUrl';
 
 class ImageCard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      image: props.data.image,
-      description: props.data.description? props.data.description : ''
-    };
     this.ref = React.createRef();
   }
 
@@ -15,12 +12,12 @@ class ImageCard extends React.Component {
     return (
       <div className="imageCard" ref={this.ref}>
         <img style={{
-          filter: this.state.description? 'brightness(80%)': 'brightness(100%)'
-        }} src={this.state.image}/>
+          filter: this.props.data.description? 'brightness(80%)': 'brightness(100%)'
+        }} src={this.props.data.image}/>
         <span style={{
-          display: !this.state.description? 'none': ''
+          display: !this.props.data.description? 'none': ''
         }}>
-          {this.state.description}
+          {this.props.data.description}
         </span>
       </div>
     );

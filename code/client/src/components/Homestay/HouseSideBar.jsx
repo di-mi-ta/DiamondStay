@@ -1,10 +1,14 @@
 import React from 'react';
 import '../../css/HouseSideBar.css';
 import HouseCard from './HouseCard';
+import {connect} from 'react-redux';
+import * as actions from '../../redux/ActionCreators';
+import { baseUrl } from '../../shared/baseUrl';
+import {Link} from 'react-router-dom';
 
 class HouseSideBar extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.promotion = [
       {
         id: "1",
@@ -53,10 +57,10 @@ class HouseSideBar extends React.Component {
     return (
         <div className="houseSideBar container-fluid">
           <div className="hostInfo">
-            <h3>Chủ nhà Babylone House</h3>
+            <h3>Chủ nhà {this.props.currentHomepost.name}</h3>
             <div className="content row">
               <div className="col-8">
-                Babylon House sở hữu những căn hộ sang trọng, giá tốt, là điểm dừng chân tuyệt vời cho cho chuyến đi cho bạn và người thân.
+                {this.props.currentHomepost.description}
               </div>
               <div className="hostAvatar col-4">
                 <img src="https://scontent.fsgn4-1.fna.fbcdn.net/v/t1.0-9/25659495_1985790391700726_2055711243115136599_n.jpg?_nc_cat=100&_nc_oc=AQm11pM1x-LWd4bzDu0lbnhDaR2gEO2jN56w7oYbUAn9UAgkkQEEXr6q_ega7yqAZpY&_nc_ht=scontent.fsgn4-1.fna&oh=e085f90bcf942f27a604d6e2b8e7f0be&oe=5D731042"></img>
@@ -65,17 +69,46 @@ class HouseSideBar extends React.Component {
           </div>
           <div className="housePromotion">
             <h3>Chỗ ở tương tự</h3>
-            {this.promotion.map(house =>
-              <HouseCard houseData={house} key={house.id}/>
-            )}
+            {
+              this.props.homeposts.homeposts
+              .slice(0, 5)  // maximum 5 posts
+              .map(house => ({
+                id: house._id,
+                image: house.image.length > 0?
+                  baseUrl + house.image[0] 
+                  : 'https://cdn.luxstay.com/rooms/14456/medium/1537270177_DSC06175.jpg',
+                type: house.typeHome,
+                houseName: house.name,
+                location: house.location,
+                price: `${house.weekdayPrice} ${house.currencyUnit}`,
+                rating: house.rating.length > 0?
+                  Math.floor(
+                    this.props.homeposts.currentHomepost.rating
+                    .map(rating => rating.rating)
+                    .reduce((a, b) => a + b, 0) / this.props.homeposts.currentHomepost.rating.length
+                  )
+                  : 0,
+                numRating: house.rating.length
+              }))
+              .map(house =>
+                <Link to={`/room/${house.id}`} key={house.id}>
+                  <HouseCard houseData={house}/>
+                </Link>
+                // <HouseCard houseData={house} key={house.id}/>
+              )
+            }
           </div>
         </div>
     );
   }
-
-  componentDidMount() {
-    
-  }
 }
 
-export default HouseSideBar;
+const mapStateToProps = state => ({
+  homeposts: state.homeposts
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchHomeposts: (query='') => {dispatch(actions.fetchHomeposts(query))}
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(HouseSideBar);
