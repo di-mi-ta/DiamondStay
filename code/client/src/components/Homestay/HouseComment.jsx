@@ -2,6 +2,7 @@ import React from 'react';
 import '../../css/HouseComment.css';
 import {connect} from 'react-redux';
 import * as actions from '../../redux/ActionCreators';
+import StarRating from './StarRating';
 
 class HouseComment extends React.Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class HouseComment extends React.Component {
       }
     ]
     */
+    this.starRatingRef = React.createRef();
     this.comments = this.props.comments;
     this.readMoreComment = this.readMoreComment.bind(this);
     this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
@@ -29,9 +31,9 @@ class HouseComment extends React.Component {
 
   handleCommentSubmit(e) {
     let content = e.target.parentNode.querySelector('textarea').value;
-    
+    let rating = this.starRatingRef.current.getValue();
     e.target.parentNode.querySelector('textarea').value = "";
-    this.props.postRating(this.props.homepostId, "3", content);
+    this.props.postRating(this.props.homepostId, rating, content);
   }
 
   readMoreComment(e) {
@@ -46,12 +48,6 @@ class HouseComment extends React.Component {
 
   render() {
     let commentList = this.comments.map(comment => {
-      const starRating = [0, 1, 2, 3, 4].map((val, idx) => 
-          val < comment.numStar?
-          <i className="fa fa-star fill" aria-hidden="true" key={idx}></i>:
-          <i className="fa fa-star" aria-hidden="true" key={idx}></i>
-      );
-
       const d = comment.time;
       let timeString = "";
       let timestamp = new Date() - d;
@@ -81,9 +77,7 @@ class HouseComment extends React.Component {
                 <span>{timeString}</span>
               </div>
             </div>
-            <div className="rating">
-              {starRating}
-            </div>
+            <StarRating options={{numStar: comment.numStar, fixed: true}}/>
           </div>
           <div className="content">
             <p className={comment.content.length > 100? 'collapse': ''}>{comment.content}</p>
@@ -101,6 +95,9 @@ class HouseComment extends React.Component {
         <form className="commentForm">
           <label htmlFor="comment-textarea">Bình luận của bạn</label>
           <textarea className="form-control" id="comment-textarea" rows="3"></textarea>
+          <div className="rating">
+            <StarRating options={{numStar: 0}} ref={this.starRatingRef}/>
+          </div>
           <button type="button" className="btn" onClick={this.handleCommentSubmit}>Đăng</button>
         </form>
       </div>
