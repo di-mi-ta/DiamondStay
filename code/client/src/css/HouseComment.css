@@ -7,6 +7,22 @@
     color: black;
 }
 
+.houseCommentList > .commentForm {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.houseCommentList > .commentForm > button {
+    background-color: red;
+    text-transform: uppercase;
+    color: white;
+    font-weight: 600;
+    padding: 8px 15px;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /* comments */
 .commentItem {
     display: flex;
