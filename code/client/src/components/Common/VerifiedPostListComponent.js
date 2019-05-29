@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../../redux/ActionCreators';
+import {Link, Switch, Route, Redirect} from 'react-router-dom';
 import moment from 'moment';
 
 import { Table, Divider, Button, Icon,
@@ -28,13 +29,18 @@ const columns = [{
     key: 'action',
     align: 'center',
     title: 'Hành động',
-    render: (text, record) => (
+    render: (homepost) => (
       <span>
-        <Button ghost onClick={this.onEditBtnClick}>
-            <Icon type="edit" style={{ color: '#FF8C00' }}
-                theme="filled"/>
-            Duyệt lại
-        </Button>
+        <Link to={{pathname:`/admin/${homepost._id}`,
+                    state: {
+                        homepost: homepost
+                    }}}
+            style={{color: 'white' }}>
+            <Button style={{color: 'green'}}>
+                <Icon type="security-scan" />
+                Duyệt lại
+            </Button>
+        </Link>
       </span>
     ),
 }]
