@@ -6,7 +6,12 @@ function getAllBookings(req, res, next) {
     const userId = req.user._id;
     console.log(userId);
     Booking.find({ renter: userId }, (err, bookings) => {
-        if (err) res.status(500).json({ err });
+        if (err)
+          res.status(500).json({ err: {
+            type: 'ServerError',
+            message: 'Lỗi server',
+            detail: err
+          }});
         else res.status(200).json({ bookings });
     })
 }
@@ -18,8 +23,16 @@ function getBooking(req, res, next) {
         .findById(id)
         .populate('appliedHostPromo appliedSystemPromo home')
         .exec((err, booking) => {
-            if (err) res.status(500).json({ err });
-            else if (!booking) res.status(404).json({ err: 'Booking not found' });
+            if (err)
+              res.status(500).json({ err: {
+                type: 'ServerError',
+                message: 'Lỗi server',
+                detail: err
+              }});
+            else if (!booking) res.status(404).json({ err: {
+              type: 'NotFound',
+              message: 'Không tìm thấy booking',
+            }});
             else res.status(200).json({ booking });
         });
 }
@@ -38,7 +51,12 @@ function addBooking(req, res, next) {
     };
 
     Booking.create(newBooking, (err, booking) => {
-        if (err || !booking) return res.status(500).json({ err });
+        if (err || !booking)
+          return res.status(500).json({ err: {
+          type: 'ServerError',
+          message: 'Lỗi server',
+          detail: err
+        }});;
         booking
             .populate('appliedHostPromo appliedSystemPromo home')
             .exec((err, booking) => {

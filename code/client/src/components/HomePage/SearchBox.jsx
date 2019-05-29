@@ -76,7 +76,6 @@ class SearchBox extends React.Component {
         roomTypeDropdownOpen: false,
       }
     };
-    this.ref = React.createRef();
   }
 
   componentDidMount() {
@@ -93,36 +92,33 @@ class SearchBox extends React.Component {
   }
 
   handleSearch = () => {
-    // TODO use utils/api/homepostSearch
-    search(this.convertStateToQueryString())
-    .then((homes) => {
+    search(this.getCleanQueryObject()).then((homes) => {
       this.props.updateResultSearch(homes);
-    }, err => console.log(err));
+    }).catch(err => console.log(err));
   }
 
+  getCleanQueryObject = () => {
+    const query = {...this.state.search};
+
+    // Delete default values
+    const dontCareValues = [undefined, '', false, 'Khác', 0, '0'];
+    for (let prop in query) {
+      if (dontCareValues.includes(query[prop]))
+          delete query[prop];
+    }
+
+    // Serialize dateCome & dateLeave
+    if (query.dateCome !== undefined)
+        query.dateCome = moment(query.dateCome).format('DD-MM-YYYY');
+    if (query.dateLeave !== undefined)
+        query.dateLeave = moment(query.dateLeave).format('DD-MM-YYYY');
+
+    return query;
+  };
+
   convertStateToQueryString = () => {
-      const query = {...this.state.search};
-      // Delete default values
-      const dontCareValues = [
-        undefined,  // text values
-        '',         // text values
-        false,      // checkboxes
-      ];
-
-      for (let prop in query) {
-        if (dontCareValues.indexOf(query[prop]) !== -1) // this props contains dont care value
-            delete query[prop];
-      }
-
-      // Serialize dateCome & dateLeave
-      if (query.dateCome !== undefined) {
-          query.dateCome = moment(query.dateCome).format('DD-MM-YYYY');
-      }
-
-      if (query.dateLeave !== undefined) {
-          query.dateLeave = moment(query.dateLeave).format('DD-MM-YYYY');
-      }
-      return queryString.stringify(query);
+      const queryObject = this.getCleanQueryObject();
+      return queryString.stringify(queryObject);
   };
 
   convertQueryStringToState = () => {
@@ -217,11 +213,9 @@ class SearchBox extends React.Component {
   );
 
   render() {
-    console.clear();
-    console.table(this.state.search)
     const MyDropdownCheckbox = this.MyDropdownCheckbox;
     return (
-      <div className="searchBox" ref={this.ref}>
+      <div className="searchBox">
         <div className="searchBox-container container-fluid">
           <div className="where inputBox">
             <div className="inputField">Nơi bạn muốn đến</div>
@@ -268,13 +262,14 @@ class SearchBox extends React.Component {
           <div className="priceValue inputBox">
             <div className="inputField">Tối đa {this.state.search.price}$ / đêm</div>
             <div className="inputContent">
-              <input type="range" name="weight" min="0" max="2000000" value={this.state.search.price} onChange={e => this.handleChangeWithEvent('price', e)} step="10"></input>
+              <input type="range" name="weight" min="0" max="2000000" value={this.state.search.price} onChange={e => this.handleChangeWithEvent('price', e)} step="50000"></input>
             </div>
             <img src="https://images.vexels.com/media/users/3/135829/isolated/preview/1a857d341d8b6dd31426d6a62a8d9054-dollar-coin-currency-icon-by-vexels.png"></img>
           </div>
 
           <div className="typeOfHomeStay inputBox">
             <div className="inputField">Loại HomeStay?</div>
+            <div className="inputContent">
               <Dropdown
                 isOpen={this.state.ui.homestayTypeDropdownOpen}
                 toggle={() => this.handleToggle('homestayTypeDropdownOpen')}>
@@ -287,6 +282,7 @@ class SearchBox extends React.Component {
                   <DropdownItem onClick={e => this.handleInnerTextDataChange('homestayType', e)}>Khác</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
+            </div>
           </div>
 
           <div className="typeOfRoom inputBox">
