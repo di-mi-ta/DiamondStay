@@ -51,9 +51,13 @@
 
 .housePage > .house-information .title > .booking .book-house {
     background-color: red;
-    text-transform: capitalize;
-    color: white;
+    text-transform: uppercase;
+    font-weight: 600;
     margin: 5px 0px;
+}
+
+.housePage > .house-information .title > .booking .book-house a {
+    color: white;
 }
 
 /* location info */
