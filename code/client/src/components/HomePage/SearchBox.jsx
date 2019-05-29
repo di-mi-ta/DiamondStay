@@ -26,18 +26,51 @@ class SearchBox extends React.Component {
         numChildren: 0,
         price: 1000000,
         homestayType: undefined,
-        kitchenChecked: false,
+        roomType: undefined,
+        numBed: 1,
+
+        // Kitchen criteria
+        electricKitchenChecked: false,
+        gasKitchenChecked: false,
+        microwaveChecked: false,
+        freezerChecked: false,
+
+        // Family criteria
         childrenChecked: false,
+        extraBedChecked: false,
         noSmokingChecked: false,
-        barAvailableChecked: false,
+
+        // Entertainment criteria
+        forPetChecked: false,
+        bbqAvailableChecked: false,
         niceViewChecked: false,
-        poolAvailableChecked: false,
-        gymAvailableChecked: false,
-        wifiAvailableChecked: false,
+        toBeachChecked: false,
+        nearGolfChecked: false,
+        fishingChecked: false,
+
+        // Room criteria
+        balconyChecked: false,
+
+        // Convenience
+        wifiChecked: false,
+        tiviChecked: false,
+        conditionerChecked: false,
+        washerChecked: false,
+        convenienceChecked: false,
+        waterChecked: false,
+        elevatorChecked: false,
+        dryerChecked: false,
+
+        // Highlight criteria
+        projectorChecked: false,
+        massagerChecked: false,
+        smartTiviChecked: false,
+        barChecked: false,
       },
       ui: {
         homestayTypeDropdownOpen: false,        // homestay box
         criteriaDropdownOpen: false,        // critera box
+        roomTypeDropdownOpen: false,
       }
     };
     this.ref = React.createRef();
@@ -153,10 +186,10 @@ class SearchBox extends React.Component {
     }))
   };
 
-  handleHomestayTypeChanged = (e) => {
+  handleInnerTextDataChange = (prop, e) => {
     this.setState(update(this.state, {
       search: {
-        homestayType: {
+        [prop]: {
           $set: e.target.innerText
         }
       }
@@ -181,6 +214,8 @@ class SearchBox extends React.Component {
   );
 
   render() {
+    console.clear();
+    console.table(this.state.search)
     const MyDropdownCheckbox = this.MyDropdownCheckbox;
     return (
       <div className="searchBox" ref={this.ref}>
@@ -237,19 +272,39 @@ class SearchBox extends React.Component {
 
           <div className="typeOfHomeStay inputBox">
             <div className="inputField">Loại HomeStay?</div>
-            <div className="inputContent">
               <Dropdown
                 isOpen={this.state.ui.homestayTypeDropdownOpen}
                 toggle={() => this.handleToggle('homestayTypeDropdownOpen')}>
                 <DropdownToggle caret>{this.state.search.homestayType || 'Chọn loại homestay'}</DropdownToggle>
                 <DropdownMenu>
-                  <DropdownItem onClick={this.handleHomestayTypeChanged}>Căn hộ dịch vụ</DropdownItem>
-                  <DropdownItem onClick={this.handleHomestayTypeChanged}>Biệt thự</DropdownItem>
-                  <DropdownItem onClick={this.handleHomestayTypeChanged}>Nhà riêng</DropdownItem>
-                  <DropdownItem onClick={this.handleHomestayTypeChanged}>Studio</DropdownItem>
+                  <DropdownItem onClick={e => this.handleInnerTextDataChange('homestayType', e)}>Căn hộ dịch vụ</DropdownItem>
+                  <DropdownItem onClick={e => this.handleInnerTextDataChange('homestayType', e)}>Biệt thự</DropdownItem>
+                  <DropdownItem onClick={e => this.handleInnerTextDataChange('homestayType', e)}>Nhà riêng</DropdownItem>
+                  <DropdownItem onClick={e => this.handleInnerTextDataChange('homestayType', e)}>Studio</DropdownItem>
+                  <DropdownItem onClick={e => this.handleInnerTextDataChange('homestayType', e)}>Khác</DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+          </div>
+
+          <div className="typeOfRoom inputBox">
+            <div className="inputField">Loại phòng?</div>
+            <div className="inputContent">
+              <Dropdown isOpen={this.state.ui.roomTypeDropdownOpen} toggle={() => this.handleToggle('roomTypeDropdownOpen')}>
+                <DropdownToggle caret>{this.state.search.roomType || 'Chọn loại phòng'}</DropdownToggle>
+                <DropdownMenu>
+                  <DropdownItem onClick={e => this.handleInnerTextDataChange('roomType', e)}>Phòng riêng</DropdownItem>
+                  <DropdownItem onClick={e => this.handleInnerTextDataChange('roomType', e)}>Nguyên căn</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
             </div>
+          </div>
+
+          <div className="bedBedRoomAndBathRoom inputBox">
+            <div className="inputField">Số giường</div>
+            <div className="inputContent">
+              <input type="number" value={this.state.search.numBed} onChange={e => this.handleChangeWithEvent('numBed', e)}/>
+            </div>
+            <img src="https://www.luxstay.com/icons/earth.svg"></img>
             <img src="https://image.flaticon.com/icons/png/512/69/69524.png"></img>
           </div>
 
@@ -261,14 +316,50 @@ class SearchBox extends React.Component {
                 toggle={() => this.handleToggle('criteriaDropdownOpen')}>
                 <DropdownToggle caret>Nhấn để xem tiêu chí</DropdownToggle>
                 <DropdownMenu>
-                  <MyDropdownCheckbox label='Có bếp?' prop='kitchenChecked' />
+                  <DropdownItem header>Tiện ích gia đình</DropdownItem>
                   <MyDropdownCheckbox label='Phù hợp với trẻ nhỏ?' prop='childrenChecked' />
+                  <MyDropdownCheckbox label='Đệm bổ sung' prop='extraBedChecked' />
                   <MyDropdownCheckbox label='Không hút thuốc?' prop='noSmokingChecked' />
-                  <MyDropdownCheckbox label='Có bar?' prop='barAvailableChecked' />
-                  <MyDropdownCheckbox label='Cảnh quan đẹp?' prop='niceViewChecked' />
-                  <MyDropdownCheckbox label='Có bể bơi?' prop='poolAvailableChecked' />
-                  <MyDropdownCheckbox label='Có phòng tập?' prop='gymAvailableChecked' />
-                  <MyDropdownCheckbox label='Có wifi?' prop='wifiAvailableChecked' />
+                  <DropdownItem divider />
+
+                  <DropdownItem header>Tiện ích bếp</DropdownItem>
+                  <MyDropdownCheckbox label='Bếp điện' prop='electricKitchenChecked' />
+                  <MyDropdownCheckbox label='Lò vi sóng' prop='microwaveChecked' />
+                  <MyDropdownCheckbox label='Tủ lạnh' prop='freezerChecked' />
+                  <MyDropdownCheckbox label='Bếp ga' prop='gasKitchenChecked' />
+                  <DropdownItem divider />
+
+                  <DropdownItem header>Tiện ích giải trí</DropdownItem>
+                  <MyDropdownCheckbox label='Cho thú cưng' prop='forPetChecked' />
+                  <MyDropdownCheckbox label='BBQ' prop='bbqAvailableChecked' />
+                  <MyDropdownCheckbox label='Cảnh quan đẹp' prop='niceViewChecked' />
+                  <MyDropdownCheckbox label='Hướng biển' prop='toBeachChecked' />
+                  <MyDropdownCheckbox label='Gần sân golf' prop='nearGolfChecked' />
+                  <MyDropdownCheckbox label='Câu cá' prop='fishingChecked' />
+                  <MyDropdownCheckbox label='Bể bơi' prop='poolAvailableChecked' />
+                  <DropdownItem divider />
+
+                  <DropdownItem header>Tiện ích phòng</DropdownItem>
+                  <MyDropdownCheckbox label='Ban công' prop='balconyChecked' />
+                  <DropdownItem divider />
+
+                  <DropdownItem header>Tiện nghi</DropdownItem>
+                  <MyDropdownCheckbox label='Wifi' prop='wifiChecked' />
+                  <MyDropdownCheckbox label='Tivi' prop='tiviChecked' />
+                  <MyDropdownCheckbox label='Điều hoà' prop='conditionerChecked' />
+                  <MyDropdownCheckbox label='Máy giặt' prop='washerChecked' />
+                  <MyDropdownCheckbox label='Dầu gội, dầu xả, xà phòng tắm, giấy vệ sinh, khăn tắm, kem đánh răng, giấy ăn' prop='convenienceChecked' />
+                  <MyDropdownCheckbox label='Nước khoáng' prop='waterChecked' />
+                  <MyDropdownCheckbox label='Thang máy' prop='elevatorChecked' />
+                  <MyDropdownCheckbox label='Máy sấy' prop='dryerChecked' />
+                  <DropdownItem divider />
+
+                  <DropdownItem header>Tiện nghi</DropdownItem>
+                  <MyDropdownCheckbox label='Máy chiếu phim' prop='projectorChecked' />
+                  <MyDropdownCheckbox label='Ghế massage' prop='massagerChecked' />
+                  <MyDropdownCheckbox label='Smart tivi' prop='smartTiviChecked' />
+                  <MyDropdownCheckbox label='Tủ đựng rượu' prop='barChecked' />
+                  <DropdownItem divider />
                 </DropdownMenu>
               </Dropdown>
             </div>
@@ -294,4 +385,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default withRouter((connect(mapStateToProps, mapDispatchToProps)(SearchBox)))
-
