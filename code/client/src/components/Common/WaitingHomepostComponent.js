@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Table, Button, Icon, Card, Divider} from 'antd';
 import {connect} from 'react-redux';
 import {Link, Switch, Route, Redirect} from 'react-router-dom';
-import VerifyHomepostComponent from '../AdminManager/VerifyHomePostComponent';
 import * as actions from '../../redux/ActionCreators';
 import moment from 'moment';
 
@@ -54,7 +53,7 @@ class WaitingHomepostList extends Component {
                     }}
                 >
                     <Table columns={this.columns}
-                        dataSource={this.props.homeposts.homeposts}
+                        dataSource={this.props.homeposts.homeposts.filter(home => home.state === 'Waiting')}
                         bordered
                     />
                 </Card>
@@ -62,7 +61,7 @@ class WaitingHomepostList extends Component {
         )
     }
     componentDidMount(){
-        this.props.fetchHomeposts('?state=Waiting');
+        this.props.fetchHomeposts();
     }
 }
 

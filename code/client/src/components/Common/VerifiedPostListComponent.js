@@ -30,7 +30,7 @@ const columns = [{
     title: 'Hành động',
     render: (text, record) => (
       <span>
-         <Popconfirm title="Bạn chắc chắn muốn xóa chứ？"
+         {/* <Popconfirm title="Bạn chắc chắn muốn xóa chứ？"
                     okText="Xóa" cancelText="Hủy bỏ"
                     onConfirm = {this.onConfirmDeleteClick}>
               <Button ghost> <Icon type="delete"
@@ -40,7 +40,7 @@ const columns = [{
         <Button ghost onClick={this.onEditBtnClick}>
             <Icon type="edit" style={{ color: '#FF8C00' }}
                 theme="filled"/>
-        </Button>
+        </Button> */}
       </span>
     ),
 }]
@@ -61,7 +61,8 @@ class VerifiedHomepostList extends Component {
                     }}
                 >
                     <Table columns={columns}
-                        dataSource={this.props.homeposts.homeposts}
+                        dataSource={this.props.homeposts.homeposts.filter(home => 
+                                                    home.state === 'Success' || home.state === 'Rejected')}
                         bordered
                     />
                 </Card>
@@ -70,7 +71,7 @@ class VerifiedHomepostList extends Component {
     }
 
     componentDidMount(){
-        this.props.fetchHomeposts('?state=Success');
+        this.props.fetchHomeposts();
     }
 }
 

@@ -171,7 +171,6 @@ class VerifyHomepostComponent extends Component {
             }
             this.props.fetchUpdateHomepost(updatedHome);
             message.success('Tin đăng đã được duyệt thành công');
-            this.context.router.history.push('/admin/waiting-posts');
         }
     }
 
