@@ -7,17 +7,23 @@ import { Table, Divider, Button, Icon,
     Popconfirm, Card } from 'antd';
 
 const columns = [{
-    title: 'Homestay',
+    title: <b>Homestay</b>,
     dataIndex: 'name',
     key: 'name',
     align: 'center',
     render: text => <p>{text}</p>,
 }, {
-    title: 'Ngày tạo',
+    title: <b>Ngày tạo</b>,
     dataIndex: 'timeUpdate',
     key: 'timeUpdate',
     align: 'center',
     render: text => <p>{moment(text).format('LLL')} </p>,
+}, {
+    title: <b>Duyệt bởi</b>,
+    dataIndex: 'confirmedBy',
+    key: 'confirmedBy',
+    align: 'center',
+    render: text => <p>{text}</p>,
 },{
     key: 'action',
     align: 'center',

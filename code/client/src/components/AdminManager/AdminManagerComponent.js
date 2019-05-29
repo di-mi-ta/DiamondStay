@@ -8,7 +8,7 @@ import VerifyHomepostComponent from './VerifyHomePostComponent';
 import VerifiedHomepostList from '../Common/VerifiedPostListComponent';
 import Header from '../Header/HostHeader';
 import {connect} from 'react-redux';
-import * as actions from '../../redux/ActionCreators';
+import MessageInbox from '../MessageInbox';
 
 const SubMenu = Menu.SubMenu;
 
@@ -60,17 +60,19 @@ class AdminManager extends Component{
             </Menu.Item>
           </SubMenu>
           <Menu.Item key="5" style={{color: 'black' }}>
-            <span> <b>Tin nhắn</b> </span>
+            <Link to='/admin/messages' style={{color: 'black' }}>
+                <span>
+                  <b>Tin nhắn</b>
+                </span>
+              </Link>
           </Menu.Item>
         </Menu>
         <Switch>
-          <Route
-            path="/admin/promotions"
-            render={() => <SystemPromotionComponent deletePromo={this.props.deletePromo} />}
-          />
+          <Route path="/admin/promotions" component={SystemPromotionComponent}/>
           <Route path="/admin/calendars" component={CalendarComponent}/>
           <Route path="/admin/waiting-posts" component={WaitingHomepostList}/>
           <Route path="/admin/verified-posts" component={VerifiedHomepostList}/>
+          <Route path="/admin/messages" component={MessageInbox}/>
           <Route path='/admin/:homepostId' component={VerifyHomepostComponent}/>
           <Redirect to="/admin/promotions"/>
         </Switch>

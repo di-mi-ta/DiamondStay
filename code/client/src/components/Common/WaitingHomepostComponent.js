@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-
 import { Table, Button, Icon, Card, Divider} from 'antd';
-
-import {Link, Switch, Router} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {Link, Switch, Route, Redirect} from 'react-router-dom';
+import VerifyHomepostComponent from '../AdminManager/VerifyHomePostComponent';
 import * as actions from '../../redux/ActionCreators';
 import moment from 'moment';
 

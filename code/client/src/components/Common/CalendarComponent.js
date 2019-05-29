@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Calendar, Alert, Card } from 'antd';
+import { Calendar, Alert, Card, Divider } from 'antd';
 import moment from 'moment';
 
 class CalendarCom extends Component{
@@ -28,6 +28,8 @@ class CalendarCom extends Component{
         const { value, selectedValue } = this.state;
         return (
             <div style = {{padding: 30}}>
+                <h2> <b> Lịch </b></h2>
+                <Divider/>
                 <Card style={{ 
                                 boxShadow: '0 8px 12px rgba(0,0,0,.1)',
                                 minHeight: '300px',
