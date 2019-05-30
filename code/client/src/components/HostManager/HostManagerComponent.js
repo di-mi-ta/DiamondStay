@@ -4,7 +4,7 @@ import {Menu} from 'antd';
 import PromotionComponent from './HostPromotionsComponent';
 import CalendarComponent from '../Common/CalendarComponent';
 import HomepostManager from './HomepostManager';
-import Reservation from '../Booking/ReservationComponent'
+import Reservation from './ReservationForHost';
 import Header from '../Header/HostHeader';
 import '../../css/host/host-manager.css';
 import MessageInbox from '../MessageInbox';

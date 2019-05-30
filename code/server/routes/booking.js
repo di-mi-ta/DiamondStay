@@ -9,6 +9,7 @@ router
     .use(auth.verifyUser);
 
 router.get('/all', controller.getAllBookings);
+router.get('/for-host',controller.getBookingsOfHost);
 router.get('/:id', controller.getBooking);
 router.post('/', controller.addBooking);
 

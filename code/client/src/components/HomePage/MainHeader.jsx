@@ -4,7 +4,7 @@ import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem,
   Modal, ModalHeader, ModalBody,
   Form, FormGroup, Input, Label } from 'reactstrap';
 import {Button, Dropdown, Icon, Menu} from 'antd';
-import {Link, Redirect} from 'react-router-dom';
+import {Link, Redirect, withRouter} from 'react-router-dom';
 import UserRegistration from './UserRegistration';
 import {connect} from 'react-redux';
 import * as actions from '../../redux/ActionCreators';
@@ -53,6 +53,13 @@ class MainHeader extends React.Component {
   }
 
   render() {
+    if (this.props.auth.isAuthenticated){
+      if (this.props.auth.user.hasOwnProperty('info')){
+        if (this.props.auth.user.info.typeUser === 2){ // admin
+          this.props.history.push('/admin');
+        }
+      }
+    }
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light mainHeader">
           <Link to='/' className="navbar-brand">
@@ -195,4 +202,4 @@ const mapDispatchToProps = (dispatch) => ({
   logoutUser: () => dispatch(actions.logoutUser()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainHeader);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MainHeader));

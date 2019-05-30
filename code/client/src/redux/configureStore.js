@@ -2,7 +2,7 @@ import {createStore, combineReducers, applyMiddleware} from 'redux';
 import {Homeposts} from './homeposts';
 import {Ratings} from './ratings';
 import {Promotions} from './promotions';
-import {favorites} from './favorites';
+import {Booking} from './booking';
 import {Auth} from './auth';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
@@ -14,7 +14,7 @@ export const ConfigureStore = () => {
             ratings: Ratings,
             promotions: Promotions,
             auth: Auth,
-            favorites,
+            booking: Booking
         }),
         // applyMiddleware(thunk, logger)
         applyMiddleware(thunk)

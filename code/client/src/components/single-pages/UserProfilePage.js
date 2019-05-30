@@ -9,7 +9,6 @@ class UserProfilePage extends React.Component{
   render(){
     return (
       <React.Fragment>
-        <MainHeader />
         <UserProfile />
       </React.Fragment>
     )

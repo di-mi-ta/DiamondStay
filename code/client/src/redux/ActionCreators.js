@@ -320,29 +320,29 @@ export const fetchCreateHostPromo = (promo) => (dispatch) => {
 
 export const fetchCreateSystemPromo = (promo) => (dispatch) => {
     const bearer = localStorage.getItem('token');
-        fetch(baseUrl + 'system-promotions/', {
-            method: "POST",
-            body: JSON.stringify(promo),
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": bearer,
-            },
-        })
-        .then(response => {
-            if (response.ok) {
-            return response;
-            } else {
-            var error = new Error('Error ' + response.status + ': ' + response.statusText);
-            error.response = response;
-            throw error;
-            }
+    fetch(baseUrl + 'system-promotions/', {
+        method: "POST",
+        body: JSON.stringify(promo),
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": bearer,
         },
-        error => {
-                throw error;
-        })
-        .then(response => response.json())
-        .then((promo)=> dispatch(addSystemPromo(promo)))
-        .catch(error => dispatch(promosFailed(error.message)));
+    })
+    .then(response => {
+        if (response.ok) {
+        return response;
+        } else {
+        var error = new Error('Error ' + response.status + ': ' + response.statusText);
+        error.response = response;
+        throw error;
+        }
+    },
+    error => {
+            throw error;
+    })
+    .then(response => response.json())
+    .then((promo)=> dispatch(addSystemPromo(promo)))
+    .catch(error => dispatch(promosFailed(error.message)));
 }
 
 
@@ -504,9 +504,9 @@ export const addRating = (rating) => ({
     payload: rating
 });
 
-export const postRating = (homepostId, rating, comment) => (dispatch) => {
+export const postRating = (homepost, rating, comment) => (dispatch) => {
     const newRating = {
-        homepost: homepostId,
+        homepost: homepost._id,
         rating: rating,
         comment: comment
     }
@@ -534,7 +534,15 @@ export const postRating = (homepostId, rating, comment) => (dispatch) => {
         throw errmess;
     })
     .then(response => response.json())
-    .then(response => dispatch(addRating(response)))
+    .then(rating => {
+        homepost.rating.push(rating);
+        const updatedHome = {
+            ...homepost,
+            rating: homepost.rating.map(rating => rating._id)
+        }
+        dispatch(fetchUpdateHomepost(updatedHome));
+        dispatch(addRating(rating));
+    })
     .catch(error => { console.log('Post ratings ', error.message);
         alert('Your rating could not be posted\nError: '+ error.message); })
 }
@@ -569,4 +577,64 @@ export const addRatings = (ratings) => ({
     type: ActionTypes.ADD_RATINGS,
     payload: ratings
 });
+
+
+// for booking 
+export const fetchLstBookingForHost = () => (dispatch) => {
+    const bearer = localStorage.getItem('token');
+    return fetch(baseUrl + 'booking/for-host', {
+            headers: {
+                "Authorization": bearer,
+            },
+        })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+        error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+        })
+        .then(response => response.json())
+        .then(bookings => dispatch(addLstBookings(bookings)))
+        .catch(err => console.log(err));
+}
+
+export const fetchLstBookingForRenter = () => (dispatch) => {
+    const bearer = localStorage.getItem('token');
+    return fetch(baseUrl + 'booking/all', {
+            headers: {
+                "Authorization": bearer,
+            },
+        })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+        error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+        })
+        .then(response => response.json())
+        .then(data => dispatch(addLstBookings(data.bookings)))
+        .catch(err => console.log(err));
+}
+
+
+export const addLstBookings = (bookings) => ({
+    type: ActionTypes.ADD_BOOKINGS,
+    payload: bookings
+})
 

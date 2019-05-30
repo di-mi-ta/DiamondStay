@@ -17,11 +17,11 @@ function getDateAt12AM(dateString) {
   
 
 const columns = [{
-    title: <b>Chủ nhà</b>,
-    dataIndex: 'home.owner',
-    key: 'owner',
+    title: <b>Khách</b>,
+    dataIndex: 'renter.firstName',
+    key: 'renter',
     align: 'center',
-    render: (text) => text,
+    render: (text, record) => <b>{record.renter.firstName + ' ' + record.renter.lastName}</b>,
 },{
     title: <b>Phòng đặt</b>,
     dataIndex: 'home.name',
@@ -50,7 +50,7 @@ const columns = [{
 }]
 
 
-class MyBooking extends Component {
+class Reservation extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -76,7 +76,7 @@ class MyBooking extends Component {
     }
 
     componentDidMount(){
-        this.props.fetchLstBookingForRenter();
+        this.props.fetchLstBookingForHost();
     }
 
     render(){
@@ -101,7 +101,7 @@ class MyBooking extends Component {
                         paddingBottom: 50}}> 
                 <Row>
                   <Col span={6}> 
-                    <h3> <b> Đặt chỗ của tôi </b></h3>
+                    <h3> <b> Đặt phòng </b></h3>
                   </Col>
                   <Col span={6} offset={12}>
                     <h4>Tổng cộng: <b>{data.length}</b></h4>
@@ -146,7 +146,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    fetchLstBookingForRenter: () =>  dispatch(actions.fetchLstBookingForRenter())
+    fetchLstBookingForHost: () =>  dispatch(actions.fetchLstBookingForHost())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyBooking);
+export default connect(mapStateToProps, mapDispatchToProps)(Reservation);

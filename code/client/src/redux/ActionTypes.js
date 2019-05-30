@@ -44,3 +44,9 @@ export const ADD_FAVORITES = 'ADD_FAVORITES';
 
 // for search
 export const UPDATE_RESULT_HOMES_QUERY = 'UPDATE_RESULT_HOMES_QUERY'
+
+
+//for booking 
+
+export const ADD_BOOKINGS = 'ADD_BOOKINGS';
+export const ADD_BOOKING = 'ADD_BOOKING';

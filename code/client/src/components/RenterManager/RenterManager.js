@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import MyBooking from './MyBooking';
 import DiamondCoin from './DiamondCoin';
 import MessageInbox from '../MessageInbox';
-import AccountSetting from './AccountSetting';
+import UserProfilePage from '../single-pages/UserProfilePage';
 
 
 class RenterManager extends Component{
@@ -57,7 +57,7 @@ class RenterManager extends Component{
           <Route path="/me/booking" component={MyBooking}/>
           <Route path="/me/inbox" component={MessageInbox}/>
           <Route path="/me/coin" component={DiamondCoin}/>
-          <Route path="/me/setting" component={AccountSetting}/>
+          <Route path="/me/setting" component={UserProfilePage}/>
           <Redirect to="/me/booking"/>
         </Switch>
         </div>

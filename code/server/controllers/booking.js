@@ -8,7 +8,9 @@ const log = require('debug')('CUONG');
 function getAllBookings(req, res, next) {
     const userId = req.user._id;
     console.log(userId);
-    Booking.find({ renter: userId }, (err, bookings) => {
+    Booking.find({ renter: userId })
+    .populate('home')
+    .exec((err, bookings) => {
         if (err)
           res.status(500).json({ err: {
             type: 'ServerError',
@@ -118,6 +120,23 @@ async function addBooking(req, res, next) {
     }
 }
 
+// get all booking for homestays of any host
+const getBookingsOfHost = (req, res, next) => {
+  const usernameHost = req.user.username;
+  console.log(usernameHost);
+  Booking.find({})
+  .populate('renter')
+  .populate('home')
+  .then((bookings) => {
+    const filteredBookings = bookings.filter(booking => booking.home.owner === usernameHost)
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.json(filteredBookings);
+  }, err => next(err))
+  .catch(err => next(err))
+}
+
+
 // Just get date, discard hour, minute, second, milliseconds
 function getDateAt12AM(dateString) {
   const date = new Date(dateString);
@@ -136,4 +155,5 @@ module.exports = {
     getAllBookings,
     getBooking,
     addBooking,
+    getBookingsOfHost
 }

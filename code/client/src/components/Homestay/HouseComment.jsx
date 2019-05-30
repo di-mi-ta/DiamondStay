@@ -26,14 +26,14 @@ class HouseComment extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchHomepostById(this.props.homepostId);
+    this.props.fetchHomepostById(this.props.currentHomepost._id);
   }
 
   handleCommentSubmit(e) {
     let content = e.target.parentNode.querySelector('textarea').value;
     let rating = this.starRatingRef.current.getValue();
     e.target.parentNode.querySelector('textarea').value = "";
-    this.props.postRating(this.props.homepostId, rating, content);
+    this.props.postRating(this.props.currentHomepost, rating, content);
   }
 
   readMoreComment(e) {
@@ -112,7 +112,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchHomepostById: homeId => {dispatch(actions.fetchHomepostById(homeId))},
-  postRating: (homepostId, rating, comment) => { dispatch(actions.postRating(homepostId, rating, comment)) }
+  postRating: (homepost, rating, comment) => { dispatch(actions.postRating(homepost, rating, comment))}
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HouseComment);

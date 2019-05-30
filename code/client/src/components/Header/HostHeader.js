@@ -3,7 +3,7 @@ import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem,
     Modal, ModalHeader, ModalBody,
     Form, FormGroup, Input, Label } from 'reactstrap';
 import {Button, Dropdown, Icon, Menu} from 'antd';
-import {Link, Redirect} from 'react-router-dom';
+import {Link, Redirect, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actions from '../../redux/ActionCreators';
 
@@ -56,7 +56,7 @@ class Header extends Component {
 
     handleLogout() {
         this.props.logoutUser();
-        return <Redirect to='/home'/>
+        this.props.history.push('/home');
     }
 
     render() {
@@ -159,4 +159,4 @@ const mapDispatchToProps = (dispatch) => ({
   logoutUser: () => dispatch(actions.logoutUser()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));
