@@ -47,10 +47,19 @@ class HouseComment extends React.Component {
   }
 
   render() {
-    let commentList = this.comments.map(comment => {
+    const lstRatings = this.props.currentHomepost ? this.props.currentHomepost.rating.map(rating => ({
+        id: rating._id,
+        username: rating.author? rating.author.lastName + " " + rating.author.firstName: "vô danh",
+        avatar: "http://fme.iuh.edu.vn/wp-content/uploads/2017/04/ABET080417-02.jpg",
+        time: new Date(rating.updatedAt),
+        content: rating.comment,
+        numStar: rating.rating
+    })): [];
+    let commentList = lstRatings.map(comment => {
       const d = comment.time;
       let timeString = "";
       let timestamp = new Date() - d;
+      timestamp = timestamp >= 0 ? timestamp : 0;
       if (timestamp > 1000*60*60*24) {
         let numDays = Math.floor(timestamp/(1000*60*60*24));
         timeString = numDays > 30?
