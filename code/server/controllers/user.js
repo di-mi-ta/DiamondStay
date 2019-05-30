@@ -19,6 +19,17 @@ function updateUserInfo(req, res, next) {
     });
 }
 
+const getInfoUserFromUsername = (req, res, next) => {
+  User.find(req.query)
+  .then((user) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json')
+    res.json(user)
+  }, err => next(err))
+  .catch(err=> next(err));
+}
+
 module.exports = {
-    updateUserInfo
+    updateUserInfo,
+    getInfoUserFromUsername
 }

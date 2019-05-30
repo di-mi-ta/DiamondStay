@@ -12,6 +12,7 @@ router.options('*', cors.corsWithOptions,(req, res) => {res.sendStatus(200);})
 
 router
   .get('/',  AuthCtrl.getListUser)
+  .get('/infoUser', userController.getInfoUserFromUsername)
   .delete('/', authenticate.verifyUser, AuthCtrl.deleteAllUsers)
   .post('/signup', cors.allowAll, AuthCtrl.signUp);
 
