@@ -91,7 +91,7 @@ class HouseSideBar extends React.Component {
                 numRating: house.rating.length
               }))
               .map(house =>
-                <Link to={`/room/${house.id}`} key={house.id} onClick={() => console.dir(this)}>
+                <Link to={`/room/${house.id}`} key={house.id} onClick={() => this.props.fetchHomepostById(house.id)}>
                   <HouseCard houseData={house}/>
                 </Link>
                 // <HouseCard houseData={house} key={house.id}/>

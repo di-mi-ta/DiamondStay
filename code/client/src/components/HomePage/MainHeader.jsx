@@ -112,8 +112,8 @@ class MainHeader extends React.Component {
                   </a>
                   <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                     <div className="dropdown-item">
-                      <Link to='/profile' className='nav-link'>
-                        <Button type='link'>Cài đặt tài khoản</Button>
+                      <Link to='/me' className='nav-link'>
+                        <Button type='link'>Đặt chỗ của tôi</Button>
                       </Link>
                     </div>
                     <div className="dropdown-item">

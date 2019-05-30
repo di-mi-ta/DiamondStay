@@ -15,6 +15,16 @@ import { withRouter } from 'react-router-dom';
 import queryString from 'query-string';
 import * as userApi from '../../utils/api/user';
 import * as messageApi from '../../utils/api/message';
+import moment from 'moment';
+
+function getDateAt12AM(dateString) {
+  const date = new Date(dateString);
+  date.setHours(0);
+  date.setSeconds(0);
+  date.setMinutes(0);
+  date.setMilliseconds(0);
+  return date;
+}
 
 class House extends Component {
   constructor(props) {
@@ -30,6 +40,7 @@ class House extends Component {
   }
 
   componentDidMount(){
+    this.props.fetchHomepostById(this.props.match.params.homepostId);
     this.props.fetchSystemPromos();
     this.props.fetchHostPromos();
     this.getHomeOwnerInfoInterval = setInterval(() => {
@@ -79,11 +90,9 @@ class House extends Component {
 
     // get list system promotions applied for current homeposts
     let sysPromos = this.props.promotions.systemPromos.filter((promo) => {
-      const currentTime = Date();
-      if (Date(promo.dateStart) <= currentTime && currentTime <= Date(promo.dateEnd)){
-        return true
-      }
-      return false
+      const currentTime = Date.now();
+      return moment(getDateAt12AM(currentTime))
+                            .isBetween(getDateAt12AM(promo.dateStart), getDateAt12AM(promo.dateEnd), null, '[]')
     });
 
     // get list promotions of host applied for current homeposts

@@ -43,6 +43,7 @@ class WaitingHomepostList extends Component {
         ),
     }]
     render(){
+        let data = this.props.homeposts.homeposts.filter(home => home.state === 'Waiting');
         return(
             <div style = {{padding: 50}}>
                 <h3> <b> Tin đợi duyệt </b></h3>
@@ -53,7 +54,7 @@ class WaitingHomepostList extends Component {
                     }}
                 >
                     <Table columns={this.columns}
-                        dataSource={this.props.homeposts.homeposts.filter(home => home.state === 'Waiting')}
+                        dataSource={data}
                         bordered
                     />
                 </Card>

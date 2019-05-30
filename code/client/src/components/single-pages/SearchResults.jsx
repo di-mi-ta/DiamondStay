@@ -6,6 +6,7 @@ import '../../css/SearchResults.css';
 import HouseCard from '../Homestay/HouseCard';
 import {baseUrl} from '../../shared/baseUrl';
 import {Link} from 'react-router-dom';
+import * as actions from '../../redux/ActionCreators';
 
 // import SearchResults
 class SearchResults extends Component {
@@ -72,7 +73,8 @@ class SearchResults extends Component {
                 numRating: house.rating.length
               }))
               .map(homepost => 
-                <Link to={`/room/${homepost.id}`} className="result-item col-xs-6 col-md-4 col-lg-3">
+                <Link to={`/room/${homepost.id}`} onClick={() => this.props.fetchHomepostById(homepost.id)}
+                      className="result-item col-xs-6 col-md-4 col-lg-3">
                   <HouseCard houseData={homepost}/>
                 </Link>
               )
@@ -117,7 +119,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-
+  fetchHomepostById: homeId => {dispatch(actions.fetchHomepostById(homeId))},
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchResults);

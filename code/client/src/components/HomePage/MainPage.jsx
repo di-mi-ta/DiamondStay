@@ -113,7 +113,7 @@ class MainPage extends React.Component {
                 : 0,
               numRating: homepost.rating.length
             })).map(place =>
-              <Link to={`/room/${place.id}`}>
+              <Link to={`/room/${place.id}`} onClick={() => this.props.fetchHomepostById(place.id)}>
                 <HouseCard houseData={place}/>
               </Link>
             )
@@ -187,6 +187,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => ({
   fetchHomeposts: (query='') => {dispatch(actions.fetchHomeposts(query))},
   fetchSystemPromos: () => {dispatch(actions.fetchSystemPromos())},
+  fetchHomepostById: homeId => {dispatch(actions.fetchHomepostById(homeId))},
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
