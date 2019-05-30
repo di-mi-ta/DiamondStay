@@ -111,6 +111,8 @@ class Rejected extends Component {
     }
 
     render(){
+        let dataHomes = this.props.homeposts.homeposts.filter((home) => 
+                home.owner === this.props.auth.user.username && home.state === 'Rejected')
         const resColumns = [{
             title: <b>Trường thông tin</b>,
             dataIndex: 'field',
@@ -191,7 +193,7 @@ class Rejected extends Component {
                             boxShadow: '0 8px 12px rgba(0,0,0,.1)',
                             minHeight: '300px'}}>
                 <Table columns={this.columns} 
-                    dataSource={this.props.homeposts.homeposts.filter(home => home.state === 'Success')} 
+                    dataSource={dataHomes} 
                     bordered
                 />
                 </Card>

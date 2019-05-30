@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Table, Button, Icon, Card, Popover} from 'antd';
+import { Table, Button, Icon, Card, Popover, Tag} from 'antd';
 import moment from 'moment';
 import {Link, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -41,8 +41,19 @@ class All extends Component {
         key: 'createdAt',
         align: 'center',
         render: (text, record) => <p>{text + ' ' + record.currencyUnit}</p>,
-    }
-    ,{ 
+    },{
+        title: <b>Tình trạng nhà</b>,
+        dataIndex: 'state',
+        key: 'state',
+        align: 'center',
+        // hard code payment status
+        render: text => text === 'Success' ? <Tag style={{width: 120}} color='green' > MỞ </Tag> : 
+                        text === 'New' ? <Tag style={{width: 120}} color='#0E19B9' > MỚI </Tag> :
+                        text === 'Hiden' ? <Tag style={{width: 120}} color='#D5E21B' > ĐÓNG </Tag> :
+                        text === 'Waiting' ? <Tag style={{width: 120}} color='#1ADBF0' > ĐỢI DUYỆT </Tag> :
+                        text === 'Rejected' ? <Tag style={{width: 120}} color='#F01A2F' > BỊ TỪ CHỔI </Tag> :
+                        <Tag color= 'red' > KHÔNG CÓ THÔNG TIN </Tag>,
+    },{ 
         title: <b>Hành động</b>,
         key: 'action',
         align: 'center',
@@ -59,13 +70,17 @@ class All extends Component {
         },
     }]
     render(){
+        let data = this.props.homeposts.homeposts.filter((home) => 
+                home.owner === this.props.auth.user.username && 
+                (home.state === 'Success' || home.state === 'New' || 
+                home.state === 'Hiden' || home.state === 'Rejected' || home.state === 'Waiting'))
         return(
             <div style = {{padding: 50}}>
                 <Card style={{
                             boxShadow: '0 8px 12px rgba(0,0,0,.1)',
                             minHeight: '300px', padding: 5}}>
                 <Table columns={this.columns}
-                    dataSource={this.props.homeposts.homeposts}
+                    dataSource={data}
                     bordered
                 />
                 </Card>

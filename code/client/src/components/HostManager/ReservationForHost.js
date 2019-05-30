@@ -101,7 +101,7 @@ class Reservation extends Component {
                         paddingBottom: 50}}> 
                 <Row>
                   <Col span={6}> 
-                    <h3> <b> Đặt phòng </b></h3>
+                    <h3> <b> Quản lí đặt chỗ </b></h3>
                   </Col>
                   <Col span={6} offset={12}>
                     <h4>Tổng cộng: <b>{data.length}</b></h4>
