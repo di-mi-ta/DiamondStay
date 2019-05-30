@@ -16,7 +16,7 @@ class MainPage extends React.Component {
       {
         id: "1",
         image: 'https://cdn.luxstay.com/home/suggestion/location_10_1556013549.png',
-        description: 'Căn hộ dịch vụ'
+        description: 'Chung cư'
       },
       {
         id: "2",
@@ -31,7 +31,7 @@ class MainPage extends React.Component {
       {
         id: "4",
         image: 'https://cdn.luxstay.com/home/suggestion/location_2_1556166927.png',
-        description: 'Studio'
+        description: 'Căn hộ Studio'
       }
     ];
     this.currentPolicies = [
@@ -80,7 +80,9 @@ class MainPage extends React.Component {
           hasControl = {false}
           options = {this.state.spaceGlideOptions}
           itemList = {
-            this.spaceList.map(space => <ImageCard data={space}/>)
+            this.spaceList.map(space => <Link to={`/search?homestayType=${space.description}`}>
+                                          <ImageCard data={space}/>
+                                        </Link>)
           }
         />
 

@@ -15,7 +15,6 @@ class App extends Component {
       <Provider store={store}>
         <BrowserRouter>
           <Main/>
-          {/* <Promo/> */}
         </BrowserRouter>
       </Provider>
     );
