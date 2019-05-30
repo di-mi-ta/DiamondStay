@@ -4,7 +4,7 @@ const axios = require('axios');
 
 initAxios(axios);
 
-export function registerUser(userInfo) {
+export function sendNewBooking(userInfo) {
     return new Promise(function(resolve, reject) {
         if (!userInfo.email)
             delete userInfo.email;
