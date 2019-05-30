@@ -1,11 +1,24 @@
 import React from 'react';
 import '../../css/promotions/PromotionCard.css';
-import {Button} from 'antd';
+import {Button, message} from 'antd';
 
 class SysPromoCard extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isCopied: false,
+    }
     this.ref = React.createRef();
+    this.toggleCopy = this.toggleCopy.bind(this);
+  }
+
+  toggleCopy = () => {
+    if (!this.state.isCopied){
+      message.success("Code: " + this.props.promotion.code);
+    }
+    this.setState({
+      isCopied: !this.state.isCopied
+    })
   }
 
   render() {
@@ -30,11 +43,20 @@ class SysPromoCard extends React.Component {
               {"Thời gian check-in: "}
               <b> Không giới hạn </b>
             </div>
-            <div className="discount__action mt--12" onClick={() => {}}>
-              <span className="btn btn--xs rounded btn--secondary">
-                Sao chép mã
-              </span>
-            </div>
+            {this.state.isCopied ? 
+              <div className="discount__action mt--12" onClick={this.toggleCopy}>
+                <span className="btn btn--xs rounded btn--main">
+                  Đã sao chép
+                </span>
+              </div>
+              :
+              <div className="discount__action mt--12" onClick={this.toggleCopy}>
+                <span className="btn btn--xs rounded btn--secondary">
+                  Sao chép mã
+                </span>
+              </div>
+            }
+            
           </div>
         </div>
       </div>

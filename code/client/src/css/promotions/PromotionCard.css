@@ -107,3 +107,8 @@
     border-radius: 5px!important;
     overflow: hidden;
 }
+
+.btn--main {
+    background-color: #f65e39;
+    color: #fff;
+}
