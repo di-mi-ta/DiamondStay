@@ -4,17 +4,6 @@ import '../../css/HouseCard.css';
 class HouseCard extends React.Component {
   constructor(props) {
     super(props);
-    /*
-    props.houseData = {
-      image: "http://imagelink",
-      type: "Nha rieng/biet thu",
-      houseName: "da lat hoang hon",
-      location: "da lat",
-      price: "10$",
-      rating: 3,
-      numRating: 20
-    }
-    */
     this.ref = React.createRef();
   }
 

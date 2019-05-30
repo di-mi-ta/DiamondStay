@@ -54,7 +54,7 @@ class House extends Component {
     // get list system promotions applied for current homeposts
     let sysPromos = this.props.promotions.systemPromos.filter((promo) => {
       const currentTime = Date();
-      if (Date(promo.dateStart) >= currentTime && currentTime <= Date(promo.dateEnd)){
+      if (Date(promo.dateStart) <= currentTime && currentTime <= Date(promo.dateEnd)){
         return true
       }
       return false
@@ -64,7 +64,7 @@ class House extends Component {
     let hostPromos = this.props.promotions.hostPromotions.filter((promo) => {
       const currentTime = Date();
       if (this.props.homeposts.currentHomepost){
-        if (Date(promo.dateStart) >= currentTime && currentTime <= Date(promo.dateEnd)){
+        if (Date(promo.dateStart) <= currentTime && currentTime <= Date(promo.dateEnd)){
           if (promo.homeposts.includes(this.props.homeposts.currentHomepost._id)){
             return true;
           }
@@ -72,6 +72,7 @@ class House extends Component {
       }
       return false
     });
+    
 
     return (
       <div>

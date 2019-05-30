@@ -56,6 +56,7 @@ class SystemPromotionCompoment extends Component {
         this.handleNumTimeChange = this.handleNumTimeChange.bind(this);
         this.handleCodeChange = this.handleCodeChange.bind(this);
         this.handleLogoChange = this.handleLogoChange.bind(this);
+        this.handlemaxValueToReceiveChange = this.handlemaxValueToReceiveChange.bind(this);
     }
 
     handleLogoChange = info => {
@@ -87,6 +88,12 @@ class SystemPromotionCompoment extends Component {
     handleDatePickerChange = value => {
         this.setState({
             currentPromo: {...this.state.currentPromo, dateStart: value[0], dateEnd: value[1]}
+        })
+    }
+
+    handlemaxValueToReceiveChange = value => {
+        this.setState({
+            currentPromo: {...this.state.currentPromo, maxValueToReceive: value}
         })
     }
 
@@ -339,21 +346,31 @@ class SystemPromotionCompoment extends Component {
                             label="Giá trị booking tối thiểu"
                             {...formItemLayout}
                         >
-                            <InputNumber min='0' onChange={this.handleMinValueChange}/>
+                            <InputNumber min='0' onChange={this.handleMinValueChange} style ={{width: '90%'}}/>
                             {'  VND'}
                         </Form.Item>
                         <Form.Item
                             label="Giá trị khuyến mãi"
                             {...formItemLayout}
                         >
-                            <InputNumber min='0' onChange={this.handleValueChange}/>
-                            {'  VND'}
+                            <InputNumber min='0' onChange={this.handleValueChange}  style ={{width: '90%'}}/>
+                            {'  %'}
+                        </Form.Item>
+                        <Form.Item
+                            label="Giá trị khuyến mãi tối đa"
+                            {...formItemLayout}
+                        >
+                            <InputNumber min='0' onChange={this.handlemaxValueToReceiveChange}
+                                                value={this.state.currentPromo.maxValueToReceive}
+                                                style ={{width: '90%'}}/>
+                            {' VND'}
                         </Form.Item>
                         <Form.Item
                             label="Số lần sử dụng tối đa"
                             {...formItemLayout}
                         >
-                            <InputNumber min='0' onChange={this.handleNumTimeChange}/>
+                            <InputNumber min='0' onChange={this.handleNumTimeChange}
+                                        style ={{width: '100%'}}/>
                         </Form.Item>
                         <Form.Item
                             label="Thời gian áp dụng"
@@ -408,7 +425,8 @@ class SystemPromotionCompoment extends Component {
                             {...formItemLayout}
                         >
                             <InputNumber min='0' onChange={this.handleMinValueChange}
-                                        value={this.state.currentPromo.minValueBooking}/>
+                                        value={this.state.currentPromo.minValueBooking}
+                                        style ={{width: '90%'}}/>
                             {' VND'}
                         </Form.Item>
                         <Form.Item
@@ -416,7 +434,17 @@ class SystemPromotionCompoment extends Component {
                             {...formItemLayout}
                         >
                             <InputNumber min='0' onChange={this.handleValueChange}
-                                                value={this.state.currentPromo.value}/>
+                                                value={this.state.currentPromo.value}
+                                                style ={{width: '90%'}}/>
+                            {' %'}
+                        </Form.Item>
+                        <Form.Item
+                            label="Giá trị khuyến mãi tối đa"
+                            {...formItemLayout}
+                        >
+                            <InputNumber min='0' onChange={this.handlemaxValueToReceiveChange}
+                                                value={this.state.currentPromo.maxValueToReceive}
+                                                style ={{width: '90%'}}/>
                             {' VND'}
                         </Form.Item>
                         <Form.Item
@@ -424,7 +452,8 @@ class SystemPromotionCompoment extends Component {
                             {...formItemLayout}
                         >
                             <InputNumber min='0' onChange={this.handleNumTimeChange}
-                                                value={this.state.currentPromo.maxNumBookingApplied}/>
+                                                value={this.state.currentPromo.maxNumBookingApplied}
+                                                style ={{width: '100%'}}/>
                         </Form.Item>
                         <Form.Item
                             label="Thời gian áp dụng"
