@@ -15,6 +15,7 @@ import UserProfilePage from './single-pages/UserProfilePage';
 import {connect} from 'react-redux';
 import * as actions from '../redux/ActionCreators';
 import {Divider} from 'antd';
+import Booking from './BookingComponent';
 
 class Main extends Component {
 
@@ -27,6 +28,7 @@ class Main extends Component {
     return (
       <div>
         <Switch>
+          {/* debug purpose <Route path="/boo" component={Booking}/>*/}
           <Route path="/" exact={true} component={Home} />
           <Route path="/search" component={SearchResults} />
           <Route path="/host" component={HostManager} />
