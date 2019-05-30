@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../css/SearchBox.css';
+import '../../css/BookingBox.css';
 import DatePicker from 'react-datepicker';
 import {Button} from 'reactstrap';
 import { connect } from 'react-redux';
@@ -29,9 +29,20 @@ class BookingForm extends React.Component{
             // //acount
             // accName: undefined,
             // accNumber: undefined
+            userEditable: false,
+            dateEditable: false,
+            accEditable: false
         }
         this.ref = React.createRef();
-
+        this.handleDateComeChange = this.handleDateComeChange.bind(this);
+        this.handleDateLeaveChange = this.handleDateLeaveChange.bind(this);
+        this.changeName = this.handleUserNameChange.bind(this);
+        this.changePhoneNumber = this.handlePhoneNumberChange.bind(this);
+        this.changeAddress = this.handleAddressChange.bind(this);
+        this.changeAccNumber = this.handleAccNumberChange.bind(this);
+        this.setUserInput = this.setUserInput.bind(this);
+        this.setDateInput = this.setDateInput.bind(this);
+        this.setAccInput = this.setAccInput.bind(this);
     }
 
     componentDidMount() {
@@ -57,12 +68,6 @@ class BookingForm extends React.Component{
     handleAccNumberChange = (value) => {
         this.setState({
             accNumber: value.target.value
-        });
-    };
-
-    handleAccNameChange = (value) => {
-        this.setState({
-            accName: value.target.value
         });
     };
 
@@ -97,6 +102,24 @@ class BookingForm extends React.Component{
         });
     };
 
+    setAccInput(){
+        this.setState({
+            accEditable: !this.state.accEditable
+        });
+    }
+
+    setDateInput(){
+        this.setState({
+            dateEditable: !this.state.dateEditable
+        });
+    }
+
+    setUserInput(){
+        this.setState({
+            userEditable: !this.state.userEditable
+        });
+    }
+
     render(){
         // KHOA
         let homepost = this.props.currentHomepost || {};
@@ -110,75 +133,83 @@ class BookingForm extends React.Component{
             <div className="huge-input-container" ref={this.ref}>
                 <div className="searchBox container-fluid">
                      <div className="inputBox">
-                        <div className="inputField">Kiểm tra thông tin trước khi đặt chuyến nào :love: </div>
+                     <div className="inputField">Dưới đây là thông tin chuyến đi sắp được đặt của bạn, cũng như thông tin 
+                        tài khoản của bạn và tài khoản ngân hàng của bạn. <br/>
+                        Hãy đảm bảo mọi thông tin dưới đây đều chính xác.</div>
                     </div>
                 </div>
                 <div className="searchBox container-fluid">
-                    <div className="first-col-info">
-                        <div className="homestay-info">
-                            Thông tin homestay
-                            <div className="inputField">Tên homestay</div>
-                            <div className="inputContent">{homepost.name}</div>
-                            <div className="inputField">Loại homestay</div>
-                            <div className="inputContent">{homepost.typeHome}</div>
-                            <div className="inputField">Giá/đêm</div>
-                            <div className="inputContent">{this.state.homestayPrice}$/đêm</div>
-                            <div className="inputField">Địa chỉ</div>
-                            <div className="inputContent">{JSON.stringify(homepost.location)}</div>
-                            <div className="inputField">Số điện thoại liên hệ</div>
-                            <div className="inputContent">{this.state.homestayPhoneNumber}</div>
-                            <div className="inputField">Email liên hệ:</div>
-                            <div className="inputContent">{this.state.homestayEmail}</div>
-                        </div>
-                        <br/>
-                        <div className="user-info">
-                            Thông tin người dùng
-                            <div className="inputField">Tên của bạn</div>
-                            <div className="inputContent">
-                                <input type="text" value={this.state.userName} onChange={this.changeName}/>
-                            </div>
-                            <div className="inputField">Tên tài khoản</div>
-                            <div className="inputContent">{this.state.userAccount}</div>
-                            <div className="inputField">Số diện thoại</div>
-                            <div className="inputContent">
-                                <input type="text" value={this.state.userPhoneNumber} onChange={this.changePhoneNumber}/>
-                            </div>
-                            <div className="inputField">Địa chỉ</div>
-                            <div className="inputContent">
-                                <input type="text" value={this.state.userAddress} onChange={this.changeAddress}/>
-                            </div>
-                            <div className="inputField">Email</div>
-                            <div className="inputContent">{this.state.userEmail}</div>
-                        </div>
+                    <div className="homestay-info inputBox">
+                        Thông tin homestay
+                        <div className="inputField">Tên homestay</div>
+                        <div className="inputContent">{homepost.name}</div>
+                        <div className="inputField">Loại homestay</div>
+                        <div className="inputContent">{homepost.typeHome}</div>
+                        <div className="inputField">Số đêm</div>
+                        <div className="inputContent">{this.state.nights}đêm</div>
+                        <div className="inputField">Số khách</div>
+                        <div className="inputContent">{this.state.numGuests} khách</div>
+                        <div className="inputField">Giá/đêm</div>
+                        <div className="inputContent">{this.state.homestayPrice}$/đêm</div>
+                        <div className="inputField">Tổng tiền</div>
+                        <div className="inputContent">{this.state.homestayPrice * this.state.numGuests} $</div>
+                        <div className="inputField">Chính sách</div>
+                        <div className="inputContent">{this.state.policy}$/đêm</div>
+                        <div className="inputField">Địa chỉ</div>
+                        <div className="inputContent">{JSON.stringify(homepost.location)}</div>
+                        <div className="inputField">Số điện thoại liên hệ</div>
+                        <div className="inputContent">{this.state.homestayPhoneNumber}</div>
+                        <div className="inputField">Email liên hệ:</div>
+                        <div className="inputContent">{this.state.homestayEmail}</div>
                     </div>
-                    <div className="second-col-info inputBox">
-                        <div className="date-picker">
+                    <div className="user-info inputBox">
+                        Thông tin người dùng
+                        <input type="image" src="../assets/images/edit.svg" style={{float:"right", width: "20px"}} onClick={this.setUserInput} disabled={(this.state.userEditable) ? "disabled" : ""}/>
+                        <div className="inputField">Tên của bạn</div>
+                        <div className="inputContent">
+                        <input type="text" value={this.state.userName} onChange={this.changeName} disabled={(this.state.userEditable) ? "" : "disabled"}/>
+                        </div>
+                        <div className="inputField">Tên tài khoản</div>
+                        <div className="inputContent">{this.state.userAccount}</div>
+                        <div className="inputField">Số diện thoại</div>
+                        <div className="inputContent">
+                        <input type="text" value={this.state.userPhoneNumber} onChange={this.changePhoneNumber} disabled={(this.state.userEditable) ? "" : "disabled"}/>
+                        </div>
+                        <div className="inputField">Địa chỉ</div>
+                        <div className="inputContent">
+                        <input type="text" value={this.state.userAddress} onChange={this.changeAddress} disabled={(this.state.userEditable) ? "" : "disabled"}/>
+                        </div>
+                        <div className="inputField">Email</div>
+                        <div className="inputContent">{this.state.userEmail}</div>
+                        <input type="image" src="../assets/images/save.svg" style={{float:"right", width: "20px", visibility: (this.state.userEditable) ? "" : "hidden"}} onClick={this.setUserInput} disabled={(this.state.userEditable) ? "" : "disabled"}/>
+                    </div>
+                </div>
+                <div className="searchBox container-fluid">
+                    <div className="date-picker inputBox">
+                        Ngày đi/về
+                        <input type="image" src="../assets/images/edit.svg" style={{float:"right", width: "20px"}} onClick={this.setDateInput} disabled={(this.state.dateEditable) ? "disabled" : ""}/>
                         <div className="inputField">Ngày đi</div>
                             <DatePicker
                                 selected={this.state.dateCome}
                                 onChange={this.handleDateComeChange}
+                                onClick={this.setDateInput} 
+                                disabled={(this.state.dateEditable) ? "" : "disabled"}
                             />
-                            <div className="inputField">Ngày về</div>
-                            <DatePicker
-                                selected={this.state.dateLeave}
-                                onChange={this.handleDateLeaveChange}
-                            />
-                        </div>
-                        <div className="banking-info">
-                            <div className="inputField">Tên tài khoản ngân hàng</div>
-                            <div className="inputContent">
-                                <input type="text" value={this.state.accName} onChange={this.changeAccName}/>
-                            </div>
-                            <div className="inputField">Số tài khoản ngân hàng</div>
-                            <div className="inputContent">
-                                <input type="text" value={this.state.accNumber} onChange={this.changeAccNumber}/>
-                            </div>
-                        </div>
+                        <div className="inputField">Ngày về</div>
+                        <DatePicker
+                            selected={this.state.dateLeave}
+                            onChange={this.handleDateLeaveChange}
+                            disabled={(this.state.dateEditable) ? "" : "disabled"}
+                        />
+                        <input type="image" src="../assets/images/save.svg" style={{float:"right", width: "20px", visibility: (this.state.dateEditable) ? "" : "hidden"}} onClick={this.setDateInput} disabled={(this.state.dateEditable) ? "" : "disabled"}/>
+                    </div>
+                    <div className="banking-info inputBox">
+                        Thông tin số tiền
+                        <div className="inputField">Số coin hiện có</div>
+                        <div className="inputContent">{this.state.accNumber}</div>
                     </div>
                 </div>
-                <div className="button-and-conditions">
-                    <Button color="primary">Đặt phòng</Button>
-                </div>
+                <Button color="primary">Hoàn tất và đặt chuyến</Button>
             </div>
         )
     }

@@ -1,0 +1,78 @@
+.searchBox {
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.searchBox > .inputBox {
+    display: inline-block;
+    border: 1px solid #d6d6d6;
+    border-radius: 6px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    flex: 1;
+    min-width: 225px;
+    margin: 20px;
+    margin-left: 0;
+}
+
+.searchBox > button {
+    text-transform: uppercase;
+    padding: 10px;
+    flex: 0;
+    font-weight: 600;
+    background-color: red;
+    color: white;
+}
+
+.searchBox > .inputBox > .inputField {
+    flex: 1;
+    display: inline-block;
+    flex-basis: 100%;
+    color: #888;
+    font-weight: 700;
+    font-size: 1rem;
+    padding-bottom: 5px;
+}
+
+.searchBox > .inputBox > img {
+    flex: 0;
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+}
+
+.searchBox > .inputBox > .inputContent {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+}
+
+.searchBox input {
+    display: inline-block;
+    border: 1px solid transparent;
+}
+
+.searchBox input:focus {
+    outline: none;
+}
+
+.searchBox > .inputBox > .inputContent > input {
+    width: 100%;
+}
+
+.searchBox > .inputBox.calendar > .inputContent > .react-datepicker-wrapper {
+    width: 50%;
+}
+
+.searchBox > .inputBox.calendar > .inputContent > .react-datepicker-wrapper * {
+    width: 100%;
+}
