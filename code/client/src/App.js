@@ -4,6 +4,7 @@ import './App.css';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ConfigureStore } from './redux/configureStore';
+import Promo from './components/Homestay/SystemPromosCard';
 
 const store = ConfigureStore();
 
@@ -14,6 +15,7 @@ class App extends Component {
       <Provider store={store}>
         <BrowserRouter>
           <Main/>
+          {/* <Promo/> */}
         </BrowserRouter>
       </Provider>
     );
