@@ -11,6 +11,7 @@ import HostHeader from './Header/HostHeader'
 import NormalUserMessageInbox from './single-pages/NormalUserMessageInbox';
 import SearchResults from './single-pages/SearchResults';
 import RenterManager from './RenterManager/RenterManager';
+import UserProfilePage from './single-pages/UserProfilePage';
 import {connect} from 'react-redux';
 import * as actions from '../redux/ActionCreators';
 import {Divider} from 'antd';
@@ -48,6 +49,7 @@ class Main extends Component {
           />
           <Route path="/booking/new" component={NewBookingPage} />
           <Route path="/messages" component={NormalUserMessageInbox} />
+          <Route path="/profile" component={UserProfilePage} />
           <Redirect to='/'/>
         </Switch>
         <Footer/>
