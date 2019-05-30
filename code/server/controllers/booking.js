@@ -1,5 +1,8 @@
 const Booking = require('../models/booking');
-
+const Homepost = require('../models/homeposts');
+const User = require('../models/user');
+const moment = require('moment');
+const log = require('debug')('CUONG');
 
 // get all user's booking
 function getAllBookings(req, res, next) {
@@ -39,31 +42,94 @@ function getBooking(req, res, next) {
         });
 }
 
-function addBooking(req, res, next) {
+async function addBooking(req, res, next) {
     const data = req.body;
-    const newBooking = {
+    const booking = {
         renter: req.user._id,
         appliedHostPromo: data.appliedHostPromo,
         appliedSystemPromo: data.appliedSystemPromo,
         home: data.home,
-        dateStart: data.dateStart,
-        dateEnd: data.dateEnd,
+        dateCheckin: getDateAt12AM(data.dateCheckin),
+        dateCheckout: getDateAt12AM(data.dateCheckout),
     };
 
-    Booking.create(newBooking, (err, booking) => {
-        if (err || !booking)
-          return res.status(500).json({ err: {
-          type: 'ServerError',
-          message: 'Lỗi server',
-          detail: err
-        }});;
-        booking
-            .populate('appliedHostPromo appliedSystemPromo home')
-            .exec((err, booking) => {
-                // if (err || !booking) return res.status(500).json({ err });
-                res.status(200).json({ booking });
-            });
-    });
+    // Check if checkin date is invalid
+    const comparedToToday = compareDates(booking.dateCheckin, new Date());
+    if (comparedToToday < 0) {
+      return res.status(499).json({
+        err: {
+          type: 'InvalidCheckinDate',
+          message: 'Ngày checkin không được trước ngày hiện tại',
+          detail: {
+            dateCheckin: booking.dateCheckin,
+            today: getDateAt12AM(new Date())
+          }
+        }
+      });
+    }
+
+    // Check if checkout date is invalid
+    const numDates = compareDates(booking.dateCheckout, booking.dateCheckin);
+    if (numDates < 1)
+      return res.status(499).json({
+        err: {
+          type: 'InvalidCheckoutDate',
+          message: 'Ngày checkout phải sau ngày checkin',
+          detail: {
+            dateCheckin: booking.dateCheckin,
+            dateCheckout: booking.dateCheckout,
+          }
+        }
+      });
+
+    try {
+        // Calculate cost
+        const homepost = await Homepost.findById(booking.home);
+        const price = homepost.weekdayPrice;
+
+        const bookingCost = numDates * price;
+
+        // Check if user has enough money
+        let user = await User.findById(booking.renter);
+        if (user.coin < bookingCost)
+          return res.status(499).json({
+            err: {
+              type: 'NotEnoughMoney',
+              message: 'Người dùng không đủ tiền',
+              detail: {
+                bookingCost: bookingCost,
+                userCoint: user.coin,
+              }
+            }
+          });
+
+        // Update database
+        user.coin -= bookingCost;
+        user = await user.save();
+        const bookingDoc = await Booking.create(booking);
+
+        res.json({ booking: bookingDoc });
+    } catch (err) {
+      res.status(500).json({ err: {
+        type: 'ServerError',
+        message: 'Lỗi server',
+        detail: err
+      }});
+    }
+}
+
+// Just get date, discard hour, minute, second, milliseconds
+function getDateAt12AM(dateString) {
+  const date = new Date(dateString);
+  date.setHours(0);
+  date.setSeconds(0);
+  date.setMinutes(0);
+  date.setMilliseconds(0);
+  return date;
+}
+
+function compareDates(dateObj1, dateObj2) {
+  return moment(getDateAt12AM(dateObj1)).diff(moment(getDateAt12AM(dateObj2)), 'days');
 }
 
 module.exports = {
