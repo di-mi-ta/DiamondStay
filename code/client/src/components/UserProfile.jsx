@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import { Form, Input, DatePicker, Row, Typography, Button, Upload, message as notification } from 'antd';
+import { Form, Card, Typography, Button, Divider, message as notification } from 'antd';
 import { connect } from 'react-redux';
 import update from 'immutability-helper';
 import * as apiUtils from '../utils/api/user';
@@ -26,12 +26,6 @@ class UserInfo extends React.Component {
     user: this.props.user || {},
     dirty: true,
   };
-
-  componentDidMount() {
-    // this.setState({
-    //   user: this.props.user || {},
-    // });
-  }
 
   userInfoChanged = () => {
     // return JSON.stringify(this.state.user) !== JSON.stringify(this.props.user);
@@ -62,10 +56,10 @@ class UserInfo extends React.Component {
         if (originalUser[prop] !== modifiedUser[prop])
           modifiedInfo[prop] = modifiedUser[prop];
     }
-
-    apiUtils.changeUserInfo(originalUser._id, modifiedInfo).then(user  => {
+    apiUtils.changeUserInfo(originalUser._id, modifiedInfo, this.props.auth)
+    .then(user => {
+      // Updated Successfully
       notification.success('Thông tin đã được cập nhật')
-      // TODO: update redux state.user.auth.info = user
     }).catch(err => {
       console.log('ERROR', err);
       notification.error('Xảy ra lỗi. Thông tin chưa được cập nhật!')
@@ -79,46 +73,39 @@ class UserInfo extends React.Component {
       return <Redirect to='/' />;
     }
     return (
-      <Form>
-        <Item label='Tên' {...formItemLayout}>
-          <Paragraph editable={{ onChange: (s) => this.changeInfo({ firstName: s }) }}>{this.state.user.firstName}</Paragraph>
-        </Item>
-        <Item label='Họ' {...formItemLayout}>
-          <Paragraph editable={{ onChange: (s) => this.changeInfo({ lastName: s }) }}>{this.state.user.lastName}</Paragraph>
-        </Item>
-        <Item label='Email' {...formItemLayout}>
-          <Paragraph editable={{ onChange: (s) => this.changeInfo({ email: s }) }}>{this.state.user.email}</Paragraph>
-        </Item>
-        <Item label='Di động' {...formItemLayout}>
-          <Paragraph placeholder='aaaaa' editable={{ onChange: (s) => this.changeInfo({ phone: s }) }}>{this.state.user.phone}</Paragraph>
-        </Item>
-        {/* <Item label='Ngày sinh' {...formItemLayout}>
-          <DatePicker
-            format={dateFormat}
-            //value={moment(this.state.user.birthday, dateFormat).isValid() ? moment(this.state.user.birthday, dateFormat) : null}
-            onChange={this.onBirthdayChange}
-            placeholder={this.state.user.birthday  || 'Bổ sung' }
-            showToday={true}
-          />
-        </Item> */}
-        {/* <Item label='Địa chỉ' {...formItemLayout}>
-          <Paragraph editable={{ onChange: (s) => this.changeInfo({ address: s }) }}>{this.state.user.address}</Paragraph>
-        </Item> */}
-        {/* <Item label='Hình đại diện' {...formItemLayout}>
-          <Upload>
-
-          </Upload>
-        </Item> */}
-        <Item {...tailFormItemLayout}>
-          <Button type='primary' disabled={!this.userInfoChanged()} onClick={this.handleUpdateInfo}>Cập nhật</Button>
-        </Item>
-      </Form>
+      <div className="container" style={{marginTop: 20}}>
+      <h3> <b> Thông tin tài khoản </b></h3>
+      <Divider/>
+      <Card style={{
+        width: '100%', padding: 10, 
+        marginTop: 10, marginBottom: 10,
+        boxShadow: '0 8px 12px rgba(0,0,0,.1)',}}>
+        <Form>
+          <Item label='Tên' {...formItemLayout}>
+            <Paragraph editable={{ onChange: (s) => this.changeInfo({ firstName: s }) }}>{this.state.user.firstName}</Paragraph>
+          </Item>
+          <Item label='Họ' {...formItemLayout}>
+            <Paragraph editable={{ onChange: (s) => this.changeInfo({ lastName: s }) }}>{this.state.user.lastName}</Paragraph>
+          </Item>
+          <Item label='Email' {...formItemLayout}>
+            <Paragraph editable={{ onChange: (s) => this.changeInfo({ email: s }) }}>{this.state.user.email}</Paragraph>
+          </Item>
+          <Item label='Di động' {...formItemLayout}>
+            <Paragraph placeholder='aaaaa' editable={{ onChange: (s) => this.changeInfo({ phone: s }) }}>{this.state.user.phone}</Paragraph>
+          </Item>
+          <Item {...tailFormItemLayout}>
+            <Button type='primary' disabled={!this.userInfoChanged()} onClick={this.handleUpdateInfo}>Cập nhật</Button>
+          </Item>
+        </Form>
+      </Card>
+      </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
+  auth: state.auth,
   user: state.auth.user ? state.auth.user.info : {} // prevent null.firstName... when user logout
 });
 

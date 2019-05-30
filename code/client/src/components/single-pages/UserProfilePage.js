@@ -10,11 +10,6 @@ class UserProfilePage extends React.Component{
     return (
       <React.Fragment>
         <MainHeader />
-        <Row>
-          <Col offset={2}>
-            <Title level={2}>Thông tin tài khoản</Title>
-          </Col>
-        </Row>
         <UserProfile />
       </React.Fragment>
     )
