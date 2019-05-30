@@ -21,10 +21,18 @@ class SearchResults extends Component {
       rating: 3,
       numRating: 2
     }
+    this.state = {
+      priceUp: true
+    }
+    this.handlePriceSort = this.handlePriceSort.bind(this);
+  }
+
+  handlePriceSort(e) {
+    this.setState({priceUp: e.target.getAttribute('data-value') == "up"});
+    // update data by price
   }
 
   render(){
-    console.log(this.props.homeposts.resHomepostsSearch);
     return(
       <div className="searchResult container-fluid">
         <MainHeader/>
@@ -34,19 +42,52 @@ class SearchResults extends Component {
           <div className="sort-box">
             <span>Sắp xếp theo</span>
             <div className="dropdown">
-              <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Giá giảm dần
+              <button 
+              className="btn btn-secondary dropdown-toggle"
+              type="button" id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              >
+                {this.state.priceUp? "Giá tăng dần": "Giá giảm dần"}
               </button>
               <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a className="dropdown-item">Giá tăng dần</a>
-                <a className="dropdown-item">Giá giảm dần</a>
+                <a className="dropdown-item" data-value="up" onClick={this.handlePriceSort}>Giá tăng dần</a>
+                <a className="dropdown-item" data-value="down" onClick={this.handlePriceSort}>Giá giảm dần</a>
               </div>
             </div>
           </div>
         </div>
         
         <div className="result row">
-          <Link to={`/room/5cea67afe89dd477c3af3f54`} className="result-item col-xs-6 col-md-4 col-lg-3">
+          {
+            this.props.homeposts.resHomepostsSearch.length > 0?
+            this.props.homeposts.resHomepostsSearch.map(house => ({
+              id: house._id,
+              image: house.image.length > 0?
+                baseUrl + house.image[0]
+                : 'https://cdn.luxstay.com/rooms/14456/medium/1537270177_DSC06175.jpg',
+              type: house.typeHome,
+              houseName: house.name,
+              location: house.location,
+              price: `${house.weekdayPrice} ${house.currencyUnit}`,
+              rating: house.rating.length > 0?
+                Math.floor(
+                  house.rating
+                  .map(rating => rating.rating)
+                  .reduce((a, b) => a + b, 0) / house.rating.length
+                )
+                : 0,
+              numRating: house.rating.length
+            }))
+            .map(homepost => 
+              <Link to={`/room/${homepost.id}`} className="result-item col-xs-6 col-md-4 col-lg-3">
+                <HouseCard houseData={homepost}/>
+              </Link>
+            )
+            : <span>Không có kết quả nào. Thử lại nhé!</span>
+          }
+          {/* <Link to={`/room/5cea67afe89dd477c3af3f54`} className="result-item col-xs-6 col-md-4 col-lg-3">
             <HouseCard houseData={this.place}/>
           </Link>
           <Link to={`/room/5cea67afe89dd477c3af3f54`} className="result-item col-xs-6 col-md-4 col-lg-3">
@@ -63,7 +104,7 @@ class SearchResults extends Component {
           </Link>
           <Link to={`/room/5cea67afe89dd477c3af3f54`} className="result-item col-xs-6 col-md-4 col-lg-3">
             <HouseCard houseData={this.place}/>
-          </Link>
+          </Link> */}
         </div>
 
         <nav className="more-result">

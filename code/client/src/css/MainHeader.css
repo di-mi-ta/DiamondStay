@@ -73,10 +73,18 @@
     left: unset;
 }
 
+@media only screen and (max-width: 992px) {
+    .mainHeader > .collapse > ul > li.nav-item.dropdown > .dropdown-menu {
+        right: unset;
+        left: 0;
+    }
+}
+
 .mainHeader > .collapse > ul > li.nav-item.dropdown > .dropdown-menu.show {
     display: flex;
     flex-wrap: wrap;
     padding: 0px;
+    position: absolute;
 }
 
 .mainHeader > .collapse > ul > li.nav-item.dropdown > .dropdown-menu > div {

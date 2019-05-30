@@ -19,11 +19,10 @@ class HouseCard extends React.Component {
           <div className="location">
             <i className="fa fa-map-marker" aria-hidden="true"></i>
             {
-              this.props.houseData.location?
+              (this.props.houseData.location && this.props.houseData.location.district && this.props.houseData.location.province)?
               <span>{`${this.props.houseData.location.district} - ${this.props.houseData.location.province}`}</span>
               : <span>Chưa rõ</span>
             }
-            
           </div>
           <div className="price">
             <i className="fa fa-usd" aria-hidden="true"></i>

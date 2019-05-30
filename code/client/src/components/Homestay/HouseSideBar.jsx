@@ -83,9 +83,9 @@ class HouseSideBar extends React.Component {
                 price: `${house.weekdayPrice} ${house.currencyUnit}`,
                 rating: house.rating.length > 0?
                   Math.floor(
-                    this.props.homeposts.currentHomepost.rating
+                    house.rating
                     .map(rating => rating.rating)
-                    .reduce((a, b) => a + b, 0) / this.props.homeposts.currentHomepost.rating.length
+                    .reduce((a, b) => a + b, 0) / house.rating.length
                   )
                   : 0,
                 numRating: house.rating.length

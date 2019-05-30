@@ -3,6 +3,10 @@
     color: #111;
 }
 
+.searchResult > .result > span {
+    margin: 20px 15px;
+}
+
 .searchResult > .title {
     margin-top: 50px;
     display: flex;

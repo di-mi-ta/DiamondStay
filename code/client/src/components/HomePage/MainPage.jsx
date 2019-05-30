@@ -102,8 +102,14 @@ class MainPage extends React.Component {
               houseName: homepost.name,
               location: homepost.location,
               price: homepost.weekdayPrice,
-              rating: 2,
-              numRating: 5
+              rating: homepost.rating.length > 0?
+                Math.floor(
+                  homepost.rating
+                  .map(rating => rating.rating)
+                  .reduce((a, b) => a + b, 0) / homepost.rating.length
+                )
+                : 0,
+              numRating: homepost.rating.length
             })).map(place =>
               <Link to={`/room/${place.id}`}>
                 <HouseCard houseData={place}/>
