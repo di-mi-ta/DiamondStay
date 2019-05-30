@@ -115,11 +115,11 @@ class MainHeader extends React.Component {
                       </Link>
                     </div>
                     <div className="dropdown-item">
-                        <a className="nav-link">
-                        <Button onClick={this.handleLogout} type="link">
-                          Đăng xuất
-                        </Button>
-                        </a>
+                      <a className="nav-link">
+                      <Button onClick={this.handleLogout} type="link">
+                        Đăng xuất
+                      </Button>
+                      </a>
                     </div>
                   </div>
                 </li>

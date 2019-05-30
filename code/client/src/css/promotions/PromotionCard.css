@@ -6,6 +6,10 @@
     overflow: hidden;
 }
 
+.discount > .discount__title > p {
+    color: white;
+}
+
 .start-xs {
     justify-content: flex-start;
     text-align: left;
@@ -72,6 +76,10 @@
 
 .discount__action .btn {
     width: 100%;
+}
+
+.discount__action .btn:hover {
+    color: red;
 }
 
 .btn--secondary {

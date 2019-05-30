@@ -91,7 +91,7 @@ class HouseSideBar extends React.Component {
                 numRating: house.rating.length
               }))
               .map(house =>
-                <Link to={`/room/${house.id}`} key={house.id}>
+                <Link to={`/room/${house.id}`} key={house.id} onClick={() => console.dir(this)}>
                   <HouseCard houseData={house}/>
                 </Link>
                 // <HouseCard houseData={house} key={house.id}/>
@@ -108,7 +108,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchHomeposts: (query='') => {dispatch(actions.fetchHomeposts(query))}
+  fetchHomeposts: (query='') => {dispatch(actions.fetchHomeposts(query))},
+  fetchHomepostById: (homeId) => {dispatch(actions.fetchHomepostById(homeId))}
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HouseSideBar);

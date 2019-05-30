@@ -19,6 +19,12 @@
     background-color: red;
     color: white;
     margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.searchBox > button > a {
+    color: white;
 }
 
 .searchBox > .searchBox-container > .inputBox {

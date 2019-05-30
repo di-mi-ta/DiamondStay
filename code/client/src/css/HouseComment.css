@@ -12,11 +12,20 @@
     flex-wrap: wrap;
 }
 
+.houseCommentList > .commentForm > label {
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
 .houseCommentList > .commentForm > .rating {
-    margin-top: 10px;
+    margin-top: 20px;
+    margin-bottom: 15px;
     width: 100%;
-    display: flex;
-    justify-content: center;
+}
+
+.houseCommentList > .commentForm > .rating > span {
+    padding: 10px 20px 10px 0;
+    font-weight: 600;
 }
 
 .houseCommentList > .commentForm > button {
@@ -26,8 +35,6 @@
     font-weight: 600;
     padding: 8px 15px;
     margin-top: 10px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 /* comments */

@@ -1,0 +1,91 @@
+.searchResult {
+    padding: 0 30px;
+    color: #111;
+}
+
+.searchResult > .title {
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.searchResult > .title > span {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.searchResult > .title > .sort-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #b4bccc;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.searchResult > .title > .sort-box:hover {
+    border: 1px solid #111;
+}
+
+.searchResult > .title > .sort-box > span {
+    font-weight: 600;
+    margin-right: 15px;
+}
+
+.searchResult > .title > .sort-box > .dropdown > button {
+    background: transparent;
+    color: #111;
+    border: none;
+    padding: 0;
+    font-size: 1.2rem;
+}
+
+.searchResult > .title > .sort-box > .dropdown > button:focus {
+    box-shadow: none !important;
+}
+
+.searchResult > .title > .sort-box > .dropdown > .dropdown-menu.show {
+    padding: 0;
+    top: 15px !important;
+    left: unset !important;
+    right: -15px !important;
+}
+
+.searchResult > .title > .sort-box > .dropdown > .dropdown-menu.show > .dropdown-item {
+    padding: 15px;
+}
+
+.searchResult > .title > .sort-box > .dropdown > .dropdown-menu.show > .dropdown-item:active {
+    background: none;
+}
+
+.searchResult > .title > .sort-box > .dropdown > .dropdown-menu.show > .dropdown-item:hover {
+    color: red;
+}
+
+.searchResult > .more-result {
+    margin: 50px 0;
+}
+
+.searchResult > .more-result > ul {
+    display: flex;
+    justify-content: center;
+}
+
+.searchResult > .more-result > ul > li > a {
+    padding: 10px 15px;
+    border-radius: 50% !important;
+    margin: 0 5px;
+    box-shadow: 0 0 8px 8px rgba(0, 0, 0, 0.01);
+}
+
+.searchResult > .more-result > ul > li > a:hover {
+    color: red;
+}
+
+.searchResult > .more-result > ul > li.active > a {
+    background-color: red;
+    color: white;
+    border-color: red;
+}
