@@ -20,11 +20,20 @@ function updateUserInfo(req, res, next) {
 }
 
 const getInfoUserFromUsername = (req, res, next) => {
-  User.find(req.query)
+  User.findOne(req.query)
   .then((user) => {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json')
-    res.json(user)
+    res.json({ 
+      user: {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        typeUser: user.typeUser,
+        coin: user.coin,
+        phone: user.phone
+      }
+    })
   }, err => next(err))
   .catch(err=> next(err));
 }
