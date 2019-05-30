@@ -1,19 +1,14 @@
 var mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const reservationSchema = new Schema({
+const bookingSchema = new Schema({
     renter: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Users'
     },
     paymentStatus: {
-        type: Number,
-        default: 0.0,
-    },
-    numNights: {
-        type: Number,
-        min: 0,
-        default: 0,
+        type: String,
+        enum: ['Đã thanh toán', 'Chưa thanh toán']
     },
     appliedHostPromo: {
         type: mongoose.Schema.Types.ObjectId,
@@ -28,16 +23,14 @@ const reservationSchema = new Schema({
         ref: 'HomePosts',
         required: true
     },
-    dateStart: {
+    dateCheckin: {
         type: Date,
-        defaut: ''
+        required: true
     },
-    dateEnd: {
+    dateCheckout: {
         type: Date,
-        default: ''
+        required: true
     },
-},{
-    timestamps : true
 });
 
-module.exports = mongoose.model('Reservations',reservationSchema);
+module.exports = mongoose.model('Reservations',bookingSchema);

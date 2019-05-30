@@ -6,6 +6,7 @@ var passport = require('passport');
 
 const Controllers  = require('../controllers');
 const AuthCtrl = Controllers.AuthCtrl;
+const userController = require('../controllers/user');
 
 router.options('*', cors.corsWithOptions,(req, res) => {res.sendStatus(200);})
 
@@ -39,5 +40,6 @@ router
 
 
 router.get('/logout', AuthCtrl.logOut)
+router.post('/changeInfo', authenticate.verifyUser, userController.updateUserInfo);
 
 module.exports = router;

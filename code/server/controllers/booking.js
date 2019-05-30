@@ -18,9 +18,11 @@ function getAllBookings(req, res, next) {
 
 // Get a booking given the id
 function getBooking(req, res, next) {
-    const id = req.params.id;
     Booking
-        .findById(id)
+        .fineOne({
+          render: req.user._id,
+          _id: req.params.id
+        })
         .populate('appliedHostPromo appliedSystemPromo home')
         .exec((err, booking) => {
             if (err)
@@ -41,8 +43,6 @@ function addBooking(req, res, next) {
     const data = req.body;
     const newBooking = {
         renter: req.user._id,
-        paymentStatus: paymentStatus,
-        numNights: data.numNights,
         appliedHostPromo: data.appliedHostPromo,
         appliedSystemPromo: data.appliedSystemPromo,
         home: data.home,
@@ -65,7 +65,6 @@ function addBooking(req, res, next) {
             });
     });
 }
-
 
 module.exports = {
     getAllBookings,

@@ -1,5 +1,4 @@
 /* for homepost search */
-
 const Homepost = require('../models/homeposts');
 
 function search(req, res, next) {
