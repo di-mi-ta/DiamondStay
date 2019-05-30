@@ -24,8 +24,9 @@ const getInfoUserFromUsername = (req, res, next) => {
   .then((user) => {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json')
-    res.json({ 
+    res.json({
       user: {
+        _id: user._id,
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,

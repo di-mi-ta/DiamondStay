@@ -33,12 +33,14 @@ class House extends Component {
     this.props.fetchSystemPromos();
     this.props.fetchHostPromos();
     this.getHomeOwnerInfoInterval = setInterval(() => {
-      userApi.getUserFromUsername(this.props.homeposts.currentHomepost.owner)
-        .then(user => {
-          clearInterval(this.getHomeOwnerInfoInterval);
-          user.fullName = user.firstName + ' ' + user.lastName;
-          this.setState({ user });
-        }).catch();
+      if (this.props.homeposts && this.props.homeposts.currentHomepost && this.props.homeposts.currentHomepost.owner) {
+        userApi.getUserFromUsername(this.props.homeposts.currentHomepost.owner)
+          .then(user => {
+            clearInterval(this.getHomeOwnerInfoInterval);
+            user.fullName = user.firstName + ' ' + user.lastName;
+            this.setState({ user });
+          }).catch();
+      }
     }, 3000);
   }
 
@@ -258,7 +260,7 @@ class House extends Component {
                   receiverId={this.state.user._id}
                   defaultTitle={''}
                   defaultContent={''}
-                  onSendMessage={() => console.log(this.props.homeposts.currentHomepost.owner)}
+                  onSendMessage={this.handleSendMessage}
                   onReturn={this.toggleMessageModal}
                 />
                 :
