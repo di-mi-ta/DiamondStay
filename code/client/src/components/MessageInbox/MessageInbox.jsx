@@ -143,7 +143,7 @@ class MessageInbox extends React.Component {
           defaultTitle={helper.makeDefaultTitle(this.state.openingMessage.title)}
           defaultContent={helper.makeDefaultContent(this.state.openingMessage.content)}
           onSendMessage={this.onSendReplyMessage}
-          onReturn={null}
+          onReturn={() => this.onOpenMessageDetail(this.state.openingMessage)}
         />
       )
     }
