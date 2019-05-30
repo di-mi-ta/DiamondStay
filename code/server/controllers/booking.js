@@ -43,8 +43,6 @@ function addBooking(req, res, next) {
     const data = req.body;
     const newBooking = {
         renter: req.user._id,
-        // paymentStatus: paymentStatus,
-        numNights: data.numNights,
         appliedHostPromo: data.appliedHostPromo,
         appliedSystemPromo: data.appliedSystemPromo,
         home: data.home,
