@@ -54,3 +54,22 @@ export function changeUserInfo(userId, newInfo, lastAuth) {
     }));
   });
 }
+
+export function getUserFromUsername(username) {
+  return new Promise(function(resolve, reject) {
+    axios.get(`/users/infoUser?username${username}`).then(res => {
+      const data = res.data;
+      if (data.err || data.error)
+        reject(data.err || data.error);
+      else {
+        resolve(data.user)
+      }
+    }).catch(err => reject({
+      err: {
+        type: 'NetworkError',
+        message: 'Lỗi mạng khi thực hiện truy vấn',
+        detail: err
+      }
+    }));
+  });
+}
