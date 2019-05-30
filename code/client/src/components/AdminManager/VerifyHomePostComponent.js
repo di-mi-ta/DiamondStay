@@ -154,12 +154,12 @@ class VerifyHomepostComponent extends Component {
             isOpenModal: false
         });
 
-        if (this.state.verifiedResult.description === -1 ||
-            this.state.verifiedResult.image === -1 ||
-            this.state.verifiedResult.price === -1 ||
-            this.state.verifiedResult.roomBedInfo === -1 ||
-            this.state.verifiedResult.roomBedInfo === -1 ||
-            this.state.verifiedResult.location === -1 ) {
+        if (this.state.verifiedResult.description === 'CHƯA XÁC NHẬN' ||
+            this.state.verifiedResult.image === 'CHƯA XÁC NHẬN' ||
+            this.state.verifiedResult.price === 'CHƯA XÁC NHẬN' ||
+            this.state.verifiedResult.roomBedInfo === 'CHƯA XÁC NHẬN' ||
+            this.state.verifiedResult.roomBedInfo === 'CHƯA XÁC NHẬN' ||
+            this.state.verifiedResult.location === 'CHƯA XÁC NHẬN' ) {
             message.error('Bạn cần xác nhận tính hợp lệ của các trường thông tin trước khi xác nhận kết quả duyệt!')
         }
         else {
@@ -167,7 +167,8 @@ class VerifyHomepostComponent extends Component {
                 ...this.state.homepost,
                 confirmedBy: this.props.auth.user.username,
                 state: 'Success',
-                note: JSON.stringify(this.state.noteResult)
+                note: JSON.stringify(this.state.noteResult),
+                verifyRes: JSON.stringify(this.state.verifiedResult)
             }
             this.props.fetchUpdateHomepost(updatedHome);
             message.success('Tin đăng đã được duyệt thành công');
@@ -178,16 +179,27 @@ class VerifyHomepostComponent extends Component {
         this.setState({
             isOpenModal: false
         })
-        const updatedHome = {
-            ...this.state.homepost,
-            confirmedBy: this.props.auth.user.username,
-            state: 'Rejected',
-            note: JSON.stringify(this.state.noteResult)
+        if (this.state.verifiedResult.description === 'CHƯA XÁC NHẬN' ||
+            this.state.verifiedResult.image === 'CHƯA XÁC NHẬN' ||
+            this.state.verifiedResult.price === 'CHƯA XÁC NHẬN' ||
+            this.state.verifiedResult.roomBedInfo === 'CHƯA XÁC NHẬN' ||
+            this.state.verifiedResult.roomBedInfo === 'CHƯA XÁC NHẬN' ||
+            this.state.verifiedResult.location === 'CHƯA XÁC NHẬN' ) {
+            message.error('Bạn cần xác nhận tính hợp lệ của các trường thông tin trước khi xác nhận kết quả duyệt!')
         }
-
-        //fetch
-        this.props.fetchUpdateHomepost(updatedHome);
-        message.success('Tin đăng đã được duyệt thành công');
+        else {
+            const updatedHome = {
+                ...this.state.homepost,
+                confirmedBy: this.props.auth.user.username,
+                state: 'Rejected',
+                note: JSON.stringify(this.state.noteResult),
+                verifyRes: JSON.stringify(this.state.verifiedResult)
+            }
+    
+            //fetch
+            this.props.fetchUpdateHomepost(updatedHome);
+            message.success('Tin đăng đã được duyệt thành công');
+        }
     }
 
     // render content

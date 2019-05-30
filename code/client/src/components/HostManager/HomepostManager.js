@@ -105,7 +105,7 @@ class HomepostManager extends Component {
             typeRoom: values.typeRoom,
             maxPeoples: values.maxPeoples,
             basicPeoples: values.basicPeoples,
-            name: values.name
+            name: values.name,
           }
           this.props.fetchCreateHomepost(homepost);
           message.success('Tạo chỗ ở mới thành công. Vui lòng cập nhật các thông tin cần thiết về nhà trước khi gửi yêu cầu duyệt !!!')

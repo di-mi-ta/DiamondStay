@@ -134,6 +134,12 @@ const HomePostSchema = new Schema({
         default: ''
     },
 
+    // Report [ADMIN] Kết quả duyệt
+    verifyRes: {
+        type: String,
+        default: ''
+    },
+
     // Bình luận và đánh giá
     rating: [{
             type: mongoose.Schema.Types.ObjectId,
