@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Table, Button, Icon, Card,} from 'antd';
+import { Table, Button, Icon, Card, Popover} from 'antd';
 import moment from 'moment';
 import {Link, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -19,7 +19,15 @@ class All extends Component {
         dataIndex: 'name',
         key: 'name',
         align: 'center',
-        render: text => <b>{text}</b>,
+        render: text => (<Popover content={text}
+            ><p>
+                {
+                    text.length > 20 ?
+                    text.substr(0,19) + '...':
+                    text
+                }
+            </p>
+        </Popover>),
     },
     ,{
         title: <b>Ngày tạo</b>,

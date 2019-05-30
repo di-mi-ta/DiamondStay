@@ -15,18 +15,6 @@ import queryString from 'query-string';
 class House extends Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   id: "4313421",
-    //   verify: true,
-    //   location: "Sóc Sơn, Hà Nội, Vietnam",
-    //   rating: 5,
-    //   numRating: 6,
-    //   //home info
-    //   name: 'Babylon House - Bungalow Bằng Lăng Trắng ',
-    //   minimumNights: 1,
-    //   weekdayPrice: 10,
-    //   weekendPrice: 100,
-    // }
   }
 
   componentWillMount(){
@@ -123,9 +111,14 @@ class House extends Component {
                   </span>
                 </div>
                 <div className="col-12 col-md-8">
-                  <SystemPromoCard 
-                    promotion={sysPromos[0]}
-                  />
+                  {
+                    sysPromos.length >=1 ?
+                      <SystemPromoCard 
+                        promotion={sysPromos[0]}
+                      />
+                      :
+                      <div/>
+                  }
                   {/* <Convenience/> */}
                   <div className="priceTable">
                     <h2>Giá phòng</h2>

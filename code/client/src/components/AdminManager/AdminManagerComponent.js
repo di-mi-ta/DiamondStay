@@ -22,7 +22,6 @@ class AdminManager extends Component{
         <Menu
           defaultSelectedKeys={['1']}
           mode= "horizontal"
-          // theme= 'light'
           style={{
             textAlign: 'center',
             boxShadow: '0 8px 12px rgba(0,0,0,.1)',

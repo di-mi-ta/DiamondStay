@@ -71,7 +71,7 @@ class VerifyHomepostComponent extends Component {
                 basicInfo: JSON.parse(this.state.homepost.note).basicInfo,
                 roomBedInfo: JSON.parse(this.state.homepost.note).roomBedInfo,
                 price: JSON.parse(this.state.homepost.note).price,
-            }
+            },
         })
     }
 
@@ -172,6 +172,7 @@ class VerifyHomepostComponent extends Component {
             }
             this.props.fetchUpdateHomepost(updatedHome);
             message.success('Tin đăng đã được duyệt thành công');
+            this.props.history.push('/admin/waiting-posts');
         }
     }
 
@@ -199,6 +200,7 @@ class VerifyHomepostComponent extends Component {
             //fetch
             this.props.fetchUpdateHomepost(updatedHome);
             message.success('Tin đăng đã được duyệt thành công');
+            this.props.history.push('/admin/waiting-posts');
         }
     }
 
@@ -566,4 +568,4 @@ const mapDispatchToProps = (dispatch) => ({
   fetchUpdateHomepost: (homepost) => {dispatch(actions.fetchUpdateHomepost(homepost))},
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(VerifyHomepostComponent);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(VerifyHomepostComponent));

@@ -24,7 +24,15 @@ class Rejected extends Component {
         dataIndex: 'name',
         key: 'name',
         align: 'center',
-        render: text => <b>{text}</b>,
+        render: text => (<Popover content={text}
+            ><p>
+                {
+                    text.length > 20 ?
+                    text.substr(0,19) + '...':
+                    text
+                }
+            </p>
+        </Popover>),
     },
     ,{
         title: <b>Ngày tạo</b>,

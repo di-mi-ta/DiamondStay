@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Table, Button, Icon, Card, Divider, message} from 'antd';
+import {Table, Button, Icon, Card, Divider, message, Popover} from 'antd';
 import {connect} from 'react-redux';
 import * as actions from '../../../redux/ActionCreators';
 import {Link, withRouter} from 'react-router-dom';
@@ -29,7 +29,15 @@ class Open extends Component {
         dataIndex: 'name',
         key: 'name',
         align: 'center',
-        render: text => <b>{text}</b>,
+        render: text =>  (<Popover content={text}
+            ><p>
+                {
+                    text.length > 20 ?
+                    text.substr(0,19) + '...':
+                    text
+                }
+            </p>
+        </Popover>),
     },
     ,{
         title: <b>Ngày tạo</b>,

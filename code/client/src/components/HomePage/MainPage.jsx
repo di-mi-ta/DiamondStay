@@ -95,7 +95,7 @@ class MainPage extends React.Component {
           options = {this.state.placeGlideOptions}
           itemList = {
             this.props.homeposts?
-            this.props.homeposts.homeposts.map(homepost => ({
+            this.props.homeposts.homeposts.filter(home=>home.state === 'Success').map(homepost => ({
               id: homepost._id,
               image: (homepost.image && homepost.image.length > 0)? 
                 `${baseUrl}${homepost.image[0]}`

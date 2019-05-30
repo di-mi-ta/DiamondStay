@@ -28,7 +28,7 @@ const columns = [{
 },{
     key: 'action',
     align: 'center',
-    title: 'Hành động',
+    title: <b>Hành động</b>,
     render: (homepost) => (
       <span>
         <Link to={{pathname:`/admin/${homepost._id}`,
