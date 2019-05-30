@@ -7,15 +7,23 @@ import {connect} from 'react-redux';
 import * as actions from '../../redux/ActionCreators';
 import MainHeader from '../HomePage/MainHeader';
 import SystemPromoCard from './SystemPromosCard';
+import MessageEdit from '../MessageInbox/MessageEdit';
+import { Modal, Spin, message as notification } from 'antd';
 import {baseUrl} from '../../shared/baseUrl';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import queryString from 'query-string';
+import * as userApi from '../../utils/api/user';
+import * as messageApi from '../../utils/api/message';
 
 class House extends Component {
   constructor(props) {
     super(props);
   }
+  state = {
+    messageModalOpen: false,
+    receiver: undefined,
+  };
 
   componentWillMount(){
     this.props.fetchHomepostById(this.props.match.params.homepostId);
@@ -24,7 +32,39 @@ class House extends Component {
   componentDidMount(){
     this.props.fetchSystemPromos();
     this.props.fetchHostPromos();
+    this.getHomeOwnerInfoInterval = setInterval(() => {
+      userApi.getUserFromUsername(this.props.homeposts.currentHomepost.owner)
+        .then(user => {
+          clearInterval(this.getHomeOwnerInfoInterval);
+          user.fullName = user.firstName + ' ' + user.lastName;
+          this.setState({ user });
+        }).catch();
+    }, 3000);
   }
+
+  componentWillUnmount() {
+    if (this.getHomeOwnerInfoInterval)
+      clearInterval(this.getHomeOwnerInfoInterval);
+  }
+
+  toggleMessageModal = () => {
+    this.setState(prevState => ({
+      messageModalOpen: !prevState.messageModalOpen
+    }))
+  };
+
+  handleSendMessage = (message) => {
+    if (!this.state.user)
+      return notification.error('Xảy ra lỗi, không thể gửi tin nhắn');
+
+    messageApi.sendReplyMessage(message).then(() => {
+      notification.success('Tin nhắn đã được gửi');
+      this.toggleMessageModal();
+    }).catch(err => {
+      notification.error('Có lỗi xảy ra. Tin nhắn chưa được gửi.');
+      this.toggleMessageModal();
+    });
+  };
 
   render() {
     const queryInUrl = this.props.location.search;
@@ -32,8 +72,8 @@ class House extends Component {
       ...queryString.parse(queryInUrl),
       homepostId: this.props.match.params.homepostId,
     };
-    
-    // for promotions 
+
+    // for promotions
 
     // get list system promotions applied for current homeposts
     let sysPromos = this.props.promotions.systemPromos.filter((promo) => {
@@ -70,11 +110,17 @@ class House extends Component {
                 <div className="title col-12">
                   <div className="booking">
                     <h1>{this.props.homeposts.currentHomepost.name}</h1>
+                    <button type="button" className="btn book-house float-right" onClick={this.toggleMessageModal}>
+                        Gửi tin nhắn cho chủ nhà
+                      </button>
                     <button type="button" className="btn book-house">
                       <Link to={`/booking/new?${queryString.stringify(query)}`}>
                         Đặt ngay
                       </Link>
                     </button>
+                  </div>
+                  <div className="booking">
+
                   </div>
                   <span className="label-house-id">
                     Mã chỗ ở: {this.props.homeposts.currentHomepost._id}
@@ -113,7 +159,7 @@ class House extends Component {
                 <div className="col-12 col-md-8">
                   {
                     sysPromos.length >=1 ?
-                      <SystemPromoCard 
+                      <SystemPromoCard
                         promotion={sysPromos[0]}
                       />
                       :
@@ -200,6 +246,27 @@ class House extends Component {
           </div>
           : ""
         }
+            <Modal
+              visible={this.state.messageModalOpen}
+              width={700}
+              onOk={this.toggleMessageModal}
+              onCancel={this.toggleMessageModal}
+            >
+              {this.state.user ?
+                <MessageEdit
+                  receiverName={this.state.user.fullName}
+                  receiverId={this.state.user._id}
+                  defaultTitle={''}
+                  defaultContent={''}
+                  onSendMessage={() => console.log(this.props.homeposts.currentHomepost.owner)}
+                  onReturn={this.toggleMessageModal}
+                />
+                :
+                <div style={{ textAlign: 'center' }}>
+                  <Spin tip='Đang tải dữ liệu chủ nhà' />
+                </div>
+              }
+            </Modal>
       </div>
     );
   }
