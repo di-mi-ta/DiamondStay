@@ -6,6 +6,7 @@ import HouseComment from './HouseComment';
 import {connect} from 'react-redux';
 import * as actions from '../../redux/ActionCreators';
 import MainHeader from '../HomePage/MainHeader';
+import SystemPromoCard from './SystemPromosCard';
 import {baseUrl} from '../../shared/baseUrl';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
@@ -15,13 +16,13 @@ class House extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: "4313421",
+      id: "",
       verify: true,
-      location: "Sóc Sơn, Hà Nội, Vietnam",
+      location: "",
       rating: 5,
       numRating: 6,
       //home info
-      name: 'Babylon House - Bungalow Bằng Lăng Trắng ',
+      name: "",
       minimumNights: 1,
       weekdayPrice: 10,
       weekendPrice: 100,
@@ -72,7 +73,7 @@ class House extends Component {
       }
       return false
     });
-    
+
 
     return (
       <div>
@@ -126,11 +127,10 @@ class House extends Component {
                     } đánh giá
                   </span>
                 </div>
-                <div>Khuyến mãi hệ thống</div>
-                {JSON.stringify(sysPromos)}
-                <div>Ưu đãi từ chủ nhà</div>
-                {JSON.stringify(hostPromos)}
                 <div className="col-12 col-md-8">
+                  <SystemPromoCard 
+                    promotion={sysPromos[0]}
+                  />
                   {/* <Convenience/> */}
                   <div className="priceTable">
                     <h2>Giá phòng</h2>
@@ -153,10 +153,6 @@ class House extends Component {
                       <div>
                         <span>Số đêm tối thiểu</span>
                         <span><b>{this.props.homeposts.currentHomepost.minimumNights} Đêm</b></span>
-                      </div>
-                      <div>
-                        <span>Phí khách tăng thêm</span>
-                        <span><b>50000 VND (sau 2 khách)</b></span>
                       </div>
                     </div>
                   </div>
